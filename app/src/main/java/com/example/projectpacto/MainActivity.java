@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 String password = binding.passwordEditText.getText().toString();
                 if (email.matches("admin") && password.matches("password123")){
                     Toast.makeText(getApplicationContext(), "Login Succeessful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), RealMainActivity.class);
+                    startActivity(intent);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
