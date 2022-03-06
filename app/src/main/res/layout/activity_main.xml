@@ -63,6 +63,7 @@
                     android:textColor="@color/black"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_editTextInput"
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
                     android:layout_height="60dp"
@@ -81,6 +82,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/password_editTextInput"
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
                     android:layout_height="60dp"
@@ -101,6 +103,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/lupaPassword"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lupa Password"
@@ -110,6 +113,7 @@
                     android:textColor="@color/primary"/>
 
                 <Button
+                    android:id="@+id/masukButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/primary_dark"
