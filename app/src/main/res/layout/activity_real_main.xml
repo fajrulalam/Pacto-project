@@ -86,7 +86,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
+            android:scrollbars="none">
 
 
             <LinearLayout
@@ -94,12 +95,10 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/curved_bg"
                 android:backgroundTint="@color/white"
-                android:elevation="2dp"
+                android:elevation="0dp"
                 android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingTop="80dp"
-                android:paddingRight="10dp"
                 android:paddingBottom="20dp"
+                android:paddingTop="60dp"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
@@ -108,10 +107,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="140dp"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/curved_less_bg"
                     android:backgroundTint="@color/secondary_light"
                     android:orientation="horizontal"
-                    android:padding="15dp">
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:padding="15dp"
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="0dp"
@@ -155,13 +158,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:id="@+id/ticketOptionsLinearLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
+
+                    android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="0dp"
@@ -247,6 +251,8 @@
 
 
                 <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -270,6 +276,8 @@
                 </LinearLayout>
 
                 <HorizontalScrollView
+                    android:layout_marginLeft="10dp"
+                    android:scrollbars="none"
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:paddingTop="0dp"
@@ -281,7 +289,9 @@
                         android:layout_height="150dp"
                         android:orientation="horizontal">
 
+
                         <ImageView
+                            android:elevation="2dp"
                             android:layout_width="132dp"
                             android:layout_height="132dp"
                             android:layout_marginRight="15dp"
