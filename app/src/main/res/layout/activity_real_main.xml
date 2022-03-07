@@ -32,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:scaleX="1.15"
                 android:scaleY="1.15"
-                android:src="@drawable/ic_home_backdrop" />
+                android:src="@drawable/ic_home_backdrop"
+                android:scaleType="centerCrop"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,233 +69,250 @@
     </FrameLayout>
 
 
-
-    <ScrollView
+    <LinearLayout
         android:id="@+id/mainCardLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
         android:layout_marginTop="-180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
 
-        <LinearLayout
-            android:paddingLeft="10dp"
-            android:paddingBottom="20dp"
-            android:paddingRight="10dp"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/curved_bg"
-            android:backgroundTint="@color/white"
-            android:elevation="2dp"
-            android:paddingTop="80dp"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:orientation="vertical">
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
 
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="140dp"
-                        android:background="@drawable/curved_less_bg"
-                        android:backgroundTint="@color/secondary_light"
-                        android:orientation="horizontal"
-                        android:padding="15dp">
-
-                        <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.15"
-                            android:src="@drawable/ic_kredit_limit_warning" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.85"
-                            android:orientation="vertical"
-                            android:paddingLeft="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/curved_bg"
+                android:backgroundTint="@color/white"
+                android:elevation="2dp"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingTop="80dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="20dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
 
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Kredit limit Anda kurang dari 30%"
-                                android:textColor="@color/black" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@drawable/curved_less_bg"
+                    android:backgroundTint="@color/secondary_light"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
-                                android:text="Segera hubungi admin dan lakukan penambahan kredit untuk pengalaman pemesanan yang lebih menyenangkan"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:fontFamily="@font/roboto_medium"
-                                android:padding="5dp"
-                                android:text="Hubungi admin"
-                                android:textColor="@color/primary_dark"
-                                android:textSize="13sp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:src="@drawable/ic_kredit_limit_warning" />
 
                     <LinearLayout
-                        android:id="@+id/ticketOptionsLinearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="10dp"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.48"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="5dp">
-
-                            <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.3"
-                                    android:src="@drawable/ic_pesawat"
-                                    android:scaleX="0.8"
-                                    android:scaleY="0.8"/>
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.8"
-                                    android:text="Pesawat"
-                                    android:textSize="16dp"
-                                    android:gravity="center_vertical"
-                                    android:fontFamily="@font/roboto_regular"
-                                    android:textColor="@color/black"/>
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginRight="3dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.48"
-                            app:cardCornerRadius="12dp"
-                            app:cardElevation="5dp">
-
-                            <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.3"
-                                    android:src="@drawable/ic_hotel"
-                                    android:scaleX="0.8"
-                                    android:scaleY="0.8"/>
-
-                                <TextView
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="0.8"
-                                    android:text="Hotel"
-                                    android:textSize="16sp"
-                                    android:gravity="center_vertical"
-                                    android:fontFamily="@font/roboto_regular"
-                                    android:textColor="@color/black"/>
-
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.85"
                         android:orientation="vertical"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="10dp">
+                        android:paddingLeft="20dp">
+
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Peraturan Perjalanan per 6 Maret 2022"
-                            android:fontFamily="@font/roboto_regular"
-                            android:textColor="@color/black"
-                            android:textSize="18dp"/>
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Kredit limit Anda kurang dari 30%"
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Berikut merupakan aturan baru yang diterbitkan oleh pemerintah berkaitan dengan perjalanan. Baca dan simak dengan seksama untuk mempersiapkan pengalaman Anda."
+                            android:layout_marginTop="10dp"
+                            android:text="Segera hubungi admin dan lakukan penambahan kredit untuk pengalaman pemesanan yang lebih menyenangkan"
                             android:textSize="13sp" />
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:padding="5dp"
+                            android:text="Hubungi admin"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="13sp" />
                     </LinearLayout>
-            
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                android:paddingTop="0dp"
-                android:paddingBottom="15dp">
-                
-                
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:orientation="horizontal">
-                    
-                    <ImageView
-                        android:layout_width="132dp"
-                        android:layout_height="132dp"
-                        android:src="@drawable/ic_domestik_rule"
-                        android:layout_marginRight="15dp"/>
 
-                    <ImageView
-                        android:layout_width="132dp"
-                        android:layout_height="132dp"
-                        android:src="@drawable/ic_internasional_rule"
-                        android:layout_marginRight="15dp"/>
-                    <ImageView
-                        android:layout_width="132dp"
-                        android:layout_height="132dp"
-                        android:src="@drawable/ic_penerbangan_rule" />
-                    
                 </LinearLayout>
-            </HorizontalScrollView>
 
-        </LinearLayout>
-    </ScrollView>
+                <LinearLayout
+                    android:id="@+id/ticketOptionsLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="0.48"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:src="@drawable/ic_pesawat" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="0.8"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="center_vertical"
+                                android:text="Pesawat"
+                                android:textColor="@color/black"
+                                android:textSize="16dp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="3dp"
+                        android:layout_weight="0.48"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.3"
+                                android:scaleX="0.8"
+                                android:scaleY="0.8"
+                                android:src="@drawable/ic_hotel" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="0.8"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="center_vertical"
+                                android:text="Hotel"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Peraturan Perjalanan per 6 Maret 2022"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Berikut merupakan aturan baru yang diterbitkan oleh pemerintah berkaitan dengan perjalanan. Baca dan simak dengan seksama untuk mempersiapkan pengalaman Anda."
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="15dp">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="132dp"
+                            android:layout_height="132dp"
+                            android:layout_marginRight="15dp"
+                            android:src="@drawable/ic_domestik_rule" />
+
+                        <ImageView
+                            android:layout_width="132dp"
+                            android:layout_height="132dp"
+                            android:layout_marginRight="15dp"
+                            android:src="@drawable/ic_internasional_rule" />
+
+                        <ImageView
+                            android:layout_width="132dp"
+                            android:layout_height="132dp"
+                            android:src="@drawable/ic_penerbangan_rule" />
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+
+
+
+
 
 
 
