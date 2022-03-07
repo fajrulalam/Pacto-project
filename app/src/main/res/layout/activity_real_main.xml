@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     tools:context=".RealMainActivity">
 
     <FrameLayout
@@ -388,9 +389,22 @@
             android:scaleX="0.59"/>
 
 
-
-
     </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-4dp"
+        android:background="@drawable/curved_less_bg"
+        android:elevation="10dp"
+        android:translationZ="10dp"
+        app:itemIconSize="40dp"
+        app:elevation="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mainCardLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_nav"/>
 
 
 
