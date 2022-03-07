@@ -261,6 +261,37 @@
                             android:textSize="13sp" />
 
                     </LinearLayout>
+            
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="15dp">
+                
+                
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:orientation="horizontal">
+                    
+                    <ImageView
+                        android:layout_width="132dp"
+                        android:layout_height="132dp"
+                        android:src="@drawable/ic_domestik_rule"
+                        android:layout_marginRight="15dp"/>
+
+                    <ImageView
+                        android:layout_width="132dp"
+                        android:layout_height="132dp"
+                        android:src="@drawable/ic_internasional_rule"
+                        android:layout_marginRight="15dp"/>
+                    <ImageView
+                        android:layout_width="132dp"
+                        android:layout_height="132dp"
+                        android:src="@drawable/ic_penerbangan_rule" />
+                    
+                </LinearLayout>
+            </HorizontalScrollView>
 
         </LinearLayout>
     </ScrollView>
