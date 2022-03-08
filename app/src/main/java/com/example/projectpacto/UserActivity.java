@@ -8,27 +8,29 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.projectpacto.databinding.ActivityRealMainBinding;
+import com.example.projectpacto.databinding.ActivityUserBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class RealMainActivity extends AppCompatActivity {
+public class UserActivity extends AppCompatActivity {
 
-    ActivityRealMainBinding binding;
+    ActivityUserBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRealMainBinding.inflate(getLayoutInflater());
+        binding = ActivityUserBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.bottomNav.setSelectedItemId(R.id.beranda);
+        binding.bottomNav.setSelectedItemId(R.id.user);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.beranda:
+                        startActivity(new Intent(getApplicationContext(), RealMainActivity.class));
+                        overridePendingTransition(0 , 0);
                         return true;
 
                     case R.id.transaksi:
@@ -42,8 +44,7 @@ public class RealMainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.user:
-                        startActivity(new Intent(getApplicationContext(), UserActivity.class));
-                        overridePendingTransition(0 , 0);
+
                         return true;
                 }
 
@@ -51,5 +52,7 @@ public class RealMainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        binding.bottomNav.setSelectedItemId(R.id.user);
     }
 }

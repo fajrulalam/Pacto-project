@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BookingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TrankasiActivity"
+            android:exported="false" />
+        <activity
             android:name=".RealMainActivity"
             android:exported="false" />
         <activity

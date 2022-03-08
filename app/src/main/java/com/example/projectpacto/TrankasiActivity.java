@@ -8,32 +8,34 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.projectpacto.databinding.ActivityRealMainBinding;
+import com.example.projectpacto.databinding.ActivityTrankasiBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class RealMainActivity extends AppCompatActivity {
+public class TrankasiActivity extends AppCompatActivity {
 
-    ActivityRealMainBinding binding;
+    ActivityTrankasiBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRealMainBinding.inflate(getLayoutInflater());
+        binding = ActivityTrankasiBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.bottomNav.setSelectedItemId(R.id.beranda);
+        binding.bottomNav.setSelectedItemId(R.id.transaksi);
+
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.beranda:
+                        startActivity(new Intent(getApplicationContext(), RealMainActivity.class));
+                        overridePendingTransition(0 , 0);
                         return true;
 
                     case R.id.transaksi:
-                        startActivity(new Intent(getApplicationContext(), TrankasiActivity.class));
-                        overridePendingTransition(0 , 0);
+
                         return true;
 
                     case R.id.booking:

@@ -8,27 +8,29 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.projectpacto.databinding.ActivityRealMainBinding;
+import com.example.projectpacto.databinding.ActivityBookingBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class RealMainActivity extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity {
 
-    ActivityRealMainBinding binding;
+    ActivityBookingBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRealMainBinding.inflate(getLayoutInflater());
+        binding = ActivityBookingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.bottomNav.setSelectedItemId(R.id.beranda);
+        binding.bottomNav.setSelectedItemId(R.id.booking);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.beranda:
+                        startActivity(new Intent(getApplicationContext(), RealMainActivity.class));
+                        overridePendingTransition(0 , 0);
                         return true;
 
                     case R.id.transaksi:
@@ -37,8 +39,6 @@ public class RealMainActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.booking:
-                        startActivity(new Intent(getApplicationContext(), BookingActivity.class));
-                        overridePendingTransition(0 , 0);
                         return true;
 
                     case R.id.user:
@@ -51,5 +51,6 @@ public class RealMainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
     }
 }
