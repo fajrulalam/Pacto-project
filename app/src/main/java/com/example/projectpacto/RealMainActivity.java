@@ -22,8 +22,13 @@ public class RealMainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        binding.bottomNav.setSelectedItemId(R.id.beranda);
 
+
+
+
+
+        //Bottom Navigation
+        binding.bottomNav.setSelectedItemId(R.id.beranda);
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
