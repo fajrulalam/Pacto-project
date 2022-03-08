@@ -26,8 +26,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleX="1.15"
-                    android:scaleY="1.15"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/ic_login_backdrop_vector" />
 
                 <ImageView
