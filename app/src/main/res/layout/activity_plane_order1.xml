@@ -93,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/curveTopBackDrop"
-        android:background="@color/white"
+        android:background="@drawable/curved_bg"
         android:padding="16dp"
         android:layout_marginTop="-35dp"
         android:elevation="2dp"
@@ -205,19 +205,9 @@
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:text="Cari"
-
             android:layout_marginBottom="8dp"
             android:textAllCaps="false"
             android:letterSpacing="0.00001"/>
-
-
-
-
-
-
-
-
-
 
 
     </LinearLayout>
