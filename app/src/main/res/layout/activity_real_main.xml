@@ -169,12 +169,15 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/pesan_pesawat"
                         android:layout_width="0dp"
                         android:background="@drawable/curved_bg_outline"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
+                        android:foreground="@drawable/selectable_view"
+                        android:clickable="true"
                         android:layout_weight="0.48">
 
                         <LinearLayout
@@ -208,11 +211,14 @@
 
 
                     <LinearLayout
+                        android:id="@+id/pesan_hotel"
                         android:layout_width="0dp"
                         android:background="@drawable/curved_bg_outline"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="3dp"
+                        android:foreground="@drawable/selectable_view"
+                        android:clickable="true"
                         android:layout_marginRight="3dp"
                         android:layout_weight="0.48">
 
