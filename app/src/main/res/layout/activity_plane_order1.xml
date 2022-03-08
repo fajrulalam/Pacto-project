@@ -91,11 +91,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/curveTopBackDrop"
         android:background="@color/white"
         android:padding="16dp"
         android:layout_marginTop="-35dp"
+        android:elevation="2dp"
         android:layout_marginLeft="17dp"
         android:layout_marginRight="17dp"
         android:orientation="vertical">
@@ -115,11 +116,14 @@
                     android:layout_height="40dp"
                     app:boxStrokeWidth="0dp"
                     android:focusable="false"
+                    app:startIconDrawable="@drawable/ic_keberangkatan"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:hint="Keberangkatan"
+                        android:textSize="14sp"
                         android:background="@drawable/curved__even_less_bg"
                         android:backgroundTint="#1AA31E71"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,15 +131,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/kedatangan_textInput"
                     android:layout_width="match_parent"
-
                     android:layout_height="40dp"
                     app:boxStrokeWidth="0dp"
+                    app:startIconDrawable="@drawable/ic_kedatangan"
                     android:focusable="false"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:hint="Kedatangan"
                         android:background="@drawable/curved__even_less_bg"
                         android:backgroundTint="#1AA31E71"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -148,17 +153,65 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:scaleX="1"
+                android:textSize="14sp"
+
                 android:scaleY="1"
                 android:src="@drawable/ic_swap"
                 android:layout_marginRight="5dp"></ImageView>
 
-
-
-
-
-
-
         </FrameLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tanggalKeberangkat_textInput"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="40dp"
+            app:boxStrokeWidth="0dp"
+            
+            android:focusable="false"
+            app:startIconDrawable="@drawable/ic_calendar"
+            app:boxStrokeWidthFocused="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Tanggal Keberangkatan"
+                android:textSize="14sp"
+                android:background="@drawable/curved__even_less_bg"
+                android:backgroundTint="#1AA31E71"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/penumpangTextInput"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_height="40dp"
+            app:boxStrokeWidth="0dp"
+            android:focusable="false"
+            app:startIconDrawable="@drawable/ic_person"
+            app:boxStrokeWidthFocused="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Penumpang"
+                android:textSize="14sp"
+                android:background="@drawable/curved__even_less_bg"
+                android:backgroundTint="#1AA31E71"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Cari"
+
+            android:layout_marginBottom="8dp"
+            android:textAllCaps="false"
+            android:letterSpacing="0.00001"/>
+
+
+
 
 
 
