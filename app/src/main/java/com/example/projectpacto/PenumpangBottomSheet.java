@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.projectpacto.databinding.FragmentPenumpangBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -28,6 +29,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class PenumpangBottomSheet extends BottomSheetDialogFragment {
 
     FragmentPenumpangBottomSheetBinding binding;
+    TextView dewasaTextView;
+    TextView anak2TextView;
+    TextView balitaTextview;
     ImageView minusDewasa;
     ImageView plusDewasa;
     ImageView minusAnak;
@@ -52,9 +56,26 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         final View view = View.inflate(getContext(), R.layout.fragment_penumpang_bottom_sheet, null);
         dialog.setContentView(view);
 
+        dewasaTextView = view.findViewById(R.id.passengerCount_dewasa);
+        anak2TextView = view.findViewById(R.id.passengerCount_anak);
+        balitaTextview = view.findViewById(R.id.passengerCount_Balita);
+        minusDewasa = view.findViewById(R.id.minusDewasa);
+        plusDewasa = view.findViewById(R.id.plusDewasa);
+        minusAnak = view.findViewById(R.id.minusAnak);
+        plusAnak = view.findViewById(R.id.plusAnak);
+        minusBalita = view.findViewById(R.id.minusBalita);
+        plusBalita = view.findViewById(R.id.plusBalita);
+        radioGroup = view.findViewById(R.id.radioGroup);
+        radioButton1 = view.findViewById(R.id.radioButton1);
+        radioButton2 = view.findViewById(R.id.radioButton2);
+        radioButton3 = view.findViewById(R.id.radioButton3);
+        radioButton4 = view.findViewById(R.id.radioButton4);
+        actionButton = view.findViewById(R.id.actionButton_cari);
+
+
+        //BOTTOM SHEET BEHAVIOR
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
-
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
@@ -86,6 +107,61 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         });
 
 
+        //DEWASA COUNT
+        plusDewasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dewasaTextView.setText(Integer.parseInt(dewasaTextView.getText().toString()) + 1 +"");
+            }
+        });
+        minusDewasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.parseInt(dewasaTextView.getText().toString())!= 0) {
+                    dewasaTextView.setText(Integer.parseInt(dewasaTextView.getText().toString()) - 1 + "");
+                }
+            }
+        });
+
+        //ANAK-ANAK COUNT
+        plusAnak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                anak2TextView.setText(Integer.parseInt(anak2TextView.getText().toString()) + 1 +"");
+            }
+        });
+        minusAnak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.parseInt(anak2TextView.getText().toString())!= 0) {
+                    anak2TextView.setText(Integer.parseInt(anak2TextView.getText().toString()) - 1 + "");
+                }
+
+            }
+        });
+
+        //BALITA COUNT
+        plusBalita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                balitaTextview.setText(Integer.parseInt(balitaTextview.getText().toString()) + 1 +"");
+
+            }
+        });
+        minusBalita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.parseInt(balitaTextview.getText().toString())!= 0) {
+                    balitaTextview.setText(Integer.parseInt(balitaTextview.getText().toString()) - 1 + "");
+                }
+
+            }
+        });
+
+
+        radioButton4.
+
+
 
 
 
@@ -93,6 +169,10 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
 
     }
 
+    @Override
+    public int getTheme() {
+        return R.style.CustomBottomSheetDialog;
+    }
 
     private void hideView(View view) {
         ViewGroup.LayoutParams params = view.getLayoutParams();

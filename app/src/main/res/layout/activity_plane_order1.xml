@@ -257,6 +257,7 @@
             android:layout_width="match_parent"
             android:clickable="true"
             android:foreground="@drawable/selectable_view_notsocurved"
+            android:tag="Persyaratan Penerbangan"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingVertical="5dp"
@@ -300,6 +301,7 @@
             android:paddingBottom="8dp"
             android:clickable="true"
             android:foreground="@drawable/selectable_view_notsocurved"
+            android:tag="Cara Pembatalan"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -343,6 +345,7 @@
             android:padding="5dp"
             android:clickable="true"
             android:foreground="@drawable/selectable_view_notsocurved"
+            android:tag="Cara Reshedule"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
