@@ -9,7 +9,7 @@
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
         <item name="android:clickable">true</item>
-        <item name="android:foreground">@drawable/selectable_view</item>
+        <item name="android:foreground">@drawable/selectable_view_notsocurved</item>
         <item name="fontFamily">@font/roboto_regular</item>
 
 
