@@ -2,6 +2,7 @@ package com.example.projectpacto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,14 +29,6 @@ public class PlaneOrderActivity1 extends AppCompatActivity {
 
 
         //Penumpang
-        binding.penumpangTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("CLICK LISTENED", "It's clicked!");
-                PenumpangBottomSheet penumpangBottomSheet = new PenumpangBottomSheet();
-                penumpangBottomSheet.show(getSupportFragmentManager(), penumpangBottomSheet.getTag());
-            }
-        });
         binding.penumpangTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -47,6 +40,16 @@ public class PlaneOrderActivity1 extends AppCompatActivity {
                 }
             }
         });
+        binding.penumpangTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("CLICK LISTENED", "It's focused...");
+                PenumpangBottomSheet penumpangBottomSheet = new PenumpangBottomSheet();
+                penumpangBottomSheet.show(getSupportFragmentManager(), penumpangBottomSheet.getTag());
+            }
+        });
+
+
 
         //Calendar Constraints
         long today = MaterialDatePicker.todayInUtcMilliseconds();
@@ -56,22 +59,6 @@ public class PlaneOrderActivity1 extends AppCompatActivity {
                 .setSelection(today)
                 .setCalendarConstraints(constraints.build())
                 .setTitleText("Pilih Tanggal Keberangkatan").build();
-
-
-
-        binding.tanggalKeberangkatTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                datePicker_start.show(getSupportFragmentManager(), "tgl_keberangkatan");
-                datePicker_start.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                    @Override
-                    public void onPositiveButtonClick(Object selection) {
-                        binding.tanggalKeberangkatTextInput.getEditText().setText(datePicker_start.getHeaderText());
-                    }
-                });
-
-            }
-        });
 
         binding.tanggalKeberangkatTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -87,6 +74,30 @@ public class PlaneOrderActivity1 extends AppCompatActivity {
                     });
 
                 }
+            }
+        });
+        binding.tanggalKeberangkatTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker_start.show(getSupportFragmentManager(), "tgl_keberangkatan");
+                datePicker_start.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+                        binding.tanggalKeberangkatTextInput.getEditText().setText(datePicker_start.getHeaderText());
+
+                    }
+                });
+
+            }
+        });
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RealMainActivity.class));
+                overridePendingTransition(0, 0);
+
+
             }
         });
     }

@@ -119,11 +119,13 @@
                     app:boxStrokeWidth="0dp"
                     app:hintAnimationEnabled="false"
                     android:focusable="false"
+                    app:hintEnabled="false"
                     app:startIconDrawable="@drawable/ic_keberangkatan"
                     app:boxStrokeWidthFocused="0dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
+                        android:paddingVertical="1dp"
                         android:layout_height="match_parent"
                         android:hint="Keberangkatan"
                         android:textSize="14sp"
@@ -134,6 +136,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/kedatangan_textInput"
                     android:layout_width="match_parent"
+                    app:hintEnabled="false"
+                    app:hintAnimationEnabled="false"
                     android:layout_height="40dp"
                     app:boxStrokeWidth="0dp"
                     app:startIconDrawable="@drawable/ic_kedatangan"
@@ -144,6 +148,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Kedatangan"
+                        android:textSize="14sp"
+                        android:paddingVertical="1dp"
                         android:background="@drawable/curved__even_less_bg"
                         android:backgroundTint="#1AA31E71"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -157,7 +163,9 @@
                 android:layout_gravity="right|center_vertical"
                 android:scaleX="1"
                 android:textSize="14sp"
-
+                android:elevation="2dp"
+                android:clickable="true"
+                android:foreground="@drawable/selectable_view_round"
                 android:scaleY="1"
                 android:src="@drawable/ic_swap"
                 android:layout_marginRight="5dp"></ImageView>
@@ -167,13 +175,13 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tanggalKeberangkat_textInput"
             app:hintEnabled="false"
+            android:focusable="false"
+            app:hintAnimationEnabled="false"
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="40dp"
             app:boxStrokeWidth="0dp"
             android:padding="-10dp"
-            app:hintAnimationEnabled="false"
-            android:focusable="false"
             app:startIconDrawable="@drawable/ic_calendar"
             app:boxStrokeWidthFocused="0dp">
 
@@ -192,10 +200,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/penumpangTextInput"
             android:layout_width="match_parent"
+            app:hintEnabled="false"
+            android:focusable="false"
+            app:hintAnimationEnabled="false"
             android:layout_marginTop="8dp"
             android:layout_height="40dp"
             app:boxStrokeWidth="0dp"
-            android:focusable="false"
             app:startIconDrawable="@drawable/ic_person"
             app:boxStrokeWidthFocused="0dp">
 
@@ -203,6 +213,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Penumpang"
+                android:paddingVertical="2dp"
                 android:textSize="14sp"
                 android:background="@drawable/curved__even_less_bg"
                 android:backgroundTint="#1AA31E71"/>
@@ -244,8 +255,11 @@
         <LinearLayout
             android:id="@+id/persyaratanPenerbangan"
             android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
-            android:layout_height="48dp"
+            android:clickable="true"
+            android:foreground="@drawable/selectable_view_notsocurved"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -257,6 +271,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="0.8"
                 android:orientation="vertical">
                 <TextView
@@ -281,7 +296,10 @@
         <LinearLayout
             android:id="@+id/caraPembatalan"
             android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="8dp"
+            android:clickable="true"
+            android:foreground="@drawable/selectable_view_notsocurved"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -322,7 +340,9 @@
         <LinearLayout
             android:id="@+id/caraReschedule"
             android:layout_width="match_parent"
-            android:layout_marginTop="15dp"
+            android:padding="5dp"
+            android:clickable="true"
+            android:foreground="@drawable/selectable_view_notsocurved"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
