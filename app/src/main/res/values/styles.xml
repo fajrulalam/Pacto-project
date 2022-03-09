@@ -8,6 +8,8 @@
         <item name="android:textColor">@color/primary</item>
         <item name="android:gravity">center</item>
         <item name="android:button">@null</item>
+        <item name="android:clickable">true</item>
+        <item name="android:foreground">@drawable/selectable_view</item>
         <item name="fontFamily">@font/roboto_regular</item>
 
 
