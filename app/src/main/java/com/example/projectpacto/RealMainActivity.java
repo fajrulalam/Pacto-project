@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.projectpacto.databinding.ActivityRealMainBinding;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class RealMainActivity extends AppCompatActivity {
@@ -21,6 +23,20 @@ public class RealMainActivity extends AppCompatActivity {
         binding = ActivityRealMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        binding.pesanPesawat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PlaneOrderActivity1.class));
+                overridePendingTransition(0 , 0);
+            }
+        });
+
+
+
+
+
+
 
 
 

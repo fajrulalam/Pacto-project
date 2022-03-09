@@ -117,6 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     app:boxStrokeWidth="0dp"
+                    app:hintAnimationEnabled="false"
                     android:focusable="false"
                     app:startIconDrawable="@drawable/ic_keberangkatan"
                     app:boxStrokeWidthFocused="0dp">
@@ -165,11 +166,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tanggalKeberangkat_textInput"
+            app:hintEnabled="false"
             android:layout_width="match_parent"
             android:layout_marginTop="8dp"
             android:layout_height="40dp"
             app:boxStrokeWidth="0dp"
-
+            android:padding="-10dp"
+            app:hintAnimationEnabled="false"
             android:focusable="false"
             app:startIconDrawable="@drawable/ic_calendar"
             app:boxStrokeWidthFocused="0dp">
@@ -177,7 +180,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Tanggal Keberangkatan"
+                android:hint="Tanggal Keberangkatn"
+                android:textColor="@color/text_grey"
+                android:layout_gravity="center"
+                android:paddingVertical="2dp"
                 android:textSize="14sp"
                 android:background="@drawable/curved__even_less_bg"
                 android:backgroundTint="#1AA31E71"/>
@@ -203,6 +209,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/cariButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
@@ -235,6 +242,7 @@
 
 
         <LinearLayout
+            android:id="@+id/persyaratanPenerbangan"
             android:layout_width="match_parent"
             android:layout_marginTop="15dp"
             android:layout_height="48dp"
@@ -271,6 +279,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/caraPembatalan"
             android:layout_width="match_parent"
             android:layout_marginTop="15dp"
             android:layout_height="wrap_content"
@@ -284,6 +293,7 @@
                 android:layout_gravity="center"/>
 
             <LinearLayout
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
@@ -310,6 +320,7 @@
 
 
         <LinearLayout
+            android:id="@+id/caraReschedule"
             android:layout_width="match_parent"
             android:layout_marginTop="15dp"
             android:layout_height="wrap_content"

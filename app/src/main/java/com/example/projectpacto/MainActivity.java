@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = String.valueOf(binding.emailEditText.getText());
                 String password = binding.passwordEditText.getText().toString();
-                if (email.matches("admin") && password.matches("password123")){
+                if (email.matches("a") && password.matches("p")){
                     Toast.makeText(getApplicationContext(), "Login Succeessful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), RealMainActivity.class);
                     startActivity(intent);
