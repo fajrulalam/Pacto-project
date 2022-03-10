@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable-v24/curved__even_less_bg.xml" value="0.5661458333333333" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable-v24/curved__even_less_colorized_bg.xml" value="0.46452991452991454" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable-v24/curved__even_less_fillcolorized_bg.xml" value="0.46452991452991454" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable-v24/curved_bg_outline.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable-v24/selectable_view_notsocurved.xml" value="0.2824786324786325" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable-v24/selectable_view_round.xml" value="0.2824786324786325" />
@@ -22,6 +23,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_trankasi.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_user.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_penumpang_bottom_sheet.xml" value="0.4512820512820513" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_pesawat_yang_perlu_diperhatikan.xml" value="0.4512820512820513" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/menu/menu_nav.xml" value="0.55" />
       </map>
     </option>

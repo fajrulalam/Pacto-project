@@ -115,4 +115,29 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 
         }
     }
+
+    public void HalYangPerluDiperhatikan(View view) {
+        PesawatYangPerluDiperhatikan pesawatYangPerluDiperhatikan = new PesawatYangPerluDiperhatikan();
+        Bundle bundle = new Bundle();
+
+
+        switch (view.getTag().toString()) {
+            case "Cara Reschedule":
+                bundle.putString("judul", view.getTag().toString());
+                bundle.putString("tanggal", "19 Januari 2020");
+
+                break;
+            case "Cara Pembatalan":
+                bundle.putString("judul", view.getTag().toString());
+                bundle.putString("tanggal", "21 Januari 2020");
+
+                break;
+            case "Persyaratan Penerbangan":
+                bundle.putString("judul", view.getTag().toString());
+                bundle.putString("tanggal", "25 Januari 2020");
+                break;
+        }
+        pesawatYangPerluDiperhatikan.setArguments(bundle);
+        pesawatYangPerluDiperhatikan.show(getSupportFragmentManager(), pesawatYangPerluDiperhatikan.getTag());
+    }
 }

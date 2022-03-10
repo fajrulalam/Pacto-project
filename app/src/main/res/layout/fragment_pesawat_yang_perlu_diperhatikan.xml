@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".PesawatYangPerluDiperhatikan"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBarLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/closeSheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24"
+                android:scaleY="1.07"
+                android:scaleX="1.07"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/pacto_logo"
+                android:scaleY="0.8"
+                android:scaleX="0.8"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/judulTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[JUDUL]"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="10dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tanggalTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="[Tanggal]"
+                android:layout_marginTop="-5dp"
+                android:fontFamily="@font/roboto_light"
+                android:paddingBottom="10dp"
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/black"
+                android:textSize="12dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/placeholder_penerbangan"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere diam congue nibh mollis congue vitae non risus. Phasellus ligula libero, fringilla sed enim ac, aliquam scelerisque dui. Morbi egestas porta odio. Sed faucibus ante arcu, sit amet blandit eros placerat vitae. Vestibulum laoreet commodo urna, interdum mollis purus luctus sed. Cras eleifend augue vel purus vestibulum, eu dictum metus accumsan. Aliquam ac tortor ex. Aenean nisi justo, pharetra in nisi ac, suscipit rhoncus est. Integer convallis, odio sed facilisis dapibus, velit enim ornare nisl, sit amet sodales nulla sem non ligula. Sed a interdum ligula. Integer congue arcu in massa mollis, et placerat sapien malesuada. Suspendisse sit amet nisl rhoncus nisi feugiat tristique.
+
+Morbi a lectus mattis, tincidunt augue in, fermentum arcu. Vestibulum sit amet vulputate sem. \n\n      Morbi tristique faucibus lacinia. Donec et magna mattis, rhoncus enim in, tristique quam. Suspendisse sed arcu eget metus elementum sollicitudin sit amet vitae elit. Sed fermentum ex quam, a efficitur ante sodales quis. Suspendisse erat erat, semper eget maximus ut, imperdiet vitae tellus. Phasellus semper nisl vitae sem feugiat finibus. Phasellus at sapien vehicula, vulputate libero eget, laoreet velit. Nunc facilisis nisl non purus sollicitudin consequat. Etiam pretium faucibus mi in finibus. Nam rhoncus eu enim ut scelerisque. Suspendisse vel nisl suscipit, ullamcorper felis id, imperdiet lorem. Nulla sollicitudin metus eget ornare ultrices. Curabitur cursus libero eu sapien sollicitudin congue. Nullam quis venenatis justo. Etiam accumsan turpis a odio fermentum, nec lobortis erat dignissim. Sed sagittis risus nec eros lobortis sagittis. Morbi lobortis molestie suscipit. Donec nisi nisi, aliquam eget laoreet et, commodo at nisi. Maecenas tristique nulla elit, at maximus dui dapibus nec. Nullam et elit vel elit rhoncus pretium.
+
+Vivamus cursus tortor mi, et sodales ex commodo sit amet. \n\n      Phasellus lectus libero, dapibus in ipsum in, sodales consequat odio. Vestibulum aliquet consectetur augue non lacinia. Suspendisse imperdiet tincidunt augue et tristique. Nam nec justo in lorem hendrerit mollis. Mauris condimentum, turpis ut pharetra sollicitudin, metus massa tempor tellus, at feugiat arcu eros a nisi. Sed rutrum tincidunt orci, sit amet consectetur nibh faucibus quis. Sed vestibulum, urna ut finibus porttitor, mauris nunc mollis libero, eu ultricies sapien purus sit amet sem. Ut in pellentesque felis. Aliquam metus lacus, bibendum eu tortor vitae, tincidunt finibus lacus. Donec interdum volutpat turpis, non gravida enim fringilla rutrum. Aliquam posuere augue in turpis condimentum, a pulvinar sem semper. Suspendisse justo ligula, posuere vitae nulla at, pharetra sollicitudin leo. Suspendisse quis ex sagittis, aliquet nisl in, porta nulla."
+                android:justificationMode="inter_word"/>
+
+
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

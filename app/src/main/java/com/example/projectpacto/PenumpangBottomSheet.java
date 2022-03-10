@@ -170,8 +170,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 resetDialog();
-                radioButton4.setBackgroundColor(getResources().getColor(R.color.primary));
-                radioButton4.setTextColor(getResources().getColor(R.color.white));
+                radioButton4.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
                 kelas[0] = radioButton4.getText().toString();
             }
         });
@@ -179,8 +178,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 resetDialog();
-                radioButton3.setBackgroundColor(getResources().getColor(R.color.primary));
-                radioButton3.setTextColor(getResources().getColor(R.color.white));
+                radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
                 kelas[0] = radioButton3.getText().toString();
             }
         });
@@ -188,8 +186,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 resetDialog();
-                radioButton2.setBackgroundColor(getResources().getColor(R.color.primary));
-                radioButton2.setTextColor(getResources().getColor(R.color.white));
+                radioButton2.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
                 kelas[0] = radioButton2.getText().toString();
             }
         });
@@ -197,8 +194,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 resetDialog();
-                radioButton1.setBackgroundColor(getResources().getColor(R.color.primary));
-                radioButton1.setTextColor(getResources().getColor(R.color.white));
+                radioButton1.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
                 kelas[0] = radioButton1.getText().toString();
 
             }
@@ -243,13 +239,9 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
 
     public void resetDialog(){
         radioButton1.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-        radioButton1.setTextColor(getResources().getColor(R.color.primary));
         radioButton2.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-        radioButton2.setTextColor(getResources().getColor(R.color.primary));
         radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-        radioButton3.setTextColor(getResources().getColor(R.color.primary));
         radioButton4.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-        radioButton4.setTextColor(getResources().getColor(R.color.primary));
 
     }
 
