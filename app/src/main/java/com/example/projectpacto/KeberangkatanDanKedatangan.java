@@ -7,16 +7,21 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
 
 
 public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
@@ -32,6 +37,12 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
     private LinearLayout appBarLayout;
     private LinearLayout linearLayout;
     private ImageView closeSheet;
+    private TextView judul;
+    private TextInputLayout bandaraTextInput;
+    private TextView cariButton;
+    private RecyclerView recyclerView;
+    private ArrayList<String> namaBandara;
+    private ArrayList<String> namaKota;
 
 
 
@@ -47,6 +58,73 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
         appBarLayout = view.findViewById(R.id.appBarLayout);
         linearLayout = view.findViewById(R.id.linearLayout);
         closeSheet  = view.findViewById(R.id.closeSheet);
+        judul = view.findViewById(R.id.KedatanganAtauKeberangkatan);
+        bandaraTextInput = view.findViewById(R.id.bandaraKota_textInput);
+        cariButton = view.findViewById(R.id.cariBandaraButton);
+        recyclerView = view.findViewById(R.id.RecycleViewKota_Bandara);
+        namaBandara = new ArrayList<>();
+        namaKota = new ArrayList<>();
+
+        Bundle bundle = this.getArguments();
+        judul.setText(bundle.getString("judul"));
+
+
+        cariButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (bandaraTextInput.getEditText().getText().toString()) {
+                    case "surabaya":
+                        namaBandara.add("Juanda International Airport");
+                        namaKota.add("Surabaya");
+                        break;
+                    case "jakarta":
+                        namaKota.add("Jakarta");
+                        namaKota.add("Jakarta");
+                        namaBandara.add("Halim Perdanakusuma International Airport");
+                        namaBandara.add("Soekarno-Hatta International Airport");
+                        break;
+                }
+
+            }
+        });
+
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
+//                    hideView(appBarLayout);
+                    showView(linearLayout, getActionBarSize());
+                }
+
+                if (BottomSheetBehavior.STATE_COLLAPSED == newState)   {
+//                    hideView(appBarLayout);
+                    showView(linearLayout, getActionBarSize());
+
+                }
+
+                if (BottomSheetBehavior.STATE_HIDDEN == newState) {
+                    dismiss();
+                }
+
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
+
+        closeSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+
+
+
+
 
 
 

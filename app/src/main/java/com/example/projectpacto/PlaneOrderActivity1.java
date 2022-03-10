@@ -27,6 +27,21 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         binding.tanggalKeberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.penumpangTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
 
+        //Keberangkatan
+        binding.keberangkatTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b==true) {
+                    KeberangkatanDanKedatangan keberangkatanDanKedatangan = new KeberangkatanDanKedatangan();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("judul", "Tentukan bandara keberangkatan");
+                    keberangkatanDanKedatangan.setArguments(bundle);
+                    keberangkatanDanKedatangan.show(getSupportFragmentManager(), keberangkatanDanKedatangan.getTag());
+
+                }
+            }
+        });
+
 
         //Penumpang
         binding.penumpangTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {

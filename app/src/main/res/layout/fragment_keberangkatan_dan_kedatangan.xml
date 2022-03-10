@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetContainer"
     android:layout_width="match_parent"
+    android:minHeight="800dp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -13,6 +13,7 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
+        android:id="@+id/appBarLayout"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -48,6 +49,8 @@
         android:layout_width="match_parent"
         android:fillViewport="true">
 
+
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -56,12 +59,13 @@
             android:paddingHorizontal="16dp">
 
             <TextView
+                android:id="@+id/KedatanganAtauKeberangkatan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tentukan bandara kedatangan"
                 android:textSize="22dp"
                 android:paddingBottom="10dp"
-                android:fontFamily="@font/roboto_medium"
+                android:fontFamily="@font/roboto_medium"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,9 +73,8 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tanggalKeberangkat_textInput"
+                    android:id="@+id/bandaraKota_textInput"
                     app:hintEnabled="false"
-                    android:focusable="false"
                     app:hintAnimationEnabled="false"
                     android:layout_width="0dp"
                     android:layout_weight="0.75"
@@ -83,7 +86,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Tulis kota atau bandara"
-
                         android:textColor="@color/black"
                         android:layout_gravity="center"
                         android:paddingVertical="2dp"
@@ -93,13 +95,15 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/cariBandaraButton"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:text="Cari"
+                    android:letterSpacing="0.005"
                     android:gravity="center"
                     android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/primary"
+                    android:textColor="@color/primary"/>
 
 
 
@@ -109,7 +113,7 @@
                 android:id="@+id/judulTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bandara"
+                android:text="Kota"
                 android:fontFamily="@font/roboto_medium"
                 android:paddingVertical="10dp"
                 android:textSize="20dp"
