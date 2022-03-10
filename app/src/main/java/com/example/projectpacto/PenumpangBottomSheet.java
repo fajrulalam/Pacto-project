@@ -1,6 +1,8 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
@@ -16,11 +18,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectpacto.databinding.FragmentPenumpangBottomSheetBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +49,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
     RadioButton radioButton3;
     RadioButton radioButton4;
     Button actionButton;
+    OnDataPassenger datapasser;
 
     public PenumpangBottomSheet() {
         // Required empty public constructor
@@ -117,7 +123,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         minusDewasa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.parseInt(dewasaTextView.getText().toString())!= 0) {
+                if (Integer.parseInt(dewasaTextView.getText().toString())!= 1) {
                     dewasaTextView.setText(Integer.parseInt(dewasaTextView.getText().toString()) - 1 + "");
                 }
             }
@@ -159,7 +165,61 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         });
 
 
-        radioButton4.
+        final String[] kelas = {""};
+        radioButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetDialog();
+                radioButton4.setBackgroundColor(getResources().getColor(R.color.primary));
+                radioButton4.setTextColor(getResources().getColor(R.color.white));
+                kelas[0] = radioButton4.getText().toString();
+            }
+        });
+        radioButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetDialog();
+                radioButton3.setBackgroundColor(getResources().getColor(R.color.primary));
+                radioButton3.setTextColor(getResources().getColor(R.color.white));
+                kelas[0] = radioButton3.getText().toString();
+            }
+        });
+        radioButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetDialog();
+                radioButton2.setBackgroundColor(getResources().getColor(R.color.primary));
+                radioButton2.setTextColor(getResources().getColor(R.color.white));
+                kelas[0] = radioButton2.getText().toString();
+            }
+        });
+        radioButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetDialog();
+                radioButton1.setBackgroundColor(getResources().getColor(R.color.primary));
+                radioButton1.setTextColor(getResources().getColor(R.color.white));
+                kelas[0] = radioButton1.getText().toString();
+
+            }
+        });
+
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!kelas[0].matches("")) {
+                    int dewasa = Integer.parseInt(dewasaTextView.getText().toString());
+                    int anak = Integer.parseInt(anak2TextView.getText().toString());
+                    int balita = Integer.parseInt(balitaTextview.getText().toString());
+                    datapasser.onDataPass(dewasa, anak, balita, kelas[0]);
+                    dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Detail penumpang belum lengkap", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
 
 
 
@@ -168,6 +228,32 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
     return dialog;
 
     }
+
+    public interface OnDataPassenger {
+         void onDataPass(int dewasa, int anak, int balita, String kelas);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        datapasser = (OnDataPassenger) context;
+    }
+
+
+
+    public void resetDialog(){
+        radioButton1.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+        radioButton1.setTextColor(getResources().getColor(R.color.primary));
+        radioButton2.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+        radioButton2.setTextColor(getResources().getColor(R.color.primary));
+        radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+        radioButton3.setTextColor(getResources().getColor(R.color.primary));
+        radioButton4.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+        radioButton4.setTextColor(getResources().getColor(R.color.primary));
+
+    }
+
+
 
     @Override
     public int getTheme() {

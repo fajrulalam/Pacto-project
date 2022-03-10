@@ -14,7 +14,7 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-public class PlaneOrderActivity1 extends AppCompatActivity {
+public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger {
 
     ActivityPlaneOrder1Binding binding;
 
@@ -100,5 +100,19 @@ public class PlaneOrderActivity1 extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onDataPass(int dewasa, int anak, int balita, String kelas) {
+        if (anak + balita == 0) {
+            binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + kelas);
+        } else if (anak > 0 && balita == 0) {
+            binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + anak + " Anak, " + kelas);
+        } else if (anak == 0 && balita > 0) {
+            binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + balita + " Balita, " + kelas);
+        } else {
+            binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + anak + " Anak, " + + balita + " Balita, " + kelas);
+
+        }
     }
 }
