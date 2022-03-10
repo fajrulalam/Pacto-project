@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".KeberangkatanDanKedatangan"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/closeSheet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_close_24"
+                android:scaleY="1.07"
+                android:scaleX="1.07"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tentukan bandara kedatangan"
+                android:textSize="22dp"
+                android:paddingBottom="10dp"
+                android:fontFamily="@font/roboto_medium"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tanggalKeberangkat_textInput"
+                    app:hintEnabled="false"
+                    android:focusable="false"
+                    app:hintAnimationEnabled="false"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.75"
+                    android:layout_height="40dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Tulis kota atau bandara"
+
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:paddingVertical="2dp"
+                        android:textSize="14sp"
+                        android:background="@drawable/curved_bg_less_thickoutline"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:text="Cari"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/primary"
+
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/judulTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bandara"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingVertical="10dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecycleViewKota_Bandara"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#EAE9E9"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                android:layout_marginBottom="30dp"/>
+
+
+
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
