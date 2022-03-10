@@ -65,8 +65,8 @@ public class PesawatYangPerluDiperhatikan extends BottomSheetDialogFragment {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
                 if (BottomSheetBehavior.STATE_EXPANDED == newState) {
-                    showView(appBarLayout, getActionBarSize());
-                    hideView(linearLayout);
+                    hideView(appBarLayout);
+                    showView(linearLayout, getActionBarSize());
                 }
 
                 if (BottomSheetBehavior.STATE_COLLAPSED == newState)   {
