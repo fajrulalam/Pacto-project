@@ -67,23 +67,40 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
 
         Bundle bundle = this.getArguments();
         judul.setText(bundle.getString("judul"));
+        RecyclerAdapaterBandara recyclerAdapaterBandara = new RecyclerAdapaterBandara(namaKota, namaBandara);
+        recyclerView.setAdapter(recyclerAdapaterBandara);
+
 
 
         cariButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                namaBandara.clear();
+                namaKota.clear();
                 switch (bandaraTextInput.getEditText().getText().toString()) {
                     case "surabaya":
                         namaBandara.add("Juanda International Airport");
                         namaKota.add("Surabaya");
+                        recyclerAdapaterBandara.notifyDataSetChanged();
+
                         break;
                     case "jakarta":
                         namaKota.add("Jakarta");
                         namaKota.add("Jakarta");
                         namaBandara.add("Halim Perdanakusuma International Airport");
                         namaBandara.add("Soekarno-Hatta International Airport");
+                        recyclerAdapaterBandara.notifyDataSetChanged();
+
                         break;
                 }
+
+
+            }
+        });
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });
