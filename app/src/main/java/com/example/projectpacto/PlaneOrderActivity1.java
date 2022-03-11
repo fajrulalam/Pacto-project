@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityPlaneOrder1Binding;
 import com.example.projectpacto.databinding.FragmentPenumpangBottomSheetBinding;
@@ -28,6 +29,21 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         binding.penumpangTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.kedatanganTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.keberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+
+        //Tombol Tukar
+        binding.tukar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keberangkatan = binding.keberangkatTextInput.getEditText().getText().toString();
+                String kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
+                if (!keberangkatan.matches("") || !kedatangan.matches("")) {
+                    binding.keberangkatTextInput.getEditText().setText(kedatangan);
+                    binding.kedatanganTextInput.getEditText().setText(keberangkatan);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Mohon destinasi diisi terlebih dahulu", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         //Keberangkatan
         binding.keberangkatTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
