@@ -14,7 +14,7 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
-public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger {
+public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger, KeberangkatanDanKedatangan.OnDataKeberangkatanAtauKepulangan {
 
     ActivityPlaneOrder1Binding binding;
 
@@ -26,6 +26,8 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         setContentView(view);
         binding.tanggalKeberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.penumpangTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+        binding.kedatanganTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+        binding.keberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
 
         //Keberangkatan
         binding.keberangkatTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -39,6 +41,40 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     keberangkatanDanKedatangan.show(getSupportFragmentManager(), keberangkatanDanKedatangan.getTag());
 
                 }
+            }
+        });
+        binding.keberangkatTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                KeberangkatanDanKedatangan keberangkatanDanKedatangan = new KeberangkatanDanKedatangan();
+                Bundle bundle = new Bundle();
+                bundle.putString("judul", "Tentukan bandara keberangkatan");
+                keberangkatanDanKedatangan.setArguments(bundle);
+                keberangkatanDanKedatangan.show(getSupportFragmentManager(), keberangkatanDanKedatangan.getTag());
+            }
+        });
+
+        //Kedatangan
+        binding.kedatanganTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b==true){
+                    KeberangkatanDanKedatangan keberangkatanDanKedatangan = new KeberangkatanDanKedatangan();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("judul", "Tentukan bandara kedatangan");
+                    keberangkatanDanKedatangan.setArguments(bundle);
+                    keberangkatanDanKedatangan.show(getSupportFragmentManager(), keberangkatanDanKedatangan.getTag());
+                }
+            }
+        });
+        binding.kedatanganTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                KeberangkatanDanKedatangan keberangkatanDanKedatangan = new KeberangkatanDanKedatangan();
+                Bundle bundle = new Bundle();
+                bundle.putString("judul", "Tentukan bandara kedatangan");
+                keberangkatanDanKedatangan.setArguments(bundle);
+                keberangkatanDanKedatangan.show(getSupportFragmentManager(), keberangkatanDanKedatangan.getTag());
             }
         });
 
@@ -154,5 +190,14 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         }
         pesawatYangPerluDiperhatikan.setArguments(bundle);
         pesawatYangPerluDiperhatikan.show(getSupportFragmentManager(), pesawatYangPerluDiperhatikan.getTag());
+    }
+
+    @Override
+    public void onDataPass(String pulangAtauPergi, String bandara) {
+        if (pulangAtauPergi.matches("Tentukan bandara kedatangan")) {
+            binding.kedatanganTextInput.getEditText().setText(bandara);
+        } else {
+            binding.keberangkatTextInput.getEditText().setText(bandara);
+        }
     }
 }

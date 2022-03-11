@@ -1,6 +1,7 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
@@ -43,6 +44,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
     private RecyclerView recyclerView;
     private ArrayList<String> namaBandara;
     private ArrayList<String> namaKota;
+    private OnDataKeberangkatanAtauKepulangan datapasser;
 
 
 
@@ -98,12 +100,16 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
             }
         });
 
-        recyclerView.setOnClickListener(new View.OnClickListener() {
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                String bandara = namaBandara.get(position);
+                String heading = judul.getText().toString();
+                datapasser.onDataPass(heading, bandara);
+                dismiss();
             }
         });
+
 
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
@@ -140,13 +146,17 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
 
 
 
-
-
-
-
-
-
         return dialog;
+    }
+
+    public interface OnDataKeberangkatanAtauKepulangan {
+        void onDataPass(String pulangAtauPergi, String bandara);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        datapasser = (OnDataKeberangkatanAtauKepulangan) context;
     }
 
     @Override
