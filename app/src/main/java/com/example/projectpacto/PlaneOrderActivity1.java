@@ -15,6 +15,8 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.util.ArrayList;
+
 public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger, KeberangkatanDanKedatangan.OnDataKeberangkatanAtauKepulangan {
 
     ActivityPlaneOrder1Binding binding;
@@ -29,6 +31,32 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         binding.penumpangTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.kedatanganTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.keberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+
+
+        //Action Button
+        binding.cariButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String keberangkatan = binding.keberangkatTextInput.getEditText().getText().toString();
+                String kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
+                String tanggal = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
+                String penumpang = binding.penumpangTextInput.getEditText().getText().toString();
+                if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
+                    Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
+                    intent.putExtra("keberangkatan", keberangkatan);
+                    intent.putExtra("keberangkatan", kedatangan);
+                    intent.putExtra("keberangkatan", tanggal);
+                    intent.putExtra("keberangkatan", penumpang);
+                    startActivity(intent);
+                    overridePendingTransition(0 , 0);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Mohon lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
 
         //Tombol Tukar
         binding.tukar.setOnClickListener(new View.OnClickListener() {
