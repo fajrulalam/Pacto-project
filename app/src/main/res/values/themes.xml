@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/secondary_light</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/status_bar</item>-->
+<!--        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>-->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
@@ -28,6 +28,10 @@
     <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>
     </style>
+
+
+
+
 
     <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
         <item name="cornerFamily">rounded</item>

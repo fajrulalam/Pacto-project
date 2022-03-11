@@ -105,7 +105,8 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 String bandara = namaBandara.get(position);
                 String heading = judul.getText().toString();
-                datapasser.onDataPass(heading, bandara);
+                String kota = namaKota.get(position);
+                datapasser.onDataPass(heading, bandara, kota);
                 dismiss();
             }
         });
@@ -150,7 +151,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
     }
 
     public interface OnDataKeberangkatanAtauKepulangan {
-        void onDataPass(String pulangAtauPergi, String bandara);
+        void onDataPass(String pulangAtauPergi, String bandara, String kota);
     }
 
     @Override

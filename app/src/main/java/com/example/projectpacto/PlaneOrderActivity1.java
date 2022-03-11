@@ -20,6 +20,10 @@ import java.util.ArrayList;
 public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger, KeberangkatanDanKedatangan.OnDataKeberangkatanAtauKepulangan {
 
     ActivityPlaneOrder1Binding binding;
+    String kota_keberangkatan;
+    String kota_kedatangan;
+    String bandara_kedatangan;
+    String bandara_keberangkatan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,11 +241,15 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
     }
 
     @Override
-    public void onDataPass(String pulangAtauPergi, String bandara) {
+    public void onDataPass(String pulangAtauPergi, String bandara, String kota) {
         if (pulangAtauPergi.matches("Tentukan bandara kedatangan")) {
             binding.kedatanganTextInput.getEditText().setText(bandara);
+            bandara_kedatangan = bandara;
+            kota_kedatangan = kota;
         } else {
             binding.keberangkatTextInput.getEditText().setText(bandara);
+            bandara_keberangkatan= bandara;
+            kota_keberangkatan = kota;
         }
     }
 }
