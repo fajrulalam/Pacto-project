@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="2dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="horizontal"
+        android:background="@drawable/curved_bg_outline">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_citilink"/>
+
+                <TextView
+                    android:id="@+id/namaMaskapai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Citilink"
+                    android:layout_gravity="bottom"
+                    android:textSize="10sp"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="#303030"
+                    android:layout_marginLeft="5dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp">
+
+
+                <TextView
+                    android:id="@+id/waktuBerangkat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:letterSpacing="0.05"
+                    android:textColor="@color/black"
+                    android:text="06:30"/>
+
+                <TextView
+                    android:id="@+id/bandaraAsal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_light"
+                    android:textSize="10sp"
+                    android:layout_below="@+id/waktuBerangkat"
+                    android:layout_alignLeft="@id/waktuBerangkat"
+                    android:layout_alignRight="@+id/waktuBerangkat"
+                    android:text="CGK"
+                    android:gravity="center"/>
+
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/waktuBerangkat"
+                    android:paddingHorizontal="10dp"
+                    android:src="@drawable/ic_right_arrow_long" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lay="@+id/arrow"
+                    android:layout_marginTop="8dp"
+                    android:layout_alignLeft="@+id/arrow"
+                    android:layout_alignRight="@+id/arrow"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:text="55 menit"
+                    android:textSize="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lay="@+id/arrow"
+                    android:layout_marginTop="11dp"
+                    android:layout_below="@+id/arrow"
+                    android:layout_alignLeft="@+id/arrow"
+                    android:layout_alignRight="@+id/arrow"
+                    android:gravity="center"
+                    android:paddingHorizontal="10dp"
+                    android:text="langsung"
+                    android:textSize="6dp"/>
+
+
+                <TextView
+                    android:id="@+id/waktuDatang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/arrow"
+                    android:fontFamily="@font/roboto_medium"
+                    android:letterSpacing="0.05"
+                    android:text="07:20"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/bandaraTujuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/roboto_light"
+                    android:layout_below="@+id/waktuDatang"
+                    android:layout_alignLeft="@id/waktuDatang"
+                    android:layout_alignRight="@+id/waktuDatang"
+                    android:text="SUB"
+                    android:gravity="center"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_covid_vaccine"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Test Covid Diperlukan"
+                    android:textSize="9dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/primary_dark"
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="130dp"
+            android:layout_weight="0.4"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IDR 550.000"
+                android:gravity="right"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/black"
+                android:paddingRight="20dp"
+                android:textSize="18dp"
+                android:layout_marginTop="75dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="/pax"
+                android:gravity="right"
+                android:paddingRight="20dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="12dp"
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
