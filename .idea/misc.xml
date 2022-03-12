@@ -18,12 +18,13 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/curved_less_bg.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.46452991452991454" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_beranda.xml" value="0.5661458333333333" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_right_arrow_long.xml" value="0.2829059829059829" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/selectable_view.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_booking.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_notification.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order1.xml" value="0.4" />
-        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order2.xml" value="0.4512820512820513" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order2.xml" value="0.2581967213114754" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_real_main.xml" value="0.6" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_trankasi.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_user.xml" value="0.328125" />
@@ -32,7 +33,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_keberangkatan_dan_kedatangan.xml" value="0.39949270767279643" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_penumpang_bottom_sheet.xml" value="0.4512820512820513" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_pesawat_yang_perlu_diperhatikan.xml" value="0.4512820512820513" />
-        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/ticket_single_view.xml" value="0.8800000000000001" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/ticket_single_view.xml" value="0.5060240963855421" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/menu/menu_filter_and_sort.xml" value="0.4512820512820513" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/menu/menu_nav.xml" value="0.55" />
       </map>

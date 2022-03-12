@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="150dp"
         android:orientation="horizontal"
         android:background="@drawable/curved_bg_outline">
 
@@ -20,27 +20,27 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/logoMaskapai"
+
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="27dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="24dp"
-
-                    android:layout_height="24dp"
+                    android:layout_width="27dp"
+                    android:id="@+id/logoMaskapai"
+                    android:layout_height="27dp"
                     android:src="@drawable/ic_citilink"/>
 
                 <TextView
                     android:id="@+id/namaMaskapai"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Citilink"
-                    android:layout_gravity="bottom"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="3dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="18sp"
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="#303030"
                     android:layout_marginLeft="5dp"/>
@@ -61,6 +61,7 @@
                     android:fontFamily="@font/roboto_medium"
                     android:letterSpacing="0.05"
                     android:text="06:30"
+                    android:textSize="20dp"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -73,7 +74,7 @@
                     android:fontFamily="@font/roboto_light"
                     android:gravity="center"
                     android:text="CGK"
-                    android:textSize="10sp" />
+                    android:textSize="16sp" />
 
                 <ImageView
                     android:id="@+id/arrow"
@@ -90,26 +91,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/arrow"
                     android:layout_alignRight="@+id/arrow"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:gravity="center"
-                    android:lay="@+id/arrow"
                     android:paddingHorizontal="10dp"
                     android:text="55 menit"
-                    android:textSize="6dp" />
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/langsungAtauTransit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:lay="@+id/arrow"
-                    android:layout_marginTop="11dp"
                     android:layout_below="@+id/arrow"
                     android:layout_alignLeft="@+id/arrow"
                     android:layout_alignRight="@+id/arrow"
+                    android:layout_marginTop="14dp"
                     android:gravity="center"
                     android:paddingHorizontal="10dp"
                     android:text="langsung"
-                    android:textSize="6dp"/>
+                    android:textSize="12dp" />
 
 
                 <TextView
@@ -117,6 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/arrow"
+                    android:textSize="20dp"
                     android:fontFamily="@font/roboto_medium"
                     android:letterSpacing="0.05"
                     android:text="07:20"
@@ -126,13 +126,13 @@
                     android:id="@+id/bandaraTujuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:fontFamily="@font/roboto_light"
                     android:layout_below="@+id/waktuDatang"
                     android:layout_alignLeft="@id/waktuDatang"
                     android:layout_alignRight="@+id/waktuDatang"
+                    android:fontFamily="@font/roboto_light"
+                    android:gravity="center"
                     android:text="SUB"
-                    android:gravity="center"/>
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
@@ -184,7 +184,7 @@
                 android:textColor="@color/black"
                 android:paddingRight="20dp"
                 android:textSize="18dp"
-                android:layout_marginTop="75dp"/>
+                android:layout_marginTop="60dp"/>
 
             <TextView
                 android:layout_width="match_parent"
