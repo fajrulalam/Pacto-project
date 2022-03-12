@@ -44,6 +44,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
     private RecyclerView recyclerView;
     private ArrayList<String> namaBandara;
     private ArrayList<String> namaKota;
+    private ArrayList<String> kodeBandara;
     private OnDataKeberangkatanAtauKepulangan datapasser;
 
 
@@ -66,10 +67,11 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
         recyclerView = view.findViewById(R.id.RecycleViewKota_Bandara);
         namaBandara = new ArrayList<>();
         namaKota = new ArrayList<>();
+        kodeBandara = new ArrayList<>();
 
         Bundle bundle = this.getArguments();
         judul.setText(bundle.getString("judul"));
-        RecyclerAdapaterBandara recyclerAdapaterBandara = new RecyclerAdapaterBandara(namaKota, namaBandara);
+        RecyclerAdapaterBandara recyclerAdapaterBandara = new RecyclerAdapaterBandara(namaKota, namaBandara, kodeBandara);
         recyclerView.setAdapter(recyclerAdapaterBandara);
 
 
@@ -83,6 +85,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
                     case "surabaya":
                         namaBandara.add("Juanda International Airport");
                         namaKota.add("Surabaya");
+                        kodeBandara.add("SUB");
                         recyclerAdapaterBandara.notifyDataSetChanged();
 
                         break;
@@ -90,9 +93,10 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
                         namaKota.add("Jakarta");
                         namaKota.add("Jakarta");
                         namaBandara.add("Halim Perdanakusuma International Airport");
+                        kodeBandara.add("HLP");
                         namaBandara.add("Soekarno-Hatta International Airport");
+                        kodeBandara.add("CGK");
                         recyclerAdapaterBandara.notifyDataSetChanged();
-
                         break;
                 }
 
@@ -106,7 +110,8 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
                 String bandara = namaBandara.get(position);
                 String heading = judul.getText().toString();
                 String kota = namaKota.get(position);
-                datapasser.onDataPass(heading, bandara, kota);
+                String airportcode = kodeBandara.get(position);
+                datapasser.onDataPass(heading, bandara, kota, airportcode);
                 dismiss();
             }
         });
@@ -151,7 +156,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
     }
 
     public interface OnDataKeberangkatanAtauKepulangan {
-        void onDataPass(String pulangAtauPergi, String bandara, String kota);
+        void onDataPass(String pulangAtauPergi, String bandara, String kota, String airportCode);
     }
 
     @Override

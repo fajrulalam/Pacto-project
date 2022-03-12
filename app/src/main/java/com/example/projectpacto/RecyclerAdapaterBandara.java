@@ -14,10 +14,12 @@ public class RecyclerAdapaterBandara extends RecyclerView.Adapter<RecyclerAdapat
 
     ArrayList<String> namaKota;
     ArrayList<String> namaBandara;
+    ArrayList<String> kodeBandara;
 
-    public RecyclerAdapaterBandara(ArrayList<String> namaKota, ArrayList<String> namaBandara){
+    public RecyclerAdapaterBandara(ArrayList<String> namaKota, ArrayList<String> namaBandara, ArrayList<String> kodeBandara){
         this.namaKota = namaKota;
         this.namaBandara = namaBandara;
+        this.kodeBandara =  kodeBandara;
 
     }
     @NonNull
@@ -31,7 +33,7 @@ public class RecyclerAdapaterBandara extends RecyclerView.Adapter<RecyclerAdapat
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.bandaraTextView.setText(String.valueOf(namaBandara.get(position)));
+        holder.bandaraTextView.setText(String.valueOf(namaBandara.get(position)) + " (" +kodeBandara.get(position)+")");
         holder.kotaTextView.setText(String.valueOf(namaKota.get(position)));
 
     }

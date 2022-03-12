@@ -45,7 +45,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 String kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
                 String tanggal = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
                 String penumpang = binding.penumpangTextInput.getEditText().getText().toString();
-                if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
+//                if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
                     intent.putExtra("keberangkatan", keberangkatan);
                     intent.putExtra("keberangkatan", kedatangan);
@@ -53,9 +53,9 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     intent.putExtra("keberangkatan", penumpang);
                     startActivity(intent);
                     overridePendingTransition(0 , 0);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Mohon lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Mohon lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });
@@ -241,13 +241,13 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
     }
 
     @Override
-    public void onDataPass(String pulangAtauPergi, String bandara, String kota) {
+    public void onDataPass(String pulangAtauPergi, String bandara, String kota, String kodeBandara) {
         if (pulangAtauPergi.matches("Tentukan bandara kedatangan")) {
-            binding.kedatanganTextInput.getEditText().setText(bandara);
+            binding.kedatanganTextInput.getEditText().setText(kota + " (" + kodeBandara + ")");
             bandara_kedatangan = bandara;
             kota_kedatangan = kota;
         } else {
-            binding.keberangkatTextInput.getEditText().setText(bandara);
+            binding.keberangkatTextInput.getEditText().setText(kota + " (" + kodeBandara + ")");
             bandara_keberangkatan= bandara;
             kota_keberangkatan = kota;
         }
