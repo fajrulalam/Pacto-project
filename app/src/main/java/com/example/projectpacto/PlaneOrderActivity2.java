@@ -57,7 +57,6 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             tanggal = extras.getString("tanggal");
             penumpang = extras.getString("penumpang");
             Log.i("Keberangkatan2", "hello" + keberangkatan);
-
         } else {
             Log.i("Keberangkatan2", "gamasuk");
         }
@@ -66,6 +65,19 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
 
         //Back Button
         binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity1.class);
+                intent.putExtra("keberangkatan", keberangkatan);
+                intent.putExtra("kedatangan", kedatangan);
+                intent.putExtra("tanggal", tanggal);
+                intent.putExtra("penumpang", penumpang);
+                startActivity(intent);
+                overridePendingTransition(0 , 0);
+            }
+        });
+        //Ubah Button
+        binding.ubahButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity1.class);

@@ -33,7 +33,6 @@ import java.util.HashMap;
  */
 public class PenumpangBottomSheet extends BottomSheetDialogFragment {
 
-    FragmentPenumpangBottomSheetBinding binding;
     TextView dewasaTextView;
     TextView anak2TextView;
     TextView balitaTextview;

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    tools:context=".PenumpangBottomSheet">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:background="@drawable/bottom_sheet_background"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/closeSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_baseline_close_24"
+            app:tint="@color/black" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:paddingVertical="10dp"
+                android:text="Filter Tiket Pesawat"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:text="Rentang Harga"
+                android:layout_marginBottom="10dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_medium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/hargaMinimum"
+                    app:hintEnabled="false"
+                    app:hintAnimationEnabled="false"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="3dp"
+
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Minimum"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:paddingVertical="2dp"
+                        android:textSize="14sp"
+                        android:background="@drawable/curved_bg_less_thickoutline"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/hargaMaksimum"
+                    app:hintEnabled="false"
+                    app:hintAnimationEnabled="false"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="40dp"
+                    app:boxStrokeWidth="0dp"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Maksimum"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:paddingVertical="2dp"
+                        android:textSize="14sp"
+                        android:background="@drawable/curved_bg_less_thickoutline"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kelas"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/radioButton1"
+                        style="@style/radioButtonStyle"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/curved__even_less_colorized_bg"
+                        android:padding="10dp"
+                        android:text="Ekonomi"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton2"
+                        style="@style/radioButtonStyle"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/curved__even_less_colorized_bg"
+                        android:padding="10dp"
+                        android:text="Premium Ekonomi"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <RadioButton
+                        android:id="@+id/radioButton3"
+                        style="@style/radioButtonStyle"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/curved__even_less_colorized_bg"
+                        android:padding="10dp"
+                        android:text="Bisnis" />
+
+                    <RadioButton
+                        android:id="@+id/radioButton4"
+                        style="@style/radioButtonStyle"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/curved__even_less_colorized_bg"
+                        android:padding="10dp"
+                        android:text="First Class"
+                        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+                </LinearLayout>
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rentang Waktu Berangkat"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/berangkat1"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="06.00 - 10.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/berangkat2"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="10.00 - 13.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/berangkat3"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="13.00 - 16.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/berangkat4"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="16.00 - 19.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/berangkat5"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"
+                android:text="19.00 - 22.00"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rentang Waktu Berangkat"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/datang1"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="06.00 - 10.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/datang2"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="10.00 - 13.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/datang3"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="13.00 - 16.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/datang4"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="16.00 - 19.00"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/datang5"
+                android:fontFamily="@font/roboto_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginBottom="20dp"
+                android:text="19.00 - 22.00"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maskapai"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

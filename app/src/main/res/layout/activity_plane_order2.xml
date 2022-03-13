@@ -17,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="6dp"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
 
             <ImageButton
@@ -137,10 +136,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/menu_filter_and_sort"/>
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
