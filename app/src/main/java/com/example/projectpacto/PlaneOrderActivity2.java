@@ -50,6 +50,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         testCovid = new ArrayList<>();
         harga = new ArrayList<>();
 
+
+        //Setting the top Bar
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             keberangkatan = extras.getString("keberangkatan");
@@ -57,9 +59,15 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             tanggal = extras.getString("tanggal");
             penumpang = extras.getString("penumpang");
             Log.i("Keberangkatan2", "hello" + keberangkatan);
+
+            binding.kotaAsal.setText(keberangkatan);
+            binding.kotaTujuan.setText(kedatangan);
+            binding.detailPassenger.setText(penumpang);
         } else {
             Log.i("Keberangkatan2", "gamasuk");
         }
+
+
 
 
 
@@ -107,6 +115,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
                         filterFragment.show(getSupportFragmentManager(), filterFragment.getTag());
                         return true;
                     case R.id.sort:
+                        SortPlaneTicket sortPlaneTicket = new SortPlaneTicket();
+                        sortPlaneTicket.show(getSupportFragmentManager(), sortPlaneTicket.getTag());
                         return true;
                 }
                 return false;

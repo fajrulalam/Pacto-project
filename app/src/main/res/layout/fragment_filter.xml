@@ -295,6 +295,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
                         android:background="@drawable/curved__even_less_colorized_bg"
                         android:layout_marginBottom="8dp"
                         android:paddingVertical="1dp"
@@ -320,6 +322,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
                         android:background="@drawable/curved__even_less_colorized_bg"
                         android:layout_marginBottom="8dp"
                         android:paddingVertical="1dp"
@@ -345,6 +349,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
                         android:background="@drawable/curved__even_less_colorized_bg"
                         android:layout_marginBottom="8dp"
                         android:paddingVertical="1dp"
@@ -373,6 +379,7 @@
                 <LinearLayout
                     android:layout_marginLeft="4dp"
                     android:layout_width="0dp"
+
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_weight="0.5">
@@ -380,6 +387,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
                         android:background="@drawable/curved__even_less_colorized_bg"
                         android:layout_marginBottom="8dp"
                         android:paddingVertical="1dp"
@@ -406,6 +415,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
                         android:background="@drawable/curved__even_less_colorized_bg"
                         android:layout_marginBottom="8dp"
                         android:paddingVertical="1dp"
@@ -432,6 +443,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
                         android:background="@drawable/curved__even_less_colorized_bg"
                         android:layout_marginBottom="8dp"
                         android:paddingVertical="1dp"
@@ -471,6 +484,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/tampilkanButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@drawable/curved__top_corners_bg"
