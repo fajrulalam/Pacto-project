@@ -102,6 +102,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.filter:
+                        Log.i("Test", "Filter");
+                        FilterFragment filterFragment = new FilterFragment();
+                        filterFragment.show(getSupportFragmentManager(), filterFragment.getTag());
                         return true;
                     case R.id.sort:
                         return true;

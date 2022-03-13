@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:context=".PenumpangBottomSheet">
+    tools:context=".FilterFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -282,7 +282,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="70dp">
 
                 <LinearLayout
                     android:layout_marginRight="4dp"
@@ -486,7 +487,7 @@
             android:layout_marginHorizontal="16dp"
             android:text="Tampilkan"
             android:textAllCaps="false"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/roboto_regular"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
