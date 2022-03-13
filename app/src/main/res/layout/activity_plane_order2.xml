@@ -21,13 +21,16 @@
             >
 
 
-            <ImageView
+            <ImageButton
+                android:id="@+id/backButton"
                 android:layout_width="0dp"
                 android:layout_weight="0.4"
-                android:scaleY="2"
-                android:scaleX="2"
+                android:scaleY="1"
+                android:scaleX="1"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                android:background="@color/white"
+                android:foreground="@drawable/selectable_view_notsocurved"
                 android:paddingHorizontal="20dp"/>
 
             <LinearLayout
@@ -80,10 +83,13 @@
             </LinearLayout>
 
             <RadioButton
+                android:id="@+id/ubahButton"
                 android:layout_width="0dp"
                 android:layout_weight="0.45"
                 android:layout_height="35dp"
+                android:layout_marginRight="8dp"
                 style="@style/radioButtonStyle"
+                android:foreground="@drawable/selectable_view_notsocurved"
                 android:text="Ubah"
                 android:layout_gravity="center"
                 android:background="@drawable/curved__even_less_colorized_bg"/>

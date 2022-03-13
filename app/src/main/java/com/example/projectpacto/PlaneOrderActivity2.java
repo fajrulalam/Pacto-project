@@ -3,7 +3,9 @@ package com.example.projectpacto;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -23,8 +25,12 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     ArrayList<String> langsungAtauTransit;
     ArrayList<String> waktuDatang;
     ArrayList<String> bandaraTujuan;
-    ArrayList<String> testCovid;
+    ArrayList<Boolean> testCovid;
     ArrayList<String> harga;
+    String keberangkatan;
+    String kedatangan;
+    String tanggal;
+    String penumpang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +50,38 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         testCovid = new ArrayList<>();
         harga = new ArrayList<>();
 
-        logoMaskapai.add(R.drawable.ic_citilink);
-        namaMaskapai.add("Lorem ipsum");
-        waktuBerangkat.add("Lorem ipsum");
-        bandaraAsal.add("Lorem ipsum");
-        durasi.add("Lorem ipsum");
-        langsungAtauTransit.add("Lorem ipsum");
-        waktuDatang.add("Lorem ipsum");
-        bandaraTujuan.add("Lorem ipsum");
-        testCovid.add("Lorem ipsum");
-        harga.add("Lorem ipsum");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            keberangkatan = extras.getString("keberangkatan");
+            kedatangan = extras.getString("kedatangan");
+            tanggal = extras.getString("tanggal");
+            penumpang = extras.getString("penumpang");
+            Log.i("Keberangkatan2", "hello" + keberangkatan);
+
+        } else {
+            Log.i("Keberangkatan2", "gamasuk");
+        }
 
 
-//        RecyclerAdapaterBandara recyclerAdapaterBandara = new RecyclerAdapaterBandara(namaMaskapai, bandaraAsal, durasi);
-        RecyclerAdapterPlaneTicket recyclerAdapterPlaneTicket = new RecyclerAdapterPlaneTicket(namaMaskapai,waktuBerangkat,bandaraAsal,durasi,langsungAtauTransit,waktuDatang, bandaraTujuan,testCovid,harga);
+
+        //Back Button
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity1.class);
+                intent.putExtra("keberangkatan", keberangkatan);
+                intent.putExtra("kedatangan", kedatangan);
+                intent.putExtra("tanggal", tanggal);
+                intent.putExtra("penumpang", penumpang);
+                startActivity(intent);
+                overridePendingTransition(0 , 0);
+            }
+        });
+
+
+        //Displaying the Tickets.
+        populateArrayLists();
+        RecyclerAdapterPlaneTicket recyclerAdapterPlaneTicket = new RecyclerAdapterPlaneTicket(logoMaskapai, namaMaskapai,waktuBerangkat,bandaraAsal,durasi,langsungAtauTransit,waktuDatang, bandaraTujuan,testCovid,harga);
         binding.RecycleViewKotaBandara.setAdapter(recyclerAdapterPlaneTicket);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -76,5 +100,62 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void populateArrayLists(){
+        logoMaskapai.add(R.drawable.ic_citilink);
+        namaMaskapai.add("Citilink");
+        waktuBerangkat.add("06:30");
+        bandaraAsal.add("SUB");
+        durasi.add("50 menit");
+        langsungAtauTransit.add("langsung");
+        waktuDatang.add("07:20");
+        bandaraTujuan.add("HLP");
+        testCovid.add(true);
+        harga.add("IDR 560.000");
+
+        logoMaskapai.add(R.drawable.ic_citilink);
+        namaMaskapai.add("Citilink");
+        waktuBerangkat.add("10:30");
+        bandaraAsal.add("SUB");
+        durasi.add("50 menit");
+        langsungAtauTransit.add("langsung");
+        waktuDatang.add("11:20");
+        bandaraTujuan.add("HLP");
+        testCovid.add(false);
+        harga.add("IDR 580.000");
+
+        logoMaskapai.add(R.drawable.ic_citilink);
+        namaMaskapai.add("Citilink");
+        waktuBerangkat.add("15:10");
+        bandaraAsal.add("SUB");
+        durasi.add("50 menit");
+        langsungAtauTransit.add("langsung");
+        waktuDatang.add("16:00");
+        bandaraTujuan.add("HLP");
+        testCovid.add(true);
+        harga.add("IDR 520.000");
+
+        logoMaskapai.add(R.drawable.ic_lionair);
+        namaMaskapai.add("Lion Air");
+        waktuBerangkat.add("08:20");
+        bandaraAsal.add("SUB");
+        durasi.add("45 menit");
+        langsungAtauTransit.add("langsung");
+        waktuDatang.add("09:05");
+        bandaraTujuan.add("HLP");
+        testCovid.add(true);
+        harga.add("IDR 570.000");
+
+        logoMaskapai.add(R.drawable.ic_lionair);
+        namaMaskapai.add("Lion Air");
+        waktuBerangkat.add("11:05");
+        bandaraAsal.add("SUB");
+        durasi.add("45 menit");
+        langsungAtauTransit.add("langsung");
+        waktuDatang.add("12:50");
+        bandaraTujuan.add("HLP");
+        testCovid.add(true);
+        harga.add("IDR 550.000");
     }
 }

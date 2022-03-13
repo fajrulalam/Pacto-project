@@ -21,10 +21,10 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
     ArrayList<String> langsungAtauTransit;
     ArrayList<String> waktuDatang;
     ArrayList<String> bandaraTujuan;
-    ArrayList<String> testCovid;
+    ArrayList<Boolean> testCovid;
     ArrayList<String> harga;
 
-    public RecyclerAdapterPlaneTicket( ArrayList<String> namaMaskapai, ArrayList<String> waktuBerangkat, ArrayList<String> bandaraAsal, ArrayList<String> durasi, ArrayList<String> langsungAtauTransit, ArrayList<String> waktuDatang, ArrayList<String> bandaraTujuan, ArrayList<String> testCovid, ArrayList<String> harga){
+    public RecyclerAdapterPlaneTicket(  ArrayList<Integer> logoMaskapai, ArrayList<String> namaMaskapai, ArrayList<String> waktuBerangkat, ArrayList<String> bandaraAsal, ArrayList<String> durasi, ArrayList<String> langsungAtauTransit, ArrayList<String> waktuDatang, ArrayList<String> bandaraTujuan, ArrayList<Boolean> testCovid, ArrayList<String> harga){
         this.logoMaskapai = logoMaskapai;
         this.namaMaskapai = namaMaskapai;
         this.waktuBerangkat = waktuBerangkat;
@@ -49,11 +49,27 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        holder.logoMaskapai.setImageResource(logoMaskapai.get(position));
+        holder.namaMaskapai.setText(namaMaskapai.get(position));
+        holder.waktuBerangkat.setText(waktuBerangkat.get(position));
+        holder.bandaraAsal.setText(bandaraAsal.get(position));
+        holder.durasi.setText(durasi.get(position));
+        holder.langsungAtauTransit.setText(langsungAtauTransit.get(position));
+        holder.waktuDatang.setText(waktuDatang.get(position));
+        holder.bandaraTujuan.setText(bandaraTujuan.get(position));
+        holder.harga.setText(harga.get(position));
+
+        if (testCovid.get(position) == false) {
+            holder.testCovid.setVisibility(View.INVISIBLE);
+        }
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return namaMaskapai.size();
     }
 
 

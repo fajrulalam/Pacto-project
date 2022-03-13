@@ -24,6 +24,10 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
     String kota_kedatangan;
     String bandara_kedatangan;
     String bandara_keberangkatan;
+    String keberangkatan;
+    String kedatangan;
+    String tanggal;
+    String penumpang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +40,39 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         binding.kedatanganTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.keberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
 
+        keberangkatan = "";
+        kedatangan = "";
+        tanggal = "";
+        penumpang = "";
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            keberangkatan = extras.getString("keberangkatan");
+            kedatangan = extras.getString("kedatangan");
+            tanggal = extras.getString("tanggal");
+            penumpang = extras.getString("penumpang");
+            Log.i("Keberangkatan1", "hello" + keberangkatan);
+            binding.keberangkatTextInput.getEditText().setText(keberangkatan);
+            binding.kedatanganTextInput.getEditText().setText(kedatangan);
+            binding.tanggalKeberangkatTextInput.getEditText().setText(tanggal);
+            binding.penumpangTextInput.getEditText().setText(penumpang);
+        }
+
 
         //Action Button
         binding.cariButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String keberangkatan = binding.keberangkatTextInput.getEditText().getText().toString();
-                String kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
-                String tanggal = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
-                String penumpang = binding.penumpangTextInput.getEditText().getText().toString();
+                keberangkatan = binding.keberangkatTextInput.getEditText().getText().toString();
+                kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
+                tanggal = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
+                penumpang = binding.penumpangTextInput.getEditText().getText().toString();
 //                if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
                     intent.putExtra("keberangkatan", keberangkatan);
-                    intent.putExtra("keberangkatan", kedatangan);
-                    intent.putExtra("keberangkatan", tanggal);
-                    intent.putExtra("keberangkatan", penumpang);
+                    intent.putExtra("kedatangan", kedatangan);
+                    intent.putExtra("tanggal", tanggal);
+                    intent.putExtra("penumpang", penumpang);
                     startActivity(intent);
                     overridePendingTransition(0 , 0);
 //                } else {
