@@ -411,7 +411,6 @@
         <LinearLayout
             android:id="@+id/detailHargaLayout"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
             android:paddingHorizontal="16dp"
             android:orientation="vertical"
@@ -496,7 +495,7 @@
                     android:id="@+id/jumlahPenumpangBalita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Anak-Anak (x1)"
+                    android:text="Balita (x1)"
                     android:fontFamily="@font/roboto_regular"
                     android:textColor="@color/black"/>
 
@@ -547,6 +546,10 @@
 
             </LinearLayout>
 
+
+
+
+
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
                 android:layout_marginTop="5dp"
@@ -555,6 +558,7 @@
             <LinearLayout
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
+                android:layout_marginBottom="80dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -580,6 +584,8 @@
                     android:fontFamily="@font/roboto_medium"/>
 
             </LinearLayout>
+
+
 
 
 

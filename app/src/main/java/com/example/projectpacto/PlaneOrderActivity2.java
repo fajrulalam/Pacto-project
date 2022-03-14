@@ -60,6 +60,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 String waktuDatang =  ((TextView) v.findViewById(R.id.waktuDatang)).getText().toString();
                 Log.i("WAKTU DATANG", waktuDatang);
+                SelectedTicketBottomSheetFragment selectedTicketBottomSheetFragment = new SelectedTicketBottomSheetFragment();
+                selectedTicketBottomSheetFragment.show(getSupportFragmentManager(), selectedTicketBottomSheetFragment.getTag());
             }
         });
 
