@@ -34,6 +34,12 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     String tanggal;
     String penumpang;
 
+    String jmlDewasa;
+    String jmlAnak;
+    String jmlBalita;
+    String kelasPesawat;
+    int jumlPenumpang;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,11 +79,42 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             kedatangan = extras.getString("kedatangan");
             tanggal = extras.getString("tanggal");
             penumpang = extras.getString("penumpang");
-            Log.i("Keberangkatan2", "hello" + keberangkatan);
+            String[] passengerRaw = penumpang.split(", ");
+            if (passengerRaw.length == 2) {
+                jmlDewasa = passengerRaw[0].split(" ")[0];
+                jmlAnak = "0";
+                jmlBalita = "0";
+            } else if (passengerRaw.length == 3) {
+                jmlDewasa = passengerRaw[0].split(" ")[0];
+                switch (passengerRaw[1].split(" ")[1]) {
+                    case "Anak":
+                        jmlAnak = passengerRaw[1].split(" ")[0];
+                        jmlBalita = "0";
+                        break;
+                    case "Balita":
+                        jmlBalita = passengerRaw[1].split(" ")[0];
+                        jmlAnak= "0";
+                        break;
+                }
+            } else {
+                jmlDewasa = passengerRaw[0].split(" ")[0];
+                jmlAnak = passengerRaw[1].split(" ")[0];
+                jmlBalita = passengerRaw[2].split(" ")[0];
+            }
+            jumlPenumpang = Integer.parseInt(jmlDewasa) +  Integer.parseInt(jmlAnak) + Integer.parseInt(jmlBalita);
+            kelasPesawat = passengerRaw[passengerRaw.length -1];
 
-            binding.kotaAsal.setText(keberangkatan);
-            binding.kotaTujuan.setText(kedatangan);
-            binding.detailPassenger.setText(penumpang);
+
+
+            Log.i("Dewasa",  "DEWASA "+  jmlDewasa);
+            Log.i("Anak",  "ANAK "+ jmlAnak);
+            Log.i("Balita",  "BALITA "+ jmlBalita);
+            Log.i("TotalPenumpang",  "" + jumlPenumpang);
+            Log.i("KelasPesawat",  "" + kelasPesawat);
+
+            binding.kotaAsal.setText(keberangkatan.split(" ")[0]);
+            binding.kotaTujuan.setText(kedatangan.split(" ")[0]);
+            binding.detailPassenger.setText(jumlPenumpang + " Penumpang");
         } else {
             Log.i("Keberangkatan2", "gamasuk");
         }
