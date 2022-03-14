@@ -148,7 +148,6 @@
                     android:textSize="18sp" />
 
 
-
                 <TextView
                     android:id="@+id/tanggalDatang"
                     android:layout_width="wrap_content"
@@ -231,6 +230,7 @@
                             android:textColor="#4C4C4C" />
 
                         <TextView
+                            android:id="@+id/kodePenerbangan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/namaMaskapai"
@@ -365,7 +365,7 @@
                             android:layout_below="@id/modelStatic"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Boeing 737 Max"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black" />
 
                         <TextView
                             android:id="@+id/kelasStatic"
@@ -386,7 +386,7 @@
                             android:layout_toRightOf="@id/modelStatic"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Premium Ekonomi"
-                            android:textColor="@color/black"/>
+                            android:textColor="@color/black" />
 
                     </RelativeLayout>
 
@@ -613,7 +613,6 @@
         </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/tampilkanButton"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -652,6 +651,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/tampilkanButton"
             android:layout_width="0dp"
             android:layout_weight="0.4"
             android:layout_height="match_parent"
