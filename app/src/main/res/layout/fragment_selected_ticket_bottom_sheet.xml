@@ -23,7 +23,8 @@
             android:id="@+id/closeSheet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp"
             android:src="@drawable/ic_baseline_close_24"
             app:tint="@color/black" />
 
@@ -44,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:paddingVertical="10dp"
+                    android:paddingVertical="5dp"
                     android:text="Surabaya"
                     android:textSize="20dp" />
 
@@ -197,54 +198,201 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="295dp"
-                    android:layout_toRightOf="@+id/upperCircle"
+                    android:layout_height="307dp"
                     android:layout_below="@+id/bandaraAsal"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/upperCircle"
                     android:background="@drawable/curved_less_bg_outline"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp">
 
                         <ImageView
                             android:id="@+id/logoMaskapai"
                             android:layout_width="37dp"
-                            android:scaleType="centerCrop"
                             android:layout_height="37dp"
-                            android:src="@drawable/ic_citilink"/>
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_citilink" />
 
                         <TextView
                             android:id="@+id/namaMaskapai"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
                             android:layout_toRightOf="@id/logoMaskapai"
-                            android:text="Citilink"
                             android:fontFamily="@font/roboto_medium"
-                            android:textColor="#4C4C4C"
-                            android:layout_marginLeft="5dp"/>
+                            android:text="Citilink"
+                            android:textColor="#4C4C4C" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/logoMaskapai"
                             android:layout_below="@+id/namaMaskapai"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@id/logoMaskapai"
                             android:fontFamily="@font/roboto_light"
                             android:text="IQK290"
-                            android:textSize="12dp"
-                            android:layout_marginLeft="5dp"/>
+                            android:textSize="12dp" />
                     </RelativeLayout>
 
                     <com.google.android.material.divider.MaterialDivider
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="15dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Fasilitas di dalamnya"
+                        android:textColor="@color/black" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/ic_bagasi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/ic_bagasi" />
+
+                        <TextView
+                            android:id="@+id/kabin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/ic_bagasi"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Kabin: 7 kg"
+                            android:textColor="@color/dark_grey" />
+
+                        <TextView
+                            android:id="@+id/bagasi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/kabin"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/ic_bagasi"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Bagasi: 20 kg"
+                            android:textColor="@color/dark_grey" />
+
+                        <TextView
+                            android:id="@+id/keteranganKabin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/bagasi"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/ic_bagasi"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Pemesanan bagasi tambahan dapat dilakukan pada form pemesanan khususnya pada fasilitas ekstra. kesediaan tergantung pada maskapai masing masing"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/detailMakan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/ic_makanPesawat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="2dp"
+                            android:src="@drawable/ic_makan" />
+
+                        <TextView
+                            android:id="@+id/makanAtauTidak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/ic_makanPesawat"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Tidak termasuk makan"
+                            android:textColor="@color/dark_grey" />
+
+
+                        <TextView
+                            android:id="@+id/keteranganMakanan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/makanAtauTidak"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/ic_makanPesawat"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Penerbangan ini tidak termasuk makanan"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="13sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp">
+
+
+                        <TextView
+                            android:id="@+id/modelStatic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Model"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/modelPesawat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/modelStatic"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Boeing 737 Max"
+                            android:textColor="@color/black"
+
+                        <TextView
+                            android:id="@+id/kelasStatic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="160dp"
+                            android:layout_toRightOf="@+id/modelStatic"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Kelas"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/kelasPesawat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/modelStatic"
+                            android:layout_marginLeft="160dp"
+                            android:layout_toRightOf="@id/modelStatic"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Premium Ekonomi"
+                            android:textColor="@color/black"
+
+                    </RelativeLayout>
+
+
                 </LinearLayout>
+
+
 
 
 
@@ -266,10 +414,11 @@
 
 
 
+
+
         </LinearLayout>
 
 
-    </LinearLayout>
 <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
 <!--        android:id="@+id/tampilkanButton"-->
 <!--        android:layout_width="match_parent"-->
