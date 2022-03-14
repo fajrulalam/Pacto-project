@@ -2,12 +2,14 @@ package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
 import com.example.projectpacto.databinding.ActivityRealMainBinding;
@@ -49,6 +51,17 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         bandaraTujuan = new ArrayList<>();
         testCovid = new ArrayList<>();
         harga = new ArrayList<>();
+
+
+        //Recycle View on Click
+
+        ItemClickSupport.addTo(binding.RecycleViewTicket).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                String waktuDatang =  ((TextView) v.findViewById(R.id.waktuDatang)).getText().toString();
+                Log.i("WAKTU DATANG", waktuDatang);
+            }
+        });
 
 
         //Setting the top Bar
@@ -102,7 +115,7 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         //Displaying the Tickets.
         populateArrayLists();
         RecyclerAdapterPlaneTicket recyclerAdapterPlaneTicket = new RecyclerAdapterPlaneTicket(logoMaskapai, namaMaskapai,waktuBerangkat,bandaraAsal,durasi,langsungAtauTransit,waktuDatang, bandaraTujuan,testCovid,harga);
-        binding.RecycleViewKotaBandara.setAdapter(recyclerAdapterPlaneTicket);
+        binding.RecycleViewTicket.setAdapter(recyclerAdapterPlaneTicket);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
