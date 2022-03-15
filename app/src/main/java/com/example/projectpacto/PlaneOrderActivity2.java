@@ -38,6 +38,10 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     String jmlAnak;
     String jmlBalita;
     String kelasPesawat;
+    String bandara_kedatangan;
+    String bandara_keberangkatan;
+    String kota_kedatangan;
+    String kota_keberangkatan;
     int jumlPenumpang;
 
     @Override
@@ -79,6 +83,11 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             kedatangan = extras.getString("kedatangan");
             tanggal = extras.getString("tanggal");
             penumpang = extras.getString("penumpang");
+            kota_keberangkatan = extras.getString("kota_keberangkatan");
+            kota_kedatangan = extras.getString("kota_kedatangan");
+            bandara_keberangkatan = extras.getString("bandara_keberangkatan") + " " + keberangkatan.split(" ")[1].replace(" ", "");
+            bandara_kedatangan = extras.getString("bandara_kedatangan") +" " +  kedatangan.split(" ")[1];
+
             String[] passengerRaw = penumpang.split(", ");
             if (passengerRaw.length == 2) {
                 jmlDewasa = passengerRaw[0].split(" ")[0];
@@ -111,6 +120,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             Log.i("Balita",  "BALITA "+ jmlBalita);
             Log.i("TotalPenumpang",  "" + jumlPenumpang);
             Log.i("KelasPesawat",  "" + kelasPesawat);
+            Log.i("BandaraAsal", bandara_keberangkatan);
+            Log.i("BandaraTujuan", bandara_kedatangan);
+
 
             binding.kotaAsal.setText(keberangkatan.split(" ")[0]);
             binding.kotaTujuan.setText(kedatangan.split(" ")[0]);
@@ -132,6 +144,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
                 intent.putExtra("kedatangan", kedatangan);
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("penumpang", penumpang);
+                intent.putExtra("bandara_kedatangan", bandara_kedatangan);
+                intent.putExtra("bandara_keberangkatan", bandara_keberangkatan);
                 startActivity(intent);
                 overridePendingTransition(0 , 0);
             }

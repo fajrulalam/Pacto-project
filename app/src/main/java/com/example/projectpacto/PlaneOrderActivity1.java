@@ -51,6 +51,8 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             kedatangan = extras.getString("kedatangan");
             tanggal = extras.getString("tanggal");
             penumpang = extras.getString("penumpang");
+            bandara_keberangkatan = extras.getString("bandara_keberangkatan").split(" \\(")[0];
+            bandara_kedatangan = extras.getString("bandara_kedatangan").split(" \\(")[0];
             Log.i("Keberangkatan1", "hello" + keberangkatan);
             binding.keberangkatTextInput.getEditText().setText(keberangkatan);
             binding.kedatanganTextInput.getEditText().setText(kedatangan);
@@ -71,6 +73,10 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
                     intent.putExtra("keberangkatan", keberangkatan);
                     intent.putExtra("kedatangan", kedatangan);
+                    intent.putExtra("kota_keberangkatan", kota_keberangkatan);
+                    intent.putExtra("kota_kedatangan", kota_kedatangan);
+                    intent.putExtra("bandara_kedatangan", bandara_kedatangan);
+                    intent.putExtra("bandara_keberangkatan", bandara_keberangkatan);
                     intent.putExtra("tanggal", tanggal);
                     intent.putExtra("penumpang", penumpang);
                     startActivity(intent);
@@ -93,6 +99,10 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 if (!keberangkatan.matches("") || !kedatangan.matches("")) {
                     binding.keberangkatTextInput.getEditText().setText(kedatangan);
                     binding.kedatanganTextInput.getEditText().setText(keberangkatan);
+                    String temp = bandara_kedatangan;
+                    String temp2 = bandara_keberangkatan;
+                    bandara_keberangkatan = temp;
+                    bandara_kedatangan = temp2;
                 } else {
                     Toast.makeText(getApplicationContext(), "Mohon destinasi diisi terlebih dahulu", Toast.LENGTH_SHORT).show();
                 }
@@ -271,6 +281,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         } else {
             binding.keberangkatTextInput.getEditText().setText(kota + " (" + kodeBandara + ")");
             bandara_keberangkatan= bandara;
+            Log.i("BANDARA_MASUK", bandara);
             kota_keberangkatan = kota;
         }
     }

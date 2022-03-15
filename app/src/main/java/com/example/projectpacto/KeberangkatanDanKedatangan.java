@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 namaBandara.clear();
                 namaKota.clear();
+                kodeBandara.clear();
                 switch (bandaraTextInput.getEditText().getText().toString()) {
                     case "surabaya":
                         namaBandara.add("Juanda International Airport");
@@ -111,6 +113,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
                 String heading = judul.getText().toString();
                 String kota = namaKota.get(position);
                 String airportcode = kodeBandara.get(position);
+                Log.i("BANDARA_BS", namaBandara.get(position));
                 datapasser.onDataPass(heading, bandara, kota, airportcode);
                 dismiss();
             }
