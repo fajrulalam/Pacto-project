@@ -1,10 +1,12 @@
 package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,6 +17,8 @@ import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
 import com.example.projectpacto.databinding.ActivityRealMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class PlaneOrderActivity2 extends AppCompatActivity {
@@ -44,6 +48,7 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     String kota_keberangkatan;
     int jumlPenumpang;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +93,10 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             bandara_keberangkatan = extras.getString("bandara_keberangkatan") + " " + keberangkatan.split(" ")[1].replace(" ", "");
             bandara_kedatangan = extras.getString("bandara_kedatangan") +" " +  kedatangan.split(" ")[1];
 
+
+
+
+
             String[] passengerRaw = penumpang.split(", ");
             if (passengerRaw.length == 2) {
                 jmlDewasa = passengerRaw[0].split(" ")[0];
@@ -116,6 +125,7 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
 
 
             Log.i("Dewasa",  "DEWASA "+  jmlDewasa);
+            Log.i("Tanggal",  "TGL "+  tanggal);
             Log.i("Anak",  "ANAK "+ jmlAnak);
             Log.i("Balita",  "BALITA "+ jmlBalita);
             Log.i("TotalPenumpang",  "" + jumlPenumpang);

@@ -1,8 +1,10 @@
 package com.example.projectpacto;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +17,12 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger, KeberangkatanDanKedatangan.OnDataKeberangkatanAtauKepulangan {
 
@@ -183,6 +190,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 
 
         //Calendar Constraints
+        Locale lokal = new Locale("id", "ID");
         long today = MaterialDatePicker.todayInUtcMilliseconds();
         CalendarConstraints.Builder constraints = new CalendarConstraints.Builder()
                 .setStart(today);
@@ -197,9 +205,14 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 if (b==true) {
                     datePicker_start.show(getSupportFragmentManager(), "tgl_keberangkatan");
                     datePicker_start.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
                         @Override
                         public void onPositiveButtonClick(Object selection) {
-                            binding.tanggalKeberangkatTextInput.getEditText().setText(datePicker_start.getHeaderText());
+                            long epoch_long = Long.parseLong(selection.toString());
+                            ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
+                            tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+
+                            binding.tanggalKeberangkatTextInput.getEditText().setText(tanggal);
 
                         }
                     });
@@ -212,10 +225,14 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             public void onClick(View view) {
                 datePicker_start.show(getSupportFragmentManager(), "tgl_keberangkatan");
                 datePicker_start.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onPositiveButtonClick(Object selection) {
-                        binding.tanggalKeberangkatTextInput.getEditText().setText(datePicker_start.getHeaderText());
+                        long epoch_long = Long.parseLong(selection.toString());
+                        ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
+                        tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", new Locale("id", "ID")));
 
+                        binding.tanggalKeberangkatTextInput.getEditText().setText(tanggal);
                     }
                 });
 
