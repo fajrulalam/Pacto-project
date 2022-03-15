@@ -457,6 +457,7 @@
             <LinearLayout
                 android:id="@+id/penumpangAnakDetail"
                 android:layout_marginTop="5dp"
+                android:visibility="gone"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -488,6 +489,7 @@
                 android:id="@+id/penumpangBalitaDetail"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -639,13 +641,13 @@
                 android:layout_marginTop="10dp"/>
 
             <TextView
-                android:id="@id/total"
+                android:id="@+id/total_bottomCorner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:fontFamily="@font/roboto_medium"
                 android:text="IDR 1.350.000"
-                android:textColor="@color/black"
-                android:fontFamily="@font/roboto_medium"/>
+                android:textColor="@color/black" />
 
 
         </LinearLayout>

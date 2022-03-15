@@ -52,6 +52,7 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
     TextView pajakTextView;
     TextView subtotalPajak;
     TextView total;
+    TextView total_bottomcorner;
 
     String tanggalBerangkat_str;
     String waktuBerangkat_str;
@@ -100,7 +101,7 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
         tanggalBerangkat = view.findViewById(R.id.tanggalBerangkat);
         waktuBerangkat = view.findViewById(R.id.waktuBerangkat);
         bandaraAsal=view.findViewById(R.id.bandaraAsal);
-        logoMaskapai = view.findViewById(R.id.kodePenerbangan);
+        logoMaskapai = view.findViewById(R.id.logoMaskapai);
         kodePenerbangan = view.findViewById(R.id.kodePenerbangan);
         namaMaskapai = view.findViewById(R.id.namaMaskapai);
         kabin = view.findViewById(R.id.kabin);
@@ -122,6 +123,7 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
         pajakTextView = view.findViewById(R.id.pajakTextView);
         subtotalPajak = view.findViewById(R.id.pajakSubtotal);
         total = view.findViewById(R.id.total);
+        total_bottomcorner = view.findViewById(R.id.total_bottomCorner);
 
         Bundle bundle = this.getArguments();
         harga_str =bundle.getString("harga");
@@ -139,6 +141,34 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
         jmlDewasa_str= bundle.getString("jmlDewasa");;
         jmlAnak_str= bundle.getString("jmlAnak"); ;
         jmlBalita_str= bundle.getString("jmlBalita");;
+
+        total.setText(harga_str);
+        total_bottomcorner.setText(harga_str);
+        kotaAsal.setText(kotaAsal_str);
+        kotaTujuan.setText(kotaTujuan_str);
+        tanggalBerangkat.setText(tanggalBerangkat_str);
+        waktuBerangkat.setText(waktuBerangkat_str);
+        bandaraAsal.setText(bandaraAsal_str);
+        logoMaskapai.setImageResource(logoMaskapai_int);
+        namaMaskapai.setText(namaMaskapai_str);
+        kelasPesawat.setText(kelasPesawat_str);
+        tanggalDatang.setText(tanggalDatang_str);
+        waktuDatang.setText(waktuDatang_str);
+        bandaraTujuan.setText(bandaraTujuan_str);
+        jmlPenumpangDewasa.setText("Dewasa (x"+jmlDewasa_str +")");
+
+
+        if (!jmlAnak_str.matches("0")){
+            jmlPenumpangAnak.setText("Anak-Anak (x"+jmlAnak_str+")");
+            penumpangAnakLinearLayout.setVisibility(View.VISIBLE);
+        }
+
+
+        if (!jmlBalita_str.matches("0")){
+            jmlPenumpangBalita.setText("Balita (x"+jmlBalita_str+")");
+            penumpangBalitaLinearLayout.setVisibility(View.VISIBLE);
+        }
+
 
 
 

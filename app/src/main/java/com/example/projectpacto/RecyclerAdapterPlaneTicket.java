@@ -49,6 +49,7 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+
         holder.logoMaskapai.setImageResource(logoMaskapai.get(position));
         holder.namaMaskapai.setText(namaMaskapai.get(position));
         holder.waktuBerangkat.setText(waktuBerangkat.get(position));

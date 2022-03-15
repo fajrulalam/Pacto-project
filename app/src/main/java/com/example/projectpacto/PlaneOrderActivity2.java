@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
@@ -74,8 +75,29 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 String waktuDatang =  ((TextView) v.findViewById(R.id.waktuDatang)).getText().toString();
-                Log.i("WAKTU DATANG", waktuDatang);
+                String waktuBerangkat = ((TextView) v.findViewById(R.id.waktuBerangkat)).getText().toString();
+                String harga = ((TextView) v.findViewById(R.id.harga)).getText().toString();
+                int logoMaskapai_selected = logoMaskapai.get(position);
+
+                Bundle bundle = new Bundle();
+                bundle.putString("harga", harga);
+                bundle.putString("kotaAsal", kota_keberangkatan);
+                bundle.putString("kotaTujuan", kota_kedatangan);
+                bundle.putString("tanggalBerangkat", tanggal);
+                bundle.putString("waktuBerangkat", waktuBerangkat);
+                bundle.putString("bandaraAsal", bandara_keberangkatan);
+                bundle.putInt("logoMaskapai", logoMaskapai_selected);
+                bundle.putString("namaMaskapai", namaMaskapai.get(position));
+                bundle.putString("waktuDatang", waktuDatang);
+                bundle.putString("kelasPesawat", kelasPesawat);
+                bundle.putString("tanggalDatang", tanggal);
+                bundle.putString("bandaraTujuan", bandara_kedatangan);
+                bundle.putString("jmlDewasa", jmlDewasa);
+                bundle.putString("jmlAnak", jmlAnak);
+                bundle.putString("jmlBalita", jmlBalita);
+
                 SelectedTicketBottomSheetFragment selectedTicketBottomSheetFragment = new SelectedTicketBottomSheetFragment();
+                selectedTicketBottomSheetFragment.setArguments(bundle);
                 selectedTicketBottomSheetFragment.show(getSupportFragmentManager(), selectedTicketBottomSheetFragment.getTag());
             }
         });
