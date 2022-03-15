@@ -143,6 +143,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             }
             jumlPenumpang = Integer.parseInt(jmlDewasa) +  Integer.parseInt(jmlAnak) + Integer.parseInt(jmlBalita);
             kelasPesawat = passengerRaw[passengerRaw.length -1];
+            kota_keberangkatan = keberangkatan.split(" ")[0];
+            kota_kedatangan = kedatangan.split(" ")[0];
+
 
 
 
@@ -156,8 +159,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             Log.i("BandaraTujuan", bandara_kedatangan);
 
 
-            binding.kotaAsal.setText(keberangkatan.split(" ")[0]);
-            binding.kotaTujuan.setText(kedatangan.split(" ")[0]);
+
+            binding.kotaAsal.setText(kota_keberangkatan);
+            binding.kotaTujuan.setText(kota_kedatangan);
             binding.detailPassenger.setText(jumlPenumpang + " Penumpang");
         } else {
             Log.i("Keberangkatan2", "gamasuk");
