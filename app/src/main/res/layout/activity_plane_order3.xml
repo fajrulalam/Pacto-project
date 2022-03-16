@@ -424,10 +424,10 @@
 
 
                 <LinearLayout
-                    android:id="@+id/kreditWarning"
+                    android:id="@+id/lastReminder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
+                    android:layout_marginBottom="59dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/curved__dashed_even_less_colorized_bg"
                     android:foreground="#1A6CAF82"
@@ -465,18 +465,60 @@
 
                         </RelativeLayout>
 
-
-
-
-
                     </LinearLayout>
 
 
+
+
+
+
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:paddingHorizontal="14dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Pembayaran"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/dark_grey"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/harga"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IDR 550.000"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/dark_grey"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pesan"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/primary_dark"
+                    android:layout_marginBottom="18dp"/>
+
+
 
 
 
             </LinearLayout>
+
+
 
 
 
