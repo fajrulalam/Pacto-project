@@ -1,6 +1,7 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +55,7 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
     TextView subtotalPajak;
     TextView total;
     TextView total_bottomcorner;
+    Button tampilkanButton;
 
     String tanggalBerangkat_str;
     String waktuBerangkat_str;
@@ -91,6 +94,8 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(3000);
+
+        tampilkanButton = view.findViewById(R.id.tampilkanButton);
 
 
         kotaAsal = view.findViewById(R.id.kotaAsal);
@@ -168,6 +173,27 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
             jmlPenumpangBalita.setText("Balita (x"+jmlBalita_str+")");
             penumpangBalitaLinearLayout.setVisibility(View.VISIBLE);
         }
+
+        view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        tampilkanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Intent intent = new Intent(getActivity(), PlaneOrderActivity3.class);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
+
+
+
+            }
+        });
 
 
 

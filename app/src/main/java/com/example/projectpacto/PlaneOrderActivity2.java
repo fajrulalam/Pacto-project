@@ -70,7 +70,6 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
 
 
         //Recycle View on Click
-
         ItemClickSupport.addTo(binding.RecycleViewTicket).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
