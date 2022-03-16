@@ -2,6 +2,7 @@
     <string name="app_name">Project Pacto</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="greenWarning">Cek semua nama dan pesanan, pastikan tidak ada yang salah <b>pada halaman terakhir!</b></string>
 
 
 </resources>
