@@ -4,9 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
+import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 
 public class PlaneOrderActivity3 extends AppCompatActivity {
     Bundle bundle;
+
+    ActivityPlaneOrder3Binding binding;
+
 
     String tanggalBerangkat_str;
     String waktuBerangkat_str;
@@ -24,10 +32,14 @@ public class PlaneOrderActivity3 extends AppCompatActivity {
     String kotaAsal_str;
     String harga_str;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_plane_order3);
+        binding = ActivityPlaneOrder3Binding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
 
         bundle = getIntent().getBundleExtra("bundle");
         harga_str =bundle.getString("harga");
@@ -48,6 +60,9 @@ public class PlaneOrderActivity3 extends AppCompatActivity {
 
 
 
+
+
+
         Log.i("ACTIVITY3", "HARGA: "+ harga_str);
         Log.i("ACTIVITY3", "KOTAASAL: "+ kotaAsal_str);
         Log.i("ACTIVITY3", "KOTATUJUAN: "+ kotaTujuan_str);
@@ -57,5 +72,13 @@ public class PlaneOrderActivity3 extends AppCompatActivity {
         Log.i("ACTIVITY3", "DEWASA: "+ jmlDewasa_str);
         Log.i("ACTIVITY3", "ANAK: "+ jmlAnak_str);
         Log.i("ACTIVITY3", "BALITA: "+ jmlBalita_str);
+
+        binding.editPassengerNamesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DataPenumpang dataPenumpang = new DataPenumpang();
+                dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
+            }
+        });
     }
 }

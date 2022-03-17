@@ -72,14 +72,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
-                app:hintTextColor="@color/text_grey"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:endIconTint="@color/white"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/testNamaAutocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Nama"
-                    android:textColorHint="#80D5D5D5"
                     android:textSize="18sp"
                     android:padding="5dp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -88,11 +88,64 @@
                 android:id="@+id/titelTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="Hello"
                 android:layout_marginBottom="12dp"
-                app:hintTextColor="@color/text_grey"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
 
+                <AutoCompleteTextView
+                    android:id="@+id/titelDropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:hint="Titel"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tglLahir"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Tanggal lahir"
+                    android:textSize="18sp"
+                    android:padding="5dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/kewarganegaraan"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/kewarganegaraanAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Kewarganegaraan"
+                    android:textSize="18sp"
+                    android:padding="5dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/NIKatauPaspor"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="NIK/No.Paspor"
+                app:hintEnabled="true"
+                android:layout_marginBottom="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/NIKatauPasporAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="18sp"
+                    android:padding="5dp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 

@@ -358,10 +358,10 @@
                         android:id="@+id/editPassengerNamesButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="14dp"
-                        android:paddingVertical="16dp"
-
                         android:layout_alignParentEnd="true"
+                        android:paddingHorizontal="14dp"
+
+                        android:paddingVertical="16dp"
                         android:src="@drawable/ic_baseline_edit_24" />
 
 <!--                    <androidx.recyclerview.widget.RecyclerView-->
