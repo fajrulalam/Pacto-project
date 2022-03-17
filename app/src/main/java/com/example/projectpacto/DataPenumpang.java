@@ -60,7 +60,6 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         kewarganegaraan = view.findViewById(R.id.kewarganegaraan);
         tglLahir = view.findViewById(R.id.tglLahir);
         NIKatauPaspor = view.findViewById(R.id.NIKatauPaspor);
-        penumpangNumber = view.findViewById(R.id.penumpangNumber);
 
 
         penumpangNumber.setText(bundle.getString("penumpangKe_n"));

@@ -115,30 +115,28 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList(namaPassenger, this);
         binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
 
-//        ItemClickSupport.addTo(binding.NamaPenumpangRecycleView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//            @Override
-//            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                DataPenumpang dataPenumpang = new DataPenumpang();
-//                Bundle bundle2 = new Bundle();
-//                bundle2.putInt("penumpangKe_n", position);
-//                dataPenumpang.setArguments(bundle2);
-//                dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
-//
-//
-//                v.findViewById(R.id.editNamaPassenger).setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Log.i("CLICKED", position + " was clicked");
-//                        Bundle bundle2 = new Bundle();
-//                        bundle2.putInt("penumpangKe_n", position);
-//                        dataPenumpang.setArguments(bundle2);
-//                        dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
-//                    }
-//                });
-//            }
-//        });
+
+        //DISPLAYING THE DATA
+        binding.kotaAsal.setText(kotaAsal_str);
+        binding.kotaTujuan.setText(kotaTujuan_str);
+        binding.tanggalBerangkat.setText(tanggalBerangkat_str);
+        binding.tanggalDatang.setText(tanggalDatang_str);
+        binding.logoMaskapai.setImageResource(logoMaskapai_int);
+        binding.namaMaskapai.setText(namaMaskapai_str);
+
+        String rincianPenumpang = "Dewasa ("+jmlDewasa_str+"x)";
+        if (!jmlAnak_str.matches("0")){
+            rincianPenumpang = rincianPenumpang + ", Anak ("+jmlAnak_str+"x)";
+        }
 
 
+        if (!jmlBalita_str.matches("0")){
+            rincianPenumpang = rincianPenumpang + ", Balita ("+jmlBalita_str+"x)";
+        }
+
+
+        binding.rincianPenumpang.setText(rincianPenumpang);
+        binding.harga.setText(harga_str);
 
         Log.i("ACTIVITY3", "HARGA: "+ harga_str);
         Log.i("ACTIVITY3", "KOTAASAL: "+ kotaAsal_str);
