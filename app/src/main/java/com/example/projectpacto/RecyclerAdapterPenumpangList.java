@@ -41,7 +41,7 @@ public class RecyclerAdapterPenumpangList extends RecyclerView.Adapter<RecyclerA
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        int penumpangKe_n = position;
+        int penumpangKe_n = position+1;
         holder.namaPassenger_textView.setText(namaPassenger.get(position));
 
 
@@ -51,7 +51,7 @@ public class RecyclerAdapterPenumpangList extends RecyclerView.Adapter<RecyclerA
             @Override
             public void onClick(View view) {
 
-                addPassengerDetail.addPassengerDetail(String.valueOf(position));
+                addPassengerDetail.addPassengerDetail(String.valueOf(penumpangKe_n));
 
 
             }

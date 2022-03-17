@@ -49,6 +49,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
         final View view = View.inflate(getContext(), R.layout.fragment_data_penumpang, null);
         dialog.setContentView(view);
+        Bundle bundle = this.getArguments();
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
@@ -59,6 +60,11 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         kewarganegaraan = view.findViewById(R.id.kewarganegaraan);
         tglLahir = view.findViewById(R.id.tglLahir);
         NIKatauPaspor = view.findViewById(R.id.NIKatauPaspor);
+        penumpangNumber = view.findViewById(R.id.penumpangNumber);
+
+
+        penumpangNumber.setText(bundle.getString("penumpangKe_n"));
+
 
         nama = new ArrayList<>();
         nama.add("Asad"); nama.add("Fajrul"); nama.add("Rekyan"); nama.add("Yoga");
