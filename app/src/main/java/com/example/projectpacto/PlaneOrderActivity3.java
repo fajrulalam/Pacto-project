@@ -1,16 +1,20 @@
 package com.example.projectpacto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 
-public class PlaneOrderActivity3 extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenumpang.OnDataPassenger {
     Bundle bundle;
 
     ActivityPlaneOrder3Binding binding;
@@ -31,6 +35,9 @@ public class PlaneOrderActivity3 extends AppCompatActivity {
     String kotaTujuan_str;
     String kotaAsal_str;
     String harga_str;
+
+    ArrayList<String> namaPassenger;
+    RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
 
 
     @Override
@@ -58,8 +65,10 @@ public class PlaneOrderActivity3 extends AppCompatActivity {
         jmlAnak_str= bundle.getString("jmlAnak"); ;
         jmlBalita_str= bundle.getString("jmlBalita");;
 
+        namaPassenger = new ArrayList<>();
 
-
+        recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList(namaPassenger);
+        binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
 
 
 
@@ -80,5 +89,19 @@ public class PlaneOrderActivity3 extends AppCompatActivity {
                 dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
             }
         });
+    }
+
+    @Override
+    public void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor) {
+        namaPassenger.add(nama);
+        recyclerAdapterPenumpangList.notifyDataSetChanged();
+        binding.penumpangKosong.setVisibility(View.GONE);
+
+        Log.i("NAMA", nama);
+        Log.i("titel", titel);
+        Log.i("tglLahir", tglLahir);
+        Log.i("kewaganegaraan", kewarganegaraan);
+        Log.i("NIK/Passport", nikAtauPaspor);
+
     }
 }
