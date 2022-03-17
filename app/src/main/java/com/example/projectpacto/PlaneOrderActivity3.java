@@ -3,6 +3,7 @@ package com.example.projectpacto;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 
 import java.util.ArrayList;
 
-public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenumpang.OnDataPassenger {
+public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail {
     Bundle bundle;
 
     ActivityPlaneOrder3Binding binding;
@@ -35,6 +36,16 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     String kotaTujuan_str;
     String kotaAsal_str;
     String harga_str;
+    int jmlPenumpang;
+
+    String keberangkatan;
+    String kedatangan;
+    String tanggal;
+    String penumpang;
+    String kota_kedatangan;
+    String kota_keberangkatan;
+    String bandara_keberangktan_raw;
+    String bandara_kedatangan_raw;
 
     ArrayList<String> namaPassenger;
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
@@ -65,10 +76,67 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         jmlAnak_str= bundle.getString("jmlAnak"); ;
         jmlBalita_str= bundle.getString("jmlBalita");;
 
+        keberangkatan = bundle.getString("keberangkatan");
+        kedatangan = bundle.getString("kedatangan");
+        tanggal = bundle.getString("tanggal");
+        penumpang = bundle.getString("penumpang");
+        kota_keberangkatan = bundle.getString("kota_keberangkatan");
+        kota_kedatangan = bundle.getString("kota_kedatangan");
+        bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
+        bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+
+
+        jmlPenumpang = Integer.parseInt(jmlDewasa_str) +  Integer.parseInt(jmlAnak_str) + Integer.parseInt(jmlBalita_str);
+
         namaPassenger = new ArrayList<>();
 
-        recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList(namaPassenger);
+        for (int i = 1; i < jmlPenumpang+1 ; i ++) {
+            namaPassenger.add("Penumpang" + i);
+        }
+
+
+        //BACK BUTTON
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
+                intent.putExtra("keberangkatan", keberangkatan);
+                intent.putExtra("kedatangan", kedatangan);
+                intent.putExtra("tanggal", tanggal);
+                intent.putExtra("penumpang", penumpang);
+                intent.putExtra("bandara_kedatangan", bandara_kedatangan_raw);
+                intent.putExtra("bandara_keberangkatan", bandara_keberangktan_raw);
+                startActivity(intent);
+                overridePendingTransition(0 , 0);
+            }
+        });
+
+
+        recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList(namaPassenger, this);
         binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
+
+//        ItemClickSupport.addTo(binding.NamaPenumpangRecycleView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+//            @Override
+//            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+//                DataPenumpang dataPenumpang = new DataPenumpang();
+//                Bundle bundle2 = new Bundle();
+//                bundle2.putInt("penumpangKe_n", position);
+//                dataPenumpang.setArguments(bundle2);
+//                dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
+//
+//
+//                v.findViewById(R.id.editNamaPassenger).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Log.i("CLICKED", position + " was clicked");
+//                        Bundle bundle2 = new Bundle();
+//                        bundle2.putInt("penumpangKe_n", position);
+//                        dataPenumpang.setArguments(bundle2);
+//                        dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
+//                    }
+//                });
+//            }
+//        });
 
 
 
@@ -89,19 +157,30 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                 dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
             }
         });
+
+
     }
 
     @Override
     public void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor) {
-        namaPassenger.add(nama);
         recyclerAdapterPenumpangList.notifyDataSetChanged();
-        binding.penumpangKosong.setVisibility(View.GONE);
 
         Log.i("NAMA", nama);
         Log.i("titel", titel);
         Log.i("tglLahir", tglLahir);
         Log.i("kewaganegaraan", kewarganegaraan);
         Log.i("NIK/Passport", nikAtauPaspor);
+
+    }
+
+    @Override
+    public void addPassengerDetail(String nomorPelanggan) {
+
+        DataPenumpang dataPenumpang = new DataPenumpang();
+        Bundle bundle = new Bundle();
+        bundle.putString("penumpangKe_n", nomorPelanggan);
+        dataPenumpang.setArguments(bundle);
+        dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
 
     }
 }

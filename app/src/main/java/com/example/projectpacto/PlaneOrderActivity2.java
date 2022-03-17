@@ -47,6 +47,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     String bandara_keberangkatan;
     String kota_kedatangan;
     String kota_keberangkatan;
+    String bandara_keberangktan_raw;
+    String bandara_kedatangan_raw;
     int jumlPenumpang;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -95,6 +97,16 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
                 bundle.putString("jmlAnak", jmlAnak);
                 bundle.putString("jmlBalita", jmlBalita);
 
+                bundle.putString("keberangkatan", keberangkatan);
+                bundle.putString("kedatangan", kedatangan);
+                bundle.putString("tanggal", tanggal);
+                bundle.putString("penumpang", penumpang);
+                bundle.putString("kota_keberangkatan", kota_keberangkatan);
+                bundle.putString("kota_kedatangan", kota_kedatangan);
+                bundle.putString("bandara_keberangkatan", bandara_keberangktan_raw);
+                bundle.putString("bandara_kedatangan", bandara_kedatangan_raw);
+
+
                 SelectedTicketBottomSheetFragment selectedTicketBottomSheetFragment = new SelectedTicketBottomSheetFragment();
                 selectedTicketBottomSheetFragment.setArguments(bundle);
                 selectedTicketBottomSheetFragment.show(getSupportFragmentManager(), selectedTicketBottomSheetFragment.getTag());
@@ -111,6 +123,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
             penumpang = extras.getString("penumpang");
             kota_keberangkatan = extras.getString("kota_keberangkatan");
             kota_kedatangan = extras.getString("kota_kedatangan");
+            bandara_keberangktan_raw = extras.getString("bandara_keberangkatan");
+            bandara_kedatangan_raw =  extras.getString("bandara_kedatangan");
             bandara_keberangkatan = extras.getString("bandara_keberangkatan") + " " + keberangkatan.split(" ")[1].replace(" ", "");
             bandara_kedatangan = extras.getString("bandara_kedatangan") +" " +  kedatangan.split(" ")[1];
 

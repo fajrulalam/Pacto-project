@@ -73,6 +73,15 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
     String kotaAsal_str;
     String harga_str;
 
+    String keberangkatan;
+    String kedatangan;
+    String tanggal;
+    String penumpang;
+    String kota_kedatangan;
+    String kota_keberangkatan;
+    String bandara_keberangktan_raw;
+    String bandara_kedatangan_raw;
+
 
 
 
@@ -147,6 +156,15 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
         jmlAnak_str= bundle.getString("jmlAnak"); ;
         jmlBalita_str= bundle.getString("jmlBalita");;
 
+        keberangkatan = bundle.getString("keberangkatan");
+        kedatangan = bundle.getString("kedatangan");
+        tanggal = bundle.getString("tanggal");
+        penumpang = bundle.getString("penumpang");
+        kota_keberangkatan = bundle.getString("kota_keberangkatan");
+        kota_kedatangan = bundle.getString("kota_kedatangan");
+        bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
+        bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+
         total.setText(harga_str);
         total_bottomcorner.setText(harga_str);
         kotaAsal.setText(kotaAsal_str);
@@ -188,6 +206,7 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
 
                 Intent intent = new Intent(getActivity(), PlaneOrderActivity3.class);
                 intent.putExtra("bundle", bundle);
+
                 startActivity(intent);
 
 

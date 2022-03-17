@@ -24,21 +24,32 @@
             android:background="@color/white"
             android:paddingLeft="10dp"
             android:paddingVertical="10dp"
-
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/namaPassenger"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
                 android:backgroundTint="#FFF6FD"
                 android:background="@color/white"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:gravity="center_vertical"
                 android:fontFamily="@font/roboto_medium"
-                android:text="Nama Kota"/>
+                android:text="Penumpang"/>
+
+            <ImageView
+                android:id="@+id/editNamaPassenger"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_baseline_edit_24"
+                android:scaleX="0.7"
+                android:clickable="true"
+                android:foreground="@drawable/selectable_view_notsocurved"
+                android:scaleY="0.7" />
 
 
 

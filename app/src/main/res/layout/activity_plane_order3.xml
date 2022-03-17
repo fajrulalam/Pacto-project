@@ -351,9 +351,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_medium"
                         android:text="Penumpang"
+                        android:visibility="gone"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
-
 
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -369,7 +369,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:paddingHorizontal="14dp"
-
+                        android:visibility="gone"
                         android:paddingVertical="16dp"
                         android:src="@drawable/ic_baseline_edit_24" />
                 </RelativeLayout>

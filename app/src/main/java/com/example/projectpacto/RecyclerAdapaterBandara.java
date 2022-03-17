@@ -1,5 +1,6 @@
 package com.example.projectpacto;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class RecyclerAdapaterBandara extends RecyclerView.Adapter<RecyclerAdapat
         holder.bandaraTextView.setText(String.valueOf(namaBandara.get(position)) + " (" +kodeBandara.get(position)+")");
         holder.kotaTextView.setText(String.valueOf(namaKota.get(position)));
 
+
     }
 
     @Override
@@ -56,4 +58,8 @@ public class RecyclerAdapaterBandara extends RecyclerView.Adapter<RecyclerAdapat
 
 
     }
+
+
+
+
 }
