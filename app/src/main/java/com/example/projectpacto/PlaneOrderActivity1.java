@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.projectpacto.databinding.ActivityPlaneOrder1Binding;
 import com.example.projectpacto.databinding.FragmentPenumpangBottomSheetBinding;
 import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
@@ -193,6 +194,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         Locale lokal = new Locale("id", "ID");
         long today = MaterialDatePicker.todayInUtcMilliseconds();
         CalendarConstraints.Builder constraints = new CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now())
                 .setStart(today);
         MaterialDatePicker datePicker_start = MaterialDatePicker.Builder.datePicker()
                 .setSelection(today)

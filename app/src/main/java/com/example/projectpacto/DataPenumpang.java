@@ -2,10 +2,12 @@ package com.example.projectpacto;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,8 +21,14 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -61,6 +69,43 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         tglLahir = view.findViewById(R.id.tglLahir);
         NIKatauPaspor = view.findViewById(R.id.NIKatauPaspor);
 
+        MaterialDatePicker datePicker_start = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Pilih Tanggal Keberangkatan").build();
+        tglLahir.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b==true){
+                    datePicker_start.show(getActivity().getSupportFragmentManager(), "tgl_keberangkatan");
+                    datePicker_start.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onPositiveButtonClick(Object selection) {
+                            long epoch_long = Long.parseLong(selection.toString());
+                            ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
+                            String tglLahir_str = dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                            tglLahir.getEditText().setText(tglLahir_str);
+                        }
+                    });
+                }
+            }
+        });
+        tglLahir.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker_start.show(getActivity().getSupportFragmentManager(), "tgl_keberangkatan");
+                datePicker_start.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onPositiveButtonClick(Object selection) {
+                        long epoch_long = Long.parseLong(selection.toString());
+                        ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
+                        String tglLahir_str = dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        tglLahir.getEditText().setText(tglLahir_str);
+                    }
+                });
+            }
+        });
+
 
         penumpangNumber.setText(bundle.getString("penumpangKe_n"));
 
@@ -89,25 +134,25 @@ public class DataPenumpang extends BottomSheetDialogFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 switch (String.valueOf(adapterView.getItemAtPosition(position))){
                     case "Asad":
-                        tglLahir.getEditText().setText("19-11-2001");
+                        tglLahir.getEditText().setText("19/11/2001");
                         titelDropdown.setText("Tuan");
                         kewarganegaraan.getEditText().setText("Indonesia");
                         NIKatauPaspor.getEditText().setText("081351");
                         break;
                     case "Fajrul":
-                        tglLahir.getEditText().setText("16-06-2001");
+                        tglLahir.getEditText().setText("16/06/2001");
                         titelDropdown.setText("Tuan");
                         kewarganegaraan.getEditText().setText("Indonesia");
                         NIKatauPaspor.getEditText().setText("3517173209235832");
                         break;
                     case "Yoga":
-                        tglLahir.getEditText().setText("16-04-2000");
+                        tglLahir.getEditText().setText("16/04/2000");
                         titelDropdown.setText("Tuan");
                         kewarganegaraan.getEditText().setText("Indonesia");
                         NIKatauPaspor.getEditText().setText("081336");
                         break;
                     case "Rekyan":
-                        tglLahir.getEditText().setText("16-06-1991");
+                        tglLahir.getEditText().setText("16/06/1991");
                         titelDropdown.setText("Nyonya");
                         kewarganegaraan.getEditText().setText("Indonesia");
                         NIKatauPaspor.getEditText().setText("623336");
@@ -119,7 +164,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         view.findViewById(R.id.actionButton_cari).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datapasser.onDataPass(namaAutoComplete.getText().toString(), titelDropdown.getText().toString(), tglLahir.getEditText().getText().toString(), kewarganegaraan.getEditText().getText().toString(), NIKatauPaspor.getEditText().toString());
+                datapasser.onDataPass(namaAutoComplete.getText().toString(), titelDropdown.getText().toString(), tglLahir.getEditText().getText().toString(), kewarganegaraan.getEditText().getText().toString(), NIKatauPaspor.getEditText().toString(), Integer.parseInt(penumpangNumber.getText().toString()));
                 dismiss();
             }
         });
@@ -130,7 +175,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     }
 
     public interface OnDataPassenger {
-        void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor);
+        void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor, int penumpangKe_n);
     }
 
     @Override
