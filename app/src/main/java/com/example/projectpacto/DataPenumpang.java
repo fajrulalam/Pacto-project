@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.Instant;
@@ -39,10 +41,16 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     AutoCompleteTextView titelDropdown;
     TextInputLayout tglLahir;
     TextInputLayout kewarganegaraan;
-    TextInputLayout NIKatauPaspor;
+    TextInputEditText NIKatauPaspor;
     ArrayList<String> titel;
     ArrayList<String> nama;
     OnDataPassenger datapasser;
+
+    String tglLahir_str;
+    String nama_str;
+    String kewarganegaraan_str;
+    String NIKatauPaspor_str;
+    String titel_str;
 
 
 
@@ -67,7 +75,24 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         penumpangNumber = view.findViewById(R.id.penumpangNumber);
         kewarganegaraan = view.findViewById(R.id.kewarganegaraan);
         tglLahir = view.findViewById(R.id.tglLahir);
-        NIKatauPaspor = view.findViewById(R.id.NIKatauPaspor);
+        NIKatauPaspor = view.findViewById(R.id.NIKatauPasporAutoComplete);
+
+        tglLahir_str = bundle.getString("tglLahir_str");
+        nama_str = bundle.getString("nama_str");
+        kewarganegaraan_str = bundle.getString("kewarganegaraan_str");
+        NIKatauPaspor_str = bundle.getString("NIKatauPaspor_str");
+        titel_str = bundle.getString("titel_str");
+
+        if (!nama_str.split(" ")[0].matches("Penumpang")){
+            namaAutoComplete.setText(nama_str);
+        }
+        tglLahir.getEditText().setText(tglLahir_str);
+        titelDropdown.setText(titel_str);
+        kewarganegaraan.getEditText().setText(kewarganegaraan_str);
+        NIKatauPaspor.setText(NIKatauPaspor_str);
+        Log.i("NIK/PASSOPRT RECEIVE", NIKatauPaspor.getText().toString());
+
+
 
         MaterialDatePicker datePicker_start = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Pilih Tanggal Keberangkatan").build();
@@ -137,34 +162,35 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                         tglLahir.getEditText().setText("19/11/2001");
                         titelDropdown.setText("Tuan");
                         kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.getEditText().setText("081351");
+                        NIKatauPaspor.setText("081351");
                         break;
                     case "Fajrul":
                         tglLahir.getEditText().setText("16/06/2001");
                         titelDropdown.setText("Tuan");
                         kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.getEditText().setText("3517173209235832");
+                        NIKatauPaspor.setText("3517173209235832");
                         break;
                     case "Yoga":
                         tglLahir.getEditText().setText("16/04/2000");
                         titelDropdown.setText("Tuan");
                         kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.getEditText().setText("081336");
+                        NIKatauPaspor.setText("081336");
                         break;
                     case "Rekyan":
                         tglLahir.getEditText().setText("16/06/1991");
                         titelDropdown.setText("Nyonya");
                         kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.getEditText().setText("623336");
+                        NIKatauPaspor.setText("623336");
                         break;
                 }
+                Log.i("NIK/PASSOPRT INPUT", NIKatauPaspor.getText().toString());
             }
         });
 
         view.findViewById(R.id.actionButton_cari).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datapasser.onDataPass(namaAutoComplete.getText().toString(), titelDropdown.getText().toString(), tglLahir.getEditText().getText().toString(), kewarganegaraan.getEditText().getText().toString(), NIKatauPaspor.getEditText().toString(), Integer.parseInt(penumpangNumber.getText().toString()));
+                datapasser.onDataPass(namaAutoComplete.getText().toString(), titelDropdown.getText().toString(), tglLahir.getEditText().getText().toString(), kewarganegaraan.getEditText().getText().toString(), NIKatauPaspor.getText().toString(), Integer.parseInt(penumpangNumber.getText().toString()));
                 dismiss();
             }
         });

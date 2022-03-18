@@ -48,6 +48,11 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     String bandara_kedatangan_raw;
 
     ArrayList<String> namaPassenger;
+    ArrayList<String> tglLahir;
+    ArrayList<String> titel;
+    ArrayList<String> kewarganegaraan;
+    ArrayList<String> NIKatauPaspor;
+
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
 
 
@@ -90,8 +95,17 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
         namaPassenger = new ArrayList<>();
 
+        tglLahir = new ArrayList<>();
+        titel = new ArrayList<>();
+        kewarganegaraan = new ArrayList<>();
+        NIKatauPaspor = new ArrayList<>();
+
         for (int i = 1; i < jmlPenumpang+1 ; i ++) {
-            namaPassenger.add("Penumpang" + i);
+            namaPassenger.add("Penumpang " + i);
+            titel.add("");
+            tglLahir.add("");
+            NIKatauPaspor.add("");
+            kewarganegaraan.add("");
         }
 
 
@@ -160,28 +174,40 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     }
 
     @Override
-    public void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor, int penumpangKe_n) {
+    public void onDataPass(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, int penumpangKe_n) {
 
 
-        namaPassenger.set(penumpangKe_n-1, nama);
+        namaPassenger.set(penumpangKe_n-1, nama_str);
+        tglLahir.set(penumpangKe_n-1, tglLahir_str);
+        titel.set(penumpangKe_n-1, titel_str);
+        kewarganegaraan.set(penumpangKe_n-1, kewarganegaraan_str);
+        NIKatauPaspor.set(penumpangKe_n-1, nikAtauPaspor_str);
+
+
+
         recyclerAdapterPenumpangList.notifyDataSetChanged();
 
 
 
-        Log.i("NAMA", nama);
-        Log.i("titel", titel);
-        Log.i("tglLahir", tglLahir);
-        Log.i("kewaganegaraan", kewarganegaraan);
-        Log.i("NIK/Passport", nikAtauPaspor);
+        Log.i("NAMA", nama_str);
+        Log.i("titel", titel_str);
+        Log.i("tglLahir", tglLahir_str);
+        Log.i("kewaganegaraan", kewarganegaraan_str);
+        Log.i("NIK/Passport", nikAtauPaspor_str);
 
     }
 
     @Override
     public void addPassengerDetail(String nomorPelanggan) {
-
+        int index = Integer.parseInt(nomorPelanggan) - 1;
         DataPenumpang dataPenumpang = new DataPenumpang();
         Bundle bundle = new Bundle();
         bundle.putString("penumpangKe_n", nomorPelanggan);
+        bundle.putString("tglLahir_str", tglLahir.get(index));
+        bundle.putString("nama_str", namaPassenger.get(index));
+        bundle.putString("kewarganegaraan_str", kewarganegaraan.get(index));
+        bundle.putString("NIKatauPaspor_str", NIKatauPaspor.get(index));
+        bundle.putString("titel_str", titel.get(index));
         dataPenumpang.setArguments(bundle);
         dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
 
