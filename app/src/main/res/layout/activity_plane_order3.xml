@@ -338,7 +338,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curved__even_less_bg"
-                    android:backgroundTint="#FFF6FD"
                     android:layout_marginBottom="12dp"
                     android:layout_marginTop="5dp">
 
@@ -375,22 +374,40 @@
                         android:src="@drawable/ic_baseline_edit_24" />
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fasilitas Ekstra"
-                    android:textSize="16sp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/dark_grey"
-                    android:layout_marginBottom="5dp"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fasilitas Ekstra"
+                        android:textSize="16sp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/dark_grey"
+                        android:layout_marginBottom="5dp"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:id="@+id/editFasilitasEkstra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:paddingHorizontal="20dp"/>
+
+                </LinearLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/tambahanBagasiRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/curved__even_less_bg"
-                    android:backgroundTint="#FFF6FD"
+                    android:background="@drawable/curved_filled_even_less_bg"
                     android:paddingHorizontal="14dp"
                     android:paddingVertical="16dp"
                     android:layout_marginBottom="12dp"

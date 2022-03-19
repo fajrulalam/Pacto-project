@@ -115,6 +115,20 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             harga_tambahan.add("IDR 0");
         }
 
+        //EDIT TAMBAHAN BAGASI
+        binding.editFasilitasEkstra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("namaList", namaPassenger);
+                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
+                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
+                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
+                tambahanBagasiBottomSheet.setArguments(bundle);
+                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
+            }
+        });
+
         //TAMBAHAN BAGASI
         binding.tambahanBagasiRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -243,6 +257,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         RecyclerAdapterBagasi recyclerAdapterBagasi = new RecyclerAdapterBagasi(tambahan_kg, hargaTambahanBagasi);
         binding.BagasiRecyclerView.setAdapter(recyclerAdapterBagasi);
         binding.BagasiRecyclerView.setVisibility(View.VISIBLE);
+        binding.tambahanBagasiRelativeLayout.setBackground(getResources().getDrawable(R.drawable.curved__even_less_bg));
         binding.bagasi.setVisibility(View.GONE);
         binding.bagasiTambahan.setVisibility(View.GONE);
         binding.hargaBagasiTambahan.setVisibility(View.GONE);
