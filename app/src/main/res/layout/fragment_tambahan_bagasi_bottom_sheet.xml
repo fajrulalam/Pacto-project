@@ -86,7 +86,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout">
 
             <Button
-                android:id="@+id/actionButton_cari"
+                android:id="@+id/actionButton_simpan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/roboto_regular"

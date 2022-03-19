@@ -1,6 +1,7 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +28,9 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
     ArrayList<String> nama;
     ArrayList<String> tambahan_kg;
     ArrayList<String> hargaTambahanBagasi;
+    OnDataBagasi datapasser;
+    Button actionButton;
+
 
     public TambahanBagasiBottomSheet() {
     }
@@ -39,13 +44,20 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
         dialog.setContentView(view);
         Bundle bundle = this.getArguments();
 
-
-
+        actionButton = view.findViewById(R.id.actionButton_simpan);
         nama = bundle.getStringArrayList("namaList");
         tambahan_kg = bundle.getStringArrayList("tambahan_kg");
         hargaTambahanBagasi = bundle.getStringArrayList("harga_tambahan");
 
         Log.i("TAMBAHAN_KG", tambahan_kg.toString());
+
+        actionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    datapasser.OnDataBagasi(tambahan_kg, hargaTambahanBagasi);
+                    dismiss();
+                }
+            });
 
         recyclerView = view.findViewById(R.id.RecyclerViewTambahanBagasi);
         TambahanBagasiRecyclerAdapter tambahanBagasiRecyclerAdapter = new TambahanBagasiRecyclerAdapter(nama, tambahan_kg, hargaTambahanBagasi);
@@ -162,8 +174,6 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
 
 
 
-
-
         }
 
 
@@ -202,5 +212,15 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
                 radioButton3 =  itemView.findViewById(R.id.radioButton3);
             }
         }
+    }
+
+    public interface OnDataBagasi {
+        void OnDataBagasi(ArrayList<String> tambahan_kg, ArrayList<String> hargaTambahanBagasi);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        datapasser = (TambahanBagasiBottomSheet.OnDataBagasi) context;
     }
 }

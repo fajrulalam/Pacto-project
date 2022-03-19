@@ -15,7 +15,7 @@ import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 
 import java.util.ArrayList;
 
-public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail {
+public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail, TambahanBagasiBottomSheet.OnDataBagasi {
     Bundle bundle;
 
     ActivityPlaneOrder3Binding binding;
@@ -235,5 +235,13 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         dataPenumpang.setArguments(bundle);
         dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
 
+    }
+
+    @Override
+    public void OnDataBagasi(ArrayList<String> tambahan_kg, ArrayList<String> hargaTambahanBagasi) {
+
+        RecyclerAdapterBagasi recyclerAdapterBagasi = new RecyclerAdapterBagasi(tambahan_kg, hargaTambahanBagasi);
+        binding.BagasiRecyclerView.setAdapter(recyclerAdapterBagasi);
+        binding.BagasiRecyclerView.setVisibility(View.VISIBLE);
     }
 }
