@@ -386,6 +386,7 @@
                     android:layout_marginBottom="5dp"/>
 
                 <RelativeLayout
+                    android:id="@+id/tambahanBagasiRelativeLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/curved__even_less_bg"
@@ -394,13 +395,6 @@
                     android:paddingVertical="16dp"
                     android:layout_marginBottom="12dp"
                     android:layout_marginTop="5dp">
-
-                    <ImageView
-                        android:id="@+id/bagasi"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_bagasi" />
 
                     <TextView
                         android:id="@+id/bagasiTambahan"
@@ -413,8 +407,15 @@
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
+                    <ImageView
+                        android:id="@+id/bagasi"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_bagasi" />
+
                     <TextView
-                        android:id="@+id/infodetailBagasi"
+                        android:id="@+id/hargaBagasiTambahan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/bagasiTambahan"
@@ -425,6 +426,19 @@
                         android:text="Tambah bagasi tambahan dengan penawaran mulai dari IDR 20.000/kg"
                         android:textColor="@color/dark_grey"
                         android:textSize="12dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/BagasiRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="0dp"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+
+
+
                 </RelativeLayout>
 
 

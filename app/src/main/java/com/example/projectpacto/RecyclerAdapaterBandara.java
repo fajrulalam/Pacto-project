@@ -45,7 +45,7 @@ public class RecyclerAdapaterBandara extends RecyclerView.Adapter<RecyclerAdapat
         return namaKota.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         TextView bandaraTextView;
         TextView kotaTextView;
 

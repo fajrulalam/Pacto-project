@@ -53,6 +53,9 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     ArrayList<String> kewarganegaraan;
     ArrayList<String> NIKatauPaspor;
 
+    ArrayList<String> tambahan_kg;
+    ArrayList<String> harga_tambahan;
+
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
 
 
@@ -99,6 +102,8 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         titel = new ArrayList<>();
         kewarganegaraan = new ArrayList<>();
         NIKatauPaspor = new ArrayList<>();
+        tambahan_kg = new ArrayList<>();
+        harga_tambahan = new ArrayList<>();
 
         for (int i = 1; i < jmlPenumpang+1 ; i ++) {
             namaPassenger.add("Penumpang " + i);
@@ -106,7 +111,26 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             tglLahir.add("");
             NIKatauPaspor.add("");
             kewarganegaraan.add("");
+            tambahan_kg.add("Bagasi +0 kg");
+            harga_tambahan.add("IDR 0");
         }
+
+        //TAMBAHAN BAGASI
+        binding.tambahanBagasiRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("namaList", namaPassenger);
+                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
+                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
+                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
+                tambahanBagasiBottomSheet.setArguments(bundle);
+                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
+
+            }
+        });
+
+
 
 
         //BACK BUTTON
