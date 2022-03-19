@@ -243,5 +243,8 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         RecyclerAdapterBagasi recyclerAdapterBagasi = new RecyclerAdapterBagasi(tambahan_kg, hargaTambahanBagasi);
         binding.BagasiRecyclerView.setAdapter(recyclerAdapterBagasi);
         binding.BagasiRecyclerView.setVisibility(View.VISIBLE);
+        binding.bagasi.setVisibility(View.GONE);
+        binding.bagasiTambahan.setVisibility(View.GONE);
+        binding.hargaBagasiTambahan.setVisibility(View.GONE);
     }
 }
