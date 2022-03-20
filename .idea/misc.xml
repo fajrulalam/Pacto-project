@@ -24,6 +24,8 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.46452991452991454" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_beranda.xml" value="0.5661458333333333" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_right_arrow_long.xml" value="0.2829059829059829" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_user_selected.xml" value="0.2824786324786325" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_useraccount_selected.xml" value="0.2824786324786325" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/selectable_view.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_booking.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_main.xml" value="0.4" />
@@ -46,6 +48,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_selected_ticket_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_tambahan_bagasi_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/passenger_list_single_view.xml" value="0.38796296296296295" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/pesanan_tiket_hotel_single_view.xml" value="0.536" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/tambahan_opsi_bagasi_single_view.xml" value="0.536" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/ticket_single_view.xml" value="0.5060240963855421" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/menu/menu_filter_and_sort.xml" value="0.4512820512820513" />

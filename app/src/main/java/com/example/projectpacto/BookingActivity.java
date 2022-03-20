@@ -22,6 +22,8 @@ public class BookingActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+
+
         binding.bottomNav.setSelectedItemId(R.id.booking);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
