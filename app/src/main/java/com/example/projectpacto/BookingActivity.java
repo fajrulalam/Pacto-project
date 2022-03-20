@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -24,6 +25,18 @@ import java.util.ArrayList;
 public class BookingActivity extends AppCompatActivity {
 
     ActivityBookingBinding binding;
+    SharedPreferences pref;
+    ArrayList<String> kotaAsal_atau_namaHotel;
+    ArrayList<String> kotaTujuan;
+    ArrayList<String> statusPesanan;
+    ArrayList<String> tglBerangkat_atau_alamat;
+    ArrayList<String> tglCek_in;
+    ArrayList<String> namaMaskapai;
+    ArrayList<String> kodePenerbangan;
+    ArrayList<String> rincianPenumpang;
+    ArrayList<String> jumlahKamar;
+    ArrayList<Integer> logoMaskapai;
+    ArrayList<String> tipePesanan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,78 @@ public class BookingActivity extends AppCompatActivity {
         binding = ActivityBookingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+
+
+        kotaAsal_atau_namaHotel = new ArrayList<>();
+        kotaTujuan = new ArrayList<>();
+        statusPesanan = new ArrayList<>();
+        tglBerangkat_atau_alamat = new ArrayList<>();
+        tglCek_in = new ArrayList<>();
+        namaMaskapai = new ArrayList<>();
+        kodePenerbangan = new ArrayList<>();
+        rincianPenumpang = new ArrayList<>();
+        jumlahKamar = new ArrayList<>();
+        logoMaskapai = new ArrayList<>();
+        tipePesanan = new ArrayList<>();
+
+
+        Bundle bundle = getIntent().getBundleExtra("bundle");
+        if (bundle !=null){
+            tglCek_in.add("");
+            jumlahKamar.add("");
+            kotaAsal_atau_namaHotel.add(bundle.getString("kotaAsal"));
+            kotaTujuan.add(bundle.getString("kotaTujuan"));
+            tglBerangkat_atau_alamat.add(bundle.getString("tanggalBerangkat") + " - " + bundle.getString("waktuBerangkat"));
+            logoMaskapai.add(bundle.getInt("logoMaskapai"));
+            namaMaskapai.add(bundle.getString("namaMaskapai"));
+            kodePenerbangan.add("IQK290");
+
+            String rincianPenumpang_str = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
+            if (!bundle.getString("jmlAnak").matches("0")){
+                rincianPenumpang_str = rincianPenumpang + ", Anak (" +bundle.getString("jmlAnak")+"x)";
+            }
+
+
+            if (!bundle.getString("jmlBalita").matches("0")){
+                rincianPenumpang_str = rincianPenumpang + ", Balita ("+bundle.getString("jmlBalita")+"x)";
+            }
+
+            rincianPenumpang.add(rincianPenumpang_str);
+            statusPesanan.add(bundle.getString("status"));
+            tipePesanan.add(bundle.getString("tipePesanan"));
+
+            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(kotaAsal_atau_namaHotel,kotaTujuan, statusPesanan,
+                    tglBerangkat_atau_alamat,  tglCek_in,  namaMaskapai,   kodePenerbangan,
+                     rincianPenumpang,  jumlahKamar, logoMaskapai,  tipePesanan);
+            binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
+
+
+
+//            bandaraAsal_str= bundle.getString("bandaraAsal");
+//            logoMaskapai_int =bundle.getInt("logoMaskapai");
+//            namaMaskapai_str= bundle.getString("namaMaskapai");;
+//            kelasPesawat_str= bundle.getString("kelasPesawat");;
+//            tanggalDatang_str= bundle.getString("tanggalDatang");;
+//            waktuDatang_str= bundle.getString("waktuDatang");;
+//            bandaraTujuan_str= bundle.getString("bandaraTujuan");
+//            jmlDewasa_str= ;;
+//            jmlAnak_str=  ;
+//            jmlBalita_str= ;;
+//
+//            keberangkatan = bundle.getString("keberangkatan");
+//            kedatangan = bundle.getString("kedatangan");
+//            tanggal = bundle.getString("tanggal");
+//            penumpang = bundle.getString("penumpang");
+//            kota_keberangkatan = bundle.getString("kota_keberangkatan");
+//            kota_kedatangan = bundle.getString("kota_kedatangan");
+//            bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
+//            bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+
+
+        }
+
+
 
 
 
@@ -101,7 +186,7 @@ public class BookingActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.tambahan_opsi_bagasi_single_view, parent, false);
+            View view = layoutInflater.inflate(R.layout.pesanan_tiket_hotel_single_view, parent, false);
             ViewHolder viewHolder = new ViewHolder(view);
             return viewHolder;
         }
@@ -110,6 +195,7 @@ public class BookingActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
             String tipePesanan_str = tipePesanan.get(position);
+            String status_str = statusPesanan.get(position);
 
 
 
@@ -123,6 +209,7 @@ public class BookingActivity extends AppCompatActivity {
             holder.rincianPenumpang.setText(rincianPenumpang.get(position));
             holder.jumlahKamar.setText(jumlahKamar.get(position));
             holder.logoMaskapai.setImageResource(logoMaskapai.get(position));
+            holder.statusPesanan.setText(statusPesanan.get(position));
 
             switch (tipePesanan_str){
                 case "Pesawat":
@@ -135,6 +222,22 @@ public class BookingActivity extends AppCompatActivity {
                     holder.kotaTujuan.setVisibility(View.GONE);
                     holder.logoMaskapaiLayout.setVisibility(View.GONE);
                     break;
+            }
+
+            switch (status_str) {
+                case "Belum Bayar":
+                    holder.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+                    break;
+                case "Selesai":
+                    holder.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.green_success));
+                    break;
+                case "Dibatalkan":
+                    holder.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
+                    break;
+                case "Issued":
+                    holder.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.primary));
+                    break;
+
             }
 
 

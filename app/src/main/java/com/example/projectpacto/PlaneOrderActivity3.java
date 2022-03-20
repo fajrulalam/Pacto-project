@@ -208,6 +208,20 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             }
         });
 
+        binding.pesanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                bundle.putString("status", "Belum Bayar");
+                bundle.putString("tipePesanan", "Pesawat");
+
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
+
+
+            }
+        });
+
 
     }
 

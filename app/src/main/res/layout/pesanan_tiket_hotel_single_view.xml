@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:background="@drawable/curved_less_bg_outline"
-            android:backgroundTint="@color/primary_dark"
+            android:backgroundTint="@color/primary"
             android:fontFamily="@font/roboto_medium"
             android:paddingHorizontal="7dp"
             android:paddingVertical="5dp"
