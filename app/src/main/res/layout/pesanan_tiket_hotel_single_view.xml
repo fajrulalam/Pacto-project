@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:layout_marginBottom="3dp"
     android:background="@drawable/curved_less_bg_outline">
 
     <RelativeLayout
@@ -124,6 +125,7 @@
             app:tint="@color/dark_grey" />
 
         <TextView
+            android:id="@+id/rincianPenumpang"
             android:layout_marginTop="3dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,6 +152,7 @@
             app:tint="@color/dark_grey" />
 
         <TextView
+            android:id="@+id/jumlahKamar"
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:layout_height="wrap_content"
