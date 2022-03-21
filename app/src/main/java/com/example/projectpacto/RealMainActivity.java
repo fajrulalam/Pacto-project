@@ -32,6 +32,14 @@ public class RealMainActivity extends AppCompatActivity {
             }
         });
 
+        binding.pesanHotel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HotelOrderActivity1.class));
+                overridePendingTransition(0 , 0);
+            }
+        });
+
 
 
 

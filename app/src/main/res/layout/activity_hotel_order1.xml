@@ -135,7 +135,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/kedatangan_textInput"
+                    android:id="@+id/tglCek_in"
                     android:layout_width="match_parent"
                     app:hintEnabled="false"
                     app:hintAnimationEnabled="false"
@@ -168,7 +168,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tanggalKeberangkat_textInput"
+                android:id="@+id/tglCek_out"
                 app:hintEnabled="false"
                 android:focusable="false"
                 app:hintAnimationEnabled="false"
@@ -228,7 +228,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/penumpangTextInput"
+            android:id="@+id/jumlahKamar"
             android:layout_width="match_parent"
             app:hintEnabled="false"
             android:focusable="false"

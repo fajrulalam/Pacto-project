@@ -28,6 +28,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/ic_useraccount_selected.xml" value="0.2824786324786325" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/drawable/selectable_view.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_booking.xml" value="0.328125" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_hotel_order1.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_notification.xml" value="0.328125" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order1.xml" value="0.4" />
@@ -42,11 +43,13 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/bandara_singular_view.xml" value="0.4512820512820513" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_data_penumpang.xml" value="0.39549180327868855" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_filter.xml" value="0.4" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_hotel__kota_atau_akomodasi.xml" value="0.44556962025316454" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_keberangkatan_dan_kedatangan.xml" value="0.39949270767279643" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_penumpang_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_pesawat_yang_perlu_diperhatikan.xml" value="0.4512820512820513" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_selected_ticket_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_tambahan_bagasi_bottom_sheet.xml" value="0.4" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/hotel_single_view.xml" value="0.2670940170940171" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/passenger_list_single_view.xml" value="0.38796296296296295" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/pesanan_tiket_hotel_single_view.xml" value="0.536" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/tambahan_opsi_bagasi_single_view.xml" value="0.536" />
