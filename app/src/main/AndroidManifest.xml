@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".HotelOrderActivity1"
+            android:exported="false" />
+        <activity
             android:name=".PlaneOrderActivity3"
             android:exported="false" />
         <activity

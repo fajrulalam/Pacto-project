@@ -73,12 +73,12 @@ public class BookingActivity extends AppCompatActivity {
 
             String rincianPenumpang_str = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
             if (!bundle.getString("jmlAnak").matches("0")){
-                rincianPenumpang_str = rincianPenumpang + ", Anak (" +bundle.getString("jmlAnak")+"x)";
+                rincianPenumpang_str = rincianPenumpang_str + ", Anak (" +bundle.getString("jmlAnak")+"x)";
             }
 
 
             if (!bundle.getString("jmlBalita").matches("0")){
-                rincianPenumpang_str = rincianPenumpang + ", Balita ("+bundle.getString("jmlBalita")+"x)";
+                rincianPenumpang_str = rincianPenumpang_str + ", Balita ("+bundle.getString("jmlBalita")+"x)";
             }
 
             rincianPenumpang.add(rincianPenumpang_str);
