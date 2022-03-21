@@ -1,12 +1,14 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +42,7 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
     private ArrayList<String> nama_provinsiNegara;
     private ArrayList<String> nama_kotaProvinsi;
 
-    private KeberangkatanDanKedatangan.OnDataKeberangkatanAtauKepulangan datapasser;
+    private DataHotel datapasser;
 
 
     public Hotel_KotaAtauAkomodasi() {
@@ -81,7 +83,7 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
         RecyclerAdapterHotel recyclerAdapterHotel = new RecyclerAdapterHotel(nama_hotel, nama_kotaProvinsi);
         recyclerViewHotel.setAdapter(recyclerAdapterHotel);
 
-
+        //CARI BUTTON
         cariButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +138,24 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
                 recyclerAdapterHotel.notifyDataSetChanged();
             }
         });
+
+        //SELECT HOTEL / KOTA
+        ItemClickSupport.addTo(recyclerViewHotel).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                datapasser.onDataPass(nama_hotel.get(position),nama_kotaProvinsi.get(position));
+                dismiss();
+            }
+        });
+        ItemClickSupport.addTo(recyclerViewKota).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                datapasser.onDataPass(namaKota.get(position),nama_provinsiNegara.get(position));
+                dismiss();
+            }
+        });
+
+
 
 
         closeSheet.setOnClickListener(new View.OnClickListener() {
@@ -252,5 +272,15 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
 
 
 
+    }
+
+    public interface DataHotel {
+        void onDataPass(String namaHotel, String keterangan);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        datapasser = (DataHotel) context;
     }
 }
