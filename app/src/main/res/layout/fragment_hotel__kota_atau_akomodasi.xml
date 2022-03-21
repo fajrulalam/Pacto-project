@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".KeberangkatanDanKedatangan"
+    tools:context=".Hotel_KotaAtauAkomodasi"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <!-- TODO: Update blank fragment layout -->

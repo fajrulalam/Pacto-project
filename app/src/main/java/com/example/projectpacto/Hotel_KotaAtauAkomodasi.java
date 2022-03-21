@@ -51,7 +51,7 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        final View view = View.inflate(getContext(), R.layout.fragment_keberangkatan_dan_kedatangan, null);
+        final View view = View.inflate(getContext(), R.layout.fragment_hotel__kota_atau_akomodasi, null);
         dialog.setContentView(view);
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
@@ -88,7 +88,7 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
                 nama_provinsiNegara.clear();
                 nama_kotaProvinsi.clear();
                 namaKota.clear();
-                nama_kotaProvinsi.clear();
+                nama_hotel.clear();
                 switch (textInputLayout.getEditText().getText().toString()) {
                     case "surabaya":
                         namaKota.add("Surabaya");

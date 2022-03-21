@@ -1,8 +1,10 @@
 package com.example.projectpacto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder1Binding;
@@ -24,7 +26,7 @@ public class HotelOrderActivity1 extends AppCompatActivity {
         setContentView(view);
 
         //KOTA ATAU HOTEL
-        binding.kotaAtauHotel.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binding.kotaAtauHotel.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if (b==true) {
@@ -37,12 +39,13 @@ public class HotelOrderActivity1 extends AppCompatActivity {
                 }
             }
         });
-        binding.kotaAtauHotel.setOnClickListener(new View.OnClickListener() {
+        binding.kotaAtauHotel.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Hotel_KotaAtauAkomodasi hotel_kotaAtauAkomodasi = new Hotel_KotaAtauAkomodasi();
                 Bundle bundle = new Bundle();
                 bundle.putString("judul", "Tentukan kota atau nama akomodasi");
+                Log.i("CLICKED", "BOTTOM SHEET SHOULD POP UP");
                 hotel_kotaAtauAkomodasi.setArguments(bundle);
                 hotel_kotaAtauAkomodasi.show(getSupportFragmentManager(), hotel_kotaAtauAkomodasi.getTag());
             }
