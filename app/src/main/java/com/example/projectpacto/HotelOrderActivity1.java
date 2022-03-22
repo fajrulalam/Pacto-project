@@ -26,7 +26,7 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_KotaAtauAkomodasi.DataHotel {
+public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_KotaAtauAkomodasi.DataHotel, JumlahKamarBottomSheet.OnDataKamar {
 
     ActivityHotelOrder1Binding binding;
     String kotaAtauHotel;
@@ -50,6 +50,8 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         binding.kotaAtauHotel.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.tglCekIn.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.tglCekOut.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+        binding.jumlahKamar.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+        binding.jumlahMalam.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
 
 
 
@@ -156,37 +158,11 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
 
 
 
-                binding.tglCekOut.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean b) {
-                        if (b == true) {
-                            if (!binding.tglCekIn.getEditText().getText().toString().matches("")) {
-                                datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
-                                datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                                    @RequiresApi(api = Build.VERSION_CODES.O)
-                                    @Override
-                                    public void onPositiveButtonClick(Object selection) {
-                                        epoch_cekOut = Long.parseLong(selection.toString());
-                                        ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekOut).atZone(ZoneId.of("Asia/Jakarta"));
-                                        tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
-
-                                        binding.tglCekOut.getEditText().setText(tanggal_cekOut);
-
-                                        long jmlMalam = ((epoch_cekOut - epoch_cekIn) / 86400000) +1;
-                                        binding.jumlahMalam.getEditText().setText(""+jmlMalam);
-
-                                    }
-                                });
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Tentukan dulu tanggal cek in", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                });
-
-                binding.tglCekOut.getEditText().setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+        binding.tglCekOut.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b == true) {
+                    if (!binding.tglCekIn.getEditText().getText().toString().matches("")) {
                         datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
                         datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
                             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -197,13 +173,61 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
                                 tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
 
                                 binding.tglCekOut.getEditText().setText(tanggal_cekOut);
+
                                 long jmlMalam = ((epoch_cekOut - epoch_cekIn) / 86400000) +1;
                                 binding.jumlahMalam.getEditText().setText(""+jmlMalam);
 
                             }
                         });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Tentukan dulu tanggal cek in", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            }
+        });
+
+        binding.tglCekOut.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!binding.tglCekIn.getEditText().getText().toString().matches("")) {
+                    datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
+                    datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onPositiveButtonClick(Object selection) {
+                            epoch_cekOut = Long.parseLong(selection.toString());
+                            ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekOut).atZone(ZoneId.of("Asia/Jakarta"));
+                            tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+
+                            binding.tglCekOut.getEditText().setText(tanggal_cekOut);
+                            long jmlMalam = ((epoch_cekOut - epoch_cekIn) / 86400000) + 1;
+                            binding.jumlahMalam.getEditText().setText("" + jmlMalam);
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Tentukan dulu tanggal cek in", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+        //JUMLAH TAMU DAN KAMAR
+        binding.jumlahKamar.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                JumlahKamarBottomSheet jumlahKamarBottomSheet = new JumlahKamarBottomSheet();
+                jumlahKamarBottomSheet.show(getSupportFragmentManager(), jumlahKamarBottomSheet.getTag());
+            }
+        });
+
+        binding.jumlahKamar.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                JumlahKamarBottomSheet jumlahKamarBottomSheet = new JumlahKamarBottomSheet();
+                jumlahKamarBottomSheet.show(getSupportFragmentManager(), jumlahKamarBottomSheet.getTag());
+            }
+        });
 
 
 
@@ -240,4 +264,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         binding.kotaAtauHotel.getEditText().setText(namaHotel);
     }
 
+    @Override
+    public void onDataPassTamu(String jumlahTamu, String jumlahKamar) {
+
+        binding.jumlahKamar.getEditText().setText(jumlahTamu + " Tamu, "+jumlahKamar+" Kamar" );
+    }
 }

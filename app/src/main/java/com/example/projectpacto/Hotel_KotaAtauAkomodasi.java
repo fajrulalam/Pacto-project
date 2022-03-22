@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -91,6 +92,8 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
                 nama_kotaProvinsi.clear();
                 namaKota.clear();
                 nama_hotel.clear();
+                InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mgr.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
                 switch (textInputLayout.getEditText().getText().toString()) {
                     case "surabaya":
                         namaKota.add("Surabaya");
