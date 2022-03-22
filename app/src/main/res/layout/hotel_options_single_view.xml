@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/nocurved_bg_outline"
+    android:layout_height="146dp">
+
+    <ImageView
+        android:id="@+id/hotelImage"
+        android:layout_width="103dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pop_hotel"
+        android:layout_marginRight="8dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingVertical="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/namaHotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[NAMA HOTEL]"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="16dp"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ic_star"/>
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ic_star"/>
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ic_star"/>
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ic_star"/>
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="3dp"
+                android:src="@drawable/ic_star"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/alamat"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[Kecamatan, Kota]"
+            android:fontFamily="@font/roboto_light"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hargaPerMalam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IDR 550.000"
+                android:layout_gravity="bottom"
+                android:textSize="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/primary_dark"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:text="/kamar/malam"
+                android:layout_gravity="center"
+                android:layout_marginTop="1dp"/>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

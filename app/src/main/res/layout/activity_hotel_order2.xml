@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HotelOrderActivity2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="60dp"
+                android:scaleY="1"
+                android:scaleX="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                android:background="@color/white"
+                android:foreground="@drawable/selectable_view_notsocurved"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/kotaAtauHotelTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="5dp"
+                        android:text="ASAL"
+                        android:textSize="16dp" />
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/detailTamudanKamar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 Penumpang, Ekonomi"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto_light"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/ubahButton"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="12dp"
+                style="@style/ubahButtonStyle"
+                android:foreground="@drawable/selectable_view_notsocurved"
+                android:text="Ubah"
+                android:layout_gravity="center"
+                android:background="@drawable/curved__even_less_colorized_bg"/>
+        </LinearLayout>
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/nocurved_bg_outline"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Horizontal Date Picker"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecycleViewHotel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingHorizontal="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginBottom="30dp"/>
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        app:itemTextAppearanceActive="@style/Widget.BottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="-4dp"
+        android:background="@drawable/curved__top_corners_bg"
+        app:itemIconTint="#434343"
+        app:itemTextColor="#434343"
+        android:elevation="10dp"
+        android:translationZ="10dp"
+        app:elevation="10dp"
+        android:layout_marginTop="-40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_filter_and_sort"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
