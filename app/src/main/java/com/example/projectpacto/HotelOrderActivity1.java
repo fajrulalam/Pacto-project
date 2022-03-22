@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder1Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder1Binding;
@@ -21,7 +22,9 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_KotaAtauAkomodasi.DataHotel {
 
@@ -34,6 +37,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
     String tanggal_cekOut;
     long epoch_cekIn;
     long epoch_cekOut;
+    MaterialDatePicker datePicker_end;
+
+    CalendarConstraints.Builder constraints_end;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +103,20 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
                         @Override
                         public void onPositiveButtonClick(Object selection) {
                             epoch_cekIn = Long.parseLong(selection.toString());
-                            ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_cekIn).atZone(ZoneId.of("Asia/Jakarta"));
+
+                            ZonedDateTime dateTime= Instant.ofEpochMilli(Long.parseLong(selection.toString())).atZone(ZoneId.of("Asia/Jakarta"));
                             tanggal_cekIn = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                            Log.i("TGL CEK IN", ""+ epoch_cekIn);
 
                             binding.tglCekIn.getEditText().setText(tanggal_cekIn);
+
+                            constraints_end = new CalendarConstraints.Builder()
+                                    .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_cekIn)))
+                                    .setStart(Long.parseLong(""+epoch_cekIn));
+                            datePicker_end = MaterialDatePicker.Builder.datePicker()
+                                    .setSelection(Long.parseLong(""+epoch_cekIn))
+                                    .setCalendarConstraints(constraints_end.build())
+                                    .setTitleText("Pilih Tanggal Check-out").build();
 
                         }
                     });
@@ -118,42 +134,52 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
                       public void onPositiveButtonClick(Object selection) {
                           epoch_cekIn = Long.parseLong(selection.toString());
                           ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekIn).atZone(ZoneId.of("Asia/Jakarta"));
-                          tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                          tanggal_cekIn = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+
 
                           binding.tglCekIn.getEditText().setText(tanggal_cekOut);
+
+                          constraints_end = new CalendarConstraints.Builder()
+                                  .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_cekIn)))
+                                  .setStart(Long.parseLong(""+epoch_cekIn));
+                          datePicker_end = MaterialDatePicker.Builder.datePicker()
+                                  .setSelection(Long.parseLong(""+epoch_cekIn))
+                                  .setCalendarConstraints(constraints_end.build())
+                                  .setTitleText("Pilih Tanggal Check-out").build();
                       }
                   });
               }
           });
 
-
                 //TGL CEK OUT
 
-                CalendarConstraints.Builder constraints_end = new CalendarConstraints.Builder()
-                        .setValidator(DateValidatorPointForward.from(Long.parseLong(tanggal_cekIn)))
-                        .setStart(today);
-                MaterialDatePicker datePicker_end = MaterialDatePicker.Builder.datePicker()
-                        .setSelection(today)
-                        .setCalendarConstraints(constraints_end.build())
-                        .setTitleText("Pilih Tanggal Check-out").build();
+
+
 
                 binding.tglCekOut.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View view, boolean b) {
                         if (b == true) {
-                            datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
-                            datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.O)
-                                @Override
-                                public void onPositiveButtonClick(Object selection) {
-                                    epoch_cekOut = Long.parseLong(selection.toString());
-                                    ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekOut).atZone(ZoneId.of("Asia/Jakarta"));
-                                    tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                            if (!binding.tglCekIn.getEditText().getText().toString().matches("")) {
+                                datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
+                                datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                                    @RequiresApi(api = Build.VERSION_CODES.O)
+                                    @Override
+                                    public void onPositiveButtonClick(Object selection) {
+                                        epoch_cekOut = Long.parseLong(selection.toString());
+                                        ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekOut).atZone(ZoneId.of("Asia/Jakarta"));
+                                        tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
 
-                                    binding.tglCekOut.getEditText().setText(tanggal_cekOut);
+                                        binding.tglCekOut.getEditText().setText(tanggal_cekOut);
 
-                                }
-                            });
+                                        long jmlMalam = ((epoch_cekOut - epoch_cekIn) / 86400000) +1;
+                                        binding.jumlahMalam.getEditText().setText(""+jmlMalam);
+
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Tentukan dulu tanggal cek in", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
@@ -171,6 +197,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
                                 tanggal_cekOut = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
 
                                 binding.tglCekOut.getEditText().setText(tanggal_cekOut);
+                                long jmlMalam = ((epoch_cekOut - epoch_cekIn) / 86400000) +1;
+                                binding.jumlahMalam.getEditText().setText(""+jmlMalam);
+
                             }
                         });
                     }
