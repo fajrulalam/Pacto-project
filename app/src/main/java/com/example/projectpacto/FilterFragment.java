@@ -27,6 +27,8 @@ public class FilterFragment extends BottomSheetDialogFragment {
 
     public FilterFragment() {
         // Required empty public constructor
+
+
     }
 
 

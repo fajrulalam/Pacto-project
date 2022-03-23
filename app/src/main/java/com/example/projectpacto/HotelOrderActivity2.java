@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder2Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 
@@ -85,6 +88,35 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+
+                    case R.id.filter:
+                        Log.i("Test", "Filter");
+                        FilterHotelFragment filterFragment = new FilterHotelFragment();
+                        filterFragment.show(getSupportFragmentManager(), filterFragment.getTag());
+                        return true;
+                    case R.id.sort:
+                        SortPlaneTicket sortPlaneTicket = new SortPlaneTicket();
+                        sortPlaneTicket.show(getSupportFragmentManager(), sortPlaneTicket.getTag());
+                        return true;
+                }
+                return false;
+
+
+
+            }
+        });
+
+
+
+
+
+
+
 
 
     }
