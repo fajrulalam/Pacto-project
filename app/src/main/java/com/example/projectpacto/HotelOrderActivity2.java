@@ -100,7 +100,7 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                         filterFragment.show(getSupportFragmentManager(), filterFragment.getTag());
                         return true;
                     case R.id.sort:
-                        SortPlaneTicket sortPlaneTicket = new SortPlaneTicket();
+                        SortHotelFragment sortPlaneTicket = new SortHotelFragment();
                         sortPlaneTicket.show(getSupportFragmentManager(), sortPlaneTicket.getTag());
                         return true;
                 }
