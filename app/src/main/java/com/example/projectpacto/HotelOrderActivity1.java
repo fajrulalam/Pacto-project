@@ -56,6 +56,17 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         binding.jumlahMalam.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
 
 
+        //BUNDLE
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            binding.kotaAtauHotel.getEditText().setText(extras.getString("kotaAtauHotel"));
+            binding.tglCekIn.getEditText().setText(extras.getString("tglCek_in"));
+            binding.tglCekOut.getEditText().setText(extras.getString("tglCek_out"));
+            binding.jumlahKamar.getEditText().setText(extras.getInt("jumlahKamar"));
+            binding.jumlahMalam.getEditText().setText(extras.getString("jumlahMalam"));
+        }
+
+
 
 
 
@@ -252,6 +263,17 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         });
 
 
+        //BACKBUTTON
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RealMainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0 , 0);
+            }
+        });
+
+
 
     }
 
@@ -279,6 +301,8 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         pesawatYangPerluDiperhatikan.setArguments(bundle);
         pesawatYangPerluDiperhatikan.show(getSupportFragmentManager(), pesawatYangPerluDiperhatikan.getTag());
     }
+
+
 
 
     @Override

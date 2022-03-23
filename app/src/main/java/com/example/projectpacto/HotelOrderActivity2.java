@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,19 @@ public class HotelOrderActivity2 extends AppCompatActivity {
             populateList(hotelAtauKota_srch);
 
         }
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Hotel_KotaAtauAkomodasi.class);
+                intent.putExtra("tglCek_in", tglCek_in);
+                intent.putExtra("tglCek_out", tglCek_out);
+                intent.putExtra("jumlahKamar", jumlahKamar);
+                intent.putExtra("jumlahMalam", jumlahMalam);
+                intent.putExtra("kotaAtauHotel", hotelAtauKota_srch);
+                startActivity(intent);
+            }
+        });
 
 
     }
