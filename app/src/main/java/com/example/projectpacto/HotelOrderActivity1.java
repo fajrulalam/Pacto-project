@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
     String kotaAtauHotel;
     String tglCek_in;
     String tglCek_out;
+    String jumlahMalam;
     String jumlahKamar;
     String tanggal_cekIn;
     String tanggal_cekOut;
@@ -153,10 +155,10 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
               }
           });
 
+
+
+
                 //TGL CEK OUT
-
-
-
 
         binding.tglCekOut.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -226,6 +228,26 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
             public void onClick(View view) {
                 JumlahKamarBottomSheet jumlahKamarBottomSheet = new JumlahKamarBottomSheet();
                 jumlahKamarBottomSheet.show(getSupportFragmentManager(), jumlahKamarBottomSheet.getTag());
+            }
+        });
+
+
+
+        //CARI BUTTON
+        binding.cariButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HotelOrderActivity2.class);
+                intent.putExtra("tglCek_in", tglCek_in);
+                intent.putExtra("tglCek_out", tglCek_out);
+                jumlahKamar = binding.jumlahKamar.getEditText().getText().toString();
+                jumlahMalam = binding.jumlahMalam.getEditText().getText().toString();
+                kotaAtauHotel = binding.kotaAtauHotel.getEditText().getText().toString();
+                intent.putExtra("jumlahKamar", jumlahKamar);
+                intent.putExtra("jumlahMalam", jumlahMalam);
+                intent.putExtra("kotaAtauHotel", kotaAtauHotel);
+                startActivity(intent);
+                overridePendingTransition(0 , 0);
             }
         });
 
