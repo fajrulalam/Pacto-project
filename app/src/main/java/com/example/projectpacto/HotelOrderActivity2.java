@@ -111,6 +111,20 @@ public class HotelOrderActivity2 extends AppCompatActivity {
             }
         });
 
+        RecyclerView recyclerView = binding.RecycleViewHotel;
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("gambarHotel", gambarHotel.get(position));
+                bundle.putString("namaHotel", nama_hotel.get(position));
+                bundle.putString("tambahanAlamat", tambahanAlamat.get(position));
+                bundle.putString("harga", harga.get(position));
+
+
+            }
+        });
+
 
 
 
