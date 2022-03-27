@@ -68,6 +68,8 @@ public class HotelOrderActivity2 extends AppCompatActivity {
             tglCek_out= extras.getString("tglCek_out");
             tglCek_in= extras.getString("tglCek_in");
 
+            Log.i("TGL CEK IN", "ACT2" + tglCek_in);
+
             //DISPLAYING INTENTS
             binding.kotaAtauHotelTextView.setText(hotelAtauKota_srch);
             binding.detailTamudanKamar.setText(jumlahKamar);
@@ -79,7 +81,7 @@ public class HotelOrderActivity2 extends AppCompatActivity {
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Hotel_KotaAtauAkomodasi.class);
+                Intent intent = new Intent(getApplicationContext(), HotelOrderActivity1.class);
                 intent.putExtra("tglCek_in", tglCek_in);
                 intent.putExtra("tglCek_out", tglCek_out);
                 intent.putExtra("jumlahKamar", jumlahKamar);
@@ -121,6 +123,11 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                 bundle.putString("tambahanAlamat", tambahanAlamat.get(position));
                 bundle.putString("harga", harga.get(position));
                 bundle.putInt("jmlBintang", jmlBintang.get(position));
+                bundle.putString("tglCek_in", tglCek_in);
+                bundle.putString("tglCek_out", tglCek_out);
+                bundle.putString("jumlahKamar", jumlahKamar);
+                bundle.putString("jumlahMalam", jumlahMalam);
+                bundle.putString("kotaAtauHotel", hotelAtauKota_srch);
 
                 HotelSelected_BottomSheet hotelSelected_bottomSheet = new HotelSelected_BottomSheet();
                 hotelSelected_bottomSheet.setArguments(bundle);

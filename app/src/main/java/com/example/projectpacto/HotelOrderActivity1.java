@@ -62,7 +62,7 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
             binding.kotaAtauHotel.getEditText().setText(extras.getString("kotaAtauHotel"));
             binding.tglCekIn.getEditText().setText(extras.getString("tglCek_in"));
             binding.tglCekOut.getEditText().setText(extras.getString("tglCek_out"));
-            binding.jumlahKamar.getEditText().setText(extras.getInt("jumlahKamar"));
+            binding.jumlahKamar.getEditText().setText(extras.getString("jumlahKamar"));
             binding.jumlahMalam.getEditText().setText(extras.getString("jumlahMalam"));
         }
 
@@ -249,8 +249,8 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HotelOrderActivity2.class);
-                intent.putExtra("tglCek_in", tglCek_in);
-                intent.putExtra("tglCek_out", tglCek_out);
+                intent.putExtra("tglCek_in", tanggal_cekIn);
+                intent.putExtra("tglCek_out", tanggal_cekOut);
                 jumlahKamar = binding.jumlahKamar.getEditText().getText().toString();
                 jumlahMalam = binding.jumlahMalam.getEditText().getText().toString();
                 kotaAtauHotel = binding.kotaAtauHotel.getEditText().getText().toString();

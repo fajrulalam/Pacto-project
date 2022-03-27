@@ -45,13 +45,13 @@
                     android:layout_gravity="center_horizontal">
 
                     <TextView
-                        android:id="@+id/namHotel"
+                        android:id="@+id/namaHotel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:padding="5dp"
-                        android:textColor="@color/dark_grey"
                         android:text="[NAMA HOTEL]"
+                        android:textColor="@color/dark_grey"
                         android:textSize="13dp" />
 
 
@@ -155,7 +155,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecycleViewTicket"
+            android:id="@+id/RecycleViewKamarOptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

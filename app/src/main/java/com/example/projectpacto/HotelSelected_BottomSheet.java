@@ -1,12 +1,14 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,12 @@ public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
     String tambahanAlamat;
     String harga;
     int jmlBintang;
+
+    String hotelAtauKota_srch;
+    String jumlahKamar ;
+    String jumlahMalam;
+    String tglCek_out;
+    String tglCek_in;
 
     TextView namaHotel_txt;
     TextView alamatTambahan_txt;
@@ -50,6 +58,13 @@ public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
         tambahanAlamat = extras.getString("tambahanAlamat");
         harga = extras.getString("harga");
         jmlBintang= extras.getInt("jmlBintang");
+        hotelAtauKota_srch= extras.getString("kotaAtauHotel");
+        jumlahKamar = extras.getString("jumlahKamar");
+        jumlahMalam= extras.getString("jumlahMalam");
+        tglCek_out= extras.getString("tglCek_out");
+        tglCek_in= extras.getString("tglCek_in");
+
+        Log.i("TGL CEK IN ", "SELECTED BS"+tglCek_in);
 
 
 
@@ -105,6 +120,15 @@ public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
 
 
         }
+
+        view.findViewById(R.id.lihatkamar_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), HotelOrderActivity3.class);
+                intent.putExtra("bundle", extras);
+                startActivity(intent);
+            }
+        });
 
 
 

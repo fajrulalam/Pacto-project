@@ -165,6 +165,8 @@ public class SelectedTicketBottomSheetFragment extends BottomSheetDialogFragment
         bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
         bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
 
+
+
         total.setText(harga_str);
         total_bottomcorner.setText(harga_str);
         kotaAsal.setText(kotaAsal_str);
