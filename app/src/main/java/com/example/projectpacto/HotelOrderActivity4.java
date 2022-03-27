@@ -11,10 +11,11 @@ import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class HotelOrderActivity4 extends AppCompatActivity {
+public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAdapterPenumpangList.AddPassengerDetail, DataTamu_BottomSheet.OnDataTamu {
 
     ActivityHotelOrder4Binding binding;
 
@@ -39,6 +40,11 @@ public class HotelOrderActivity4 extends AppCompatActivity {
     Date tglCek_in_date;
     Date tglCek_out_date;
 
+    ArrayList<String> namaPassenger;
+    ArrayList<String> titel;
+
+    RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
+
     Bundle extras;
 
     @Override
@@ -50,7 +56,7 @@ public class HotelOrderActivity4 extends AppCompatActivity {
 
         extras = getIntent().getBundleExtra("bundle");
         gambarKamar= extras.getInt("gambarKamar");
-        namaKamar= extras.getString("");
+        namaKamar= extras.getString("namaKamar");
         kapasitasKamar= extras.getInt("kapasitasKamar");
         tipeKasur= extras.getString("tipeKasur");
         sarapan= extras.getString("sarapan");
@@ -68,6 +74,7 @@ public class HotelOrderActivity4 extends AppCompatActivity {
         tglCek_in= extras.getString("tglCek_out");
         tglCek_out= extras.getString("tglCek_in");
 
+
         Locale lokal = new Locale("id", "ID");
 
 //        SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy", lokal);
@@ -81,6 +88,18 @@ public class HotelOrderActivity4 extends AppCompatActivity {
 //            parseException.printStackTrace();
 //        }
 
+        binding.namaHotelTxt.setText(namaHotel);
+        binding.alamatTambahan.setText(tambahanAlamat);
+        binding.tglCekIn.setText(tglCek_in);
+        binding.tglCekOut.setText(tglCek_out);
+        binding.detailTamu.setText(jumlahKamar.split(", ")[0]);
+        binding.jmldanPilihanKamar.setText(jumlahKamar.split(", ")[1]+ " ("+namaKamar+")");
+
+        namaPassenger = new ArrayList<>();
+        titel = new ArrayList<>();
+
+
+
         Log.i("NAMAHOTEL", ""+namaHotel);
         Log.i("NAMAKAMAR", ""+namaKamar);
         Log.i("CEKIN", ""+tglCek_in);
@@ -89,10 +108,43 @@ public class HotelOrderActivity4 extends AppCompatActivity {
         Log.i("KAPASITAS KAMAR", ""+kapasitasKamar);
         Log.i("TIPE KASIR", ""+tipeKasur);
 
+        int jumlahTamu_int = Integer.parseInt(jumlahKamar.split(" ")[0]);
+        for (int i = 1; i < jumlahTamu_int+1 ; i ++) {
+            namaPassenger.add("Tamu " + i);
+            titel.add("");
 
+        }
+
+        recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList(namaPassenger, this);
+        binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
+
+
+    }
+
+
+    @Override
+    public void addPassengerDetail(String nomorPelanggan) {
+        DataTamu_BottomSheet dataTamu_bottomSheet = new DataTamu_BottomSheet();
+        int index = Integer.parseInt(nomorPelanggan) - 1;
+        Bundle bundle = new Bundle();
+        bundle.putString("penumpangKe_n", nomorPelanggan);
+        bundle.putString("nama_str", namaPassenger.get(index));
+        bundle.putString("titel_str", titel.get(index));
+        dataTamu_bottomSheet.setArguments(bundle);
+        dataTamu_bottomSheet.show(getSupportFragmentManager(), dataTamu_bottomSheet.getTag());
+
+    }
+
+    @Override
+    public void onDataTamuPass(String nama, String titel_str, int penumpangKe_n) {
+        namaPassenger.set(penumpangKe_n-1, nama);
+        titel.set(penumpangKe_n-1, titel_str);
+        recyclerAdapterPenumpangList.notifyDataSetChanged();
 
 
 
 
     }
 }
+
+
