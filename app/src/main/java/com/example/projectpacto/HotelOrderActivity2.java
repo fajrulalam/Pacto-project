@@ -120,6 +120,11 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                 bundle.putString("namaHotel", nama_hotel.get(position));
                 bundle.putString("tambahanAlamat", tambahanAlamat.get(position));
                 bundle.putString("harga", harga.get(position));
+                bundle.putInt("jmlBintang", jmlBintang.get(position));
+
+                HotelSelected_BottomSheet hotelSelected_bottomSheet = new HotelSelected_BottomSheet();
+                hotelSelected_bottomSheet.setArguments(bundle);
+                hotelSelected_bottomSheet.show(getSupportFragmentManager(), hotelSelected_bottomSheet.getTag());
 
 
             }
