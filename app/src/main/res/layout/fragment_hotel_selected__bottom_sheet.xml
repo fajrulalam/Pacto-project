@@ -13,11 +13,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="IMAGE GALLERY"
-            android:gravity="center"
-            android:textColor="@color/white"
             android:fontFamily="@font/roboto_bold"
-            android:textSize="20dp"/>
+            android:gravity="center"
+            android:text="IMAGE GALLERY"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
     </RelativeLayout>
 
@@ -140,6 +140,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/fasilitas_restoran"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -168,6 +169,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/fasilitas_wifi"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -196,6 +198,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/fasilitas_airhangat"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -224,6 +227,7 @@
 
 
                 <LinearLayout
+                    android:id="@+id/fasilitas_laundry"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -249,6 +253,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/lihatlainnya_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -276,6 +281,7 @@
                 android:textSize="16dp" />
 
             <LinearLayout
+                android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 android:layout_marginBottom="8dp"
@@ -304,6 +310,7 @@
                     android:src="@drawable/ic_location_address" />
 
                 <TextView
+                    android:id="@+id/alamatlengkap_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -347,6 +354,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/waktuCekin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -379,6 +387,7 @@
                     android:layout_weight="1" />
 
                 <TextView
+                    android:id="@+id/waktuCekout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -399,6 +408,7 @@
                 android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/deskripsi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Minimalist rooms in a trendy budget hotel offering complimentary Wi-Fi and a mall shuttle. \n\nA 10-minute walk from Surabaya Gubeng train station, this trendy budget hotel on a tree-lined street is 2 km from Tunjungan Plaza mall. \n\nSleeping up to 3 people, the functional, minimalist rooms come with complimentary Wi-Fi, flat-screen TVs and safes. Room service is offered. \n \nFreebies include a mall shuttle. Breakfast (fee) is served in a bright lobby dining room."
@@ -439,7 +449,7 @@
                     android:layout_marginTop="10dp"/>
 
                 <TextView
-                    android:id="@+id/total_bottomCorner"
+                    android:id="@+id/harga_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
@@ -451,7 +461,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/tampilkanButton"
+                android:id="@+id/lihatkamar_btn"
                 android:layout_width="0dp"
                 android:layout_weight="0.4"
                 android:layout_height="match_parent"
