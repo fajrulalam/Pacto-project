@@ -56,6 +56,9 @@ public class HotelOrderActivity3 extends AppCompatActivity {
 
     RecycleAdapterKamarOptions recycleAdapterKamarOptions;
 
+    Intent bundle;
+    Bundle extras;
+
 
 
 
@@ -67,8 +70,8 @@ public class HotelOrderActivity3 extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        Intent bundle = this.getIntent();
-        Bundle extras = bundle.getBundleExtra("bundle");
+        bundle = this.getIntent();
+        extras = bundle.getBundleExtra("bundle");
         gambarHotel = extras.getInt("gambarHotel");
         namaHotel = extras.getString("namaHotel");
         tambahanAlamat = extras.getString("tambahanAlamat");
@@ -218,12 +221,40 @@ public class HotelOrderActivity3 extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+            int position_fix = position;
             holder.gambarKamar.setImageResource(gambarKamar.get(position));
             holder.namaKamar.setText(namaKamar.get(position));
             holder.jumlahTamu.setText(kapasitasTamu.get(position) + " Tamu");
             holder.tipeKasur.setText(tipeKasur.get(position));
             holder.sarapan.setText(sarapan.get(position));
             holder.harga.setText(hargaKamar.get(position));
+
+            holder.pilihKamar_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int gambarKamar_int = gambarKamar.get(position_fix);
+                    String namaKamar_str = namaKamar.get(position_fix);
+                    int kapasitasKamar =  kapasitasTamu.get(position_fix);
+                    String tipeKasur_str = tipeKasur.get(position_fix);
+                    String sarapan_str = sarapan.get(position_fix);
+                    String hargaKamar_str = hargaKamar.get(position_fix);
+
+                    extras.putInt("gambarKamar", gambarKamar_int);
+                    extras.putString("namaKamar", namaKamar_str);
+                    extras.putInt("kapasitasKamar", kapasitasKamar);
+                    extras.putString("tipeKasur", tipeKasur_str);
+                    extras.putString("sarapan", sarapan_str);
+                    extras.putString("hargaKamar", hargaKamar_str);
+
+                    Intent intent = new Intent(getApplicationContext(), HotelOrderActivity4.class);
+                    intent.putExtra("bundle", extras);
+
+                    startActivity(intent);
+
+
+                }
+            });
 
         }
 
