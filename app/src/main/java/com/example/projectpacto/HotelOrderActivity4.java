@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAdapterPenumpangList.AddPassengerDetail, DataTamu_BottomSheet.OnDataTamu {
+public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAdapterPenumpangList.AddPassengerDetail, DataTamu_BottomSheet.OnDataTamu, PermintaanKhususBottomSheet.OnDataSpecialRequest {
 
     ActivityHotelOrder4Binding binding;
 
@@ -144,6 +144,11 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
                 bundle.putString("tipeRanjang_req", tipeRanjang_req);
                 bundle.putString("catatanLainnya_req", catatanLainnya_req);
 
+                PermintaanKhususBottomSheet permintaanKhususBottomSheet = new PermintaanKhususBottomSheet();
+                permintaanKhususBottomSheet.setArguments(bundle);
+                permintaanKhususBottomSheet.show(getSupportFragmentManager(), permintaanKhususBottomSheet.getTag());
+
+
 
             }
         });
@@ -174,6 +179,16 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
 
 
+    }
+
+    @Override
+    public void OnDataSpecialRequest(int bebasAsapRokok_req, int kamarTersambung_req, String waktuCekin, String waktuCekout, String tipeRanjang, String catatanLainnya) {
+        bebasAsapRokok = bebasAsapRokok_req;
+        kamarTersambung = kamarTersambung_req;
+        waktuCekin_req = waktuCekin;
+        waktuCekOut_req = waktuCekout;
+        tipeRanjang_req = tipeRanjang;
+        catatanLainnya_req = catatanLainnya;
     }
 }
 
