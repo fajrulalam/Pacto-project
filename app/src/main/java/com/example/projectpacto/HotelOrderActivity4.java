@@ -2,6 +2,7 @@ package com.example.projectpacto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -150,6 +151,16 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
 
 
+            }
+        });
+
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HotelOrderActivity3.class);
+                intent.putExtra("bundle", extras);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
