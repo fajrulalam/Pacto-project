@@ -383,7 +383,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_baseline_edit_24"
-                        android:paddingHorizontal="20dp"/>
+                        android:paddingHorizontal="20dp"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 
@@ -399,7 +400,7 @@
                     android:layout_marginTop="5dp">
 
                     <TextView
-                        android:id="@+id/bagasiTambahan"
+                        android:id="@+id/permintaanKhusus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -420,7 +421,7 @@
                         android:id="@+id/hargaBagasiTambahan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/bagasiTambahan"
+                        android:layout_below="@+id/permintaanKhusus"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@id/bagasi"

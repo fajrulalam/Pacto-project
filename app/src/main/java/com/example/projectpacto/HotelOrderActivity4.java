@@ -43,6 +43,14 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
     ArrayList<String> namaPassenger;
     ArrayList<String> titel;
 
+    //Permintaan Khusus
+    int bebasAsapRokok;
+    int kamarTersambung;
+    String waktuCekin_req;
+    String waktuCekOut_req;
+    String tipeRanjang_req;
+    String catatanLainnya_req;
+
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
 
     Bundle extras;
@@ -73,6 +81,13 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         jumlahMalam= extras.getString("jumlahMalam");
         tglCek_in= extras.getString("tglCek_out");
         tglCek_out= extras.getString("tglCek_in");
+
+        bebasAsapRokok = 0;
+        kamarTersambung = 0;
+        waktuCekin_req = "";
+        waktuCekOut_req = "";
+        tipeRanjang_req = "";
+        catatanLainnya_req = "";
 
 
         Locale lokal = new Locale("id", "ID");
@@ -117,6 +132,21 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
         recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList(namaPassenger, this);
         binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
+
+        binding.tambahanBagasiRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("bebasAsapRokok", bebasAsapRokok);
+                bundle.putInt("kamarTersambung", kamarTersambung);
+                bundle.putString("waktuCekin_req", waktuCekin_req);
+                bundle.putString("waktuCekOut_req", waktuCekOut_req);
+                bundle.putString("tipeRanjang_req", tipeRanjang_req);
+                bundle.putString("catatanLainnya_req", catatanLainnya_req);
+
+
+            }
+        });
 
 
     }
