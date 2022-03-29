@@ -45,18 +45,25 @@
                 android:textColor="@color/dark_grey"
                 android:textSize="18dp"/>
 
-
-            <RadioButton
-                android:id="@+id/ubahButton"
+            <ImageView
                 android:layout_width="60dp"
                 android:layout_height="35dp"
+                android:src="@drawable/pacto_logo"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="12dp"
-                style="@style/ubahButtonStyle"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:text="Ubah"
-                android:layout_gravity="center"
-                android:background="@drawable/curved__even_less_colorized_bg"/>
+                android:layout_marginLeft="12dp"/>
+
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/ubahButton"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:layout_marginLeft="12dp"-->
+<!--                style="@style/ubahButtonStyle"-->
+<!--                android:foreground="@drawable/selectable_view_notsocurved"-->
+<!--                android:text="Ubah"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="@drawable/curved__even_less_colorized_bg"/>-->
         </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider

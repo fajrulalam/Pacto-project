@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".MasukkanPIN_Activity"
+            android:exported="false" />
+        <activity
             android:name=".HotelOrderActivity4"
             android:exported="false" />
         <activity
