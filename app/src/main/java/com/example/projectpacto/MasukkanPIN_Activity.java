@@ -26,6 +26,10 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         View view = binding.getRoot();
         setContentView(view);
 
+
+        Bundle extras = this.getIntent().getBundleExtra("bundle");
+
+
         binding.pin1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

@@ -62,6 +62,9 @@ public class BookingActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
         if (bundle !=null){
+
+            //CEK APAKAH PESAWAT ATAU HOTEL
+
             tglCek_in.add("");
             jumlahKamar.add("");
             kotaAsal_atau_namaHotel.add(bundle.getString("kotaAsal"));

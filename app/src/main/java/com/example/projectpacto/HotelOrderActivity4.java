@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder4Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,6 +54,9 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
     String catatanLainnya_req;
 
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
+    FirebaseFirestore fs;
+
+
 
     Bundle extras;
 
@@ -92,6 +96,8 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
 
         Locale lokal = new Locale("id", "ID");
+
+        fs = FirebaseFirestore.getInstance();
 
 //        SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy", lokal);
 //        try {
