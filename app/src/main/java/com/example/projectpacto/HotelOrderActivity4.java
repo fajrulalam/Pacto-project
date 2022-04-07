@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder4Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
+
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.utils.URIBuilder;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
@@ -93,6 +95,16 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         waktuCekOut_req = "";
         tipeRanjang_req = "";
         catatanLainnya_req = "";
+
+        String MSISDN =  "08180700672";
+        String iccid = "8962115937878589405";
+        URIBuilder uriBuilder = new URIBuilder()
+                .setScheme("[INSERT_SCHEME")
+                .setHost("[INSER_HOST")
+                .setPath("subscriber/v1/params?iscancel=true&msisdn=")
+                .setParameter("mssisdn", MSISDN)
+                .setParameter("ICCID", iccid);
+        String URL = uriBuilder.toString();
 
 
         Locale lokal = new Locale("id", "ID");

@@ -164,31 +164,31 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                 gambarHotel.add(R.drawable.pop_hotel);
 
 
-                nama_hotel.add("Zest Hotel");
-                tambahanAlamat.add("Kertajaya, Surabaya");
-                harga.add("IDR 410.000");
-                jmlBintang.add(3);
-                gambarHotel.add(R.drawable.zest2_hotel);
-
-
-                nama_hotel.add("The Life Hotel");
-                tambahanAlamat.add("Menanggal, Surabaya");
-                harga.add("IDR 470.000");
-                jmlBintang.add(3);
-                gambarHotel.add(R.drawable.thelife2_hotel);
-
-
-                nama_hotel.add("Shangri-La");
-                tambahanAlamat.add("Tunjungan, Surabaya");
-                harga.add("IDR 780.000");
-                jmlBintang.add(4);
-                gambarHotel.add(R.drawable.pop_hotel);
-
-                nama_hotel.add("Grand Mercure Surabaya");
-                tambahanAlamat.add("Gubeng, Surabaya");
-                harga.add("IDR 1.280.000");
-                jmlBintang.add(5);
-                gambarHotel.add(R.drawable.grandmercure_hotel);
+//                nama_hotel.add("Zest Hotel");
+//                tambahanAlamat.add("Kertajaya, Surabaya");
+//                harga.add("IDR 410.000");
+//                jmlBintang.add(3);
+//                gambarHotel.add(R.drawable.zest2_hotel);
+//
+//
+//                nama_hotel.add("The Life Hotel");
+//                tambahanAlamat.add("Menanggal, Surabaya");
+//                harga.add("IDR 470.000");
+//                jmlBintang.add(3);
+//                gambarHotel.add(R.drawable.thelife2_hotel);
+//
+//
+//                nama_hotel.add("Shangri-La");
+//                tambahanAlamat.add("Tunjungan, Surabaya");
+//                harga.add("IDR 780.000");
+//                jmlBintang.add(4);
+//                gambarHotel.add(R.drawable.pop_hotel);
+//
+//                nama_hotel.add("Grand Mercure Surabaya");
+//                tambahanAlamat.add("Gubeng, Surabaya");
+//                harga.add("IDR 1.280.000");
+//                jmlBintang.add(5);
+//                gambarHotel.add(R.drawable.grandmercure_hotel);
 
                 break;
 

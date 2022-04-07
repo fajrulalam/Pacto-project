@@ -190,7 +190,14 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         view.findViewById(R.id.actionButton_cari).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datapasser.onDataPass(namaAutoComplete.getText().toString(), titelDropdown.getText().toString(), tglLahir.getEditText().getText().toString(), kewarganegaraan.getEditText().getText().toString(), NIKatauPaspor.getText().toString(), Integer.parseInt(penumpangNumber.getText().toString()));
+
+                String nama = namaAutoComplete.getText().toString();
+                String titel = titelDropdown.getText().toString();
+                String tglLahir_str = tglLahir.getEditText().getText().toString();
+                String kewarganegaraan_str = kewarganegaraan.getEditText().getText().toString();
+                String NIKatauPasport_str = NIKatauPaspor.getText().toString();
+                int penumpangNumber_int = Integer.parseInt(penumpangNumber.getText().toString());
+                datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,penumpangNumber_int );
                 dismiss();
             }
         });

@@ -14,10 +14,20 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder4Binding;
 import com.example.projectpacto.databinding.ActivityMasukkanPinBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MasukkanPIN_Activity extends AppCompatActivity  {
     ActivityMasukkanPinBinding binding;
     String pin;
+
+    Bundle extras;
+
+
+    FirebaseFirestore fs;
+    HashMap<String, Object> pesananHotel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +37,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         setContentView(view);
 
 
-        Bundle extras = this.getIntent().getBundleExtra("bundle");
+        extras = this.getIntent().getBundleExtra("bundle");
+        fs = FirebaseFirestore.getInstance();
+
+        pesananHotel = new HashMap<>();
+
 
 
         binding.pin1.addTextChangedListener(new TextWatcher() {
@@ -138,6 +152,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     public void checkPIN(String pin){
         if (pin.matches("1738")){
+            pesananHotel.put("orderNumber", 1);
+            pesananHotel.put("bookingCode", "18ABAN");
+            pesananHotel.put("namaHotel", extras.getString("namaHotel"));
+            
+
 
         }
     }
