@@ -15,11 +15,13 @@ import android.widget.ImageView;
 
 import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -124,195 +126,9 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         tambahan_kg = new ArrayList<>();
         harga_tambahan = new ArrayList<>();
 
-        ArrayofPenumpangMaps = new List<Map<String, String>>() {
-            @Override
-            public int size() {
-                return jmlPenumpang;
-            }
+        ArrayofPenumpangMaps = new ArrayList<>();
 
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
 
-            @Override
-            public boolean contains(@Nullable Object o) {
-                return false;
-            }
-
-            @NonNull
-            @Override
-            public Iterator<Map<String, String>> iterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @NonNull
-            @Override
-            public <T> T[] toArray(@NonNull T[] ts) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Map<String, String> stringStringMap) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(@Nullable Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(@NonNull Collection<? extends Map<String, String>> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int i, @NonNull Collection<? extends Map<String, String>> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(@NonNull Collection<?> collection) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Map<String, String> get(int i) {
-                return null;
-            }
-
-            @Override
-            public Map<String, String> set(int i, Map<String, String> stringStringMap) {
-                return null;
-            }
-
-            @Override
-            public void add(int i, Map<String, String> stringStringMap) {
-
-            }
-
-            @Override
-            public Map<String, String> remove(int i) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(@Nullable Object o) {
-                return 0;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Map<String, String>> listIterator() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public ListIterator<Map<String, String>> listIterator(int i) {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public List<Map<String, String>> subList(int i, int i1) {
-                return null;
-            }
-        };
-        dataPenumpangMap = new Map<String, String>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean containsKey(@Nullable Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsValue(@Nullable Object o) {
-                return false;
-            }
-
-            @Nullable
-            @Override
-            public String get(@Nullable Object o) {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public String put(String s, String s2) {
-                return null;
-            }
-
-            @Nullable
-            @Override
-            public String remove(@Nullable Object o) {
-                return null;
-            }
-
-            @Override
-            public void putAll(@NonNull Map<? extends String, ? extends String> map) {
-
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @NonNull
-            @Override
-            public Set<String> keySet() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Collection<String> values() {
-                return null;
-            }
-
-            @NonNull
-            @Override
-            public Set<Entry<String, String>> entrySet() {
-                return null;
-            }
-        };
 
         for (int i = 1; i < jmlPenumpang+1 ; i ++) {
             namaPassenger.add("Penumpang " + i);
@@ -323,7 +139,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             tambahan_kg.add("Bagasi +0 kg");
             harga_tambahan.add("IDR 0");
 
-
+            dataPenumpangMap = new HashMap<>();
             dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i-1));
             dataPenumpangMap.put("titel", titel.get(i-1));
             dataPenumpangMap.put("tglLahir", tglLahir.get(i-1));
@@ -332,8 +148,8 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             dataPenumpangMap.put("tambahan_kg", tambahan_kg.get(i-1));
             dataPenumpangMap.put("harga_tambahan", harga_tambahan.get(i-1));
 
-            ArrayofPenumpangMaps.set(i-1, dataPenumpangMap);
-            Log.i("ArrayofPenumpangMaps"+i, "" + dataPenumpangMap);
+            ArrayofPenumpangMaps.add(dataPenumpangMap);
+            Log.i("ArrayofPenumpangMaps"+i, "" + ArrayofPenumpangMaps);
 
         }
 
@@ -507,6 +323,10 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                     }
                 };
                 map.put("penumpangData", ArrayofPenumpangMaps);
+                FieldValue timestamp = FieldValue.serverTimestamp();
+
+                PenumpangData penumpangData = new PenumpangData("pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
+                fs.collection("bookingHistoryPesawat").add(penumpangData);
 
 
 
@@ -534,15 +354,23 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         kewarganegaraan.set(penumpangKe_n-1, kewarganegaraan_str);
         NIKatauPaspor.set(penumpangKe_n-1, nikAtauPaspor_str);
 
+        ArrayofPenumpangMaps.clear();
 
-        dataPenumpangMap.put("namaPenumpang", namaPassenger.get(penumpangKe_n-1));
-        dataPenumpangMap.put("titel", titel.get(penumpangKe_n-1));
-        dataPenumpangMap.put("tglLahir", tglLahir.get(penumpangKe_n-1));
-        dataPenumpangMap.put("NIKatauPaspor", NIKatauPaspor.get(penumpangKe_n-1));
-        dataPenumpangMap.put("kewarganegaraan", kewarganegaraan.get(penumpangKe_n-1));
+        for(int i = 0; i<jmlPenumpang; i++) {
+            dataPenumpangMap = new HashMap<>();
+            dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
+            dataPenumpangMap.put("titel", titel.get(i));
+            dataPenumpangMap.put("tglLahir", tglLahir.get(i));
+            dataPenumpangMap.put("NIKatauPaspor", NIKatauPaspor.get(i));
+            dataPenumpangMap.put("kewarganegaraan", kewarganegaraan.get(i));
+            dataPenumpangMap.put("tambahan_kg", tambahan_kg.get(i));
+            dataPenumpangMap.put("harga_tambahan", harga_tambahan.get(i));
+
+            ArrayofPenumpangMaps.add(i, dataPenumpangMap);
+        }
 
 
-        ArrayofPenumpangMaps.set(penumpangKe_n-1, dataPenumpangMap);
+
 
 
 
@@ -577,13 +405,19 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     @Override
     public void OnDataBagasi(ArrayList<String> tambahan_kg, ArrayList<String> hargaTambahanBagasi) {
 
-        for (int i = 0; i < tambahan_kg.size(); i++){
+        ArrayofPenumpangMaps.clear();
 
+        for(int i = 0; i<jmlPenumpang; i++) {
+            dataPenumpangMap = new HashMap<>();
+            dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
+            dataPenumpangMap.put("titel", titel.get(i));
+            dataPenumpangMap.put("tglLahir", tglLahir.get(i));
+            dataPenumpangMap.put("NIKatauPaspor", NIKatauPaspor.get(i));
+            dataPenumpangMap.put("kewarganegaraan", kewarganegaraan.get(i));
             dataPenumpangMap.put("tambahan_kg", tambahan_kg.get(i));
-            dataPenumpangMap.put("harga_tambahan", hargaTambahanBagasi.get(i));
+            dataPenumpangMap.put("harga_tambahan", harga_tambahan.get(i));
 
-            ArrayofPenumpangMaps.set(i, dataPenumpangMap);
-
+            ArrayofPenumpangMaps.add(i, dataPenumpangMap);
         }
 
         RecyclerAdapterBagasi recyclerAdapterBagasi = new RecyclerAdapterBagasi(tambahan_kg, hargaTambahanBagasi);
@@ -593,5 +427,166 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         binding.bagasi.setVisibility(View.GONE);
         binding.bagasiTambahan.setVisibility(View.GONE);
         binding.hargaBagasiTambahan.setVisibility(View.GONE);
+    }
+
+    public class PenumpangData {
+
+        private String bandaraAsal;
+        private String bandara_kedatangan;
+        private String bookingCode;
+        private String kodePenerbangan;
+        private String namaMaskapai;
+        private String namaPemesan;
+        private String orderNumber;
+        private List<Map<String, String>> penumpang;
+        private String phoneNumber;
+        private String status;
+        private String userID;
+        private String waktuBerangkat;
+        private String waktuDatang;
+        private String tipePesanan;
+        private FieldValue timeStampPesanan;
+
+        public PenumpangData(){
+
+        }
+
+        public PenumpangData(String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
+            this.bandaraAsal = bandaraAsal;
+            this.bandara_kedatangan = bandara_kedatangan;
+            this.bookingCode = bookingCode;
+            this.kodePenerbangan = kodePenerbangan;
+            this.namaMaskapai = namaMaskapai;
+            this.namaPemesan = namaPemesan;
+            this.orderNumber = orderNumber;
+            this.penumpang = penumpang;
+            this.phoneNumber = phoneNumber;
+            this.status = status;
+            this.userID = userID;
+            this.waktuBerangkat = waktuBerangkat;
+            this.waktuDatang = waktuDatang;
+            this.tipePesanan = tipePesanan;
+            this.timeStampPesanan = timeStampPesanan;
+        }
+
+        public String getTipePesanan() {
+            return tipePesanan;
+        }
+
+        public void setTipePesanan(String tipePesanan) {
+            this.tipePesanan = tipePesanan;
+        }
+
+        public FieldValue getTimeStampPesanan() {
+            return timeStampPesanan;
+        }
+
+        public void setTimeStampPesanan(FieldValue timeStampPesanan) {
+            this.timeStampPesanan = timeStampPesanan;
+        }
+
+        public String getBandaraAsal() {
+            return bandaraAsal;
+        }
+
+        public void setBandaraAsal(String bandaraAsal) {
+            this.bandaraAsal = bandaraAsal;
+        }
+
+        public String getBandara_kedatangan() {
+            return bandara_kedatangan;
+        }
+
+        public void setBandara_kedatangan(String bandara_kedatangan) {
+            this.bandara_kedatangan = bandara_kedatangan;
+        }
+
+        public String getBookingCode() {
+            return bookingCode;
+        }
+
+        public void setBookingCode(String bookingCode) {
+            this.bookingCode = bookingCode;
+        }
+
+        public String getKodePenerbangan() {
+            return kodePenerbangan;
+        }
+
+        public void setKodePenerbangan(String kodePenerbangan) {
+            this.kodePenerbangan = kodePenerbangan;
+        }
+
+        public String getNamaMaskapai() {
+            return namaMaskapai;
+        }
+
+        public void setNamaMaskapai(String namaMaskapai) {
+            this.namaMaskapai = namaMaskapai;
+        }
+
+        public String getNamaPemesan() {
+            return namaPemesan;
+        }
+
+        public void setNamaPemesan(String namaPemesan) {
+            this.namaPemesan = namaPemesan;
+        }
+
+        public String getOrderNumber() {
+            return orderNumber;
+        }
+
+        public void setOrderNumber(String orderNumber) {
+            this.orderNumber = orderNumber;
+        }
+
+        public List<Map<String, String>> getPenumpang() {
+            return penumpang;
+        }
+
+        public void setPenumpang(List<Map<String, String>> penumpang) {
+            this.penumpang = penumpang;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public String getWaktuBerangkat() {
+            return waktuBerangkat;
+        }
+
+        public void setWaktuBerangkat(String waktuBerangkat) {
+            this.waktuBerangkat = waktuBerangkat;
+        }
+
+        public String getWaktuDatang() {
+            return waktuDatang;
+        }
+
+        public void setWaktuDatang(String waktuDatang) {
+            this.waktuDatang = waktuDatang;
+        }
     }
 }
