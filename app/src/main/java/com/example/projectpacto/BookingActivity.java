@@ -23,6 +23,9 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 
 public class BookingActivity extends AppCompatActivity {
+    @Override
+    public void onBackPressed() {
+    }
 
     ActivityBookingBinding binding;
     SharedPreferences pref;
