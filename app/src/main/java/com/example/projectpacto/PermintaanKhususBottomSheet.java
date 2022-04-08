@@ -103,12 +103,12 @@ public class PermintaanKhususBottomSheet extends BottomSheetDialogFragment {
 
 
         //HANDLING THE TEXT VIEWS
-        waktuCekin = view.findViewById(R.id.waktuCekInTextInput);
-        waktuCekOut = view.findViewById(R.id.waktuCekOutTextInput);
+//        waktuCekin = view.findViewById(R.id.waktuCekInTextInput);
+//        waktuCekOut = view.findViewById(R.id.waktuCekOutTextInput);
         catatanLainnya = view.findViewById(R.id.catatanLainnyaTextInput);
 
-        waktuCekin.getEditText().setText(waktuCekin_req);
-        waktuCekOut.getEditText().setText(waktuCekOut_req);
+//        waktuCekin.getEditText().setText(waktuCekin_req);
+//        waktuCekOut.getEditText().setText(waktuCekOut_req);
         catatanLainnya.getEditText().setText(catatanLainnya_req);
 
 
@@ -127,8 +127,8 @@ public class PermintaanKhususBottomSheet extends BottomSheetDialogFragment {
         view.findViewById(R.id.actionButton_cari).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                waktuCekin_req = waktuCekin.getEditText().getText().toString();
-                waktuCekOut_req = waktuCekOut.getEditText().getText().toString();
+//                waktuCekin_req = waktuCekin.getEditText().getText().toString();
+//                waktuCekOut_req = waktuCekOut.getEditText().getText().toString();
                 tipeRanjang_req = tipeRanjang_autoComplete.getText().toString();
                 catatanLainnya_req = catatanLainnya.getEditText().getText().toString();
                 datapasser.OnDataSpecialRequest(bebasAsapRokok, kamarTersambung, waktuCekin_req, waktuCekOut_req, tipeRanjang_req, catatanLainnya_req);

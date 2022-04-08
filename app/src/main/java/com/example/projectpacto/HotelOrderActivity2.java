@@ -189,8 +189,8 @@ public class HotelOrderActivity2 extends AppCompatActivity {
 //                harga.add("IDR 1.280.000");
 //                jmlBintang.add(5);
 //                gambarHotel.add(R.drawable.grandmercure_hotel);
-
-                break;
+//
+//                break;
 
             case "Bali":
                 nama_hotel.add("ASTON Denpasar Hotel");

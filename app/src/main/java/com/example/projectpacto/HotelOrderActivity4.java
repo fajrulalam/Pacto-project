@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -46,6 +47,8 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
     Date tglCek_in_date;
     Date tglCek_out_date;
 
+    String permintaanKhusus;
+
     ArrayList<String> namaPassenger;
     ArrayList<String> titel;
 
@@ -59,6 +62,8 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
     FirebaseFirestore fs;
+
+    int jumlahTamu_int;
 
     List<Map<String, String>> ArrayofPenumpangMaps;
     Map<String, String> dataPenumpangMap;
@@ -74,6 +79,7 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         View view = binding.getRoot();
         setContentView(view);
 
+        permintaanKhusus = "";
         extras = getIntent().getBundleExtra("bundle");
         gambarKamar= extras.getInt("gambarKamar");
         namaKamar= extras.getString("namaKamar");
@@ -96,8 +102,8 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
         bebasAsapRokok = 0;
         kamarTersambung = 0;
-        waktuCekin_req = "";
-        waktuCekOut_req = "";
+//        waktuCekin_req = "";
+//        waktuCekOut_req = "";
         tipeRanjang_req = "";
         catatanLainnya_req = "";
 
@@ -147,10 +153,18 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         Log.i("KAPASITAS KAMAR", ""+kapasitasKamar);
         Log.i("TIPE KASIR", ""+tipeKasur);
 
-        int jumlahTamu_int = Integer.parseInt(jumlahKamar.split(" ")[0]);
+        jumlahTamu_int = Integer.parseInt(jumlahKamar.split(" ")[0]);
+
+        ArrayofPenumpangMaps = new ArrayList<>();
         for (int i = 1; i < jumlahTamu_int+1 ; i ++) {
             namaPassenger.add("Tamu " + i);
             titel.add("");
+
+            dataPenumpangMap = new HashMap<>();
+            dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i-1));
+            dataPenumpangMap.put("titel", titel.get(i-1));
+            ArrayofPenumpangMaps.add(dataPenumpangMap);
+            Log.i("ArrayofPenumpangMaps"+i, "" + ArrayofPenumpangMaps);
 
         }
 
@@ -163,8 +177,8 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
                 Bundle bundle = new Bundle();
                 bundle.putInt("bebasAsapRokok", bebasAsapRokok);
                 bundle.putInt("kamarTersambung", kamarTersambung);
-                bundle.putString("waktuCekin_req", waktuCekin_req);
-                bundle.putString("waktuCekOut_req", waktuCekOut_req);
+//                bundle.putString("waktuCekin_req", waktuCekin_req);
+//                bundle.putString("waktuCekOut_req", waktuCekOut_req);
                 bundle.putString("tipeRanjang_req", tipeRanjang_req);
                 bundle.putString("catatanLainnya_req", catatanLainnya_req);
 
@@ -190,6 +204,14 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         binding.pesanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                extras.putStringArrayList("namaTamu", namaPassenger);
+                extras.putStringArrayList("titel", titel);
+                extras.putString("permintaanKhusus", permintaanKhusus);
+
+                Intent intent = new Intent(getApplicationContext(), MasukkanPIN_Activity.class);
+               intent.putExtra("bundle", extras);
+               startActivity(intent);
+               overridePendingTransition(0, 0);
 
             }
         });
@@ -215,6 +237,17 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
     public void onDataTamuPass(String nama, String titel_str, int penumpangKe_n) {
         namaPassenger.set(penumpangKe_n-1, nama);
         titel.set(penumpangKe_n-1, titel_str);
+
+        ArrayofPenumpangMaps.clear();
+
+        for(int i = 0; i<jumlahTamu_int; i++) {
+            dataPenumpangMap = new HashMap<>();
+            dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
+            dataPenumpangMap.put("titel", titel.get(i));
+
+
+            ArrayofPenumpangMaps.add(i, dataPenumpangMap);
+        }
         recyclerAdapterPenumpangList.notifyDataSetChanged();
 
 
@@ -226,10 +259,29 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
     public void OnDataSpecialRequest(int bebasAsapRokok_req, int kamarTersambung_req, String waktuCekin, String waktuCekout, String tipeRanjang, String catatanLainnya) {
         bebasAsapRokok = bebasAsapRokok_req;
         kamarTersambung = kamarTersambung_req;
-        waktuCekin_req = waktuCekin;
-        waktuCekOut_req = waktuCekout;
+//        waktuCekin_req = waktuCekin;
+//        waktuCekOut_req = waktuCekout;
         tipeRanjang_req = tipeRanjang;
         catatanLainnya_req = catatanLainnya;
+
+
+
+        if (bebasAsapRokok_req == 1){
+            permintaanKhusus += "Bebas asap rokok";
+        }
+
+        if (kamarTersambung_req == 1){
+            permintaanKhusus += ", Kamar tersambung";
+        }
+
+        if (!tipeRanjang.matches("")) {
+            permintaanKhusus += "Tipe ranjang: " + tipeRanjang_req;
+        }
+
+        if (!catatanLainnya.matches("")){
+            permintaanKhusus += " || Catatan lainnya: " + catatanLainnya;
+        }
+
     }
 }
 

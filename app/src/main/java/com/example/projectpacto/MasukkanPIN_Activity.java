@@ -155,7 +155,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             pesananHotel.put("orderNumber", 1);
             pesananHotel.put("bookingCode", "18ABAN");
             pesananHotel.put("namaHotel", extras.getString("namaHotel"));
-            
+
+            Log.i("PIN_CORRECT", "SEND DATA TO FIRESTORE");
 
 
         }
