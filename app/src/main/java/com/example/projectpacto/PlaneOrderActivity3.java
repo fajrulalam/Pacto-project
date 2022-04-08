@@ -263,7 +263,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
 
 
-                fs.collection("bookingHistoryPesawat").document("test1").set(bundle);
+//                fs.collection("bookingHistoryPesawat").document("test1").set(bundle);
 //                fs.collection("bookingHistoryPesawat").document("test1").set(map);
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);

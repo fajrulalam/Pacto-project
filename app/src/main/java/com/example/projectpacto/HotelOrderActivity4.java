@@ -97,8 +97,8 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         kotaAtauHotel= extras.getString("kotaAtauHotel");
         jumlahKamar= extras.getString("jumlahKamar");
         jumlahMalam= extras.getString("jumlahMalam");
-        tglCek_in= extras.getString("tglCek_out");
-        tglCek_out= extras.getString("tglCek_in");
+        tglCek_in= extras.getString("tglCek_in");
+        tglCek_out= extras.getString("tglCek_out");
 
         bebasAsapRokok = 0;
         kamarTersambung = 0;
@@ -244,6 +244,7 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
             dataPenumpangMap = new HashMap<>();
             dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
             dataPenumpangMap.put("titel", titel.get(i));
+
 
 
             ArrayofPenumpangMaps.add(i, dataPenumpangMap);
