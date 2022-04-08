@@ -17,7 +17,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAdapterPenumpangList.AddPassengerDetail, DataTamu_BottomSheet.OnDataTamu, PermintaanKhususBottomSheet.OnDataSpecialRequest {
 
@@ -57,6 +59,9 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
     FirebaseFirestore fs;
+
+    List<Map<String, String>> ArrayofPenumpangMaps;
+    Map<String, String> dataPenumpangMap;
 
 
 
@@ -179,6 +184,13 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
                 intent.putExtra("bundle", extras);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+            }
+        });
+
+        binding.pesanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

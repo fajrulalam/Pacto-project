@@ -75,39 +75,39 @@
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/dark_grey"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/waktuCekInTextInput"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                app:endIconTint="@color/white"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/waktuCekInTextInput"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                app:endIconTint="@color/white"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
 
-                <AutoCompleteTextView
-                    android:id="@+id/waktuCekInAutocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Waktu Check in"
-                    android:textSize="18sp"
-                    android:padding="5dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <AutoCompleteTextView-->
+<!--                    android:id="@+id/waktuCekInAutocomplete"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:hint="Waktu Check in"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:padding="5dp"/>-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/waktuCekOutTextInput"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="12dp"
-                app:endIconTint="@color/white"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/waktuCekOutTextInput"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginBottom="12dp"-->
+<!--                app:endIconTint="@color/white"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">-->
 
-                <AutoCompleteTextView
-                    android:id="@+id/waktuCekOutAutocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Waktu Check out"
-                    android:textSize="18sp"
-                    android:padding="5dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <AutoCompleteTextView-->
+<!--                    android:id="@+id/waktuCekOutAutocomplete"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:hint="Waktu Check out"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:padding="5dp"/>-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tipeRanjangTextInput"

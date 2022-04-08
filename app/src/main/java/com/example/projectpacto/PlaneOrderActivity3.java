@@ -255,74 +255,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                 bundle.putString("bookingCode", "AS2831");
                 bundle.putString("kodePenerbangan","LA9230" );
 
-                Map map = new Map() {
-                    @Override
-                    public int size() {
-                        return 0;
-                    }
 
-                    @Override
-                    public boolean isEmpty() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean containsKey(@Nullable Object o) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean containsValue(@Nullable Object o) {
-                        return false;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Object get(@Nullable Object o) {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Object put(Object o, Object o2) {
-                        return null;
-                    }
-
-                    @Nullable
-                    @Override
-                    public Object remove(@Nullable Object o) {
-                        return null;
-                    }
-
-                    @Override
-                    public void putAll(@NonNull Map map) {
-
-                    }
-
-                    @Override
-                    public void clear() {
-
-                    }
-
-                    @NonNull
-                    @Override
-                    public Set keySet() {
-                        return null;
-                    }
-
-                    @NonNull
-                    @Override
-                    public Collection values() {
-                        return null;
-                    }
-
-                    @NonNull
-                    @Override
-                    public Set<Entry> entrySet() {
-                        return null;
-                    }
-                };
-                map.put("penumpangData", ArrayofPenumpangMaps);
                 FieldValue timestamp = FieldValue.serverTimestamp();
 
                 PenumpangData penumpangData = new PenumpangData("pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);

@@ -411,7 +411,7 @@
                         android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@id/bagasi"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Bagasi Tambahan"
+                        android:text="Permintaan khusus"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
@@ -431,7 +431,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_toRightOf="@id/bagasi"
                         android:fontFamily="@font/roboto_light"
-                        android:text="Tambah bagasi tambahan dengan penawaran mulai dari IDR 20.000/kg"
+                        android:text="Silakan mengirim permintaan khusus seperti kamar terhubung, tipe ranjang, atau permintaan lainnya!"
                         android:textColor="@color/dark_grey"
                         android:textSize="12dp" />
 
