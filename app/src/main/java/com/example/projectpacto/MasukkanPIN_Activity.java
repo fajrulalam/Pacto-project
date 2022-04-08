@@ -1,8 +1,11 @@
 package com.example.projectpacto;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.media.tv.TvContract;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +28,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.security.auth.login.LoginException;
 
 public class MasukkanPIN_Activity extends AppCompatActivity  {
     ActivityMasukkanPinBinding binding;
@@ -112,7 +117,12 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         namaPassenger = extras.getStringArrayList("namaTamu");
         titel = extras.getStringArrayList("titel");
 
-        for(int i = 0; i<jumlahTamu_int; i++) {
+        Log.i(TAG, "onCreate: Nama Tamu " + namaPassenger);
+        Log.i(TAG, "onCreate: Titel " + titel);
+
+        ArrayofPenumpangMaps = new ArrayList<>();
+
+        for(int i = 0; i<namaPassenger.size(); i++) {
             dataPenumpangMap = new HashMap<>();
             dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
             dataPenumpangMap.put("titel", titel.get(i));
@@ -121,6 +131,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
             ArrayofPenumpangMaps.add(i, dataPenumpangMap);
         }
+
+        Log.i(TAG, "onCreate: ArrayofPenumpangMaps " + ArrayofPenumpangMaps);
 
 
 
