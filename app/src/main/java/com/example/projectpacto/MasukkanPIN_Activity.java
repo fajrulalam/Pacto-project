@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.tv.TvContract;
 import android.os.Bundle;
 import android.text.Editable;
@@ -280,10 +281,14 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
             fs.collection("bookingHistoryPesawat").add(bookingPesawat).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
-                public void onSuccess(DocumentReference documentReference) {
+                public void onSuccess(DocumentReference documentReferebnce) {
                     Toast.makeText(getApplicationContext(), "Update to Firestore successful!", Toast.LENGTH_SHORT).show();
                 }
             });
+
+            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
 
 
         }

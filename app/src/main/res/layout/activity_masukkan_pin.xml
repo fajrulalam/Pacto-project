@@ -114,6 +114,7 @@
                 android:textAlignment="center"
                 android:layout_width="28dp"
                 android:layout_height="match_parent"
+                android:inputType="numberPassword"
                 android:layout_marginRight="20dp"/>
             <EditText
                 android:id="@+id/pin2"
@@ -122,6 +123,7 @@
                 android:hint="—"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
+                android:inputType="numberPassword"
                 android:layout_marginRight="20dp"/>
             <EditText
                 android:id="@+id/pin3"
@@ -130,6 +132,7 @@
                 android:layout_width="28dp"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
+                android:inputType="numberPassword"
                 android:layout_marginRight="20dp"/>
             <EditText
                 android:id="@+id/pin4"
@@ -138,6 +141,7 @@
                 android:hint="—"
                 android:textAlignment="center"
                 android:layout_height="match_parent"
+                android:inputType="numberPassword"
                />
             <View
                 android:layout_width="0dp"

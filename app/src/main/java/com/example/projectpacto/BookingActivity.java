@@ -1,12 +1,14 @@
 package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,14 +21,22 @@ import android.widget.TextView;
 
 import com.example.projectpacto.databinding.ActivityBookingBinding;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class BookingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
     }
 
+    private static final String TAG = "MainActivity";
     ActivityBookingBinding binding;
     SharedPreferences pref;
     ArrayList<String> kotaAsal_atau_namaHotel;
@@ -40,6 +50,9 @@ public class BookingActivity extends AppCompatActivity {
     ArrayList<String> jumlahKamar;
     ArrayList<Integer> logoMaskapai;
     ArrayList<String> tipePesanan;
+    ArrayList<String> jumlahMalam;
+
+    FirebaseFirestore fs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,50 +61,107 @@ public class BookingActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        fs= FirebaseFirestore.getInstance();
 
 
-        kotaAsal_atau_namaHotel = new ArrayList<>();
-        kotaTujuan = new ArrayList<>();
-        statusPesanan = new ArrayList<>();
-        tglBerangkat_atau_alamat = new ArrayList<>();
-        tglCek_in = new ArrayList<>();
-        namaMaskapai = new ArrayList<>();
-        kodePenerbangan = new ArrayList<>();
-        rincianPenumpang = new ArrayList<>();
-        jumlahKamar = new ArrayList<>();
-        logoMaskapai = new ArrayList<>();
-        tipePesanan = new ArrayList<>();
+
+        kotaAsal_atau_namaHotel = new ArrayList<>(); //Semua keisi, sesuaikan saja
+        kotaTujuan = new ArrayList<>(); //khusus pesawat, kalau hotel tinggal diisi string kosong saja
+        statusPesanan = new ArrayList<>(); //semua clear
+        tglBerangkat_atau_alamat = new ArrayList<>(); //sesuaikan
+        tglCek_in = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
+        namaMaskapai = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
+        kodePenerbangan = new ArrayList<>(); // khusus pesawat, hotel diisi string kosong saja
+        rincianPenumpang = new ArrayList<>(); //sesuaikan
+        jumlahKamar = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
+        logoMaskapai = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
+        tipePesanan = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
+        jumlahMalam = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
 
 
-        Bundle bundle = getIntent().getBundleExtra("bundle");
-        if (bundle !=null){
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").addSnapshotListener(new EventListener<QuerySnapshot>() {
+           @Override
+           public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+               if (error != null) {
+                   Log.e(TAG, "onEvent", error);
+                   return;
+               }
+               if (value != null) {
+                   List<DocumentSnapshot> snapshotList = value.getDocuments();
+                   for (DocumentSnapshot snapshot : snapshotList) {
+                       Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                       String tipePesanan_str = map.get("tipePesanan").toString();
 
-            //CEK APAKAH PESAWAT ATAU HOTEL
+                       //If it's a hotel
+                       if (tipePesanan_str.matches("Hotel")) {
 
-            tglCek_in.add("");
-            jumlahKamar.add("");
-            kotaAsal_atau_namaHotel.add(bundle.getString("kotaAsal"));
-            kotaTujuan.add(bundle.getString("kotaTujuan"));
-            tglBerangkat_atau_alamat.add(bundle.getString("tanggalBerangkat") + " - " + bundle.getString("waktuBerangkat"));
-            logoMaskapai.add(bundle.getInt("logoMaskapai"));
-            namaMaskapai.add(bundle.getString("namaMaskapai"));
-            kodePenerbangan.add("IQK290");
+                           String namaHotel_str = map.get("namaHotel").toString();
+                           String alamatTambahan = map.get("tambahanAlamat").toString();
+                           String tglCek_in_str = map.get("tglCek_in").toString();
+                           String tglCek_out_str = map.get("tglCek_out").toString();
+                           String jumlahKamar_str = map.get("jumlahKamar").toString();
+                           String jumlahMalam_str = "(" + map.get("jumlahMalam").toString() + " Malam)";
+                           ArrayList<String> arrayTamu = (ArrayList<String>) map.get("dataTamu");
+                           String jumlahTamu_str = arrayTamu.size() + " Tamu";
+                           String status = map.get("status").toString();
 
-            String rincianPenumpang_str = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
-            if (!bundle.getString("jmlAnak").matches("0")){
-                rincianPenumpang_str = rincianPenumpang_str + ", Anak (" +bundle.getString("jmlAnak")+"x)";
-            }
+                           kotaAsal_atau_namaHotel.add(namaHotel_str);
+                           kotaTujuan.add("");
+                           statusPesanan.add(status);
+                           tglBerangkat_atau_alamat.add(jumlahMalam_str);
+                           tglCek_in.add(tglCek_in_str);
+                           namaMaskapai.add(tglCek_out_str);
+                           kodePenerbangan.add("");
+                           rincianPenumpang.add(jumlahTamu_str);
+                           jumlahKamar.add(jumlahKamar_str);
+                           logoMaskapai.add(null);
+                           tipePesanan.add(tipePesanan_str);
+                           jumlahMalam.add(jumlahMalam_str);
 
 
-            if (!bundle.getString("jmlBalita").matches("0")){
-                rincianPenumpang_str = rincianPenumpang_str + ", Balita ("+bundle.getString("jmlBalita")+"x)";
-            }
+                       } if (tipePesanan_str.matches("pesawat")){
 
-            rincianPenumpang.add(rincianPenumpang_str);
-            statusPesanan.add(bundle.getString("status"));
-            tipePesanan.add(bundle.getString("tipePesanan"));
 
-            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(kotaAsal_atau_namaHotel,kotaTujuan, statusPesanan,
+                       }
+                   }
+               }
+           }
+       });
+
+
+
+
+
+
+//        Bundle bundle = getIntent().getBundleExtra("bundle");
+//        if (bundle !=null){
+//
+//            //CEK APAKAH PESAWAT ATAU HOTEL
+//
+//            tglCek_in.add("");
+//            jumlahKamar.add("");
+//            kotaAsal_atau_namaHotel.add(bundle.getString("kotaAsal"));
+//            kotaTujuan.add(bundle.getString("kotaTujuan"));
+//            tglBerangkat_atau_alamat.add(bundle.getString("tanggalBerangkat") + " - " + bundle.getString("waktuBerangkat"));
+//            logoMaskapai.add(bundle.getInt("logoMaskapai"));
+//            namaMaskapai.add(bundle.getString("namaMaskapai"));
+//            kodePenerbangan.add("IQK290");
+//
+//            String rincianPenumpang_str = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
+//            if (!bundle.getString("jmlAnak").matches("0")){
+//                rincianPenumpang_str = rincianPenumpang_str + ", Anak (" +bundle.getString("jmlAnak")+"x)";
+//            }
+//
+//
+//            if (!bundle.getString("jmlBalita").matches("0")){
+//                rincianPenumpang_str = rincianPenumpang_str + ", Balita ("+bundle.getString("jmlBalita")+"x)";
+//            }
+//
+//            rincianPenumpang.add(rincianPenumpang_str);
+//            statusPesanan.add(bundle.getString("status"));
+//            tipePesanan.add(bundle.getString("tipePesanan"));
+
+            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel,kotaTujuan, statusPesanan,
                     tglBerangkat_atau_alamat,  tglCek_in,  namaMaskapai,   kodePenerbangan,
                      rincianPenumpang,  jumlahKamar, logoMaskapai,  tipePesanan);
             binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
@@ -119,7 +189,8 @@ public class BookingActivity extends AppCompatActivity {
 //            bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
 
 
-        }
+
+
 
 
 
@@ -158,6 +229,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
 
+
     public class BookingStatusRecyclerAdapter extends RecyclerView.Adapter<BookingStatusRecyclerAdapter.ViewHolder> {
         ArrayList<String> kotaAsal_atau_namaHotel;
         ArrayList<String> kotaTujuan;
@@ -170,8 +242,9 @@ public class BookingActivity extends AppCompatActivity {
         ArrayList<String> jumlahKamar;
         ArrayList<Integer> logoMaskapai;
         ArrayList<String> tipePesanan;
+        ArrayList<String> jumlahMalam;
 
-        public BookingStatusRecyclerAdapter(ArrayList<String> kotaAsal_atau_namaHotel, ArrayList<String> kotaTujuan, ArrayList<String> statusPesanan,
+        public BookingStatusRecyclerAdapter(ArrayList<String> jumlahMalam, ArrayList<String> kotaAsal_atau_namaHotel, ArrayList<String> kotaTujuan, ArrayList<String> statusPesanan,
                                             ArrayList<String> tglBerangkat_atau_alamat, ArrayList<String> tglCek_in,  ArrayList<String> namaMaskapai,  ArrayList<String> kodePenerbangan,
                                             ArrayList<String> rincianPenumpang, ArrayList<String> jumlahKamar, ArrayList<Integer> logoMaskapai, ArrayList<String> tipePesanan){
 
@@ -186,6 +259,7 @@ public class BookingActivity extends AppCompatActivity {
             this.jumlahKamar = jumlahKamar;
             this.logoMaskapai = logoMaskapai;
             this.tipePesanan = tipePesanan;
+            this.jumlahMalam = jumlahMalam;
         }
 
         @NonNull
