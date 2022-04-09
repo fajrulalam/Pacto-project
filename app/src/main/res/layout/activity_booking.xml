@@ -152,7 +152,8 @@
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"/>
+                    android:paddingVertical="10dp"
+                    android:layout_marginBottom="60dp"/>
 
 
             </LinearLayout>

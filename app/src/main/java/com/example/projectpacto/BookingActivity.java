@@ -75,7 +75,7 @@ public class BookingActivity extends AppCompatActivity {
         rincianPenumpang = new ArrayList<>(); //sesuaikan
         jumlahKamar = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
         logoMaskapai = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
-        tipePesanan = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
+        tipePesanan = new ArrayList<>(); //semuaClear
         jumlahMalam = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
 
 
@@ -109,8 +109,8 @@ public class BookingActivity extends AppCompatActivity {
                            kotaTujuan.add("");
                            statusPesanan.add(status);
                            tglBerangkat_atau_alamat.add(alamatTambahan_str);
-                           tglCek_in.add(tglCek_in_str);
-                           namaMaskapai.add(tglCek_out_str);
+                           tglCek_in.add(tglCek_in_str + " - " + tglCek_out_str +" "+ jumlahMalam_str);
+                           namaMaskapai.add("");
                            kodePenerbangan.add("");
                            rincianPenumpang.add(jumlahTamu_str);
                            jumlahKamar.add(jumlahKamar_str);
@@ -128,83 +128,43 @@ public class BookingActivity extends AppCompatActivity {
                            String namaMaskapai_str = map.get("namaMaskapai").toString();
                            String kodePenerbangan_str = map.get("kodePenerbangan").toString();
                            String rincianPenumpang_str = map.get("rincianPenumpang").toString();
-                           logo
+                           Integer logoMaskapai_int = Integer.parseInt(map.get("logoMaskapai").toString());
 
-
-
+                           kotaAsal_atau_namaHotel.add(kotaAsal_str);
+                           kotaTujuan.add(kotaTujuan_str);
+                           statusPesanan.add(status_str);
+                           tglBerangkat_atau_alamat.add(tglBerangkat_str);
+                           tglCek_in.add("");
+                           namaMaskapai.add(namaMaskapai_str);
+                           kodePenerbangan.add(kodePenerbangan_str);
+                           rincianPenumpang.add(rincianPenumpang_str);
+                           jumlahKamar.add("");
+                           logoMaskapai.add(logoMaskapai_int);
+                           tipePesanan.add(tipePesanan_str);
+                           jumlahMalam.add("");
 
 
                        }
                    }
+                   BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(
+                           jumlahMalam,
+                           kotaAsal_atau_namaHotel,
+                           kotaTujuan,
+                           statusPesanan,
+                           tglBerangkat_atau_alamat,
+                           tglCek_in,
+                           namaMaskapai,
+                           kodePenerbangan,
+                            rincianPenumpang,
+                           jumlahKamar,
+                           logoMaskapai,
+                           tipePesanan
+                   );
+                    binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
+
                }
            }
        });
-
-
-
-
-
-
-//        Bundle bundle = getIntent().getBundleExtra("bundle");
-//        if (bundle !=null){
-//
-//            //CEK APAKAH PESAWAT ATAU HOTEL
-//
-//            tglCek_in.add("");
-//            jumlahKamar.add("");
-//            kotaAsal_atau_namaHotel.add(bundle.getString("kotaAsal"));
-//            kotaTujuan.add(bundle.getString("kotaTujuan"));
-//            tglBerangkat_atau_alamat.add(bundle.getString("tanggalBerangkat") + " - " + bundle.getString("waktuBerangkat"));
-//            logoMaskapai.add(bundle.getInt("logoMaskapai"));
-//            namaMaskapai.add(bundle.getString("namaMaskapai"));
-//            kodePenerbangan.add("IQK290");
-//
-//            String rincianPenumpang_str = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
-//            if (!bundle.getString("jmlAnak").matches("0")){
-//                rincianPenumpang_str = rincianPenumpang_str + ", Anak (" +bundle.getString("jmlAnak")+"x)";
-//            }
-//
-//
-//            if (!bundle.getString("jmlBalita").matches("0")){
-//                rincianPenumpang_str = rincianPenumpang_str + ", Balita ("+bundle.getString("jmlBalita")+"x)";
-//            }
-//
-//            rincianPenumpang.add(rincianPenumpang_str);
-//            statusPesanan.add(bundle.getString("status"));
-//            tipePesanan.add(bundle.getString("tipePesanan"));
-
-//            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel,kotaTujuan, statusPesanan,
-//                    tglBerangkat_atau_alamat,  tglCek_in,  namaMaskapai,   kodePenerbangan,
-//                     rincianPenumpang,  jumlahKamar, logoMaskapai,  tipePesanan);
-//            binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
-
-
-
-//            bandaraAsal_str= bundle.getString("bandaraAsal");
-//            logoMaskapai_int =bundle.getInt("logoMaskapai");
-//            namaMaskapai_str= bundle.getString("namaMaskapai");;
-//            kelasPesawat_str= bundle.getString("kelasPesawat");;
-//            tanggalDatang_str= bundle.getString("tanggalDatang");;
-//            waktuDatang_str= bundle.getString("waktuDatang");;
-//            bandaraTujuan_str= bundle.getString("bandaraTujuan");
-//            jmlDewasa_str= ;;
-//            jmlAnak_str=  ;
-//            jmlBalita_str= ;;
-//
-//            keberangkatan = bundle.getString("keberangkatan");
-//            kedatangan = bundle.getString("kedatangan");
-//            tanggal = bundle.getString("tanggal");
-//            penumpang = bundle.getString("penumpang");
-//            kota_keberangkatan = bundle.getString("kota_keberangkatan");
-//            kota_kedatangan = bundle.getString("kota_kedatangan");
-//            bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
-//            bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
-
-
-
-
-
-
 
 
 
@@ -300,11 +260,12 @@ public class BookingActivity extends AppCompatActivity {
             holder.kodePenerbangan.setText(kodePenerbangan.get(position));
             holder.rincianPenumpang.setText(rincianPenumpang.get(position));
             holder.jumlahKamar.setText(jumlahKamar.get(position));
-            holder.logoMaskapai.setImageResource(logoMaskapai.get(position));
+
             holder.statusPesanan.setText(statusPesanan.get(position));
 
             switch (tipePesanan_str){
                 case "Pesawat":
+                    holder.logoMaskapai.setImageResource(logoMaskapai.get(position));
                     holder.tglCek_in.setVisibility(View.GONE);
                     holder.jumlahKamarLayout.setVisibility(View.GONE);
                     break;
@@ -317,7 +278,7 @@ public class BookingActivity extends AppCompatActivity {
             }
 
             switch (status_str) {
-                case "Belum Bayar":
+                case "Belum bayar":
                     holder.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
                     break;
                 case "Selesai":

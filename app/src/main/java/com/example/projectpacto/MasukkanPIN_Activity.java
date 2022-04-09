@@ -279,7 +279,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     hargaTotal
             );
 
-            fs.collection("bookingHistoryPesawat").add(bookingPesawat).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            fs.collection("bookingHistory").add(bookingPesawat).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReferebnce) {
                     Toast.makeText(getApplicationContext(), "Update to Firestore successful!", Toast.LENGTH_SHORT).show();

@@ -268,7 +268,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                 FieldValue timestamp = FieldValue.serverTimestamp();
 
                 PenumpangData penumpangData = new PenumpangData(logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
-                fs.collection("bookingHistoryPesawat").add(penumpangData);
+                fs.collection("bookingHistory").add(penumpangData);
 
 
 
