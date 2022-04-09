@@ -52,6 +52,7 @@ public class BookingActivity extends AppCompatActivity {
     ArrayList<Integer> logoMaskapai;
     ArrayList<String> tipePesanan;
     ArrayList<String> jumlahMalam;
+    ArrayList<String> documentID;
 
     FirebaseFirestore fs;
 
@@ -65,7 +66,7 @@ public class BookingActivity extends AppCompatActivity {
         fs= FirebaseFirestore.getInstance();
 
 
-
+        documentID = new ArrayList<>(); //semua ada
         kotaAsal_atau_namaHotel = new ArrayList<>(); //Semua keisi, sesuaikan saja
         kotaTujuan = new ArrayList<>(); //khusus pesawat, kalau hotel tinggal diisi string kosong saja
         statusPesanan = new ArrayList<>(); //semua clear
@@ -88,6 +89,9 @@ public class BookingActivity extends AppCompatActivity {
                     List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot snapshot : snapshotList) {
                         Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        documentID.add(id);
+                        Log.i("ID", id);
                         String tipePesanan_str = map.get("tipePesanan").toString();
 
                         //If it's a hotel
