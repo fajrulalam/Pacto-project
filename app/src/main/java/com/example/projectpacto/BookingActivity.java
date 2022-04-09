@@ -96,7 +96,7 @@ public class BookingActivity extends AppCompatActivity {
                        if (tipePesanan_str.matches("Hotel")) {
 
                            String namaHotel_str = map.get("namaHotel").toString();
-                           String alamatTambahan = map.get("tambahanAlamat").toString();
+                           String alamatTambahan_str = map.get("tambahanAlamat").toString();
                            String tglCek_in_str = map.get("tglCek_in").toString();
                            String tglCek_out_str = map.get("tglCek_out").toString();
                            String jumlahKamar_str = map.get("jumlahKamar").toString();
@@ -108,7 +108,7 @@ public class BookingActivity extends AppCompatActivity {
                            kotaAsal_atau_namaHotel.add(namaHotel_str);
                            kotaTujuan.add("");
                            statusPesanan.add(status);
-                           tglBerangkat_atau_alamat.add(jumlahMalam_str);
+                           tglBerangkat_atau_alamat.add(alamatTambahan_str);
                            tglCek_in.add(tglCek_in_str);
                            namaMaskapai.add(tglCek_out_str);
                            kodePenerbangan.add("");
@@ -119,7 +119,8 @@ public class BookingActivity extends AppCompatActivity {
                            jumlahMalam.add(jumlahMalam_str);
 
 
-                       } if (tipePesanan_str.matches("pesawat")){
+                       } if (tipePesanan_str.matches("Pesawat")){
+
 
 
                        }
@@ -161,10 +162,10 @@ public class BookingActivity extends AppCompatActivity {
 //            statusPesanan.add(bundle.getString("status"));
 //            tipePesanan.add(bundle.getString("tipePesanan"));
 
-            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel,kotaTujuan, statusPesanan,
-                    tglBerangkat_atau_alamat,  tglCek_in,  namaMaskapai,   kodePenerbangan,
-                     rincianPenumpang,  jumlahKamar, logoMaskapai,  tipePesanan);
-            binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
+//            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel,kotaTujuan, statusPesanan,
+//                    tglBerangkat_atau_alamat,  tglCek_in,  namaMaskapai,   kodePenerbangan,
+//                     rincianPenumpang,  jumlahKamar, logoMaskapai,  tipePesanan);
+//            binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
 
 
 

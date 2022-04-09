@@ -59,6 +59,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     String kota_keberangkatan;
     String bandara_keberangktan_raw;
     String bandara_kedatangan_raw;
+    String rincianPenumpang;
 
     ArrayList<String> namaPassenger;
     ArrayList<String> tglLahir;
@@ -113,6 +114,14 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         kota_kedatangan = bundle.getString("kota_kedatangan");
         bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
         bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+
+        rincianPenumpang = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
+        if (!bundle.getString("jmlAnak").matches("0")){
+                rincianPenumpang = rincianPenumpang + ", Anak (" +bundle.getString("jmlAnak")+"x)";
+        }
+        if (!bundle.getString("jmlBalita").matches("0")){
+            rincianPenumpang = rincianPenumpang + ", Balita ("+bundle.getString("jmlBalita")+"x)";
+        }
 
 
         jmlPenumpang = Integer.parseInt(jmlDewasa_str) +  Integer.parseInt(jmlAnak_str) + Integer.parseInt(jmlBalita_str);
@@ -214,7 +223,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         binding.logoMaskapai.setImageResource(logoMaskapai_int);
         binding.namaMaskapai.setText(namaMaskapai_str);
 
-        String rincianPenumpang = "Dewasa ("+jmlDewasa_str+"x)";
+        rincianPenumpang = "Dewasa ("+jmlDewasa_str+"x)";
         if (!jmlAnak_str.matches("0")){
             rincianPenumpang = rincianPenumpang + ", Anak ("+jmlAnak_str+"x)";
         }
@@ -258,7 +267,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
                 FieldValue timestamp = FieldValue.serverTimestamp();
 
-                PenumpangData penumpangData = new PenumpangData("pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
+                PenumpangData penumpangData = new PenumpangData(rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
                 fs.collection("bookingHistoryPesawat").add(penumpangData);
 
 
@@ -365,6 +374,10 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
     public class PenumpangData {
 
+        String kotaAsal;
+        String kotaTujuan;
+        String rincianPenumpang;
+
         private String bandaraAsal;
         private String bandara_kedatangan;
         private String bookingCode;
@@ -385,7 +398,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
         }
 
-        public PenumpangData(String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
+        public PenumpangData(String rincianPenumpang, String kotaAsal, String kotaTujuan, String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
             this.bandaraAsal = bandaraAsal;
             this.bandara_kedatangan = bandara_kedatangan;
             this.bookingCode = bookingCode;
@@ -401,6 +414,33 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             this.waktuDatang = waktuDatang;
             this.tipePesanan = tipePesanan;
             this.timeStampPesanan = timeStampPesanan;
+            this.kotaAsal = kotaAsal;
+            this.kotaTujuan = kotaTujuan;
+            this.rincianPenumpang = rincianPenumpang;
+        }
+
+        public String getRincianPenumpang() {
+            return rincianPenumpang;
+        }
+
+        public void setRincianPenumpang(String rincianPenumpang) {
+            this.rincianPenumpang = rincianPenumpang;
+        }
+
+        public String getKotaAsal() {
+            return kotaAsal;
+        }
+
+        public void setKotaAsal(String kotaAsal) {
+            this.kotaAsal = kotaAsal;
+        }
+
+        public String getKotaTujuan() {
+            return kotaTujuan;
+        }
+
+        public void setKotaTujuan(String kotaTujuan) {
+            this.kotaTujuan = kotaTujuan;
         }
 
         public String getTipePesanan() {
