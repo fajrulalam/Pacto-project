@@ -121,6 +121,17 @@ public class BookingActivity extends AppCompatActivity {
 
                        } if (tipePesanan_str.matches("Pesawat")){
 
+                           String kotaAsal_str = map.get("kotaAsal").toString();
+                           String kotaTujuan_str = map.get("kotaTujuan").toString();
+                           String status_str = map.get("status").toString();
+                           String tglBerangkat_str = map.get("tanggalBerangkat").toString();
+                           String namaMaskapai_str = map.get("namaMaskapai").toString();
+                           String kodePenerbangan_str = map.get("kodePenerbangan").toString();
+                           String rincianPenumpang_str = map.get("rincianPenumpang").toString();
+                           logo
+
+
+
 
 
                        }
