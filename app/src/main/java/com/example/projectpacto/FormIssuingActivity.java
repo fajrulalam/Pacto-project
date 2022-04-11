@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,15 @@ public class FormIssuingActivity extends AppCompatActivity {
     List<Map<String, String>> penumpang;
     String hargaTotal;
 
+    ArrayList NIKatauPaspor;
+    ArrayList harga_tambahan;
+    ArrayList kewarganegaraan;
+    ArrayList namaPenumpang;
+    ArrayList tambahan_kg;
+    ArrayList tglLahir;
+    ArrayList titel;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,14 @@ public class FormIssuingActivity extends AppCompatActivity {
         binding = ActivityFormIssuingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        NIKatauPaspor = new ArrayList();
+        harga_tambahan = new ArrayList();
+        kewarganegaraan = new ArrayList();
+        namaPenumpang = new ArrayList();
+        tambahan_kg = new ArrayList();
+        tglLahir = new ArrayList();
+        titel = new ArrayList();
 
         fs = FirebaseFirestore.getInstance();
 
@@ -87,6 +105,20 @@ public class FormIssuingActivity extends AppCompatActivity {
 
                         Log.i("kota_dan_bandaraAsal", kota_dan_bandaraAsal);
                         Log.i("kota_dan_bandaraTujuan", kota_dan_bandaraTujuan);
+
+                        for (int i= 0; i < penumpang.size(); i++){
+                            Map<String, String> penumpangMap = penumpang.get(i);
+                            NIKatauPaspor.add(penumpangMap.get("NIKatauPaspor"));
+                            harga_tambahan.add(penumpangMap.get("harga_tambahan"));
+                            kewarganegaraan.add(penumpangMap.get("kewarganegaraan"));
+                            namaPenumpang.add(penumpangMap.get("namaPenumpang"));
+                            tambahan_kg.add(penumpangMap.get("tambahan_kg"));
+                            tglLahir.add(penumpangMap.get("tglLahir"));
+                            titel.add(penumpangMap.get("titel"));
+
+                        }
+                        Log.i("NamaPenumpang", namaPenumpang.toString());
+
 
 
                     }
