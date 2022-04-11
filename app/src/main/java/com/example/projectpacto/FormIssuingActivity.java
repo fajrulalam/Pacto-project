@@ -38,6 +38,7 @@ public class FormIssuingActivity extends AppCompatActivity {
     String phoneNumber;
     List<Map<String, String>> penumpang;
     String hargaTotal;
+    int logoMaskapai;
 
     ArrayList NIKatauPaspor;
     ArrayList harga_tambahan;
@@ -99,6 +100,7 @@ public class FormIssuingActivity extends AppCompatActivity {
                         phoneNumber = map.get("phoneNumber").toString();
                         penumpang = (List<Map<String, String>>) map.get("penumpang");
                         hargaTotal = map.get("hargaTotal").toString();
+                        logoMaskapai = Integer.parseInt(map.get("logoMaskapai").toString());
 
                         String kota_dan_bandaraAsal = kotaAsal + " (" + bandaraAsal.split("\\(")[1];
                         String kota_dan_bandaraTujuan = kotaTujuan + " (" + bandara_kedatangan.split("\\(")[1];
@@ -119,17 +121,38 @@ public class FormIssuingActivity extends AppCompatActivity {
                         }
                         Log.i("NamaPenumpang", namaPenumpang.toString());
 
+                        binding.kotaAsal.setText(kota_dan_bandaraAsal);
+                        binding.kotaTujuan.setText(kota_dan_bandaraTujuan);
+                        binding.tanggalBerangkat.setText(tanggalBerangkat);
+                        binding.tanggalDatang.setText(waktuBerangkat);
+                        binding.logoMaskapai.setImageResource(logoMaskapai);
+                        binding.namaMaskapai.setText(namaMaskapai);
+                        binding.kodePenerbangan.setText(kodePenerbangan);
+                        binding.rincianPenumpang.setText(rincianPenumpang);
+                        binding.namaPemesan.setText(namaPemesan);
+                        binding.nomorPemesan.setText(phoneNumber);
+
+                        RecyclerAdapterPenumpangList_IssueForm recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList_IssueForm(namaPenumpang);
+                        binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
+
+
 
 
                     }
 
 
+
                 }
+
             }
         });
 
 
 
 
+
+
     }
+
+
 }
