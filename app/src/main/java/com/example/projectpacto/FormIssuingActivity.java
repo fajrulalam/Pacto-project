@@ -1,8 +1,12 @@
 package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.projectpacto.databinding.ActivityFormIssuingBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -150,6 +156,42 @@ public class FormIssuingActivity extends AppCompatActivity {
 
 
                 }
+
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        binding.batalkanPesanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                builder.setTitle("Yakin batalkan pesanan?")
+                        .setPositiveButton("Tidak", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                            }
+                        })
+                        .setNegativeButton("Ya", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fs.collection("bookingHistory").document(
+                                        "RqFX7uaSw0T6q3PoGwIO").update("status", "Dibatalkan").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(0, 0);
+                                        Log.i("Success", "The data was successfully sent");
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.i("Fail", "The data was not sent");
+                                    }
+                                });
+                            }
+                        }).show();
 
             }
         });

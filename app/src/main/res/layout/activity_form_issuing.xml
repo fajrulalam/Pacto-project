@@ -405,7 +405,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_baseline_edit_24"
-                        android:paddingHorizontal="20dp"/>
+                        android:paddingHorizontal="20dp"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 
@@ -465,57 +466,25 @@
 
                 </RelativeLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/lastReminder"
+                <TextView
+                    android:id="@+id/batalkanPesanan"
+                    android:clickable="true"
+                    android:foreground="@drawable/selectable_view_notsocurved"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="59dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/curved__dashed_even_less_colorized_bg"
-                    android:foreground="#1A6CAF82"
-                    android:orientation="horizontal"
-                    android:padding="15dp"
-                    android:visibility="visible">
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.15"
-                        android:src="@drawable/ic_pesawat_real" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.85"
-                        android:orientation="horizontal"
-                        android:paddingLeft="10dp">
-
-
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/notBold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/greenWarning"
-                                android:textSize="12sp"
-                                android:textColor="@color/black"
-                                android:fontFamily="@font/roboto_regular"/>
-
-
-                        </RelativeLayout>
-
-                    </LinearLayout>
+                    android:text="Batalkan pesanan"
+                    android:textColor="@color/fail"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingVertical="7dp"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/curved__dashed_even_less_colorized_bg_red"
+                    android:layout_marginBottom="18dp"/>
 
 
 
 
-
-
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:paddingHorizontal="14dp"
@@ -547,6 +516,9 @@
 
                 </LinearLayout>
 
+
+
+
                 <Button
                     android:id="@+id/pesanButton"
                     android:layout_width="match_parent"
@@ -555,6 +527,9 @@
                     android:textAllCaps="false"
                     android:backgroundTint="@color/primary_dark"
                     android:layout_marginBottom="18dp"/>
+
+
+
 
 
 
