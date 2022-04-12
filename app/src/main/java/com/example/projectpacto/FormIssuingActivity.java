@@ -1,10 +1,13 @@
 package com.example.projectpacto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.projectpacto.databinding.ActivityFormIssuingBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,7 +52,6 @@ public class FormIssuingActivity extends AppCompatActivity {
     ArrayList titel;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +89,7 @@ public class FormIssuingActivity extends AppCompatActivity {
 
 
                     } else if (tipePesanan.matches("Pesawat")) {
-                        bandaraAsal  = map.get("bandaraAsal").toString();
+                        bandaraAsal = map.get("bandaraAsal").toString();
                         bandara_kedatangan = map.get("bandara_kedatangan").toString();
                         kotaAsal = map.get("kotaAsal").toString();
                         kotaTujuan = map.get("kotaTujuan").toString();
@@ -108,7 +110,7 @@ public class FormIssuingActivity extends AppCompatActivity {
                         Log.i("kota_dan_bandaraAsal", kota_dan_bandaraAsal);
                         Log.i("kota_dan_bandaraTujuan", kota_dan_bandaraTujuan);
 
-                        for (int i= 0; i < penumpang.size(); i++){
+                        for (int i = 0; i < penumpang.size(); i++) {
                             Map<String, String> penumpangMap = penumpang.get(i);
                             NIKatauPaspor.add(penumpangMap.get("NIKatauPaspor"));
                             harga_tambahan.add(penumpangMap.get("harga_tambahan"));
@@ -135,11 +137,16 @@ public class FormIssuingActivity extends AppCompatActivity {
                         RecyclerAdapterPenumpangList_IssueForm recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList_IssueForm(namaPenumpang);
                         binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
 
-
+                        RecyclerAdapterBagasi recyclerAdapterBagasi = new RecyclerAdapterBagasi(tambahan_kg, harga_tambahan);
+                        binding.BagasiRecyclerView.setAdapter(recyclerAdapterBagasi);
+                        binding.BagasiRecyclerView.setVisibility(View.VISIBLE);
+                        binding.tambahanBagasiRelativeLayout.setBackground(getResources().getDrawable(R.drawable.curved__even_less_bg));
+                        binding.bagasi.setVisibility(View.GONE);
+                        binding.bagasiTambahan.setVisibility(View.GONE);
+                        binding.hargaBagasiTambahan.setVisibility(View.GONE);
 
 
                     }
-
 
 
                 }
@@ -148,11 +155,10 @@ public class FormIssuingActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
     }
+
+
+
 
 
 }
