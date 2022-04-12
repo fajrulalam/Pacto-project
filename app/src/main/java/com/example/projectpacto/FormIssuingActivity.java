@@ -79,6 +79,15 @@ public class FormIssuingActivity extends AppCompatActivity {
 
         Log.i("DocumentID FormIssuing", documentID);
 
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
         fs.collection("bookingHistory").document(documentID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -88,6 +97,22 @@ public class FormIssuingActivity extends AppCompatActivity {
 
                     //adjust the color according to the status
                     status = map.get("status").toString();
+                    binding.statusPesanan.setText(status);
+                    switch (status) {
+                        case "Belum bayar":
+                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+                            break;
+                        case "Selesai":
+                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.green_success));
+                            break;
+                        case "Dibatalkan":
+                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
+                            break;
+                        case "Issued":
+                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.primary));
+                            break;
+
+                    }
 
 
                     if (tipePesanan.matches("Hotel")) {
@@ -109,6 +134,7 @@ public class FormIssuingActivity extends AppCompatActivity {
                         penumpang = (List<Map<String, String>>) map.get("penumpang");
                         hargaTotal = map.get("hargaTotal").toString();
                         logoMaskapai = Integer.parseInt(map.get("logoMaskapai").toString());
+
 
                         String kota_dan_bandaraAsal = kotaAsal + " (" + bandaraAsal.split("\\(")[1];
                         String kota_dan_bandaraTujuan = kotaTujuan + " (" + bandara_kedatangan.split("\\(")[1];
@@ -196,6 +222,8 @@ public class FormIssuingActivity extends AppCompatActivity {
 
             }
         });
+
+
 
 
     }

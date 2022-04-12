@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityBookingBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -116,10 +117,14 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.i("Document ID clicked", ""+ documentID.get(position));
-                Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
-                intent.putExtra("documentID", documentID.get(position));
-                startActivity(intent);
-                overridePendingTransition(0 , 0);
+                if (tipePesanan.get(position).matches("Pesawat")) {
+                    Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
+                    intent.putExtra("documentID", documentID.get(position));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                } else if (tipePesanan.get(position).matches("Hotel")){
+                    Toast.makeText(getApplicationContext(), "Tunggu desain dari Asad", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
