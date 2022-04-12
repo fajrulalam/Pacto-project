@@ -106,7 +106,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:text="Sedang Berjalan"/>
                         <View
-                            android:id="@+id/selected_SedangBerjalan"
+                            android:id="@+id/sedangBerjalanUnderline"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:background="@color/white"
@@ -125,15 +125,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
-                            android:textSize="14dp"
+                            android:textSize="16dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Selesai"/>
                         <View
+                            android:id="@+id/selesaiUnderline"
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
                             android:background="@color/white"
                             android:visibility="invisible"
-                            android:backgroundTint="@color/primary"/>
+                            android:backgroundTint="@color/primary_dark"/>
 
 
                     </LinearLayout>

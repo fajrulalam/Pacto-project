@@ -26,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -80,8 +81,99 @@ public class BookingActivity extends AppCompatActivity {
         tipePesanan = new ArrayList<>(); //semuaClear
         jumlahMalam = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
 
+        queryPesanan("Belum bayar", "Issued");
 
-        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        binding.textSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.textSelesai.setTextColor(getResources().getColor(R.color.primary_dark));
+                binding.selesaiUnderline.setVisibility(View.VISIBLE);
+
+                binding.textSedangBerjalan.setTextColor(getResources().getColor(R.color.text_grey));
+                binding.sedangBerjalanUnderline.setVisibility(View.INVISIBLE);
+
+                queryPesanan("Dibatalkan", "Selesai");
+            }
+        });
+
+        binding.textSedangBerjalan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.textSedangBerjalan.setTextColor(getResources().getColor(R.color.primary_dark));
+                binding.sedangBerjalanUnderline.setVisibility(View.VISIBLE);
+
+                binding.textSelesai.setTextColor(getResources().getColor(R.color.text_grey));
+                binding.selesaiUnderline.setVisibility(View.INVISIBLE);
+
+                queryPesanan("Belum bayar", "Issued");
+            }
+        });
+
+
+
+
+        ItemClickSupport.addTo(binding.RecyclerViewPesanan).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Log.i("Document ID clicked", ""+ documentID.get(position));
+                Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
+                intent.putExtra("documentID", documentID.get(position));
+                startActivity(intent);
+                overridePendingTransition(0 , 0);
+            }
+        });
+
+
+
+
+        binding.bottomNav.setSelectedItemId(R.id.booking);
+
+        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.beranda:
+                        startActivity(new Intent(getApplicationContext(), RealMainActivity.class));
+                        overridePendingTransition(0 , 0);
+                        return true;
+
+                    case R.id.transaksi:
+                        startActivity(new Intent(getApplicationContext(), TrankasiActivity.class));
+                        overridePendingTransition(0 , 0);
+                        return true;
+
+                    case R.id.booking:
+                        return true;
+
+                    case R.id.user:
+                        startActivity(new Intent(getApplicationContext(), UserActivity.class));
+                        overridePendingTransition(0 , 0);
+                        return true;
+                }
+
+
+                return false;
+            }
+        });
+
+    }
+
+    public void queryPesanan(String status1, String status2){
+        kotaAsal_atau_namaHotel.clear();
+        kotaTujuan.clear();
+        statusPesanan.clear();
+        tglBerangkat_atau_alamat.clear();
+        tglCek_in.clear();
+        namaMaskapai.clear();
+        kodePenerbangan.clear();
+        rincianPenumpang.clear();
+        jumlahKamar.clear();
+        logoMaskapai.clear();
+        tipePesanan.clear();
+        jumlahMalam.clear();
+        documentID.clear();
+
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("status", status1).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
@@ -168,50 +260,93 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        ItemClickSupport.addTo(binding.RecyclerViewPesanan).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("status", status2).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                Log.i("Document ID clicked", ""+ documentID.get(position));
-                Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
-                intent.putExtra("documentID", documentID.get(position));
-                startActivity(intent);
-                overridePendingTransition(0 , 0);
-            }
-        });
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        documentID.add(id);
+                        Log.i("ID", id);
+                        String tipePesanan_str = map.get("tipePesanan").toString();
+
+                        //If it's a hotel
+                        if (tipePesanan_str.matches("Hotel")) {
+
+                            String namaHotel_str = map.get("namaHotel").toString();
+                            String alamatTambahan_str = map.get("tambahanAlamat").toString();
+                            String tglCek_in_str = map.get("tglCek_in").toString();
+                            String tglCek_out_str = map.get("tglCek_out").toString();
+                            String jumlahKamar_str = map.get("jumlahKamar").toString();
+                            String jumlahMalam_str = "(" + map.get("jumlahMalam").toString() + " Malam)";
+                            ArrayList<String> arrayTamu = (ArrayList<String>) map.get("dataTamu");
+                            String jumlahTamu_str = arrayTamu.size() + " Tamu";
+                            String status = map.get("status").toString();
+
+                            kotaAsal_atau_namaHotel.add(namaHotel_str);
+                            kotaTujuan.add("");
+                            statusPesanan.add(status);
+                            tglBerangkat_atau_alamat.add(alamatTambahan_str);
+                            tglCek_in.add(tglCek_in_str + " - " + tglCek_out_str +" "+ jumlahMalam_str);
+                            namaMaskapai.add("");
+                            kodePenerbangan.add("");
+                            rincianPenumpang.add(jumlahTamu_str);
+                            jumlahKamar.add(jumlahKamar_str);
+                            logoMaskapai.add(null);
+                            tipePesanan.add(tipePesanan_str);
+                            jumlahMalam.add(jumlahMalam_str);
 
 
+                        } if (tipePesanan_str.matches("Pesawat")){
+
+                            String kotaAsal_str = map.get("kotaAsal").toString();
+                            String kotaTujuan_str = map.get("kotaTujuan").toString();
+                            String status_str = map.get("status").toString();
+                            String tglBerangkat_str = map.get("tanggalBerangkat").toString();
+                            String namaMaskapai_str = map.get("namaMaskapai").toString();
+                            String kodePenerbangan_str = map.get("kodePenerbangan").toString();
+                            String rincianPenumpang_str = map.get("rincianPenumpang").toString();
+                            Integer logoMaskapai_int = Integer.parseInt(map.get("logoMaskapai").toString());
+
+                            kotaAsal_atau_namaHotel.add(kotaAsal_str);
+                            kotaTujuan.add(kotaTujuan_str);
+                            statusPesanan.add(status_str);
+                            tglBerangkat_atau_alamat.add(tglBerangkat_str);
+                            tglCek_in.add("");
+                            namaMaskapai.add(namaMaskapai_str);
+                            kodePenerbangan.add(kodePenerbangan_str);
+                            rincianPenumpang.add(rincianPenumpang_str);
+                            jumlahKamar.add("");
+                            logoMaskapai.add(logoMaskapai_int);
+                            tipePesanan.add(tipePesanan_str);
+                            jumlahMalam.add("");
 
 
-        binding.bottomNav.setSelectedItemId(R.id.booking);
+                        }
+                    }
+                    BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(
+                            jumlahMalam,
+                            kotaAsal_atau_namaHotel,
+                            kotaTujuan,
+                            statusPesanan,
+                            tglBerangkat_atau_alamat,
+                            tglCek_in,
+                            namaMaskapai,
+                            kodePenerbangan,
+                            rincianPenumpang,
+                            jumlahKamar,
+                            logoMaskapai,
+                            tipePesanan
+                    );
+                    binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
 
-        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.beranda:
-                        startActivity(new Intent(getApplicationContext(), RealMainActivity.class));
-                        overridePendingTransition(0 , 0);
-                        return true;
-
-                    case R.id.transaksi:
-                        startActivity(new Intent(getApplicationContext(), TrankasiActivity.class));
-                        overridePendingTransition(0 , 0);
-                        return true;
-
-                    case R.id.booking:
-                        return true;
-
-                    case R.id.user:
-                        startActivity(new Intent(getApplicationContext(), UserActivity.class));
-                        overridePendingTransition(0 , 0);
-                        return true;
                 }
-
-
-                return false;
             }
         });
-
     }
 
 

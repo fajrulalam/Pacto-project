@@ -165,6 +165,7 @@ public class FormIssuingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 builder.setTitle("Yakin batalkan pesanan?")
+                        .setMessage("\n")
                         .setPositiveButton("Tidak", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
