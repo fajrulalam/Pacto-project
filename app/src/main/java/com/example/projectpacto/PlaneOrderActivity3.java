@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -32,6 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -282,10 +285,17 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                 c.add(Calendar.MINUTE, 15);
                 long expTime_long = c.getTimeInMillis();
 
-                c.add(Calendar.DATE, 30);
-                long waktuArsip = c.getTimeInMillis();
+
+                long waktuArsip = 0;
 
 
+                Locale lokal = new Locale("id", "ID");
+                try {
+                    Date date1 = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat_str);
+                    waktuArsip = date.getTime() + 43200000;
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
 
 
                 PenumpangData penumpangData = new PenumpangData(true, waktuArsip, expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);

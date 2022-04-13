@@ -207,6 +207,7 @@ public class BookingActivity extends AppCompatActivity {
                         Long epoch_waktuArsip = Long.parseLong(map.get("waktuArsip").toString());
                         String status = map.get("status").toString();
 
+
                         if (epoch_waktuArsip > epoch_timeNow) {
                             String tipePesanan_str = map.get("tipePesanan").toString();
                             documentID.add(id);
@@ -222,6 +223,7 @@ public class BookingActivity extends AppCompatActivity {
                                 ArrayList<String> arrayTamu = (ArrayList<String>) map.get("dataTamu");
                                 String jumlahTamu_str = arrayTamu.size() + " Tamu";
 
+
                                 kotaAsal_atau_namaHotel.add(namaHotel_str);
                                 kotaTujuan.add("");
                                 statusPesanan.add(status);
@@ -234,6 +236,7 @@ public class BookingActivity extends AppCompatActivity {
                                 logoMaskapai.add(null);
                                 tipePesanan.add(tipePesanan_str);
                                 jumlahMalam.add(jumlahMalam_str);
+
 
 
                             }
