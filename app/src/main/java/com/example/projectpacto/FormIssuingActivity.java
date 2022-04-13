@@ -232,7 +232,7 @@ public class FormIssuingActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 fs.collection("bookingHistory").document(documentID).update("ongoing", false);
                                 fs.collection("bookingHistory").document(
-                                        "RqFX7uaSw0T6q3PoGwIO").update("status", "Dibatalkan").addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        documentID).update("status", "Dibatalkan").addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
