@@ -2,10 +2,12 @@ package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -19,8 +21,13 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -256,6 +263,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         });
 
         binding.pesanButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
@@ -266,9 +274,17 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
 
                 FieldValue timestamp = FieldValue.serverTimestamp();
+                Date date = new Date();
+                long epoch_now = date.getTime();
+                Calendar c = Calendar.getInstance();
+
+                c.setTimeInMillis(epoch_now);
+                c.add(Calendar.MINUTE, 15);
+                long expTime_long = c.getTimeInMillis();
 
 
-                PenumpangData penumpangData = new PenumpangData(harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
+
+                PenumpangData penumpangData = new PenumpangData(expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
                 fs.collection("bookingHistory").add(penumpangData);
 
 
@@ -380,6 +396,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         String rincianPenumpang;
         String tanggalBerangkat;
         int logoMaskapai;
+        Long expTime;
 
 
         private String hargaTotal;
@@ -403,7 +420,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
         }
 
-        public PenumpangData(String hargaTotal, int logoMaskapai, String tanggalBerangkat, String rincianPenumpang, String kotaAsal, String kotaTujuan, String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
+        public PenumpangData(Long expTime, String hargaTotal, int logoMaskapai, String tanggalBerangkat, String rincianPenumpang, String kotaAsal, String kotaTujuan, String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
             this.bandaraAsal = bandaraAsal;
             this.bandara_kedatangan = bandara_kedatangan;
             this.bookingCode = bookingCode;
@@ -425,6 +442,15 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             this.tanggalBerangkat = tanggalBerangkat;
             this.logoMaskapai = logoMaskapai;
             this.hargaTotal = hargaTotal;
+            this.expTime = expTime;
+        }
+
+        public Long getExpTime() {
+            return expTime;
+        }
+
+        public void setExpTime(Long expTime) {
+            this.expTime = expTime;
         }
 
         public String getHargaTotal() {

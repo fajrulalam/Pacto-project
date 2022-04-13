@@ -121,16 +121,27 @@ public class FormIssuingActivity extends AppCompatActivity {
 
 
                     } else if (tipePesanan.matches("Pesawat")) {
-                        String timeStampPesanan_str = map.get("timeStampPesanan").toString();
-                        String timeStampPesanan_epochStr = timeStampPesanan_str.substring(timeStampPesanan_str.indexOf("=") +1, timeStampPesanan_str.indexOf(","));
-                        Long epoch_timestampPesanan = Long.parseLong(timeStampPesanan_epochStr)*1000;
+                        Date date = new Date();
+                        long timeNow = date.getTime();
+//                        String timeStampPesanan_str = map.get("timeStampPesanan").toString();
+//                        String timeStampPesanan_epochStr = timeStampPesanan_str.substring(timeStampPesanan_str.indexOf("=") +1, timeStampPesanan_str.indexOf(","));
+//                        Long epoch_timestampPesanan = Long.parseLong(timeStampPesanan_epochStr)*1000;
 
-                        String expTime_str = map.get("expTime").toString();
-                        String expTime_epochStr = expTime_str.substring(expTime_str.indexOf("=") +1, expTime_str.indexOf(","));
-                        Long epoch_ExpTime = Long.parseLong(expTime_epochStr) *1000;
+                        Long expTime_str = Long.parseLong(map.get("expTime").toString());
 
-                        long duration =  (epoch_ExpTime - epoch_timestampPesanan);
-                        startTimer(duration);
+
+//                        String expTime_epochStr = expTime_str.substring(expTime_str.indexOf("=") +1, expTime_str.indexOf(","));
+//                        Long epoch_ExpTime = Long.parseLong(expTime_epochStr) *1000;
+
+                        long duration =  (expTime_str - timeNow);
+                        if (duration > 0) {
+                            startTimer(duration);
+                        } else {
+                            binding.minuteTens.setText("0");
+                            binding.minuteOnes.setText("0");
+                            binding.secondTens.setText("0");
+                            binding.secondOnes.setText("0");
+                        }
 
                         bandaraAsal = map.get("bandaraAsal").toString();
                         bandara_kedatangan = map.get("bandara_kedatangan").toString();
