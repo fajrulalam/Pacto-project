@@ -78,28 +78,42 @@ public class FormIssuingActivity extends AppCompatActivity {
 
         fs = FirebaseFirestore.getInstance();
 
+        String documentID = getIntent().getStringExtra("documentID");
+
+
         timer = new CountDownTimer(65000, 1000) {
             @Override
             public void onTick(long l) {
                 int minuteLeft = (int) l / 1000 / 60;
                 int secondsLeft = (int) l / 1000 % 60;
 
-                String timeLeftFormatted = String.format("%02d:%02d", minuteLeft, secondsLeft);
-                Log.i("TIMELEFTFORMATTED", timeLeftFormatted);
+                String timeleftFormatted = String.format("%02d:%02d", minuteLeft, secondsLeft);
 
-                String minuteTens = timeLeftFormatted.substring(0, 0);
-                String minuteOnes = timeLeftFormatted.substring(1, 1);
-                String secondsTens = timeLeftFormatted.substring(3, 3);
-                String secondsOnes = timeLeftFormatted.substring(4, 4);
+
+
+
+                String minuteTens = timeleftFormatted.substring(0,1);
+                String minuteOnes = timeleftFormatted.substring(1,2);
+                String secondsTens = timeleftFormatted.substring(3,4);
+                String secondsOnes = timeleftFormatted.substring(4);
+
+                binding.minuteTens.setText(minuteTens);
+                binding.minuteOnes.setText(minuteOnes);
+                binding.secondTens.setText(secondsTens);
+                binding.secondOnes.setText(secondsOnes);
             }
 
             @Override
             public void onFinish() {
 
+                binding.statusPesanan.setText("Dibatalkan");
+                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
+                fs.collection("bookingHistory").document(documentID).update("status", "Dibatalkan");
+
+
             }
         }.start();
 
-        String documentID = getIntent().getStringExtra("documentID");
 
         Log.i("DocumentID FormIssuing", documentID);
 
