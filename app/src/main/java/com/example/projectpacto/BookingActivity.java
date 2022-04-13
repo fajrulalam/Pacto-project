@@ -32,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ public class BookingActivity extends AppCompatActivity {
     ArrayList<String> tipePesanan;
     ArrayList<String> jumlahMalam;
     ArrayList<String> documentID;
+    long epoch_timeNow;
 
     FirebaseFirestore fs;
 
@@ -84,8 +86,11 @@ public class BookingActivity extends AppCompatActivity {
         logoMaskapai = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
         tipePesanan = new ArrayList<>(); //semuaClear
         jumlahMalam = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
+        Date date = new Date();
+        epoch_timeNow = date.getTime();
 
-        queryPesanan("Belum bayar", "Issued");
+
+        queryPesananOngoing();
 
         binding.textSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +100,8 @@ public class BookingActivity extends AppCompatActivity {
 
                 binding.textSedangBerjalan.setTextColor(getResources().getColor(R.color.text_grey));
                 binding.sedangBerjalanUnderline.setVisibility(View.INVISIBLE);
-
-                queryPesanan("Dibatalkan", "Selesai");
+                clearArrayList();
+                queryPesananNotOngoing();
             }
         });
 
@@ -109,7 +114,9 @@ public class BookingActivity extends AppCompatActivity {
                 binding.textSelesai.setTextColor(getResources().getColor(R.color.text_grey));
                 binding.selesaiUnderline.setVisibility(View.INVISIBLE);
 
-                queryPesanan("Belum bayar", "Issued");
+                clearArrayList();
+                queryPesananOngoing();
+
             }
         });
 
@@ -164,6 +171,202 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void clearArrayList(){
+        kotaAsal_atau_namaHotel.clear();
+        kotaTujuan.clear();
+        statusPesanan.clear();
+        tglBerangkat_atau_alamat.clear();
+        tglCek_in.clear();
+        namaMaskapai.clear();
+        kodePenerbangan.clear();
+        rincianPenumpang.clear();
+        jumlahKamar.clear();
+        logoMaskapai.clear();
+        tipePesanan.clear();
+        jumlahMalam.clear();
+        documentID.clear();
+        BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
+        );
+        binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
+
+    }
+
+    public void queryPesananOngoing(){
+        clearArrayList();
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("ongoing", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        Long epoch_waktuArsip = Long.parseLong(map.get("waktuArsip").toString());
+                        String status = map.get("status").toString();
+
+                        if (epoch_waktuArsip > epoch_timeNow) {
+                            String tipePesanan_str = map.get("tipePesanan").toString();
+                            documentID.add(id);
+
+                            if (tipePesanan_str.matches("Hotel")) {
+
+                                String namaHotel_str = map.get("namaHotel").toString();
+                                String alamatTambahan_str = map.get("tambahanAlamat").toString();
+                                String tglCek_in_str = map.get("tglCek_in").toString();
+                                String tglCek_out_str = map.get("tglCek_out").toString();
+                                String jumlahKamar_str = map.get("jumlahKamar").toString();
+                                String jumlahMalam_str = "(" + map.get("jumlahMalam").toString() + " Malam)";
+                                ArrayList<String> arrayTamu = (ArrayList<String>) map.get("dataTamu");
+                                String jumlahTamu_str = arrayTamu.size() + " Tamu";
+
+                                kotaAsal_atau_namaHotel.add(namaHotel_str);
+                                kotaTujuan.add("");
+                                statusPesanan.add(status);
+                                tglBerangkat_atau_alamat.add(alamatTambahan_str);
+                                tglCek_in.add(tglCek_in_str + " - " + tglCek_out_str + " " + jumlahMalam_str);
+                                namaMaskapai.add("");
+                                kodePenerbangan.add("");
+                                rincianPenumpang.add(jumlahTamu_str);
+                                jumlahKamar.add(jumlahKamar_str);
+                                logoMaskapai.add(null);
+                                tipePesanan.add(tipePesanan_str);
+                                jumlahMalam.add(jumlahMalam_str);
+
+
+                            }
+                            if (tipePesanan_str.matches("Pesawat")) {
+
+                                String kotaAsal_str = map.get("kotaAsal").toString();
+                                String kotaTujuan_str = map.get("kotaTujuan").toString();
+                                String tglBerangkat_str = map.get("tanggalBerangkat").toString();
+                                String namaMaskapai_str = map.get("namaMaskapai").toString();
+                                String kodePenerbangan_str = map.get("kodePenerbangan").toString();
+                                String rincianPenumpang_str = map.get("rincianPenumpang").toString();
+                                Integer logoMaskapai_int = Integer.parseInt(map.get("logoMaskapai").toString());
+
+                                kotaAsal_atau_namaHotel.add(kotaAsal_str);
+                                kotaTujuan.add(kotaTujuan_str);
+                                statusPesanan.add(status);
+                                tglBerangkat_atau_alamat.add(tglBerangkat_str);
+                                tglCek_in.add("");
+                                namaMaskapai.add(namaMaskapai_str);
+                                kodePenerbangan.add(kodePenerbangan_str);
+                                rincianPenumpang.add(rincianPenumpang_str);
+                                jumlahKamar.add("");
+                                logoMaskapai.add(logoMaskapai_int);
+                                tipePesanan.add(tipePesanan_str);
+                                jumlahMalam.add("");
+
+
+                            }
+
+                            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
+                            );
+
+                            binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
+
+                        } else {
+                            switch (status){
+                                case "Issued":
+                                    fs.collection("bookingHistory").document(id).update("status", "Selesai");
+                                    break;
+                                case "Belum bayar":
+                                    fs.collection("bookingHistory").document(id).update("status", "Dibatalkan");
+                                    break;
+                            }
+                            fs.collection("bookingHistory").document(id).update("ongoing", false);
+                        }
+                    }
+                }
+
+            }
+        });
+    }
+
+    public void queryPesananNotOngoing(){
+        clearArrayList();
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("ongoing", false).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        Long epoch_waktuArsip = Long.parseLong(map.get("waktuArsip").toString());
+                        String status = map.get("status").toString();
+
+
+                            String tipePesanan_str = map.get("tipePesanan").toString();
+                            documentID.add(id);
+
+                            if (tipePesanan_str.matches("Hotel")) {
+
+                                String namaHotel_str = map.get("namaHotel").toString();
+                                String alamatTambahan_str = map.get("tambahanAlamat").toString();
+                                String tglCek_in_str = map.get("tglCek_in").toString();
+                                String tglCek_out_str = map.get("tglCek_out").toString();
+                                String jumlahKamar_str = map.get("jumlahKamar").toString();
+                                String jumlahMalam_str = "(" + map.get("jumlahMalam").toString() + " Malam)";
+                                ArrayList<String> arrayTamu = (ArrayList<String>) map.get("dataTamu");
+                                String jumlahTamu_str = arrayTamu.size() + " Tamu";
+
+                                kotaAsal_atau_namaHotel.add(namaHotel_str);
+                                kotaTujuan.add("");
+                                statusPesanan.add(status);
+                                tglBerangkat_atau_alamat.add(alamatTambahan_str);
+                                tglCek_in.add(tglCek_in_str + " - " + tglCek_out_str + " " + jumlahMalam_str);
+                                namaMaskapai.add("");
+                                kodePenerbangan.add("");
+                                rincianPenumpang.add(jumlahTamu_str);
+                                jumlahKamar.add(jumlahKamar_str);
+                                logoMaskapai.add(null);
+                                tipePesanan.add(tipePesanan_str);
+                                jumlahMalam.add(jumlahMalam_str);
+
+
+                            }
+                            if (tipePesanan_str.matches("Pesawat")) {
+
+                                String kotaAsal_str = map.get("kotaAsal").toString();
+                                String kotaTujuan_str = map.get("kotaTujuan").toString();
+                                String tglBerangkat_str = map.get("tanggalBerangkat").toString();
+                                String namaMaskapai_str = map.get("namaMaskapai").toString();
+                                String kodePenerbangan_str = map.get("kodePenerbangan").toString();
+                                String rincianPenumpang_str = map.get("rincianPenumpang").toString();
+                                Integer logoMaskapai_int = Integer.parseInt(map.get("logoMaskapai").toString());
+
+                                kotaAsal_atau_namaHotel.add(kotaAsal_str);
+                                kotaTujuan.add(kotaTujuan_str);
+                                statusPesanan.add(status);
+                                tglBerangkat_atau_alamat.add(tglBerangkat_str);
+                                tglCek_in.add("");
+                                namaMaskapai.add(namaMaskapai_str);
+                                kodePenerbangan.add(kodePenerbangan_str);
+                                rincianPenumpang.add(rincianPenumpang_str);
+                                jumlahKamar.add("");
+                                logoMaskapai.add(logoMaskapai_int);
+                                tipePesanan.add(tipePesanan_str);
+                                jumlahMalam.add("");
+
+
+                            }
+
+                            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
+                            );
+
+                            binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
+
+
+                    }
+                }
+
+            }
+        });
     }
 
     public void queryPesanan(String status1, String status2){

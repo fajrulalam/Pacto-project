@@ -133,7 +133,7 @@ public class FormIssuingActivity extends AppCompatActivity {
 //                        String expTime_epochStr = expTime_str.substring(expTime_str.indexOf("=") +1, expTime_str.indexOf(","));
 //                        Long epoch_ExpTime = Long.parseLong(expTime_epochStr) *1000;
 
-                        long duration =  (expTime_str - timeNow);
+                        long duration =  (expTime_str  - timeNow);
                         if (duration > 0) {
                             startTimer(duration);
                         } else {
@@ -141,6 +141,8 @@ public class FormIssuingActivity extends AppCompatActivity {
                             binding.minuteOnes.setText("0");
                             binding.secondTens.setText("0");
                             binding.secondOnes.setText("0");
+                            timeUp();
+
                         }
 
                         bandaraAsal = map.get("bandaraAsal").toString();
@@ -228,6 +230,7 @@ public class FormIssuingActivity extends AppCompatActivity {
                         .setNegativeButton("Ya", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                fs.collection("bookingHistory").document(documentID).update("ongoing", false);
                                 fs.collection("bookingHistory").document(
                                         "RqFX7uaSw0T6q3PoGwIO").update("status", "Dibatalkan").addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -303,17 +306,8 @@ public class FormIssuingActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                fs.collection("bookingHistory").document(documentID).update("status", "Dibatalkan");
-                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
-                binding.statusPesanan.setText("Dibatalkan");
+                timeUp();
 
-                binding.batalkanPesanan.setVisibility(View.GONE);
-                binding.pesanButton.setVisibility(View.GONE);
-
-                binding.minuteTens.setText("0");
-                binding.minuteOnes.setText("0");
-                binding.secondTens.setText("0");
-                binding.secondOnes.setText("0");
 
 
 
@@ -321,6 +315,21 @@ public class FormIssuingActivity extends AppCompatActivity {
             }
         };
         timer.start();
+    }
+
+    public void timeUp(){
+        fs.collection("bookingHistory").document(documentID).update("status", "Dibatalkan");
+        fs.collection("bookingHistory").document(documentID).update("ongoing", false);
+        binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
+        binding.statusPesanan.setText("Dibatalkan");
+
+        binding.batalkanPesanan.setVisibility(View.GONE);
+        binding.pesanButton.setVisibility(View.GONE);
+
+        binding.minuteTens.setText("0");
+        binding.minuteOnes.setText("0");
+        binding.secondTens.setText("0");
+        binding.secondOnes.setText("0");
     }
 
 

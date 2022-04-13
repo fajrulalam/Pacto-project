@@ -282,9 +282,13 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                 c.add(Calendar.MINUTE, 15);
                 long expTime_long = c.getTimeInMillis();
 
+                c.add(Calendar.DATE, 30);
+                long waktuArsip = c.getTimeInMillis();
 
 
-                PenumpangData penumpangData = new PenumpangData(expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
+
+
+                PenumpangData penumpangData = new PenumpangData(true, waktuArsip, expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
                 fs.collection("bookingHistory").add(penumpangData);
 
 
@@ -397,8 +401,9 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
         String tanggalBerangkat;
         int logoMaskapai;
         Long expTime;
+        Long waktuArsip;
 
-
+        private boolean ongoing;
         private String hargaTotal;
         private String bandaraAsal;
         private String bandara_kedatangan;
@@ -420,7 +425,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
 
         }
 
-        public PenumpangData(Long expTime, String hargaTotal, int logoMaskapai, String tanggalBerangkat, String rincianPenumpang, String kotaAsal, String kotaTujuan, String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
+        public PenumpangData(boolean ongoing, Long waktuArsip, Long expTime, String hargaTotal, int logoMaskapai, String tanggalBerangkat, String rincianPenumpang, String kotaAsal, String kotaTujuan, String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
             this.bandaraAsal = bandaraAsal;
             this.bandara_kedatangan = bandara_kedatangan;
             this.bookingCode = bookingCode;
@@ -443,6 +448,24 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             this.logoMaskapai = logoMaskapai;
             this.hargaTotal = hargaTotal;
             this.expTime = expTime;
+            this.waktuArsip = waktuArsip;
+            this.ongoing = ongoing;
+        }
+
+        public boolean isOngoing() {
+            return ongoing;
+        }
+
+        public void setOngoing(boolean ongoing) {
+            this.ongoing = ongoing;
+        }
+
+        public Long getWaktuArsip() {
+            return waktuArsip;
+        }
+
+        public void setWaktuArsip(Long waktuArsip) {
+            this.waktuArsip = waktuArsip;
         }
 
         public Long getExpTime() {
