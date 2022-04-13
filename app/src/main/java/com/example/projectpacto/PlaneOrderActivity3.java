@@ -292,7 +292,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
                 Locale lokal = new Locale("id", "ID");
                 try {
                     Date date1 = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat_str);
-                    waktuArsip = date.getTime() + 43200000;
+                    waktuArsip = date1.getTime() + 86400000;
                 } catch (ParseException parseException) {
                     parseException.printStackTrace();
                 }

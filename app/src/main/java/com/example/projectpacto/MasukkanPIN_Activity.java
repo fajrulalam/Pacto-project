@@ -24,10 +24,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.security.auth.login.LoginException;
@@ -70,6 +73,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     String tipeRanjang_req;
     String catatanLainnya_req;
     String documentID;
+    long waktuArsip;
+    boolean ongoing;
 
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
     FirebaseFirestore fs;
@@ -93,6 +98,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
         String tipePesanan = this.getIntent().getStringExtra("tipePesanan");
         fs = FirebaseFirestore.getInstance();
+        binding.pin1.requestFocus();
 
 
         if (tipePesanan.matches("Hotel")) {
@@ -116,6 +122,15 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             jumlahMalam = extras.getString("jumlahMalam");
             tglCek_in = extras.getString("tglCek_in");
             tglCek_out = extras.getString("tglCek_out");
+
+            ongoing = true;
+            Locale lokal = new Locale("id", "ID");
+            try {
+                Date date = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tglCek_out);
+                waktuArsip = date.getTime() + 86400000;
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
 
             permintaanKhusus = extras.getString("permintaanKhusus");
 
@@ -141,7 +156,6 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
         if (tipePesanan.matches("Pesawat")){
             documentID = this.getIntent().getStringExtra("documentID");
-//            Log.i("DOCUMENTID", documentID);
         }
 
 
@@ -275,6 +289,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String hargaTotal = "IDR 670.000";
             FieldValue timeStamp = FieldValue.serverTimestamp();
             BookingPesawat bookingPesawat = new BookingPesawat(
+                    ongoing,
+                    waktuArsip,
                     timeStamp,
                     tglCek_in,
                     tglCek_out,
@@ -319,6 +335,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     public class BookingPesawat {
 
+        private  boolean ongoing;
+        private long waktuArsip;
         private String tglCek_in;
         private String tglCek_out;
         private String jumlahMalam;
@@ -339,7 +357,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         public BookingPesawat() {
         }
 
-        public BookingPesawat(FieldValue pesananTimeStamp, String tglCek_in, String tglCek_out, String jumlahMalam, List<Map<String, String>> dataTamu, String namaPemesan, String bookingCode, String namaHotel, String status, String tipePesanan, String userID, String jumlahKamar, String namaKamar, String permintaanKhusus, String tambahanAlamat, String hargaTotal) {
+        public BookingPesawat(boolean ongoing, long waktuArsip, FieldValue pesananTimeStamp, String tglCek_in, String tglCek_out, String jumlahMalam, List<Map<String, String>> dataTamu, String namaPemesan, String bookingCode, String namaHotel, String status, String tipePesanan, String userID, String jumlahKamar, String namaKamar, String permintaanKhusus, String tambahanAlamat, String hargaTotal) {
             this.tglCek_in = tglCek_in;
             this.tglCek_out = tglCek_out;
             this.jumlahMalam = jumlahMalam;
@@ -356,6 +374,24 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             this.tambahanAlamat = tambahanAlamat;
             this.hargaTotal = hargaTotal;
             this.pesananTimeStamp = pesananTimeStamp;
+            this.ongoing = ongoing;
+            this.waktuArsip = waktuArsip;
+        }
+
+        public boolean isOngoing() {
+            return ongoing;
+        }
+
+        public void setOngoing(boolean ongoing) {
+            this.ongoing = ongoing;
+        }
+
+        public long getWaktuArsip() {
+            return waktuArsip;
+        }
+
+        public void setWaktuArsip(long waktuArsip) {
+            this.waktuArsip = waktuArsip;
         }
 
         public FieldValue getPesananTimeStamp() {
