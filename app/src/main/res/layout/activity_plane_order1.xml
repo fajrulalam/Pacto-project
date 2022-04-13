@@ -169,7 +169,7 @@
                 android:foreground="@drawable/selectable_view_round"
                 android:scaleY="1"
                 android:src="@drawable/ic_swap"
-                android:layout_marginRight="5dp"></ImageView>
+                android:layout_marginRight="5dp" />
 
         </FrameLayout>
 

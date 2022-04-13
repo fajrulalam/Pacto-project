@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,8 @@ public class FormIssuingActivity extends AppCompatActivity {
 
     ActivityFormIssuingBinding binding;
     FirebaseFirestore fs;
+
+    CountDownTimer timer;
 
 
     String tipePesanan;
@@ -74,6 +77,27 @@ public class FormIssuingActivity extends AppCompatActivity {
         titel = new ArrayList();
 
         fs = FirebaseFirestore.getInstance();
+
+        timer = new CountDownTimer(65000, 1000) {
+            @Override
+            public void onTick(long l) {
+                int minuteLeft = (int) l / 1000 / 60;
+                int secondsLeft = (int) l / 1000 % 60;
+
+                String timeLeftFormatted = String.format("%02d:%02d", minuteLeft, secondsLeft);
+                Log.i("TIMELEFTFORMATTED", timeLeftFormatted);
+
+                String minuteTens = timeLeftFormatted.substring(0, 0);
+                String minuteOnes = timeLeftFormatted.substring(1, 1);
+                String secondsTens = timeLeftFormatted.substring(3, 3);
+                String secondsOnes = timeLeftFormatted.substring(4, 4);
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        }.start();
 
         String documentID = getIntent().getStringExtra("documentID");
 
@@ -132,7 +156,11 @@ public class FormIssuingActivity extends AppCompatActivity {
                         namaPemesan = map.get("namaPemesan").toString();
                         phoneNumber = map.get("phoneNumber").toString();
                         penumpang = (List<Map<String, String>>) map.get("penumpang");
-                        hargaTotal = map.get("hargaTotal").toString();
+                        try {
+                            hargaTotal = map.get("hargaTotal").toString();
+                        } catch (Exception e) {
+                            hargaTotal = map.get("harga").toString();
+                        }
                         logoMaskapai = Integer.parseInt(map.get("logoMaskapai").toString());
 
 

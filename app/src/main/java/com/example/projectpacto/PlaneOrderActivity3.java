@@ -427,6 +427,14 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
             this.hargaTotal = hargaTotal;
         }
 
+        public String getHargaTotal() {
+            return hargaTotal;
+        }
+
+        public void setHargaTotal(String hargaTotal) {
+            this.hargaTotal = hargaTotal;
+        }
+
         public int getLogoMaskapai() {
             return logoMaskapai;
         }

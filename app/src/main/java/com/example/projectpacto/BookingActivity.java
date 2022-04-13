@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,8 @@ public class BookingActivity extends AppCompatActivity {
         setContentView(view);
 
         fs= FirebaseFirestore.getInstance();
+
+//        Picasso.with(getApplicationContext()).load(R.drawable.ic_home_backdrop).into(binding.backdrop);
 
 
         documentID = new ArrayList<>(); //semua ada
