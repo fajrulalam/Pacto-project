@@ -21,7 +21,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +39,11 @@ public class FormIssuingActivity extends AppCompatActivity {
     String tipePesanan;
     String status;
 
+    String documentID;
+
     String bandaraAsal;
+    Date timeStampPesanan;
+    Date expTime;
     String bandara_kedatangan;
     String kotaAsal;
     String kotaTujuan;
@@ -78,41 +84,10 @@ public class FormIssuingActivity extends AppCompatActivity {
 
         fs = FirebaseFirestore.getInstance();
 
-        String documentID = getIntent().getStringExtra("documentID");
-
-
-        timer = new CountDownTimer(65000, 1000) {
-            @Override
-            public void onTick(long l) {
-                int minuteLeft = (int) l / 1000 / 60;
-                int secondsLeft = (int) l / 1000 % 60;
-
-                String timeleftFormatted = String.format("%02d:%02d", minuteLeft, secondsLeft);
+        documentID = getIntent().getStringExtra("documentID");
 
 
 
-
-                String minuteTens = timeleftFormatted.substring(0,1);
-                String minuteOnes = timeleftFormatted.substring(1,2);
-                String secondsTens = timeleftFormatted.substring(3,4);
-                String secondsOnes = timeleftFormatted.substring(4);
-
-                binding.minuteTens.setText(minuteTens);
-                binding.minuteOnes.setText(minuteOnes);
-                binding.secondTens.setText(secondsTens);
-                binding.secondOnes.setText(secondsOnes);
-            }
-
-            @Override
-            public void onFinish() {
-
-                binding.statusPesanan.setText("Dibatalkan");
-                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
-                fs.collection("bookingHistory").document(documentID).update("status", "Dibatalkan");
-
-
-            }
-        }.start();
 
 
         Log.i("DocumentID FormIssuing", documentID);
@@ -132,32 +107,31 @@ public class FormIssuingActivity extends AppCompatActivity {
                 if (documentSnapshot != null) {
                     Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
                     tipePesanan = map.get("tipePesanan").toString();
-
                     //adjust the color according to the status
                     status = map.get("status").toString();
-                    binding.statusPesanan.setText(status);
-                    switch (status) {
-                        case "Belum bayar":
-                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
-                            break;
-                        case "Selesai":
-                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.green_success));
-                            break;
-                        case "Dibatalkan":
-                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
-                            break;
-                        case "Issued":
-                            binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.primary));
-                            break;
+                    adjustStatus(status);
 
-                    }
 
 
                     if (tipePesanan.matches("Hotel")) {
+
+                        //Insert Hotel shit here
                         Log.i("Tipe Pesanan", "Hotel");
 
 
+
                     } else if (tipePesanan.matches("Pesawat")) {
+                        String timeStampPesanan_str = map.get("timeStampPesanan").toString();
+                        String timeStampPesanan_epochStr = timeStampPesanan_str.substring(timeStampPesanan_str.indexOf("=") +1, timeStampPesanan_str.indexOf(","));
+                        Long epoch_timestampPesanan = Long.parseLong(timeStampPesanan_epochStr)*1000;
+
+                        String expTime_str = map.get("expTime").toString();
+                        String expTime_epochStr = expTime_str.substring(expTime_str.indexOf("=") +1, expTime_str.indexOf(","));
+                        Long epoch_ExpTime = Long.parseLong(expTime_epochStr) *1000;
+
+                        long duration =  (epoch_ExpTime - epoch_timestampPesanan);
+                        startTimer(duration);
+
                         bandaraAsal = map.get("bandaraAsal").toString();
                         bandara_kedatangan = map.get("bandara_kedatangan").toString();
                         kotaAsal = map.get("kotaAsal").toString();
@@ -268,6 +242,74 @@ public class FormIssuingActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void adjustStatus(String status){
+        binding.statusPesanan.setText(status);
+        switch (status) {
+            case "Belum bayar":
+                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.yellow));
+                break;
+            case "Selesai":
+                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.green_success));
+                break;
+            case "Dibatalkan":
+                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
+                binding.batalkanPesanan.setVisibility(View.GONE);
+                binding.pesanButton.setVisibility(View.GONE);
+                break;
+            case "Issued":
+                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.primary));
+                binding.batalkanPesanan.setVisibility(View.GONE);
+                binding.pesanButton.setVisibility(View.GONE);
+                break;
+
+        }
+    }
+
+    public void startTimer(long duration){
+        timer = new CountDownTimer(duration, 1000) {
+            @Override
+            public void onTick(long l) {
+                int minuteLeft = (int) l / 1000 / 60;
+                int secondsLeft = (int) l / 1000 % 60;
+
+                String timeleftFormatted = String.format("%02d:%02d", minuteLeft, secondsLeft);
+
+
+
+
+                String minuteTens = timeleftFormatted.substring(0,1);
+                String minuteOnes = timeleftFormatted.substring(1,2);
+                String secondsTens = timeleftFormatted.substring(3,4);
+                String secondsOnes = timeleftFormatted.substring(4);
+
+                binding.minuteTens.setText(minuteTens);
+                binding.minuteOnes.setText(minuteOnes);
+                binding.secondTens.setText(secondsTens);
+                binding.secondOnes.setText(secondsOnes);
+            }
+
+            @Override
+            public void onFinish() {
+                fs.collection("bookingHistory").document(documentID).update("status", "Dibatalkan");
+                binding.statusPesanan.setBackgroundTintList(getResources().getColorStateList(R.color.fail));
+                binding.statusPesanan.setText("Dibatalkan");
+
+                binding.batalkanPesanan.setVisibility(View.GONE);
+                binding.pesanButton.setVisibility(View.GONE);
+
+                binding.minuteTens.setText("0");
+                binding.minuteOnes.setText("0");
+                binding.secondTens.setText("0");
+                binding.secondOnes.setText("0");
+
+
+
+
+            }
+        };
+        timer.start();
     }
 
 

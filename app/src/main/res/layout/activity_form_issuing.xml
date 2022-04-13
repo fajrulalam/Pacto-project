@@ -686,7 +686,7 @@
                     android:id="@+id/pesanButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pesan"
+                    android:text="Selesaikan pemesanan"
                     android:textAllCaps="false"
                     android:backgroundTint="@color/primary_dark"
                     android:layout_marginBottom="18dp"/>
