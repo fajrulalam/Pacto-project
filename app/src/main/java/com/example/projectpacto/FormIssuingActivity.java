@@ -101,6 +101,17 @@ public class FormIssuingActivity extends AppCompatActivity {
             }
         });
 
+        binding.pesanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MasukkanPIN_Activity.class);
+                intent.putExtra("tipePesanan", "Pesawat");
+                intent.putExtra("documentID", documentID);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
         fs.collection("bookingHistory").document(documentID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {

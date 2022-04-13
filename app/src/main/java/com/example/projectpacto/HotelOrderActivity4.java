@@ -210,6 +210,7 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
 
                 Intent intent = new Intent(getApplicationContext(), MasukkanPIN_Activity.class);
                intent.putExtra("bundle", extras);
+               intent.putExtra("tipePesanan", "Hotel");
                startActivity(intent);
                overridePendingTransition(0, 0);
 

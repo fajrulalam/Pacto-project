@@ -69,6 +69,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     String waktuCekOut_req;
     String tipeRanjang_req;
     String catatanLainnya_req;
+    String documentID;
 
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
     FirebaseFirestore fs;
@@ -90,50 +91,59 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         View view = binding.getRoot();
         setContentView(view);
 
-
-        extras = this.getIntent().getBundleExtra("bundle");
+        String tipePesanan = this.getIntent().getStringExtra("tipePesanan");
         fs = FirebaseFirestore.getInstance();
 
-        gambarKamar= extras.getInt("gambarKamar");
-        namaKamar= extras.getString("namaKamar");
-        kapasitasKamar= extras.getInt("kapasitasKamar");
-        tipeKasur= extras.getString("tipeKasur");
-        sarapan= extras.getString("sarapan");
-        hargaKamar= extras.getString("hargaKamar");
 
-        gambarHotel= extras.getInt("gambarHotel");
-        namaHotel= extras.getString("namaHotel");
-        tambahanAlamat= extras.getString("tambahanAlamat");
-        hargaMulaiHotel= extras.getString("harga");
-        jmlBintang= extras.getInt("jmlBintang");
+        if (tipePesanan.matches("Hotel")) {
+            extras = this.getIntent().getBundleExtra("bundle");
 
-        kotaAtauHotel= extras.getString("kotaAtauHotel");
-        jumlahKamar= extras.getString("jumlahKamar");
-        jumlahMalam= extras.getString("jumlahMalam");
-        tglCek_in= extras.getString("tglCek_in");
-        tglCek_out= extras.getString("tglCek_out");
+            gambarKamar = extras.getInt("gambarKamar");
+            namaKamar = extras.getString("namaKamar");
+            kapasitasKamar = extras.getInt("kapasitasKamar");
+            tipeKasur = extras.getString("tipeKasur");
+            sarapan = extras.getString("sarapan");
+            hargaKamar = extras.getString("hargaKamar");
 
-        permintaanKhusus = extras.getString("permintaanKhusus");
+            gambarHotel = extras.getInt("gambarHotel");
+            namaHotel = extras.getString("namaHotel");
+            tambahanAlamat = extras.getString("tambahanAlamat");
+            hargaMulaiHotel = extras.getString("harga");
+            jmlBintang = extras.getInt("jmlBintang");
 
-        namaPassenger = extras.getStringArrayList("namaTamu");
-        titel = extras.getStringArrayList("titel");
+            kotaAtauHotel = extras.getString("kotaAtauHotel");
+            jumlahKamar = extras.getString("jumlahKamar");
+            jumlahMalam = extras.getString("jumlahMalam");
+            tglCek_in = extras.getString("tglCek_in");
+            tglCek_out = extras.getString("tglCek_out");
 
-        Log.i(TAG, "onCreate: Nama Tamu " + namaPassenger);
-        Log.i(TAG, "onCreate: Titel " + titel);
+            permintaanKhusus = extras.getString("permintaanKhusus");
 
-        ArrayofPenumpangMaps = new ArrayList<>();
+            namaPassenger = extras.getStringArrayList("namaTamu");
+            titel = extras.getStringArrayList("titel");
 
-        for(int i = 0; i<namaPassenger.size(); i++) {
-            dataPenumpangMap = new HashMap<>();
-            dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
-            dataPenumpangMap.put("titel", titel.get(i));
+            Log.i(TAG, "onCreate: Nama Tamu " + namaPassenger);
+            Log.i(TAG, "onCreate: Titel " + titel);
+
+            ArrayofPenumpangMaps = new ArrayList<>();
+
+            for (int i = 0; i < namaPassenger.size(); i++) {
+                dataPenumpangMap = new HashMap<>();
+                dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i));
+                dataPenumpangMap.put("titel", titel.get(i));
 
 
+                ArrayofPenumpangMaps.add(i, dataPenumpangMap);
+            }
 
-            ArrayofPenumpangMaps.add(i, dataPenumpangMap);
+            Log.i(TAG, "onCreate: ArrayofPenumpangMaps " + ArrayofPenumpangMaps);
         }
 
-        Log.i(TAG, "onCreate: ArrayofPenumpangMaps " + ArrayofPenumpangMaps);
+        if (tipePesanan.matches("Pesawat")){
+            documentID = this.getIntent().getStringExtra("documentID");
+//            Log.i("DOCUMENTID", documentID);
+        }
+
 
 
 
@@ -233,7 +243,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     mgr.hideSoftInputFromWindow(binding.pin4.getWindowToken(), 0);
 
                     pin = binding.pin1.getText().toString() + binding.pin2.getText().toString() + binding.pin3.getText().toString() + binding.pin4.getText().toString();
-                    checkPIN(pin);
+                    if (tipePesanan.matches("Hotel")) {
+                        HotelcheckPIN(pin);
+                    } else if (tipePesanan.matches("Pesawat")){
+                        PesawatcheckPIN(pin);
+                    }
 
 
                 }else if(editable.length() == 0)  {
@@ -247,7 +261,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     }
 
-    public void checkPIN(String pin){
+    public void HotelcheckPIN(String pin){
         if (pin.matches("1738")){
 
 
@@ -291,6 +305,15 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             overridePendingTransition(0, 0);
 
 
+        }
+    }
+
+    public void PesawatcheckPIN(String pin){
+        if (pin.matches("1738")){
+            fs.collection("bookingHistory").document(documentID).update("status", "Issued");
+            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+            startActivity(intent);
+            overridePendingTransition(0, 0);
         }
     }
 
