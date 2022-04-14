@@ -41,6 +41,7 @@ public class FormIssuingActivity extends AppCompatActivity {
 
     String documentID;
 
+    //Pesawat
     String bandaraAsal;
     Date timeStampPesanan;
     Date expTime;
@@ -57,6 +58,17 @@ public class FormIssuingActivity extends AppCompatActivity {
     List<Map<String, String>> penumpang;
     String hargaTotal;
     int logoMaskapai;
+
+    //Hotel
+    String namaHotel;
+    String tambahanAlamat;
+    String tglCek_in;
+    String tglCek_out;
+    String jumlahMalam;
+    List<Map<String, String>> dataTamu;
+    String jumlahKamar;
+    String namaKamar;
+    String fasilitasExtra;
 
     ArrayList NIKatauPaspor;
     ArrayList harga_tambahan;
@@ -134,6 +146,17 @@ public class FormIssuingActivity extends AppCompatActivity {
 
 
                     if (tipePesanan.matches("Hotel")) {
+
+                        namaHotel = map.get("namaHotel").toString();
+                        tambahanAlamat = map.get("tambahanAlamat").toString();
+                        tglCek_in = map.get("tglCek_in").toString();
+                        tglCek_out = map.get("tglCek_out").toString();
+                        jumlahMalam = map.get("jumlahMalam").toString();
+                        dataTamu = (List<Map<String, String>>) map.get("dataTamu");
+                        jumlahKamar = map.get("jumlahKamar").toString();
+                        namaKamar = map.get("namaKamar").toString();
+                        fasilitasExtra = map.get("fasilitasExtra").toString();
+
 
                         //Insert Hotel shit here
                         Log.i("Tipe Pesanan", "Hotel");
