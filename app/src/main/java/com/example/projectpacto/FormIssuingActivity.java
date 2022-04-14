@@ -103,6 +103,8 @@ public class FormIssuingActivity extends AppCompatActivity {
         if (tipePesanan_.matches("Hotel")){
             binding.timer.setVisibility(View.GONE);
             binding.pesawatLinearLayout.setVisibility(View.GONE);
+            binding.bagasiTambahan.setText("Permintaan khusus");
+            binding.hargaBagasiTambahan.setText("Permintaan khusus Anda akan tertulis di sini jika ada.");
         } else if (tipePesanan_.matches("Pesawat")){
             binding.hotelLinearLayout.setVisibility(View.GONE);
         }
@@ -155,7 +157,34 @@ public class FormIssuingActivity extends AppCompatActivity {
                         dataTamu = (List<Map<String, String>>) map.get("dataTamu");
                         jumlahKamar = map.get("jumlahKamar").toString();
                         namaKamar = map.get("namaKamar").toString();
-                        fasilitasExtra = map.get("fasilitasExtra").toString();
+                        hargaTotal = map.get("hargaTotal").toString();
+                        String permintaanKhusus = map.get("permintaanKhusus").toString();
+
+                        String tglCekout_jmlMalam = tglCek_out + " ("+jumlahMalam +" Malam)";
+                        String jmldanPilihanKamar = jumlahKamar + " Kamar (" +namaKamar+")";
+
+                        for (int i = 0; i < dataTamu.size(); i++) {
+                            Map<String, String> penumpangMap = dataTamu.get(i);
+                            namaPenumpang.add(penumpangMap.get("namaPenumpang"));
+                            titel.add(penumpangMap.get("titel"));
+
+                        }
+
+                        if (permintaanKhusus.matches("")) {
+                            binding.hargaBagasiTambahan.setText("Anda tidak mengajukan permintaan khusus");
+                        }
+
+
+                        binding.harga.setText(hargaTotal);
+                        binding.namaHotelTxt.setText(namaHotel);
+                        binding.alamatTambahan.setText(tambahanAlamat);
+                        binding.tglCekIn.setText(tglCek_in);
+                        binding.tglCekOut.setText(tglCekout_jmlMalam);
+                        binding.detailTamu.setText(dataTamu.size() + " Tamu");
+                        binding.jmldanPilihanKamar.setText(jmldanPilihanKamar);
+
+                        RecyclerAdapterPenumpangList_IssueForm recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList_IssueForm(namaPenumpang);
+                        binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
 
 
                         //Insert Hotel shit here
