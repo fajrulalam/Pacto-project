@@ -67,6 +67,8 @@ public class FormIssuingActivity extends AppCompatActivity {
     ArrayList titel;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +87,13 @@ public class FormIssuingActivity extends AppCompatActivity {
         fs = FirebaseFirestore.getInstance();
 
         documentID = getIntent().getStringExtra("documentID");
+        String tipePesanan_ = getIntent().getStringExtra("tipePesanan");
+        if (tipePesanan_.matches("Hotel")){
+            binding.timer.setVisibility(View.GONE);
+            binding.pesawatLinearLayout.setVisibility(View.GONE);
+        } else if (tipePesanan_.matches("Pesawat")){
+            binding.hotelLinearLayout.setVisibility(View.GONE);
+        }
 
 
 
@@ -128,6 +137,7 @@ public class FormIssuingActivity extends AppCompatActivity {
 
                         //Insert Hotel shit here
                         Log.i("Tipe Pesanan", "Hotel");
+
 
 
 
