@@ -74,6 +74,7 @@
             android:padding="16dp"
             android:orientation="vertical"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/curved_less_bg_outline">
 
             <TextView
@@ -84,6 +85,7 @@
                 android:fontFamily="@font/roboto_light"
                 android:textColor="@color/text_grey"/>
             <TextView
+                android:id="@+id/kreditLimitNominal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="IDR 140.000.000"
@@ -92,7 +94,55 @@
                 android:textColor="@color/black"/>
 
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Riwayat Transaksi"
+                android:textSize="16dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/black"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/filterButton"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:clickable="true"
+                android:foreground="@drawable/selectable_view_notsocurved"
+                android:background="@drawable/curved__even_less_colorized_bg"
+                android:layout_marginBottom="8dp"
+                android:paddingVertical="1dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="4dp"
+                    android:scaleY="0.7"
+                    android:scaleX="0.7"
+                    android:src="@drawable/ic_baseline_filter_alt_24"
+                    app:tint="@color/primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Filter"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/primary"
+                    android:paddingRight="10dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
