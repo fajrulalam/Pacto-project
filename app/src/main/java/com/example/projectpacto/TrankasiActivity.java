@@ -22,6 +22,11 @@ public class TrankasiActivity extends AppCompatActivity {
 
     ActivityTrankasiBinding binding;
 
+    ArrayList<String> keterangan;
+    ArrayList<String> tanggal;
+    ArrayList<String> tipeTransaksi;
+    ArrayList<String> nominalTransaksi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +34,27 @@ public class TrankasiActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        keterangan = new ArrayList<>();
+        tanggal = new ArrayList<>();
+        tipeTransaksi = new ArrayList<>();
+        nominalTransaksi = new ArrayList<>();
+
         binding.bottomNav.setSelectedItemId(R.id.transaksi);
+
+        keterangan.add("Penambahan kredit bertambah");
+        tanggal.add("27/02/2022");
+        tipeTransaksi.add("plus");
+        nominalTransaksi.add("+ IDR 20.000.00");
+
+        keterangan.add("Penambahan kredit berkurang");
+        tanggal.add("27/02/2022");
+        tipeTransaksi.add("minus");
+        nominalTransaksi.add(" IDR 2.000.00");
+
+        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+
+
 
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -92,7 +117,7 @@ public class TrankasiActivity extends AppCompatActivity {
                 holder.simbolPlusOrMinus.setImageResource(R.drawable.transaction_minus);
                 holder.nominalTransaction.setTextColor(getResources().getColor(R.color.fail));
             }
-            holder.keterangan.setText(keterangan.get(position));
+            holder.keteranganTransaksi.setText(keterangan.get(position));
             holder.tanggal.setText(tanggal.get(position));
             holder.nominalTransaction.setText(nominalTransaksi.get(position));
 
@@ -107,7 +132,7 @@ public class TrankasiActivity extends AppCompatActivity {
 
     class ViewHolder extends RecyclerView.ViewHolder{
         ImageView simbolPlusOrMinus;
-        TextView keterangan;
+        TextView keteranganTransaksi;
         TextView nominalTransaction;
         TextView tanggal;
 
@@ -117,10 +142,10 @@ public class TrankasiActivity extends AppCompatActivity {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            simbolPlusOrMinus = findViewById(R.id.simbolPlusOrMinus);
-            keterangan = findViewById(R.id.keterangan);
-            nominalTransaction = findViewById(R.id.nominalTransaction);
-            tanggal = findViewById(R.id.tanggalTransaksi);
+            simbolPlusOrMinus = itemView.findViewById(R.id.simbolPlusOrMinus);
+            keteranganTransaksi = itemView.findViewById(R.id.keteranganTransaksi);
+            nominalTransaction = itemView.findViewById(R.id.nominalTransaction);
+            tanggal = itemView.findViewById(R.id.tanggalTransaksi);
 
 
 
