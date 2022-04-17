@@ -58,6 +58,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:id="@+id/tanggalMulai_txtInput"
                 android:layout_width="match_parent"
+                android:background="@drawable/curved_less_bg_outline"
                 android:layout_height="40dp"
                 android:layout_marginBottom="10dp"
                 app:boxStrokeWidth="0dp"
@@ -81,6 +82,7 @@
                 android:id="@+id/tanggalBerakhir_txtInput"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
+                android:background="@drawable/curved_less_bg_outline"
                 app:hintEnabled="false"
                 android:layout_height="40dp"
                 app:boxStrokeWidth="0dp"
@@ -104,7 +106,7 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/roboto_medium"
                 android:textSize="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"/>
 
             <LinearLayout
@@ -135,6 +137,8 @@
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_marginLeft="8dp"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
                             android:src="@drawable/transaction_plus"/>
 
                         <TextView
@@ -177,6 +181,8 @@
                             android:layout_height="35dp"
                             android:scaleType="centerCrop"
                             android:layout_marginLeft="8dp"
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
                             android:src="@drawable/transaction_minus"/>
 
                         <TextView
@@ -194,6 +200,8 @@
 
 
                 </LinearLayout>
+
+
             </LinearLayout>
 
 

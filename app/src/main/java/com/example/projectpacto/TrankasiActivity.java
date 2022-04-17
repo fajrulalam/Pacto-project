@@ -28,6 +28,10 @@ public class TrankasiActivity extends AppCompatActivity {
 
     ActivityTrankasiBinding binding;
 
+    String tglMulai;
+    String tglBerakhir;
+    int pemasukanAtauPengeluaran;
+
     ArrayList<String> keterangan;
     ArrayList<String> tanggal;
     ArrayList<String> tipeTransaksi;
@@ -54,6 +58,24 @@ public class TrankasiActivity extends AppCompatActivity {
         binding.bottomNav.setSelectedItemId(R.id.transaksi);
 
         String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
+        tglMulai = "";
+        tglBerakhir = "";
+        pemasukanAtauPengeluaran = 0;
+
+
+        binding.filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("tglMulai", tglMulai);
+                bundle.putString("tglBerakhir", tglBerakhir);
+                bundle.putInt("pemasukanAtauPengeluaran", pemasukanAtauPengeluaran);
+                TransaksiFilterButtonSheet transaksiFilterButtonSheet = new TransaksiFilterButtonSheet();
+                transaksiFilterButtonSheet.setArguments(bundle);
+                transaksiFilterButtonSheet.show(getSupportFragmentManager(), transaksiFilterButtonSheet.getTag());
+            }
+        });
 
         fs.collection("credit").whereEqualTo("userID", userID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override

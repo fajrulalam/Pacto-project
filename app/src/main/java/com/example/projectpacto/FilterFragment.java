@@ -2,22 +2,38 @@ package com.example.projectpacto;
 
 import android.app.Dialog;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 public class FilterFragment extends BottomSheetDialogFragment {
+
 
 
 
@@ -40,6 +56,10 @@ public class FilterFragment extends BottomSheetDialogFragment {
         final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
         final View view = View.inflate(getContext(), R.layout.fragment_filter, null);
         dialog.setContentView(view);
+
+
+
+
 
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
@@ -71,6 +91,13 @@ public class FilterFragment extends BottomSheetDialogFragment {
 
             }
         });
+
+
+
+
+
+
+
         view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
