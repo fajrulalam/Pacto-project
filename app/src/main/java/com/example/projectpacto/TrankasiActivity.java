@@ -14,9 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projectpacto.databinding.ActivityTrankasiBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class TrankasiActivity extends AppCompatActivity {
 
@@ -26,6 +32,10 @@ public class TrankasiActivity extends AppCompatActivity {
     ArrayList<String> tanggal;
     ArrayList<String> tipeTransaksi;
     ArrayList<String> nominalTransaksi;
+    ArrayList<String> documentID;
+
+
+    FirebaseFirestore fs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +43,9 @@ public class TrankasiActivity extends AppCompatActivity {
         binding = ActivityTrankasiBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        fs = FirebaseFirestore.getInstance();
 
+        documentID = new ArrayList<>();
         keterangan = new ArrayList<>();
         tanggal = new ArrayList<>();
         tipeTransaksi = new ArrayList<>();
@@ -41,18 +53,46 @@ public class TrankasiActivity extends AppCompatActivity {
 
         binding.bottomNav.setSelectedItemId(R.id.transaksi);
 
-        keterangan.add("Penambahan kredit bertambah");
-        tanggal.add("27/02/2022");
-        tipeTransaksi.add("plus");
-        nominalTransaksi.add("+ IDR 20.000.00");
+        String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
 
-        keterangan.add("Penambahan kredit berkurang lorem ipsum sit dolar amet");
-        tanggal.add("27/02/2022");
-        tipeTransaksi.add("minus");
-        nominalTransaksi.add("- IDR 2.000.00");
+        fs.collection("credit").whereEqualTo("userID", userID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
 
-        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
-        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        documentID.add(id);
+                        String keterangan_str = map.get("keterangan").toString();
+                        String tanggal_str = map.get("tanggal").toString();
+                        String tipeTransakasi_str = map.get("tipeTransaksi").toString();
+                        String nominalTransaksi_str = map.get("nominalTransaksi").toString();
+
+                        keterangan.add(keterangan_str);
+                        tanggal.add(tanggal_str);
+                        tipeTransaksi.add(tipeTransakasi_str);
+                        nominalTransaksi.add(nominalTransaksi_str);
+
+                    }
+                    RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+                    binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+                }
+            }
+        });
+
+//        keterangan.add("Penambahan kredit bertambah");
+//        tanggal.add("27/02/2022");
+//        tipeTransaksi.add("plus");
+//        nominalTransaksi.add("+ IDR 20.000.00");
+//
+//        keterangan.add("Penambahan kredit berkurang lorem ipsum sit dolar amet");
+//        tanggal.add("27/02/2022");
+//        tipeTransaksi.add("minus");
+//        nominalTransaksi.add("- IDR 2.000.00");
+
+
 
 
 

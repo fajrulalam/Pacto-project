@@ -163,6 +163,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Map<String, Object> map = documentSnapshot.getData();
                     hargaPesawat = map.get("hargaTotal").toString();
+                    namaHotel = map.get("kodePenerbangan").toString();
                     if (hargaPesawat.matches("")){
                         hargaPesawat = map.get("harga").toString();
                     }
@@ -358,7 +359,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     public void PesawatcheckPIN(String pin){
         if (pin.matches("1738")){
-            String keterangan = "Pemesanan hotel " + namaHotel;
+            String keterangan = "Pemesanan tiket pesawat " + namaHotel;
             String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
             Date date = new Date();
             String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
