@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    tools:context=".TransaksiFilterButtonSheet">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:background="@drawable/bottom_sheet_background"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/closeSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:src="@drawable/ic_baseline_close_24"
+            app:tint="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:paddingVertical="10dp"
+                android:text="Filter Data Transaksi"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batas tanggal"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp"/>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/keberangkat_textInput"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                app:boxStrokeWidth="0dp"
+                app:hintAnimationEnabled="false"
+                android:focusable="false"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/icon"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:paddingVertical="1dp"
+                    android:layout_height="match_parent"
+                    android:hint="Tanggal mulai"
+                    android:textSize="14sp"
+                    android:backgroundTint="@color/white"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/kedatangan_textInput"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                app:hintEnabled="false"
+                android:layout_height="40dp"
+                app:boxStrokeWidth="0dp"
+                app:startIconDrawable="@drawable/icon"
+                android:focusable="false"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Tanggal berakhir"
+                    android:textSize="14sp"
+                    android:paddingVertical="1dp"
+                    android:backgroundTint="@color/white"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jenis Transaksi"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:layout_marginRight="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
+                        android:id="@+id/filterPemasukan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
+                        android:background="@drawable/curved__even_less_colorized_bg"
+                        android:layout_marginBottom="8dp"
+                        android:paddingVertical="1dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/transaction_plus"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pemasukan"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/primary"
+                            android:paddingHorizontal="10dp"/>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="0dp"
+
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:foreground="@drawable/selectable_view_notsocurved"
+                        android:background="@drawable/curved__even_less_colorized_bg"
+                        android:layout_marginBottom="8dp"
+                        android:paddingVertical="1dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:scaleType="centerCrop"
+                            android:layout_marginLeft="8dp"
+                            android:src="@drawable/transaction_minus"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pengeluaran"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/primary"
+                            android:paddingHorizontal="10dp"/>
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/curved_bg"
+            android:elevation="2dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout">
+
+            <Button
+                android:id="@+id/actionButton_cari"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Tampilkan"
+                android:textAllCaps="false"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"/>
+
+
+
+</FrameLayout>

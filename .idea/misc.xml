@@ -54,7 +54,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/bandara_singular_view.xml" value="0.4512820512820513" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_data_penumpang.xml" value="0.39549180327868855" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_data_tamu__bottom_sheet.xml" value="0.261965811965812" />
-        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_filter.xml" value="0.4" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_filter.xml" value="0.3953871499176277" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_filter_hotel.xml" value="0.3145299145299145" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_hotel__kota_atau_akomodasi.xml" value="0.44556962025316454" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_hotel_selected__bottom_sheet.xml" value="0.4512820512820513" />
@@ -67,6 +67,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_selected_ticket_bottom_sheet.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_sort_hotel.xml" value="0.3145299145299145" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_tambahan_bagasi_bottom_sheet.xml" value="0.4" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/fragment_transaksi_filter_button_sheet.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/hotel_options_single_view.xml" value="0.536" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/hotel_single_view.xml" value="0.2670940170940171" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/passenger_list_single_view.xml" value="0.38796296296296295" />
