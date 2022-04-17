@@ -30,7 +30,7 @@ public class TrankasiActivity extends AppCompatActivity {
 
     String tglMulai;
     String tglBerakhir;
-    int pemasukanAtauPengeluaran;
+    String pemasukanAtauPengeluaran;
 
     ArrayList<String> keterangan;
     ArrayList<String> tanggal;
@@ -61,7 +61,7 @@ public class TrankasiActivity extends AppCompatActivity {
 
         tglMulai = "";
         tglBerakhir = "";
-        pemasukanAtauPengeluaran = 0;
+        pemasukanAtauPengeluaran = "2"; //1a = pengeluaran saja. 1b = pemasukan saja. 2 = dua2nya
 
 
         binding.filterButton.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class TrankasiActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("tglMulai", tglMulai);
                 bundle.putString("tglBerakhir", tglBerakhir);
-                bundle.putInt("pemasukanAtauPengeluaran", pemasukanAtauPengeluaran);
+                bundle.putString("pemasukanAtauPengeluaran", pemasukanAtauPengeluaran);
                 TransaksiFilterButtonSheet transaksiFilterButtonSheet = new TransaksiFilterButtonSheet();
                 transaksiFilterButtonSheet.setArguments(bundle);
                 transaksiFilterButtonSheet.show(getSupportFragmentManager(), transaksiFilterButtonSheet.getTag());

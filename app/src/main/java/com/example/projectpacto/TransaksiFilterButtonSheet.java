@@ -38,7 +38,11 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
     TextInputLayout tglBerakhir;
     LinearLayout pemasukanFilter;
     LinearLayout pengeluaranFilter;
-    Long epoch_tglMulai;
+    TextView keteranganTipeTransaksi;
+
+    String tglMulai_str;
+    String tglBerakhir_str;
+    String jenisTransaksi_str;
 
     MaterialDatePicker datePicker_end;
 
@@ -55,6 +59,24 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
         final View view = View.inflate(getContext(), R.layout.fragment_transaksi_filter_button_sheet, null);
         dialog.setContentView(view);
 
+        Bundle bundle = this.getArguments();
+        tglMulai_str = bundle.getString("tglMulai");
+        tglBerakhir_str = bundle.getString("tglBerakhir");
+        jenisTransaksi_str = bundle.getString("pemasukanAtauPengeluaran");
+        keteranganTipeTransaksi = view.findViewById(R.id.jenisTransaksi_txt);
+
+        tglMulai = view.findViewById(R.id.tanggalMulai_txtInput);
+        tglBerakhir = view.findViewById(R.id.tanggalBerakhir_txtInput);
+        pemasukanFilter = view.findViewById(R.id.filterPemasukan);
+        pengeluaranFilter = view.findViewById(R.id.filterPengeluaran);
+
+        tglMulai.getEditText().setText(tglMulai_str);
+        tglBerakhir.getEditText().setText(tglBerakhir_str);
+
+        adjustFilterTipeTransaksi(jenisTransaksi_str);
+
+
+
 
         //Calendar Constraints
         Locale lokal = new Locale("id", "ID");
@@ -68,10 +90,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
 
 
 
-        tglMulai = view.findViewById(R.id.tanggalMulai_txtInput);
-        tglBerakhir = view.findViewById(R.id.tanggalBerakhir_txtInput);
-        pemasukanFilter = view.findViewById(R.id.filterPemasukan);
-        pengeluaranFilter = view.findViewById(R.id.filterPengeluaran);
+
 
         tglMulai.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         tglBerakhir.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
@@ -203,6 +222,39 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
             }
         });
 
+        //FILTER JENIS TRANSAKSI
+        pemasukanFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //1a = pengeluaran saja. 1b = pemasukan saja. 2 = dua2nya
+                if (jenisTransaksi_str.matches("1a")){
+                    jenisTransaksi_str = "2";
+                    adjustFilterTipeTransaksi(jenisTransaksi_str);
+                } else if (jenisTransaksi_str.matches("1b")){
+
+                } else if (jenisTransaksi_str.matches("2")){
+                    jenisTransaksi_str = "1a";
+                    adjustFilterTipeTransaksi(jenisTransaksi_str);
+                }
+            }
+        });
+
+        pengeluaranFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //1a = pengeluaran saja. 1b = pemasukan saja. 2 = dua2nya
+                if (jenisTransaksi_str.matches("1b")){
+                    jenisTransaksi_str = "2";
+                    adjustFilterTipeTransaksi(jenisTransaksi_str);
+                } else if (jenisTransaksi_str.matches("1a")){
+
+                } else if (jenisTransaksi_str.matches("2")){
+                    jenisTransaksi_str = "1b";
+                    adjustFilterTipeTransaksi(jenisTransaksi_str);
+                }
+            }
+        });
+
 
 
 
@@ -222,8 +274,26 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
         return dialog;
     }
 
+    private void adjustFilterTipeTransaksi(String jenisTransaksi_str) {
+        switch (jenisTransaksi_str){
+            case "2":
+                pemasukanFilter.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+                pengeluaranFilter.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+                keteranganTipeTransaksi.setText("Pilihan: pemasukan dan pengeluaran");
+                break;
+            case "1a":
+                pemasukanFilter.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+                pengeluaranFilter.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+                keteranganTipeTransaksi.setText("Pilihan: pengeluaran saja");
+                break;
+            case "1b":
+                pemasukanFilter.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+                pengeluaranFilter.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+                keteranganTipeTransaksi.setText("Pilihan: pemasukan saja saja");
 
-
+                break;
+        }
+    }
 
 
 }
