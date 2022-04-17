@@ -46,10 +46,10 @@ public class TrankasiActivity extends AppCompatActivity {
         tipeTransaksi.add("plus");
         nominalTransaksi.add("+ IDR 20.000.00");
 
-        keterangan.add("Penambahan kredit berkurang");
+        keterangan.add("Penambahan kredit berkurang lorem ipsum sit dolar amet");
         tanggal.add("27/02/2022");
         tipeTransaksi.add("minus");
-        nominalTransaksi.add(" IDR 2.000.00");
+        nominalTransaksi.add("- IDR 2.000.00");
 
         RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
         binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);

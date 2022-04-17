@@ -21,6 +21,7 @@ import com.example.projectpacto.databinding.ActivityHotelOrder4Binding;
 import com.example.projectpacto.databinding.ActivityMasukkanPinBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -39,6 +40,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     ActivityMasukkanPinBinding binding;
     String pin;
 
+    String hargaPesawat;
 
     int gambarKamar;
     String namaKamar;
@@ -156,6 +158,19 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
         if (tipePesanan.matches("Pesawat")){
             documentID = this.getIntent().getStringExtra("documentID");
+            fs.collection("bookingHistory").document(documentID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Map<String, Object> map = documentSnapshot.getData();
+                    hargaPesawat = map.get("hargaTotal").toString();
+                    if (hargaPesawat.matches("")){
+                        hargaPesawat = map.get("harga").toString();
+                    }
+
+                }
+            });
+
+
         }
 
 
@@ -308,17 +323,34 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     tambahanAlamat,
                     hargaTotal
             );
+            String keterangan = "Pemesanan hotel " + namaHotel;
+            Date date = new Date();
+            String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
+            String tipeTransaksi = "minus";
+            String nominalTransaksi = "- " + hargaTotal;
 
-            fs.collection("bookingHistory").add(bookingPesawat).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            TransactionDetail transactionDetail = new TransactionDetail(userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
+
+
+            fs.collection("credit").add(transactionDetail).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
-                public void onSuccess(DocumentReference documentReferebnce) {
-                    Toast.makeText(getApplicationContext(), "Update to Firestore successful!", Toast.LENGTH_SHORT).show();
+                public void onSuccess(DocumentReference documentReference) {
+                    fs.collection("bookingHistory").add(bookingPesawat).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReferebnce) {
+                            Toast.makeText(getApplicationContext(), "Update to Firestore successful!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                        }
+                    });
+
                 }
             });
 
-            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
+
+
+
 
 
         }
@@ -326,10 +358,24 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     public void PesawatcheckPIN(String pin){
         if (pin.matches("1738")){
-            fs.collection("bookingHistory").document(documentID).update("status", "Issued");
-            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
-            startActivity(intent);
-            overridePendingTransition(0, 0);
+            String keterangan = "Pemesanan hotel " + namaHotel;
+            String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+            Date date = new Date();
+            String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
+            String tipeTransaksi = "minus";
+            String nominalTransaksi = "- " + hargaPesawat;
+
+            TransactionDetail transactionDetail = new TransactionDetail(userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
+            fs.collection("credit").add(transactionDetail).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    fs.collection("bookingHistory").document(documentID).update("status", "Issued");
+                    Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+            });
+
         }
     }
 
@@ -520,6 +566,66 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
         public void setHargaTotal(String hargaTotal) {
             this.hargaTotal = hargaTotal;
+        }
+    }
+
+    public class TransactionDetail{
+        String keterangan;
+        String tanggal;
+        String tipeTransaksi;
+        String nominalTransaksi;
+        String userID;
+
+
+        public TransactionDetail() {
+        }
+
+        public TransactionDetail(String userID, String keterangan, String tanggal, String tipeTransaksi, String nominalTransaksi) {
+            this.keterangan = keterangan;
+            this.tanggal = tanggal;
+            this.tipeTransaksi = tipeTransaksi;
+            this.nominalTransaksi = nominalTransaksi;
+            this.userID = userID;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public String getKeterangan() {
+            return keterangan;
+        }
+
+        public void setKeterangan(String keterangan) {
+            this.keterangan = keterangan;
+        }
+
+        public String getTanggal() {
+            return tanggal;
+        }
+
+        public void setTanggal(String tanggal) {
+            this.tanggal = tanggal;
+        }
+
+        public String getTipeTransaksi() {
+            return tipeTransaksi;
+        }
+
+        public void setTipeTransaksi(String tipeTransaksi) {
+            this.tipeTransaksi = tipeTransaksi;
+        }
+
+        public String getNominalTransaksi() {
+            return nominalTransaksi;
+        }
+
+        public void setNominalTransaksi(String nominalTransaksi) {
+            this.nominalTransaksi = nominalTransaksi;
         }
     }
 
