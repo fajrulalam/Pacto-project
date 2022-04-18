@@ -1,6 +1,7 @@
 package com.example.projectpacto;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -34,6 +37,7 @@ import java.util.Locale;
 public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
 
 
+    Button tampilkanButton;
     TextInputLayout tglMulai;
     TextInputLayout tglBerakhir;
     LinearLayout pemasukanFilter;
@@ -47,6 +51,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
     MaterialDatePicker datePicker_end;
 
     CalendarConstraints.Builder constraints_end;
+    FilterTranskasi datapasser;
 
     public TransaksiFilterButtonSheet() {
         // Required empty public constructor
@@ -69,6 +74,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
         tglBerakhir = view.findViewById(R.id.tanggalBerakhir_txtInput);
         pemasukanFilter = view.findViewById(R.id.filterPemasukan);
         pengeluaranFilter = view.findViewById(R.id.filterPengeluaran);
+        tampilkanButton = view.findViewById(R.id.tampilkanButton);
 
         tglMulai.getEditText().setText(tglMulai_str);
         tglBerakhir.getEditText().setText(tglBerakhir_str);
@@ -108,6 +114,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
                             long epoch_long = Long.parseLong(selection.toString());
                             ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
                             String tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                            tglMulai_str = tanggal;
                             tglMulai.getEditText().setText(tanggal);
 
                             constraints_end = new CalendarConstraints.Builder()
@@ -137,6 +144,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
                         long epoch_long = Long.parseLong(selection.toString());
                         ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
                         String tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                        tglMulai_str = tanggal;
                         tglMulai.getEditText().setText(tanggal);
                         constraints_end = new CalendarConstraints.Builder()
                                 .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_long)))
@@ -168,6 +176,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
                                 long epoch_long = Long.parseLong(selection.toString());
                                 ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
                                 String tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                                tglBerakhir_str = tanggal;
                                 tglBerakhir.getEditText().setText(tanggal);
                             }
                         });
@@ -180,6 +189,7 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
                             long epoch_long = Long.parseLong(selection.toString());
                             ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
                             String tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                            tglBerakhir_str = tanggal;
                             tglBerakhir.getEditText().setText(tanggal);
                         }
                     });
@@ -255,6 +265,17 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
             }
         });
 
+        //TAMPILKAN BUTTON
+        tampilkanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datapasser.onDataFilterPass(tglMulai_str, tglBerakhir_str, jenisTransaksi_str);
+                dismiss();
+            }
+        });
+
+
+
 
 
 
@@ -293,6 +314,16 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
 
                 break;
         }
+    }
+
+    public interface FilterTranskasi {
+        void onDataFilterPass(String tglMulai, String tglBerakhir, String jenisTranskasi);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        datapasser = (TransaksiFilterButtonSheet.FilterTranskasi) context;
     }
 
 

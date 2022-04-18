@@ -329,8 +329,10 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
             String tipeTransaksi = "minus";
             String nominalTransaksi = "- " + hargaTotal;
+            Date dateNow = new Date();
+            Long epochNow = dateNow.getTime();
 
-            TransactionDetail transactionDetail = new TransactionDetail(userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
+            TransactionDetail transactionDetail = new TransactionDetail(epochNow, userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
 
 
             fs.collection("credit").add(transactionDetail).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -365,8 +367,10 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
             String tipeTransaksi = "minus";
             String nominalTransaksi = "- " + hargaPesawat;
+            Date dateNow = new Date();
+            Long epochNow = dateNow.getTime();
 
-            TransactionDetail transactionDetail = new TransactionDetail(userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
+            TransactionDetail transactionDetail = new TransactionDetail(epochNow, userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
             fs.collection("credit").add(transactionDetail).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
@@ -571,6 +575,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     }
 
     public class TransactionDetail{
+        Long timeStampEpoch;
         String keterangan;
         String tanggal;
         String tipeTransaksi;
@@ -581,12 +586,22 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         public TransactionDetail() {
         }
 
-        public TransactionDetail(String userID, String keterangan, String tanggal, String tipeTransaksi, String nominalTransaksi) {
+        public TransactionDetail(Long timeStampEpoch, String userID, String keterangan, String tanggal, String tipeTransaksi, String nominalTransaksi) {
             this.keterangan = keterangan;
             this.tanggal = tanggal;
             this.tipeTransaksi = tipeTransaksi;
             this.nominalTransaksi = nominalTransaksi;
             this.userID = userID;
+            this.timeStampEpoch = timeStampEpoch;
+        }
+
+
+        public Long getTimeStampEpoch() {
+            return timeStampEpoch;
+        }
+
+        public void setTimeStampEpoch(Long timeStampEpoch) {
+            this.timeStampEpoch = timeStampEpoch;
         }
 
         public String getUserID() {

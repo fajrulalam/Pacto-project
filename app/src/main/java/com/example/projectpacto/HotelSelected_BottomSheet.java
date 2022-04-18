@@ -27,7 +27,7 @@ public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
     int jmlBintang;
 
     String hotelAtauKota_srch;
-    String jumlahKamar ;
+    String jumlahKamar;
     String jumlahMalam;
     String tglCek_out;
     String tglCek_in;

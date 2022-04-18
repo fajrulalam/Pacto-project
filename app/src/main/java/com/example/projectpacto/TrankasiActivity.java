@@ -4,27 +4,35 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityTrankasiBinding;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class TrankasiActivity extends AppCompatActivity {
+public class TrankasiActivity extends AppCompatActivity implements TransaksiFilterButtonSheet.FilterTranskasi{
 
     ActivityTrankasiBinding binding;
 
@@ -38,6 +46,8 @@ public class TrankasiActivity extends AppCompatActivity {
     ArrayList<String> nominalTransaksi;
     ArrayList<String> documentID;
 
+    Locale lokal;
+
 
     FirebaseFirestore fs;
 
@@ -48,6 +58,9 @@ public class TrankasiActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         fs = FirebaseFirestore.getInstance();
+
+         lokal = new Locale("id", "ID");
+
 
         documentID = new ArrayList<>();
         keterangan = new ArrayList<>();
@@ -149,6 +162,163 @@ public class TrankasiActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onDataFilterPass(String tglMulai, String tglBerakhir, String jenisTranskasi) {
+        keterangan.clear();
+        tanggal.clear();
+        tipeTransaksi.clear();
+        nominalTransaksi.clear();
+        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+        Long epochMulai;
+        Long epochBerakhir;
+        SimpleDateFormat formatter=new SimpleDateFormat("E, dd MMM yyyy", lokal);
+
+        //Handling the date Strings
+        if (tglMulai.matches("")) {
+            epochMulai = 0l;
+        } else {
+            Date tglMulai_date = null;
+            try {
+                tglMulai_date = formatter.parse(tglMulai);
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+            epochMulai = tglMulai_date.getTime();
+        }
+        if (tglBerakhir.matches("")){
+            epochBerakhir = 95626876768000l;
+        } else {
+            Date tglMulai_date = null;
+            try {
+                tglMulai_date = formatter.parse(tglMulai);
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+            epochBerakhir = tglMulai_date.getTime();
+        }
+
+
+        switch (jenisTranskasi){
+            case "1a":
+                filterSalahSatuTransaksi("minus", epochMulai, epochBerakhir);
+                break;
+            case "1b":
+                filterSalahSatuTransaksi("plus", epochMulai, epochBerakhir);
+                break;
+            case "2":
+                bothTransaksi(epochMulai, epochBerakhir);
+
+        }
+    }
+
+
+    public void filterSalahSatuTransaksi(String tipeTransaksi_str, Long epochMulai, Long epochBerakhir){
+        fs.collection("credit").whereEqualTo("tipeTransaksi", tipeTransaksi_str)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (queryDocumentSnapshots != null) {
+                            List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+
+                            for (DocumentSnapshot snapshot : snapshotList) {
+                                Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                                String id = snapshot.getId();
+                                documentID.add(id);
+                                Long epochTimeStamp = Long.parseLong(map.get("timeStampEpoch").toString());
+                                if (epochTimeStamp > epochMulai && epochBerakhir <epochTimeStamp){
+                                    String keterangan_str = map.get("keterangan").toString();
+                                    String tanggal_str = map.get("tanggal").toString();
+                                    String tipeTransakasi_str = map.get("tipeTransaksi").toString();
+                                    String nominalTransaksi_str = map.get("nominalTransaksi").toString();
+
+
+                                    keterangan.add(keterangan_str);
+                                    tanggal.add(tanggal_str);
+                                    tipeTransaksi.add(tipeTransakasi_str);
+                                    nominalTransaksi.add(nominalTransaksi_str);
+
+                                }
+
+
+                            }
+                            Toast.makeText(getApplicationContext(), "QUERY HAS BEEN DONE", Toast.LENGTH_SHORT).show();
+
+                        }
+                        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+                        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                Log.i("Error", e.toString());
+
+
+            }
+        });
+
+    }
+
+    public void bothTransaksi(Long epochMulai, Long epochBerakhir) {
+        Log.i("EPOCH MULAI" , ""+epochMulai);
+        Log.i("EPOCH BERAKHIR" , ""+epochBerakhir);
+
+
+        fs.collection("credit")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        documentID.add(id);
+                        Long epochTimeStamp = Long.parseLong(map.get("timeStampEpoch").toString());
+                        if (epochTimeStamp > epochMulai && epochBerakhir > epochTimeStamp){
+                            String keterangan_str = map.get("keterangan").toString();
+                            String tanggal_str = map.get("tanggal").toString();
+                            String tipeTransakasi_str = map.get("tipeTransaksi").toString();
+                            String nominalTransaksi_str = map.get("nominalTransaksi").toString();
+
+
+                            keterangan.add(keterangan_str);
+                            tanggal.add(tanggal_str);
+                            tipeTransaksi.add(tipeTransakasi_str);
+                            nominalTransaksi.add(nominalTransaksi_str);
+
+                        }
+
+                    }
+                    Toast.makeText(getApplicationContext(), "QUERY HAS BEEN DONE", Toast.LENGTH_SHORT).show();
+                    RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+                    binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+                }
+                RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+                binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                Log.i("Error", e.toString());
+
+            }
+        });
+    }
+
+
+
+
+
+
+
 
     public class RecyclerAdapterTransaksi extends RecyclerView.Adapter<ViewHolder> {
 
@@ -216,4 +386,10 @@ public class TrankasiActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+
 }
