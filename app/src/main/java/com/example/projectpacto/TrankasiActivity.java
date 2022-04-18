@@ -168,8 +168,8 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
         tanggal.clear();
         tipeTransaksi.clear();
         nominalTransaksi.clear();
-        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
-        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+//        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+//        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
         Long epochMulai;
         Long epochBerakhir;
         SimpleDateFormat formatter=new SimpleDateFormat("E, dd MMM yyyy", lokal);
@@ -186,16 +186,17 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
             }
             epochMulai = tglMulai_date.getTime();
         }
+
         if (tglBerakhir.matches("")){
             epochBerakhir = 95626876768000l;
         } else {
-            Date tglMulai_date = null;
+            Date tglBerakhir_date = null;
             try {
-                tglMulai_date = formatter.parse(tglMulai);
+                tglBerakhir_date = formatter.parse(tglBerakhir);
             } catch (ParseException parseException) {
                 parseException.printStackTrace();
             }
-            epochBerakhir = tglMulai_date.getTime();
+            epochBerakhir = tglBerakhir_date.getTime();
         }
 
 
@@ -215,6 +216,8 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
 
     public void filterSalahSatuTransaksi(String tipeTransaksi_str, Long epochMulai, Long epochBerakhir){
         fs.collection("credit").whereEqualTo("tipeTransaksi", tipeTransaksi_str)
+                .whereLessThan("timeStampEpoch",epochBerakhir)
+                .whereGreaterThan("timeStampEpoch", epochMulai)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -228,7 +231,7 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
                                 String id = snapshot.getId();
                                 documentID.add(id);
                                 Long epochTimeStamp = Long.parseLong(map.get("timeStampEpoch").toString());
-                                if (epochTimeStamp > epochMulai && epochBerakhir <epochTimeStamp){
+//                                if (epochTimeStamp > epochMulai && epochBerakhir > epochTimeStamp){
                                     String keterangan_str = map.get("keterangan").toString();
                                     String tanggal_str = map.get("tanggal").toString();
                                     String tipeTransakasi_str = map.get("tipeTransaksi").toString();
@@ -240,7 +243,7 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
                                     tipeTransaksi.add(tipeTransakasi_str);
                                     nominalTransaksi.add(nominalTransaksi_str);
 
-                                }
+//                                }
 
 
                             }
@@ -269,6 +272,8 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
 
 
         fs.collection("credit")
+                .whereLessThan("timeStampEpoch",epochBerakhir)
+                .whereGreaterThan("timeStampEpoch", epochMulai)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -281,7 +286,7 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
                         String id = snapshot.getId();
                         documentID.add(id);
                         Long epochTimeStamp = Long.parseLong(map.get("timeStampEpoch").toString());
-                        if (epochTimeStamp > epochMulai && epochBerakhir > epochTimeStamp){
+//                        if (epochTimeStamp > epochMulai && epochBerakhir > epochTimeStamp){
                             String keterangan_str = map.get("keterangan").toString();
                             String tanggal_str = map.get("tanggal").toString();
                             String tipeTransakasi_str = map.get("tipeTransaksi").toString();
@@ -293,7 +298,7 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
                             tipeTransaksi.add(tipeTransakasi_str);
                             nominalTransaksi.add(nominalTransaksi_str);
 
-                        }
+//                        }
 
                     }
                     Toast.makeText(getApplicationContext(), "QUERY HAS BEEN DONE", Toast.LENGTH_SHORT).show();
