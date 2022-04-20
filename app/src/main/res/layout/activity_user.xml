@@ -1,37 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainConstraintLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
     tools:context=".UserActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="131dp"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:text="User"
-        android:textSize="30dp"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/backdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.15"
+                    android:scaleY="1.15"
+                    android:src="@drawable/ic_home_backdrop"
+                    android:scaleType="centerCrop"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_marginHorizontal="17dp"
+                    android:layout_marginTop="17dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="User"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="21dp"
+                        android:src="@drawable/pacto_logo"/>
+
+
+
+                </LinearLayout>
+            </FrameLayout>
+
+
+
+
+
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/curved_less_bg"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="60dp"
+            android:paddingHorizontal="16dp"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/curved_less_bg_outline">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:orientation="vertical"
+                    android:paddingVertical="10dp">
+
+                    <TextView
+                        android:id="@+id/namaPerusahaan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PT. Saga Construction"
+                        android:textSize="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/roboto_medium"/>
+
+                    <TextView
+                        android:id="@+id/emailPerusahaan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="picpacto@sagacons.com"/>
+                    <TextView
+                        android:id="@+id/nomorPerusahaan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+6282231518977"
+                        android:fontFamily="@font/roboto_regular"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:src="@drawable/logo_perusahaan2"
+                    android:layout_weight="0.1"/>
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerViewPesanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"
+                android:layout_marginBottom="60dp"/>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav"
+        android:id="@+id/bottomNav"
+        app:itemTextAppearanceActive="@style/Widget.BottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/curved_less_bg"
         android:elevation="10dp"
         android:translationZ="10dp"
         app:elevation="10dp"
-        app:itemTextAppearanceActive="@style/Widget.BottomNavigationView"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_nav" />
+        app:layout_constraintBottom_toBottomOf="@id/mainConstraintLayout"
+        android:layout_marginTop="-20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_nav"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

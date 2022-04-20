@@ -62,6 +62,8 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
          lokal = new Locale("id", "ID");
 
 
+
+
         documentID = new ArrayList<>();
         keterangan = new ArrayList<>();
         tanggal = new ArrayList<>();

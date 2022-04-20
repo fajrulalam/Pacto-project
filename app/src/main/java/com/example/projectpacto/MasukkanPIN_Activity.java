@@ -78,6 +78,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     long waktuArsip;
     boolean ongoing;
 
+
+
     RecyclerAdapterPenumpangList recyclerAdapterPenumpangList;
     FirebaseFirestore fs;
 

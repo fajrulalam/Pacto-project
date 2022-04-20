@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -36,7 +37,7 @@ import java.util.Locale;
 
 public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
 
-
+    ImageView closeSheet;
     Button tampilkanButton;
     TextInputLayout tglMulai;
     TextInputLayout tglBerakhir;
@@ -70,6 +71,8 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
         jenisTransaksi_str = bundle.getString("pemasukanAtauPengeluaran");
         keteranganTipeTransaksi = view.findViewById(R.id.jenisTransaksi_txt);
 
+        closeSheet = view.findViewById(R.id.closeSheet);
+
         tglMulai = view.findViewById(R.id.tanggalMulai_txtInput);
         tglBerakhir = view.findViewById(R.id.tanggalBerakhir_txtInput);
         pemasukanFilter = view.findViewById(R.id.filterPemasukan);
@@ -80,6 +83,13 @@ public class TransaksiFilterButtonSheet extends BottomSheetDialogFragment {
         tglBerakhir.getEditText().setText(tglBerakhir_str);
 
         adjustFilterTipeTransaksi(jenisTransaksi_str);
+
+        closeSheet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
 
 
