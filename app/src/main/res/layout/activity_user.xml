@@ -141,6 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
+                android:foreground="@drawable/selectable_view"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -165,6 +167,8 @@
                 android:id="@+id/ubahPin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/selectable_view"
+                android:clickable="true"
                 android:paddingVertical="10dp"
                 android:orientation="horizontal">
 
@@ -194,6 +198,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:foreground="@drawable/selectable_view"
+                android:clickable="true"
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
 
@@ -219,6 +225,8 @@
                 android:id="@+id/tentangKami"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/selectable_view"
+                android:clickable="true"
                 android:paddingVertical="10dp"
                 android:orientation="horizontal">
 
@@ -252,6 +260,8 @@
                 android:id="@+id/logoutButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:foreground="@drawable/selectable_view"
+                android:clickable="true"
                 android:layout_gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingVertical="10dp">
