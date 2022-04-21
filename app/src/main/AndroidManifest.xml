@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".NamaTersimpanActivity"
+            android:exported="false" />
+        <activity
             android:name=".FormIssuingActivity"
             android:exported="false" />
         <activity
