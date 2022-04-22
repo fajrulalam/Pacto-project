@@ -19,6 +19,13 @@ public class NamaTersimpanActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
     }
 }
