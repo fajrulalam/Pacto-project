@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +42,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         nama_titel.add("Rekyan (Mr)");
         NIKatauPaspor.add("35174");
 
-        RecyclerAdapterNamaTersimpan recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor);
+        RecyclerAdapterNamaTersimpan recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
         binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
 
 
@@ -57,6 +58,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
     @Override
     public void addPassengerDetail(String NIKatauPaspor) {
+        Log.i("NIK atau Paspor di MENU", NIKatauPaspor);
 
     }
 }

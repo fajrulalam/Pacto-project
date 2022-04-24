@@ -21,9 +21,10 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
     AddPassengerDetail addPassengerDetail;
 
 
-    public RecyclerAdapterNamaTersimpan(ArrayList<String> nama_titel, ArrayList<String> NIKatauPaspor) {
+    public RecyclerAdapterNamaTersimpan(ArrayList<String> nama_titel, ArrayList<String> NIKatauPaspor, AddPassengerDetail addPassengerDetail) {
         this.nama_titel = nama_titel;
         this.NIKatauPaspor = NIKatauPaspor;
+        this.addPassengerDetail = addPassengerDetail;
     }
 
     @NonNull
@@ -38,6 +39,7 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        int position_ = position;
         holder.namaTersimpan_titel.setText(nama_titel.get(position));
         holder.NIKatauPaspor.setText(NIKatauPaspor.get(position));
 
@@ -45,7 +47,7 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
             @Override
             public void onClick(View view) {
                 Log.i("NIK atau Paspor", holder.NIKatauPaspor.getText().toString());
-                addPassengerDetail.addPassengerDetail(holder.NIKatauPaspor.getText().toString());
+                addPassengerDetail.addPassengerDetail(NIKatauPaspor.get(position_));
             }
         });
 
