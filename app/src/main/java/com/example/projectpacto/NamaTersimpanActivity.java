@@ -34,11 +34,11 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
         nama_titel.add("Fajrul (Mr)");
         NIKatauPaspor.add("35171");
-        nama_titel.add("Asad (Mr");
+        nama_titel.add("Asad (Mr)");
         NIKatauPaspor.add("35172");
-        nama_titel.add("Yoga (Mr");
+        nama_titel.add("Yoga (Mr)");
         NIKatauPaspor.add("35173");
-        nama_titel.add("Rekyan (Mr");
+        nama_titel.add("Rekyan (Mr)");
         NIKatauPaspor.add("35174");
 
         RecyclerAdapterNamaTersimpan recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor);
