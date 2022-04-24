@@ -22,6 +22,18 @@ public class UserActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+
+
+        binding.namaTersimpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NamaTersimpanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         binding.bottomNav.setSelectedItemId(R.id.user);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

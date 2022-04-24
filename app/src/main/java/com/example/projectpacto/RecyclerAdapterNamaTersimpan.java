@@ -1,5 +1,6 @@
 package com.example.projectpacto;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,26 +10,50 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
+import javax.security.auth.login.LoginException;
+
 public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerAdapterNamaTersimpan.ViewHolder> {
 
+    ArrayList<String> nama_titel;
+    ArrayList<String> NIKatauPaspor;
+    AddPassengerDetail addPassengerDetail;
+
+
+    public RecyclerAdapterNamaTersimpan(ArrayList<String> nama_titel, ArrayList<String> NIKatauPaspor) {
+        this.nama_titel = nama_titel;
+        this.NIKatauPaspor = NIKatauPaspor;
+    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.nama_tersimpan_single_view, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, addPassengerDetail);
         return  viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        holder.namaTersimpan_titel.setText(nama_titel.get(position));
+        holder.NIKatauPaspor.setText(NIKatauPaspor.get(position));
+
+        holder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("NIK atau Paspor", holder.NIKatauPaspor.getText().toString());
+                addPassengerDetail.addPassengerDetail(holder.NIKatauPaspor.getText().toString());
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return nama_titel.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -38,7 +63,7 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
         ImageView delete;
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, AddPassengerDetail addPassengerDetail) {
             super(itemView);
 
 
@@ -49,5 +74,9 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
         }
 
 
+    }
+
+    public interface AddPassengerDetail {
+        void addPassengerDetail(String nomorPelanggan);
     }
 }

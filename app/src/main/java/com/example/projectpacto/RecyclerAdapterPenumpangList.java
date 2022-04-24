@@ -83,6 +83,6 @@ public class RecyclerAdapterPenumpangList extends RecyclerView.Adapter<RecyclerA
     }
 
     public interface AddPassengerDetail {
-        void addPassengerDetail(String nomorPelanggan);
+        void addPassengerDetail(String NIKatauPaspor);
     }
 }
