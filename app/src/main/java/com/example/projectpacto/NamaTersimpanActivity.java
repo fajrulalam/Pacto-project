@@ -98,6 +98,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         DataPenumpang dataPenumpang = new DataPenumpang();
         Bundle bundle = new Bundle();
         bundle.putString("penumpangKe_n", "");
+        bundle.putInt("index", index);
         bundle.putString("tglLahir_str", tglLahir.get(index));
         bundle.putString("nama_str", nama.get(index));
         bundle.putString("kewarganegaraan_str", kewarganegaraan.get(index));

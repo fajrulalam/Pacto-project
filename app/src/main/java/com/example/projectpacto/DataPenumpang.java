@@ -46,6 +46,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     ArrayList<String> titel;
     ArrayList<String> nama;
     OnDataPassenger datapasser;
+    int index;
 
     String tglLahir_str;
     String nama_str;
@@ -137,6 +138,8 @@ public class DataPenumpang extends BottomSheetDialogFragment {
 
         if (bundle.getString("penumpangKe_n").matches("")){
             headingFragment.setText("Sunting nama tersimpan");
+            index = bundle.getInt("index");
+
         } else {
             penumpangNumber.setText(bundle.getString("penumpangKe_n"));
         }
@@ -203,8 +206,13 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                 String tglLahir_str = tglLahir.getEditText().getText().toString();
                 String kewarganegaraan_str = kewarganegaraan.getEditText().getText().toString();
                 String NIKatauPasport_str = NIKatauPaspor.getText().toString();
-                int penumpangNumber_int = Integer.parseInt(penumpangNumber.getText().toString());
-                datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,penumpangNumber_int );
+                try {
+                    int penumpangNumber_int = Integer.parseInt(penumpangNumber.getText().toString());
+                    datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,penumpangNumber_int );
+                } catch (Exception e){
+                    datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,index );
+
+                }
                 dismiss();
             }
         });
