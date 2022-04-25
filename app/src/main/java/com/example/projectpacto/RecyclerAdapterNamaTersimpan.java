@@ -39,7 +39,7 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        int position_ = position;
+        int position_ = position+1;
         holder.namaTersimpan_titel.setText(nama_titel.get(position));
         holder.NIKatauPaspor.setText(NIKatauPaspor.get(position));
 

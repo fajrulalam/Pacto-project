@@ -36,6 +36,7 @@ import java.util.ArrayList;
 
 public class DataPenumpang extends BottomSheetDialogFragment {
 
+    TextView headingFragment;
     TextView penumpangNumber;
     AutoCompleteTextView namaAutoComplete;
     AutoCompleteTextView titelDropdown;
@@ -70,6 +71,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
 
+        headingFragment = view.findViewById(R.id.headingFragment);
         namaAutoComplete = view.findViewById(R.id.testNamaAutocomplete);
         titelDropdown = view.findViewById(R.id.titelDropdown);
         penumpangNumber = view.findViewById(R.id.penumpangNumber);
@@ -82,6 +84,8 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         kewarganegaraan_str = bundle.getString("kewarganegaraan_str");
         NIKatauPaspor_str = bundle.getString("NIKatauPaspor_str");
         titel_str = bundle.getString("titel_str");
+
+
 
         if (!nama_str.split(" ")[0].matches("Penumpang")){
             namaAutoComplete.setText(nama_str);
@@ -131,8 +135,11 @@ public class DataPenumpang extends BottomSheetDialogFragment {
             }
         });
 
-
-        penumpangNumber.setText(bundle.getString("penumpangKe_n"));
+        if (bundle.getString("penumpangKe_n").matches("")){
+            headingFragment.setText("Sunting nama tersimpan");
+        } else {
+            penumpangNumber.setText(bundle.getString("penumpangKe_n"));
+        }
 
 
         nama = new ArrayList<>();
