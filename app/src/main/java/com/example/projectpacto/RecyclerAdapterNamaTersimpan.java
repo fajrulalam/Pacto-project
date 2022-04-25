@@ -47,7 +47,7 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
             @Override
             public void onClick(View view) {
                 Log.i("NIK atau Paspor", holder.NIKatauPaspor.getText().toString());
-                addPassengerDetail.addPassengerDetail(NIKatauPaspor.get(position_));
+                addPassengerDetail.addPassengerDetail(position_);
             }
         });
 
@@ -79,6 +79,11 @@ public class RecyclerAdapterNamaTersimpan extends RecyclerView.Adapter<RecyclerA
     }
 
     public interface AddPassengerDetail {
-        void addPassengerDetail(String nomorPelanggan);
+        void addPassengerDetail(int nomorPelanggan);
+
+
+
+
+
     }
 }

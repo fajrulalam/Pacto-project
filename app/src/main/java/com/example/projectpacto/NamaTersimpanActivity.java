@@ -56,10 +56,21 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
     }
 
-    @Override
-    public void addPassengerDetail(String NIKatauPaspor) {
-        Log.i("NIK atau Paspor di MENU", NIKatauPaspor);
 
+    @Override
+    public void addPassengerDetail(int penumpangKe_n) {
+
+        int index = penumpangKe_n - 1;
+        DataPenumpang dataPenumpang = new DataPenumpang();
+        Bundle bundle = new Bundle();
+//        bundle.putString("penumpangKe_n", nomorPelanggan);
+//        bundle.putString("tglLahir_str", tglLahir.get(index));
+//        bundle.putString("nama_str", namaPassenger.get(index));
+//        bundle.putString("kewarganegaraan_str", kewarganegaraan.get(index));
+//        bundle.putString("NIKatauPaspor_str", NIKatauPaspor.get(index));
+//        bundle.putString("titel_str", titel.get(index));
+        dataPenumpang.setArguments(bundle);
+        dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
     }
 }
 
