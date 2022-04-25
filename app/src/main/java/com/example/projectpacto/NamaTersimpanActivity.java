@@ -25,6 +25,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
     ArrayList<String> titel;
     ArrayList<String> tglLahir;
     ArrayList<String> kewarganegaraan;
+    RecyclerAdapterNamaTersimpan recyclerAdapterNamaTersimpan;
 
 
 
@@ -75,7 +76,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
             nama_titel.add(nama_titel_str);
         }
 
-        RecyclerAdapterNamaTersimpan recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
+        recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
         binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
 
 
@@ -109,7 +110,21 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
     }
 
     @Override
-    public void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor, int penumpangKe_n) {
+    public void onDataPass(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, int penumpangKe_n) {
+
+        NIKatauPaspor.set(penumpangKe_n,nikAtauPaspor_str );
+        nama.set(penumpangKe_n,nama_str );
+        titel.set(penumpangKe_n,titel_str );
+        tglLahir.set(penumpangKe_n,tglLahir_str );
+        kewarganegaraan.set(penumpangKe_n,kewarganegaraan_str );
+
+        nama_titel.set(penumpangKe_n, nama.get(penumpangKe_n) + " (" + titel.get(penumpangKe_n) +")");
+
+        recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
+        binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+
+
+
         Log.i("Data should be saved", "SAVED");
     }
 }
