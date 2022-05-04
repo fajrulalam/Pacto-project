@@ -18,7 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -26,6 +28,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -53,6 +56,9 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     String kewarganegaraan_str;
     String NIKatauPaspor_str;
     String titel_str;
+    String documentID;
+
+    FirebaseFirestore fs;
 
 
 
@@ -85,8 +91,9 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         kewarganegaraan_str = bundle.getString("kewarganegaraan_str");
         NIKatauPaspor_str = bundle.getString("NIKatauPaspor_str");
         titel_str = bundle.getString("titel_str");
+        documentID = bundle.getString("documentID");
 
-
+        fs = FirebaseFirestore.getInstance();
 
         if (!nama_str.split(" ")[0].matches("Penumpang")){
             namaAutoComplete.setText(nama_str);
@@ -206,6 +213,17 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                 String tglLahir_str = tglLahir.getEditText().getText().toString();
                 String kewarganegaraan_str = kewarganegaraan.getEditText().getText().toString();
                 String NIKatauPasport_str = NIKatauPaspor.getText().toString();
+
+                fs.collection("namaTersimpan").document(documentID).update(
+                        "NIKatauPaspor", NIKatauPasport_str,
+                        "titel", titel,
+                        "nama", nama,
+                        "tglLahir", tglLahir_str,
+                        "kewarganegaraan", kewarganegaraan_str).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                    }
+                });
                 try {
                     int penumpangNumber_int = Integer.parseInt(penumpangNumber.getText().toString());
                     datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,penumpangNumber_int );
