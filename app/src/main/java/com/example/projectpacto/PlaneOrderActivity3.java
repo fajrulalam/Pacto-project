@@ -319,7 +319,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements DataPenump
     }
 
     @Override
-    public void onDataPass(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, int penumpangKe_n) {
+    public void onDataPass(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, int penumpangKe_n, String request) {
 
 
         namaPassenger.set(penumpangKe_n-1, nama_str);

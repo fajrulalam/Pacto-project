@@ -57,6 +57,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     String NIKatauPaspor_str;
     String titel_str;
     String documentID;
+    String request; //can be Create, Update, or Add temporarily.
 
     FirebaseFirestore fs;
 
@@ -92,6 +93,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         NIKatauPaspor_str = bundle.getString("NIKatauPaspor_str");
         titel_str = bundle.getString("titel_str");
         documentID = bundle.getString("documentID");
+        request = bundle.getString("request");
 
         fs = FirebaseFirestore.getInstance();
 
@@ -146,6 +148,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         if (bundle.getString("penumpangKe_n").matches("")){
             headingFragment.setText("Sunting nama tersimpan");
             index = bundle.getInt("index");
+            penumpangNumber.setVisibility(View.INVISIBLE);
 
         } else {
             penumpangNumber.setText(bundle.getString("penumpangKe_n"));
@@ -214,21 +217,12 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                 String kewarganegaraan_str = kewarganegaraan.getEditText().getText().toString();
                 String NIKatauPasport_str = NIKatauPaspor.getText().toString();
 
-                fs.collection("namaTersimpan").document(documentID).update(
-                        "NIKatauPaspor", NIKatauPasport_str,
-                        "titel", titel,
-                        "nama", nama,
-                        "tglLahir", tglLahir_str,
-                        "kewarganegaraan", kewarganegaraan_str).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                    }
-                });
+
                 try {
                     int penumpangNumber_int = Integer.parseInt(penumpangNumber.getText().toString());
-                    datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,penumpangNumber_int );
+                    datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,penumpangNumber_int, request );
                 } catch (Exception e){
-                    datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,index );
+                    datapasser.onDataPass(nama, titel ,tglLahir_str ,kewarganegaraan_str ,NIKatauPasport_str ,index, request);
 
                 }
                 dismiss();
@@ -241,7 +235,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     }
 
     public interface OnDataPassenger {
-        void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor, int penumpangKe_n);
+        void onDataPass(String nama, String titel, String tglLahir, String kewarganegaraan, String nikAtauPaspor, int penumpangKe_n, String request);
     }
 
     @Override

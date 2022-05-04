@@ -84,9 +84,6 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
                         titel.add(titel_str);
                         tglLahir.add(tglLahir_str);
                         kewarganegaraan.add(kewarganegaraan_str);
-
-
-
                     }
                     recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, NamaTersimpanActivity.this::addPassengerDetail);
                     binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
@@ -96,40 +93,14 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
 
 
-//        NIKatauPaspor.add("35171");
-//        nama.add("Fajrul");
-//        titel.add("Mr");
-//        tglLahir.add("27 Januari 2003");
-//        kewarganegaraan.add("Indonesia");
-//
-//
-//        NIKatauPaspor.add("35172");
-//        nama.add("Yoga");
-//        titel.add("Mr");
-//        tglLahir.add("27 Januari 1987");
-//        kewarganegaraan.add("Indonesia");
-//
-//
-//        NIKatauPaspor.add("35173");
-//        nama.add("Asad");
-//        titel.add("Ms");
-//        tglLahir.add("27 Januari 2003");
-//        kewarganegaraan.add("Australia");
+        binding.tambahButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DataPenumpang dataPenumpang = new DataPenumpang();
+                Bundle bundle = new Bundle();
 
-
-//        NIKatauPaspor.add("35174");
-//        nama.add("Rekyan");
-//        titel.add("Mr");
-//        tglLahir.add("27 Januari 1967");
-//        kewarganegaraan.add("Indonesia");
-//
-//        for (int i = 0; i<nama.size(); i++){
-//            String nama_titel_str = nama.get(i) + " (" + titel.get(i) +")";
-//            nama_titel.add(nama_titel_str);
-//        }
-//
-//        recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
-//        binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+            }
+        });
 
 
         binding.backButton.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +126,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
             bundle.putString("documentID", documentID.get(index));
             bundle.putInt("index", index);
             bundle.putString("tglLahir_str", tglLahir.get(index));
+            bundle.putString("request", "Update");
             bundle.putString("nama_str", nama.get(index));
             bundle.putString("kewarganegaraan_str", kewarganegaraan.get(index));
             bundle.putString("NIKatauPaspor_str", NIKatauPaspor.get(index));
@@ -191,7 +163,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
     }
 
     @Override
-    public void onDataPass(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, int penumpangKe_n) {
+    public void onDataPass(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, int penumpangKe_n, String request) {
 
         NIKatauPaspor.set(penumpangKe_n,nikAtauPaspor_str );
         nama.set(penumpangKe_n,nama_str );
@@ -203,6 +175,15 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
         recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
         binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+
+        if (request.matches("Update")) {
+            fs.collection("namaTersimpan").document(documentID.get(penumpangKe_n)).update(
+                    "NIKatauPaspor", nikAtauPaspor_str,
+                    "titel", titel_str,
+                    "nama", nama_str,
+                    "tglLahir", tglLahir_str,
+                    "kewarganegaraan", kewarganegaraan_str);
+        }
 
 
 
