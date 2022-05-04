@@ -92,21 +92,33 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
 
     @Override
-    public void addPassengerDetail(int penumpangKe_n) {
-
+    public void addPassengerDetail(int penumpangKe_n, String query) {
         int index = penumpangKe_n - 1;
-        Log.i("index battle", "tgl Lahir: " + tglLahir.size() +" || index: " + index);
-        DataPenumpang dataPenumpang = new DataPenumpang();
-        Bundle bundle = new Bundle();
-        bundle.putString("penumpangKe_n", "");
-        bundle.putInt("index", index);
-        bundle.putString("tglLahir_str", tglLahir.get(index));
-        bundle.putString("nama_str", nama.get(index));
-        bundle.putString("kewarganegaraan_str", kewarganegaraan.get(index));
-        bundle.putString("NIKatauPaspor_str", NIKatauPaspor.get(index));
-        bundle.putString("titel_str", titel.get(index));
-        dataPenumpang.setArguments(bundle);
-        dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
+        Log.i("index battle", "tgl Lahir: " + tglLahir.size() + " || index: " + index);
+
+        if (query.matches("edit")) {
+            DataPenumpang dataPenumpang = new DataPenumpang();
+            Bundle bundle = new Bundle();
+            bundle.putString("penumpangKe_n", "");
+            bundle.putInt("index", index);
+            bundle.putString("tglLahir_str", tglLahir.get(index));
+            bundle.putString("nama_str", nama.get(index));
+            bundle.putString("kewarganegaraan_str", kewarganegaraan.get(index));
+            bundle.putString("NIKatauPaspor_str", NIKatauPaspor.get(index));
+            bundle.putString("titel_str", titel.get(index));
+            dataPenumpang.setArguments(bundle);
+            dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
+        } else {
+            NIKatauPaspor.remove(index);
+            nama.remove(index);
+            titel.remove(index);
+            tglLahir.remove(index);
+            kewarganegaraan.remove(index);
+            nama_titel.remove(index);
+            recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
+            binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+
+        }
     }
 
     @Override
