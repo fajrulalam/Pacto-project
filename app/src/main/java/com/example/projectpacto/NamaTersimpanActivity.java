@@ -1,9 +1,12 @@
 package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder4Binding;
 import com.example.projectpacto.databinding.ActivityNamaTersimpanBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 
@@ -109,14 +114,30 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
             dataPenumpang.setArguments(bundle);
             dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
         } else {
-            NIKatauPaspor.remove(index);
-            nama.remove(index);
-            titel.remove(index);
-            tglLahir.remove(index);
-            kewarganegaraan.remove(index);
-            nama_titel.remove(index);
-            recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, this);
-            binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Yakin hapus nama " + nama.get(index)+"?")
+                    .setMessage("\n")
+                    .setPositiveButton("Tidak", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                        }
+                    })
+                    .setNegativeButton("Ya", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            NIKatauPaspor.remove(index);
+                            nama.remove(index);
+                            titel.remove(index);
+                            tglLahir.remove(index);
+                            kewarganegaraan.remove(index);
+                            nama_titel.remove(index);
+                            recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, NamaTersimpanActivity.this::addPassengerDetail);
+                            binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+                        }
+                    }).show();
+
 
         }
     }
