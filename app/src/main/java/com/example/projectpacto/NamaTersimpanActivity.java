@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
     RecyclerAdapterNamaTersimpan recyclerAdapterNamaTersimpan;
     FirebaseFirestore fs;
 
+    String userID;
+
 
 
     @Override
@@ -50,6 +53,8 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
         fs = FirebaseFirestore.getInstance();
 
+        userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
         nama_titel = new ArrayList<>();
         NIKatauPaspor = new ArrayList<>();
         nama = new ArrayList<>();
@@ -59,37 +64,8 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         documentID = new ArrayList<>();
 
 
+        QueryNamaTersimpan();
 
-
-        fs.collection("namaTersimpan").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (queryDocumentSnapshots != null) {
-                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-
-                    for (DocumentSnapshot snapshot : snapshotList) {
-                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
-                        String id = snapshot.getId();
-                        documentID.add(id);
-                        String NIKatauPaspor_str = map.get("NIKatauPaspor").toString();
-                        String nama_str = map.get("nama").toString();
-                        String titel_str = map.get("titel").toString();
-                        String nama_titel_str = nama_str + " (" + titel_str +")";
-                        String tglLahir_str = map.get("tglLahir").toString();
-                        String kewarganegaraan_str = map.get("kewarganegaraan").toString();
-
-                        nama_titel.add(nama_titel_str);
-                        NIKatauPaspor.add(NIKatauPaspor_str);
-                        nama.add(nama_str);
-                        titel.add(titel_str);
-                        tglLahir.add(tglLahir_str);
-                        kewarganegaraan.add(kewarganegaraan_str);
-                    }
-                    recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, NamaTersimpanActivity.this::addPassengerDetail);
-                    binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
-                }
-            }
-        });
 
 
 
@@ -124,6 +100,53 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         });
 
 
+    }
+
+    public void QueryNamaTersimpan(){
+        NIKatauPaspor.clear();
+        nama_titel.clear();
+        nama.clear();
+        titel.clear();
+        tglLahir.clear();
+        kewarganegaraan.clear();
+        documentID.clear();
+
+        fs.collection("namaTersimpan").whereEqualTo("userID", userID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+                        String id = snapshot.getId();
+                        documentID.add(id);
+                        try {
+                            String NIKatauPaspor_str = map.get("NIKatauPaspor").toString();
+                            NIKatauPaspor.add(NIKatauPaspor_str);
+                        } catch (Exception e) {
+                                String NIKatauPaspor_str = map.get("nikatauPaspor").toString();
+                                NIKatauPaspor.add(NIKatauPaspor_str);
+
+                        }
+                        String nama_str = map.get("nama").toString();
+                        String titel_str = map.get("titel").toString();
+                        String nama_titel_str = nama_str + " (" + titel_str +")";
+                        String tglLahir_str = map.get("tglLahir").toString();
+                        String kewarganegaraan_str = map.get("kewarganegaraan").toString();
+
+                        nama_titel.add(nama_titel_str);
+
+                        nama.add(nama_str);
+                        titel.add(titel_str);
+                        tglLahir.add(tglLahir_str);
+                        kewarganegaraan.add(kewarganegaraan_str);
+                    }
+                    recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, NamaTersimpanActivity.this::addPassengerDetail);
+                    binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
+                }
+            }
+        });
     }
 
 
@@ -197,7 +220,9 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
                     "tglLahir", tglLahir_str,
                     "kewarganegaraan", kewarganegaraan_str);
         } else if (request.matches("Create")){
-
+            SimpanNamaBaru simpanNamaBaru = new SimpanNamaBaru(nama_str, titel_str, tglLahir_str, kewarganegaraan_str, nikAtauPaspor_str, userID);
+            fs.collection("namaTersimpan").add(simpanNamaBaru);
+            QueryNamaTersimpan();
         }
 
         Log.i("Data should be saved", "SAVED");
@@ -205,64 +230,64 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
 
 
     public class SimpanNamaBaru {
-        String nama_str;
-        String titel_str;
-        String tglLahir_str;
-        String kewarganegaraan_str;
-        String nikAtauPaspor_str;
+        String nama;
+        String titel;
+        String tglLahir;
+        String kewarganegaraan;
+        String NIKatauPaspor;
         String userID;
 
         public SimpanNamaBaru() {
             //Constructor
         }
 
-        public SimpanNamaBaru(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, String userID) {
-            this.nama_str = nama_str;
-            this.titel_str = titel_str;
-            this.tglLahir_str = tglLahir_str;
-            this.kewarganegaraan_str = kewarganegaraan_str;
-            this.nikAtauPaspor_str = nikAtauPaspor_str;
+        public SimpanNamaBaru(String nama, String titel, String tglLahir, String kewarganegaraan, String NIKatauPaspor, String userID) {
+            this.nama = nama;
+            this.titel = titel;
+            this.tglLahir = tglLahir;
+            this.kewarganegaraan = kewarganegaraan;
+            this.NIKatauPaspor = NIKatauPaspor;
             this.userID = userID;
         }
 
-        public String getNama_str() {
-            return nama_str;
+        public String getNama() {
+            return nama;
         }
 
-        public void setNama_str(String nama_str) {
-            this.nama_str = nama_str;
+        public void setNama(String nama) {
+            this.nama = nama;
         }
 
-        public String getTitel_str() {
-            return titel_str;
+        public String getTitel() {
+            return titel;
         }
 
-        public void setTitel_str(String titel_str) {
-            this.titel_str = titel_str;
+        public void setTitel(String titel) {
+            this.titel = titel;
         }
 
-        public String getTglLahir_str() {
-            return tglLahir_str;
+        public String getTglLahir() {
+            return tglLahir;
         }
 
-        public void setTglLahir_str(String tglLahir_str) {
-            this.tglLahir_str = tglLahir_str;
+        public void setTglLahir(String tglLahir) {
+            this.tglLahir = tglLahir;
         }
 
-        public String getKewarganegaraan_str() {
-            return kewarganegaraan_str;
+        public String getKewarganegaraan() {
+            return kewarganegaraan;
         }
 
-        public void setKewarganegaraan_str(String kewarganegaraan_str) {
-            this.kewarganegaraan_str = kewarganegaraan_str;
+        public void setKewarganegaraan(String kewarganegaraan) {
+            this.kewarganegaraan = kewarganegaraan;
         }
 
-        public String getNikAtauPaspor_str() {
-            return nikAtauPaspor_str;
+        public String getNIKatauPaspor() {
+            return NIKatauPaspor;
         }
 
-        public void setNikAtauPaspor_str(String nikAtauPaspor_str) {
-            this.nikAtauPaspor_str = nikAtauPaspor_str;
+        public void setNIKatauPaspor(String NIKatauPaspor) {
+            this.NIKatauPaspor = NIKatauPaspor;
         }
 
         public String getUserID() {
