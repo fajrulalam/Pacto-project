@@ -98,6 +98,18 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
             public void onClick(View view) {
                 DataPenumpang dataPenumpang = new DataPenumpang();
                 Bundle bundle = new Bundle();
+                bundle.putString("penumpangKe_n", "");
+                bundle.putString("documentID", "");
+//                bundle.putInt("index", null);
+                bundle.putString("tglLahir_str", "");
+                bundle.putString("request", "Create");
+                bundle.putString("nama_str", "");
+                bundle.putString("kewarganegaraan_str", "");
+                bundle.putString("NIKatauPaspor_str", "");
+                bundle.putString("titel_str", "");
+                dataPenumpang.setArguments(bundle);
+                dataPenumpang.show(getSupportFragmentManager(), dataPenumpang.getTag());
+
 
             }
         });
@@ -106,6 +118,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         binding.backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
             }
         });
@@ -183,11 +196,82 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
                     "nama", nama_str,
                     "tglLahir", tglLahir_str,
                     "kewarganegaraan", kewarganegaraan_str);
+        } else if (request.matches("Create")){
+
         }
 
-
-
         Log.i("Data should be saved", "SAVED");
+    }
+
+
+    public class SimpanNamaBaru {
+        String nama_str;
+        String titel_str;
+        String tglLahir_str;
+        String kewarganegaraan_str;
+        String nikAtauPaspor_str;
+        String userID;
+
+        public SimpanNamaBaru() {
+            //Constructor
+        }
+
+        public SimpanNamaBaru(String nama_str, String titel_str, String tglLahir_str, String kewarganegaraan_str, String nikAtauPaspor_str, String userID) {
+            this.nama_str = nama_str;
+            this.titel_str = titel_str;
+            this.tglLahir_str = tglLahir_str;
+            this.kewarganegaraan_str = kewarganegaraan_str;
+            this.nikAtauPaspor_str = nikAtauPaspor_str;
+            this.userID = userID;
+        }
+
+        public String getNama_str() {
+            return nama_str;
+        }
+
+        public void setNama_str(String nama_str) {
+            this.nama_str = nama_str;
+        }
+
+        public String getTitel_str() {
+            return titel_str;
+        }
+
+        public void setTitel_str(String titel_str) {
+            this.titel_str = titel_str;
+        }
+
+        public String getTglLahir_str() {
+            return tglLahir_str;
+        }
+
+        public void setTglLahir_str(String tglLahir_str) {
+            this.tglLahir_str = tglLahir_str;
+        }
+
+        public String getKewarganegaraan_str() {
+            return kewarganegaraan_str;
+        }
+
+        public void setKewarganegaraan_str(String kewarganegaraan_str) {
+            this.kewarganegaraan_str = kewarganegaraan_str;
+        }
+
+        public String getNikAtauPaspor_str() {
+            return nikAtauPaspor_str;
+        }
+
+        public void setNikAtauPaspor_str(String nikAtauPaspor_str) {
+            this.nikAtauPaspor_str = nikAtauPaspor_str;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
     }
 }
 
