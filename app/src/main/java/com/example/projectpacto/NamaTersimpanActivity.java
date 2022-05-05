@@ -189,6 +189,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
                             tglLahir.remove(index);
                             kewarganegaraan.remove(index);
                             nama_titel.remove(index);
+                            fs.collection("namaTersimpan").document(documentID.get(index)).delete();
                             recyclerAdapterNamaTersimpan = new RecyclerAdapterNamaTersimpan(nama_titel, NIKatauPaspor, NamaTersimpanActivity.this::addPassengerDetail);
                             binding.recyclerViewNamaTersimpan.setAdapter(recyclerAdapterNamaTersimpan);
                         }
