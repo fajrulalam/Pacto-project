@@ -33,10 +33,10 @@
                     android:id="@+id/backdrop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
                     android:scaleX="1.15"
                     android:scaleY="1.15"
-                    android:src="@drawable/ic_home_backdrop"
-                    android:scaleType="centerCrop"/>
+                    android:src="@drawable/ic_home_backdrop" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

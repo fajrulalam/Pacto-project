@@ -9,11 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.projectpacto.databinding.ActivityUserBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
 
 public class UserActivity extends AppCompatActivity {
 
     ActivityUserBinding binding;
+
+    FirebaseFirestore fs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,25 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        fs = FirebaseFirestore.getInstance();
+
+        String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
+        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                String namaPerusahaan = map.get("nama").toString();
+                String email = map.get("email").toString();
+                String noTelp = map.get("nomorTelpon").toString();
+
+                binding.namaPerusahaan.setText(namaPerusahaan);
+                binding.emailPerusahaan.setText(email);
+                binding.nomorPerusahaan.setText(noTelp);
+            }
+        });
+
 
 
 
