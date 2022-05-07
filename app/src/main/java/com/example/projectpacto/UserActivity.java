@@ -44,6 +44,9 @@ public class UserActivity extends AppCompatActivity {
 
         String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
 
+
+
+        //GET THE USER ACCOUNT DATA
         fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -60,7 +63,24 @@ public class UserActivity extends AppCompatActivity {
 
 
 
+        //UBAH PASSWORD
+        //.... insert code here.....//
 
+
+
+
+        //UBAH PIN
+        binding.ubahPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), UbahPinActivity1.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
+            }
+        });
+
+
+        //SETTING THE BOTTOM NAV
         binding.bottomNav.setSelectedItemId(R.id.user);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

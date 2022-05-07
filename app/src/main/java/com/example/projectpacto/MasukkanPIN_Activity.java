@@ -179,7 +179,50 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
 
 
+        binding.pin1.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i == KeyEvent.KEYCODE_DEL){
+                    Toast.makeText(getApplicationContext(), "Masukkan PIN", Toast.LENGTH_SHORT).show();
+                }
 
+                return false;
+            }
+        });
+
+        binding.pin2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i == KeyEvent.KEYCODE_DEL){
+                    binding.pin1.requestFocus();
+                }
+
+                return false;
+            }
+        });
+
+        binding.pin3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i == KeyEvent.KEYCODE_DEL){
+                    binding.pin2.requestFocus();
+                }
+
+                return false;
+            }
+        });
+
+
+        binding.pin4.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i == KeyEvent.KEYCODE_DEL){
+                    binding.pin3.requestFocus();
+                }
+
+                return false;
+            }
+        });
 
 
 
