@@ -9,13 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.projectpacto.databinding.ActivityRealMainBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 public class RealMainActivity extends AppCompatActivity {
 
     ActivityRealMainBinding binding;
+    FirebaseFirestore fs;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +30,10 @@ public class RealMainActivity extends AppCompatActivity {
         binding = ActivityRealMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        fs = FirebaseFirestore.getInstance();
+
+        userID =  "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
 
         binding.pesanPesawat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +50,19 @@ public class RealMainActivity extends AppCompatActivity {
                 overridePendingTransition(0 , 0);
             }
         });
+
+        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                int kredit_int = Integer.parseInt(map.get("kredit").toString());
+                String kredit_str  = String.format("%,d", kredit_int).replace(',', '.');
+                binding.kredit.setText("IDR " + kredit_str);
+
+            }
+        });
+
+
 
 
 

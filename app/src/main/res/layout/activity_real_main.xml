@@ -365,6 +365,7 @@
                 android:fontFamily="@font/roboto_regular"
                 />
             <TextView
+                android:id="@+id/kredit"
                 android:gravity="center_vertical"
                 android:textAlignment="gravity"
                 android:layout_width="match_parent"
