@@ -64,6 +64,8 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
 
 
 
+
+
         documentID = new ArrayList<>();
         keterangan = new ArrayList<>();
         tanggal = new ArrayList<>();
@@ -77,6 +79,17 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
         tglMulai = "";
         tglBerakhir = "";
         pemasukanAtauPengeluaran = "2"; //1a = pengeluaran saja. 1b = pemasukan saja. 2 = dua2nya
+
+        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                int kredit_int = Integer.parseInt(map.get("kredit").toString());
+                String kredit_str  = String.format("%,d", kredit_int).replace(',', '.');
+                binding.kreditLimitNominal.setText("IDR " + kredit_str);
+
+            }
+        });
 
 
         binding.filterButton.setOnClickListener(new View.OnClickListener() {

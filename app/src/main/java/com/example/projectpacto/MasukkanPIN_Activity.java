@@ -348,6 +348,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
             String JumlahKamar = jumlahKamar.split(", ")[1];
             String hargaTotal = "IDR 670.000";
+
+            String hargaPesawat_cleanstr = hargaTotal.split(" ")[1].replace(".", "");
+            int hargaPesawat_int = Integer.parseInt(hargaPesawat_cleanstr) *-1;
+            Log.i("harga hotel", ""+hargaPesawat_int);
+
             FieldValue timeStamp = FieldValue.serverTimestamp();
             BookingPesawat bookingPesawat = new BookingPesawat(
                     ongoing,
@@ -380,6 +385,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             TransactionDetail transactionDetail = new TransactionDetail(epochNow, userID, keterangan, date_str, tipeTransaksi, nominalTransaksi);
 
 
+
             fs.collection("credit").add(transactionDetail).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
@@ -387,6 +393,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                         @Override
                         public void onSuccess(DocumentReference documentReferebnce) {
                             Toast.makeText(getApplicationContext(), "Update to Firestore successful!", Toast.LENGTH_SHORT).show();
+                            fs.collection("user").document(userID).update("kredit", FieldValue.increment(hargaPesawat_int));
                             Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
                             startActivity(intent);
                             overridePendingTransition(0, 0);
@@ -412,6 +419,12 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
             String tipeTransaksi = "minus";
             String nominalTransaksi = "- " + hargaPesawat;
+
+            String hargaPesawat_cleanstr = hargaPesawat.split(" ")[1].replace(".", "");
+            int hargaPesawat_int = Integer.parseInt(hargaPesawat_cleanstr) *-1;
+            Log.i("harga hotel", ""+hargaPesawat_int);
+
+
             Date dateNow = new Date();
             Long epochNow = dateNow.getTime();
 
@@ -419,6 +432,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             fs.collection("credit").add(transactionDetail).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
+                    fs.collection("user").document(userID).update("kredit", FieldValue.increment(hargaPesawat_int));
                     fs.collection("bookingHistory").document(documentID).update("status", "Issued");
                     Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
                     startActivity(intent);
