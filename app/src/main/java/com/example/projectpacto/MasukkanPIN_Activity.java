@@ -24,7 +24,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.scottyab.aescrypt.AESCrypt;
 
+import java.security.GeneralSecurityException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ import javax.security.auth.login.LoginException;
 public class MasukkanPIN_Activity extends AppCompatActivity  {
     ActivityMasukkanPinBinding binding;
     String pin;
+
+    String decrypt;
 
     String hargaPesawat;
 
@@ -61,6 +65,9 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     String tglCek_in;
     String tglCek_out;
 
+    String pinFirebase;
+
+
 
     String permintaanKhusus;
 
@@ -77,6 +84,9 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     String documentID;
     long waktuArsip;
     boolean ongoing;
+
+    String userID;
+
 
 
 
@@ -103,6 +113,18 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         String tipePesanan = this.getIntent().getStringExtra("tipePesanan");
         fs = FirebaseFirestore.getInstance();
         binding.pin1.requestFocus();
+
+        userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
+        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                pinFirebase = map.get("pin").toString();
+
+            }
+        });
+
 
 
         if (tipePesanan.matches("Hotel")) {
@@ -318,11 +340,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     mgr.hideSoftInputFromWindow(binding.pin4.getWindowToken(), 0);
 
                     pin = binding.pin1.getText().toString() + binding.pin2.getText().toString() + binding.pin3.getText().toString() + binding.pin4.getText().toString();
-                    if (tipePesanan.matches("Hotel")) {
-                        HotelcheckPIN(pin);
-                    } else if (tipePesanan.matches("Pesawat")){
-                        PesawatcheckPIN(pin);
-                    }
+                    decrypt(pin, tipePesanan);
 
 
                 }else if(editable.length() == 0)  {
@@ -336,8 +354,27 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     }
 
-    public void HotelcheckPIN(String pin){
-        if (pin.matches("1738")){
+    public void decrypt(String pin, String tipePesanan){
+        try {
+            decrypt = AESCrypt.decrypt(pin, pinFirebase);
+            if (tipePesanan.matches("Hotel")) {
+                HotelcheckPIN();
+            } else if (tipePesanan.matches("Pesawat")){
+                PesawatcheckPIN();
+            }
+
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "PIN Anda Salah", Toast.LENGTH_SHORT).show();
+            binding.pin1.setText("");
+            binding.pin2.setText("");
+            binding.pin3.setText("");
+            binding.pin4.setText("");
+            binding.pin1.requestFocus();
+        }
+    }
+
+    public void HotelcheckPIN(){
 
 
             Log.i("PIN_CORRECT", "SEND DATA TO FIRESTORE");
@@ -408,11 +445,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
 
 
-        }
+
     }
 
-    public void PesawatcheckPIN(String pin){
-        if (pin.matches("1738")){
+    public void PesawatcheckPIN(){
+
             String keterangan = "Pemesanan tiket pesawat " + namaHotel;
             String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
             Date date = new Date();
@@ -440,7 +477,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 }
             });
 
-        }
+
     }
 
     public class BookingPesawat {
