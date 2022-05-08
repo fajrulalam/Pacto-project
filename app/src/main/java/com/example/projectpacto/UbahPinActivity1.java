@@ -16,7 +16,9 @@ import com.example.projectpacto.databinding.ActivityUbahPin1Binding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.scottyab.aescrypt.AESCrypt;
 
+import java.security.GeneralSecurityException;
 import java.util.Map;
 
 public class UbahPinActivity1 extends AppCompatActivity {
@@ -25,6 +27,10 @@ public class UbahPinActivity1 extends AppCompatActivity {
     FirebaseFirestore fs;
 
     String pinFirebase;
+
+    String userID;
+
+    String decrypt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +41,15 @@ public class UbahPinActivity1 extends AppCompatActivity {
 
         fs = FirebaseFirestore.getInstance();
 
-        String userID = this.getIntent().getStringExtra("userID");
+        userID = this.getIntent().getStringExtra("userID");
 
         fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
                 pinFirebase = map.get("pin").toString();
+                decrypt();
+
             }
         });
 
@@ -201,6 +209,28 @@ public class UbahPinActivity1 extends AppCompatActivity {
     }
 
     public void CheckPin(String pin){
+        if (pin.matches(decrypt)) {
+            Toast.makeText(getApplicationContext(), "PIN Correct. NEXT PAGE" , Toast.LENGTH_SHORT).show();
 
+
+        }
+    }
+
+    public void encrypt(){
+        try {
+            String encrypted = AESCrypt.encrypt("1738", "1738");
+            fs.collection("user").document(userID).update("pin", encrypted);
+
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void decrypt(){
+        try {
+            decrypt = AESCrypt.decrypt("1738", pinFirebase);
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
     }
 }
