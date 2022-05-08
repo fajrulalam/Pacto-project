@@ -14,47 +14,21 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityUbahPin1Binding;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.scottyab.aescrypt.AESCrypt;
+import com.example.projectpacto.databinding.ActivityUbahPin2Binding;
 
-import java.security.GeneralSecurityException;
-import java.util.Map;
+public class UbahPinActivity2 extends AppCompatActivity {
 
-public class UbahPinActivity1 extends AppCompatActivity {
-
-    ActivityUbahPin1Binding binding;
-    FirebaseFirestore fs;
-
-    String pinFirebase;
-
+    ActivityUbahPin2Binding binding;
     String userID;
-
-    String decrypt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityUbahPin1Binding.inflate(getLayoutInflater());
+        binding = ActivityUbahPin2Binding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
-        fs = FirebaseFirestore.getInstance();
-
         userID = this.getIntent().getStringExtra("userID");
-
-        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
-                pinFirebase = map.get("pin").toString();
-
-            }
-        });
-
-
-
 
         binding.pin1.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -195,7 +169,7 @@ public class UbahPinActivity1 extends AppCompatActivity {
                     mgr.hideSoftInputFromWindow(binding.pin4.getWindowToken(), 0);
 
                     String pin = binding.pin1.getText().toString() + binding.pin2.getText().toString() + binding.pin3.getText().toString() + binding.pin4.getText().toString();
-                    decrypt(pin);
+                    CheckPin(pin);
 
 
                 }else if(editable.length() == 0)  {
@@ -209,36 +183,13 @@ public class UbahPinActivity1 extends AppCompatActivity {
     }
 
     public void CheckPin(String pin){
-            Intent intent = new Intent(getApplicationContext(), UbahPinActivity2.class);
-            intent.putExtra("userID", userID);
-            startActivity(intent);
 
-    }
+        Intent intent = new Intent(getApplicationContext(), UbahPinActivity3.class);
+        intent.putExtra("userID", userID);
+        intent.putExtra("newPIN", pin);
+        startActivity(intent);
 
-    public void encrypt(){
-        try {
-            String encrypted = AESCrypt.encrypt("1738", "1738");
-            fs.collection("user").document(userID).update("pin", encrypted);
 
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
 
-        }
-    }
-
-    public void decrypt(String pin){
-        try {
-            decrypt = AESCrypt.decrypt(pin, pinFirebase);
-            CheckPin(pin);
-
-        } catch (GeneralSecurityException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "PIN Anda Salah", Toast.LENGTH_SHORT).show();
-            binding.pin1.setText("");
-            binding.pin2.setText("");
-            binding.pin3.setText("");
-            binding.pin4.setText("");
-            binding.pin1.requestFocus();
-        }
     }
 }

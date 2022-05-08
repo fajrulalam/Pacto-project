@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".UbahPinActivity3"
+            android:exported="false" />
+        <activity
+            android:name=".UbahPinActivity2"
+            android:exported="false" />
+        <activity
             android:name=".UbahPinActivity1"
             android:exported="false" />
         <activity
