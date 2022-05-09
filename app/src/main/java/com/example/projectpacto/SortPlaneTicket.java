@@ -6,6 +6,8 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class SortPlaneTicket extends BottomSheetDialogFragment {
+
+    Button tampilkanButton;
 
     public SortPlaneTicket() {
 
@@ -30,33 +34,11 @@ public class SortPlaneTicket extends BottomSheetDialogFragment {
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
-        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-//                if (BottomSheetBehavior.STATE_EXPANDED == newState) {
-////                    showView(appBarLayout, getActionBarSize());
-////                    hideView(view.findViewById(R.id.linearLayout));
-////                    showView(view.findViewById(R.id.tampilkanButton), 212);
-//
-//                }
-//
-//                if (BottomSheetBehavior.STATE_COLLAPSED == newState)   {
-////                    hideView(appBarLayout);
-////                    showView(view.findViewById(R.id.linearLayout), getActionBarSize());
-////                    showView(view.findViewById(R.id.tampilkanButton), 56);
-//
-//                }
 
-                if (BottomSheetBehavior.STATE_HIDDEN == newState) {
-                    dismiss();
-                }
-            }
+        tampilkanButton = view.findViewById(R.id.tampilkanButton);
 
-            @Override
-            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
-            }
-        });
+        tampilkanButton.setVisibility(View.INVISIBLE);
         view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,7 +48,58 @@ public class SortPlaneTicket extends BottomSheetDialogFragment {
 
 
 
+        for (int i = 1; i < 7; i++){
+            int idView = getResources().getIdentifier("planeSort" + i, "id", getContext().getPackageName());
+            View eventView = view.findViewById(idView);
+            eventView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickSort(view);
+                }
+            });
+        }
+
+
+
+
+
+
         return dialog;
+    }
+
+    public void onClickSort(View view){
+        tampilkanButton.setVisibility(View.VISIBLE);
+
+        switch (view.getId()){
+            case R.id.planeSort1:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 1", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort2:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 2", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort3:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort4:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 4", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort5:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 5", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort6:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 6", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+
+
+
     }
 
     @Override

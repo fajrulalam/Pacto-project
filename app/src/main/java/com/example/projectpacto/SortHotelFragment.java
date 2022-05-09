@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -20,7 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class SortHotelFragment extends BottomSheetDialogFragment {
 
-
+    Button tampilkanButton;
     public SortHotelFragment() {
         // Required empty public constructor
     }
@@ -38,37 +39,21 @@ public class SortHotelFragment extends BottomSheetDialogFragment {
 
         view.findViewById(R.id.tampilkanButton).setVisibility(View.INVISIBLE);
 
-
+        tampilkanButton = view.findViewById(R.id.tampilkanButton);
 
         //A click will make it the action button visible
-        view.findViewById(R.id.planeSort1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
 
-            }
-        });
-        view.findViewById(R.id.planeSort2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
+        for (int i = 1; i < 5; i++){
+            int idView = getResources().getIdentifier("planeSort" + i, "id", getContext().getPackageName());
+            View eventView = view.findViewById(idView);
+            eventView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickSort(view);
+                }
+            });
+        }
 
-            }
-        });
-        view.findViewById(R.id.planeSort3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
-
-            }
-        });
-        view.findViewById(R.id.planeSort4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
-
-            }
-        });
 
 
         view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {
@@ -83,6 +68,29 @@ public class SortHotelFragment extends BottomSheetDialogFragment {
 
         return dialog;
 
+    }
+
+    public void onClickSort(View view) {
+        tampilkanButton.setVisibility(View.VISIBLE);
+        switch (view.getId()){
+            case R.id.planeSort1:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 1", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort2:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 2", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort3:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 3", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.planeSort4:
+                //do something...
+                Toast.makeText(getContext(), "Plane Sort 4", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
     }
 
     @Override
