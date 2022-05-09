@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -17,7 +19,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 
 public class SortHotelFragment extends BottomSheetDialogFragment {
-
 
 
     public SortHotelFragment() {
@@ -34,6 +35,40 @@ public class SortHotelFragment extends BottomSheetDialogFragment {
 
         BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
         bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
+
+        view.findViewById(R.id.tampilkanButton).setVisibility(View.INVISIBLE);
+
+
+
+        //A click will make it the action button visible
+        view.findViewById(R.id.planeSort1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
+
+            }
+        });
+        view.findViewById(R.id.planeSort2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
+
+            }
+        });
+        view.findViewById(R.id.planeSort3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
+
+            }
+        });
+        view.findViewById(R.id.planeSort4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.findViewById(R.id.tampilkanButton).setVisibility(View.VISIBLE);
+
+            }
+        });
 
 
         view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {

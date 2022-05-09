@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:paddingVertical="1dp"
                         android:layout_height="match_parent"
-                        android:hint="Keberangkatan"
+                        android:hint="Kota atau Hotel"
                         android:textSize="14sp"
                         android:background="@drawable/curved__even_less_bg"
                         android:backgroundTint="#1AA31E71"/>
