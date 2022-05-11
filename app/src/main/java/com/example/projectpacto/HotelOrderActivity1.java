@@ -41,6 +41,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
     long epoch_cekOut;
     MaterialDatePicker datePicker_end;
 
+    int jumlahKamar_int;
+    int jumlahTamu_int;
+
     CalendarConstraints.Builder constraints_end;
 
     @Override
@@ -54,6 +57,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         binding.tglCekOut.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.jumlahKamar.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.jumlahMalam.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+
+        jumlahKamar_int = -1;
+        jumlahTamu_int = -1;
 
 
         //BUNDLE
@@ -234,7 +240,11 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         binding.jumlahKamar.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("jmlKamar", jumlahKamar_int);
+                bundle.putInt("jmlTamu", jumlahTamu_int);
                 JumlahKamarBottomSheet jumlahKamarBottomSheet = new JumlahKamarBottomSheet();
+                jumlahKamarBottomSheet.setArguments(bundle);
                 jumlahKamarBottomSheet.show(getSupportFragmentManager(), jumlahKamarBottomSheet.getTag());
             }
         });
@@ -242,7 +252,11 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
         binding.jumlahKamar.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("jmlKamar", jumlahKamar_int);
+                bundle.putInt("jmlTamu", jumlahTamu_int);
                 JumlahKamarBottomSheet jumlahKamarBottomSheet = new JumlahKamarBottomSheet();
+                jumlahKamarBottomSheet.setArguments(bundle);
                 jumlahKamarBottomSheet.show(getSupportFragmentManager(), jumlahKamarBottomSheet.getTag());
             }
         });
@@ -317,7 +331,8 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
 
     @Override
     public void onDataPassTamu(String jumlahTamu, String jumlahKamar) {
-
+        jumlahTamu_int = Integer.parseInt(jumlahTamu);
+        jumlahKamar_int = Integer.parseInt(jumlahKamar);
         binding.jumlahKamar.getEditText().setText(jumlahTamu + " Tamu, "+jumlahKamar+" Kamar" );
     }
 }

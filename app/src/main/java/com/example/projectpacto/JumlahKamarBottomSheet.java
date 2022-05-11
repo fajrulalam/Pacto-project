@@ -50,6 +50,17 @@ public class JumlahKamarBottomSheet extends BottomSheetDialogFragment {
         plusKamar = view.findViewById(R.id.plusKamar);
         kamarCount = view.findViewById(R.id.kamarCount);
 
+        Bundle bundle = this.getArguments();
+        int jmlTamu_int = bundle.getInt("jmlTamu");
+        int jmlKamar_int = bundle.getInt("jmlKamar");
+
+        if (jmlKamar_int > 0 ){
+            tamuCount.setText(jmlTamu_int+"");
+        }
+        if (jmlTamu_int > 0 ){
+            kamarCount.setText(jmlKamar_int+"");
+        }
+
         //TAMU COUNT
         plusTamu.setOnClickListener(new View.OnClickListener() {
             @Override
