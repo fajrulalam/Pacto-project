@@ -11,9 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,6 +49,7 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
     private ArrayList<String> namaKota;
     private ArrayList<String> kodeBandara;
     private OnDataKeberangkatanAtauKepulangan datapasser;
+    private RecyclerAdapaterBandara recyclerAdapaterBandara;
 
 
 
@@ -72,35 +75,29 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
 
         Bundle bundle = this.getArguments();
         judul.setText(bundle.getString("judul"));
-        RecyclerAdapaterBandara recyclerAdapaterBandara = new RecyclerAdapaterBandara(namaKota, namaBandara, kodeBandara);
+        recyclerAdapaterBandara = new RecyclerAdapaterBandara(namaKota, namaBandara, kodeBandara);
         recyclerView.setAdapter(recyclerAdapaterBandara);
+
+        bandaraTextInput.getEditText().requestFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
+        bandaraTextInput.getEditText().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i==keyEvent.KEYCODE_ENTER){
+                    cariBandara();
+                }
+                return false;
+            }
+        });
 
 
 
         cariButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                namaBandara.clear();
-                namaKota.clear();
-                kodeBandara.clear();
-                switch (bandaraTextInput.getEditText().getText().toString()) {
-                    case "surabaya":
-                        namaBandara.add("Juanda International Airport");
-                        namaKota.add("Surabaya");
-                        kodeBandara.add("SUB");
-                        recyclerAdapaterBandara.notifyDataSetChanged();
-
-                        break;
-                    case "jakarta":
-                        namaKota.add("Jakarta");
-                        namaKota.add("Jakarta");
-                        namaBandara.add("Halim Perdanakusuma International Airport");
-                        kodeBandara.add("HLP");
-                        namaBandara.add("Soekarno-Hatta International Airport");
-                        kodeBandara.add("CGK");
-                        recyclerAdapaterBandara.notifyDataSetChanged();
-                        break;
-                }
+               cariBandara();
 
 
             }
@@ -156,6 +153,32 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
 
 
         return dialog;
+    }
+
+    public void cariBandara(){
+        namaBandara.clear();
+        namaKota.clear();
+        kodeBandara.clear();
+        InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(bandaraTextInput.getEditText().getWindowToken(), 0);
+        switch (bandaraTextInput.getEditText().getText().toString()) {
+            case "surabaya":
+                namaBandara.add("Juanda International Airport");
+                namaKota.add("Surabaya");
+                kodeBandara.add("SUB");
+                recyclerAdapaterBandara.notifyDataSetChanged();
+
+                break;
+            case "jakarta":
+                namaKota.add("Jakarta");
+                namaKota.add("Jakarta");
+                namaBandara.add("Halim Perdanakusuma International Airport");
+                kodeBandara.add("HLP");
+                namaBandara.add("Soekarno-Hatta International Airport");
+                kodeBandara.add("CGK");
+                recyclerAdapaterBandara.notifyDataSetChanged();
+                break;
+        }
     }
 
     public interface OnDataKeberangkatanAtauKepulangan {

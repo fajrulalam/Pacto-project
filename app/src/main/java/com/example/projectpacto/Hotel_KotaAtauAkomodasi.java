@@ -9,9 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.ContactsContract;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +44,8 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
     private ArrayList<String> namaKota;
     private ArrayList<String> nama_provinsiNegara;
     private ArrayList<String> nama_kotaProvinsi;
+    RecyclerAdapterKota recyclerAdapterKota;
+    RecyclerAdapterHotel recyclerAdapterHotel;
 
     private DataHotel datapasser;
 
@@ -71,6 +75,11 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
         recyclerViewKota = view.findViewById(R.id.RecycleViewKota);
         recyclerViewHotel = view.findViewById(R.id.RecycleViewHotel);
 
+        textInputLayout.getEditText().requestFocus();
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+
+
 
 
         nama_provinsiNegara = new ArrayList<>();
@@ -78,67 +87,29 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
         namaKota = new ArrayList<>();
         nama_hotel = new ArrayList<>();
 
-        RecyclerAdapterKota recyclerAdapterKota = new RecyclerAdapterKota(namaKota, nama_provinsiNegara);
+        recyclerAdapterKota = new RecyclerAdapterKota(namaKota, nama_provinsiNegara);
         recyclerViewKota.setAdapter(recyclerAdapterKota);
 
-        RecyclerAdapterHotel recyclerAdapterHotel = new RecyclerAdapterHotel(nama_hotel, nama_kotaProvinsi);
+        recyclerAdapterHotel = new RecyclerAdapterHotel(nama_hotel, nama_kotaProvinsi);
         recyclerViewHotel.setAdapter(recyclerAdapterHotel);
+
+        textInputLayout.getEditText().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (i == KeyEvent.KEYCODE_ENTER){
+                    cariKotaAtauHotel();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         //CARI BUTTON
         cariButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nama_provinsiNegara.clear();
-                nama_kotaProvinsi.clear();
-                namaKota.clear();
-                nama_hotel.clear();
-                InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                mgr.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
-                switch (textInputLayout.getEditText().getText().toString()) {
-                    case "surabaya":
-                        namaKota.add("Surabaya");
-                        nama_provinsiNegara.add("Jawa Timur, Indonesia");
+                cariKotaAtauHotel();
 
-
-                        nama_hotel.add("Pop! Hotel Gubeng Surabaya");
-                        nama_kotaProvinsi.add("Surabaya, Jawa Timur");
-                        nama_hotel.add("Zest Hotel");
-                        nama_kotaProvinsi.add("Surabaya, Jawa Timur");
-                        nama_hotel.add("The Life Hotel");
-                        nama_kotaProvinsi.add("Surabaya, Jawa Timur");
-                        nama_hotel.add("Shangri-La");
-                        nama_kotaProvinsi.add("Surabaya, Jawa Timur");
-
-
-                        break;
-                    case "bali":
-                        namaKota.add("Bali");
-                        nama_provinsiNegara.add("Bali, Indonesia");
-
-                        nama_hotel.add("ASTON Denpasar Hotel");
-                        nama_kotaProvinsi.add("Denpasar, Bali");
-
-                        nama_hotel.add("Padma Resort Ubud");
-                        nama_kotaProvinsi.add("Ubud, Bali");
-
-                        nama_hotel.add("Shangri-La");
-                        nama_kotaProvinsi.add("Karangasem, Bali");
-
-
-                    case "shangri la":
-                        nama_hotel.add("Shangri-La Bali");
-                        nama_kotaProvinsi.add("Karangasem, Bali");
-
-                        nama_hotel.add("Shangri-La Surabaya");
-                        nama_kotaProvinsi.add("Surabaya, Jawa Timur");
-
-                        nama_hotel.add("Shangri-La Jakarta");
-                        nama_kotaProvinsi.add("Jakarta Pusat, DKI Jakarta");
-
-                        break;
-                }
-                recyclerAdapterKota.notifyDataSetChanged();
-                recyclerAdapterHotel.notifyDataSetChanged();
             }
         });
 
@@ -171,6 +142,60 @@ public class Hotel_KotaAtauAkomodasi extends BottomSheetDialogFragment {
 
 
         return dialog;
+    }
+
+    public void cariKotaAtauHotel(){
+        nama_provinsiNegara.clear();
+        nama_kotaProvinsi.clear();
+        namaKota.clear();
+        nama_hotel.clear();
+        InputMethodManager mgr = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        mgr.hideSoftInputFromWindow(textInputLayout.getEditText().getWindowToken(), 0);
+        switch (textInputLayout.getEditText().getText().toString()) {
+            case "surabaya":
+                namaKota.add("Surabaya");
+                nama_provinsiNegara.add("Jawa Timur, Indonesia");
+
+
+                nama_hotel.add("Pop! Hotel Gubeng Surabaya");
+                nama_kotaProvinsi.add("Surabaya, Jawa Timur");
+                nama_hotel.add("Zest Hotel");
+                nama_kotaProvinsi.add("Surabaya, Jawa Timur");
+                nama_hotel.add("The Life Hotel");
+                nama_kotaProvinsi.add("Surabaya, Jawa Timur");
+                nama_hotel.add("Shangri-La");
+                nama_kotaProvinsi.add("Surabaya, Jawa Timur");
+
+
+                break;
+            case "bali":
+                namaKota.add("Bali");
+                nama_provinsiNegara.add("Bali, Indonesia");
+
+                nama_hotel.add("ASTON Denpasar Hotel");
+                nama_kotaProvinsi.add("Denpasar, Bali");
+
+                nama_hotel.add("Padma Resort Ubud");
+                nama_kotaProvinsi.add("Ubud, Bali");
+
+                nama_hotel.add("Shangri-La");
+                nama_kotaProvinsi.add("Karangasem, Bali");
+
+
+            case "shangri la":
+                nama_hotel.add("Shangri-La Bali");
+                nama_kotaProvinsi.add("Karangasem, Bali");
+
+                nama_hotel.add("Shangri-La Surabaya");
+                nama_kotaProvinsi.add("Surabaya, Jawa Timur");
+
+                nama_hotel.add("Shangri-La Jakarta");
+                nama_kotaProvinsi.add("Jakarta Pusat, DKI Jakarta");
+
+                break;
+        }
+        recyclerAdapterKota.notifyDataSetChanged();
+        recyclerAdapterHotel.notifyDataSetChanged();
     }
 
 

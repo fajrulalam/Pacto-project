@@ -125,6 +125,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
 
                             binding.tglCekIn.getEditText().setText(tanggal_cekIn);
 
+                            binding.tglCekOut.getEditText().setText("");
+                            binding.jumlahMalam.getEditText().setText("");
+
                             constraints_end = new CalendarConstraints.Builder()
                                     .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_cekIn)))
                                     .setStart(Long.parseLong(""+epoch_cekIn));
@@ -152,7 +155,9 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
                           tanggal_cekIn = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
 
 
-                          binding.tglCekIn.getEditText().setText(tanggal_cekOut);
+                          binding.tglCekIn.getEditText().setText(tanggal_cekIn);
+                          binding.tglCekOut.getEditText().setText("");
+                          binding.jumlahMalam.getEditText().setText("");
 
                           constraints_end = new CalendarConstraints.Builder()
                                   .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_cekIn)))
