@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,9 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         final View view = View.inflate(getContext(), R.layout.fragment_penumpang_bottom_sheet, null);
         dialog.setContentView(view);
 
+
+
+
         dewasaTextView = view.findViewById(R.id.passengerCount_dewasa);
         anak2TextView = view.findViewById(R.id.passengerCount_anak);
         balitaTextview = view.findViewById(R.id.passengerCount_Balita);
@@ -75,6 +79,27 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         radioButton3 = view.findViewById(R.id.radioButton3);
         radioButton4 = view.findViewById(R.id.radioButton4);
         actionButton = view.findViewById(R.id.actionButton_cari);
+
+
+        Bundle bundle = this.getArguments();
+        String kelas_str = bundle.get("kelas").toString();
+        int dewasa = bundle.getInt("dewasa");
+        int balita = bundle.getInt("balita");
+        int anak = bundle.getInt("anak");
+
+//        Log.i("KELAS FRAG", "hello yolo"+ kelas_str);
+        Log.i("DEWASA FRAG", dewasa+"");
+
+
+        if (dewasa > 0){
+            dewasaTextView.setText(""+dewasa);
+        }
+        if (anak > 0){
+            anak2TextView.setText(""+anak);
+        }
+        if (balita > 0){
+            balitaTextview.setText(""+balita);
+        }
 
 
         //BOTTOM SHEET BEHAVIOR
@@ -164,6 +189,22 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
 
 
         final String[] kelas = {""};
+        if (!kelas_str.matches("")){
+            kelas[0] = kelas_str;
+        }
+        if (kelas_str.matches("Ekonomi")){
+            radioButton1.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+        }
+        if (kelas_str.matches("Bisnis")){
+            radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+        }
+        if (kelas_str.matches("Premium Ekonomi")){
+            radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+        }
+        if (kelas_str.matches("First Class")){
+            radioButton4.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+        }
+
         radioButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,8 +246,13 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
                     int dewasa = Integer.parseInt(dewasaTextView.getText().toString());
                     int anak = Integer.parseInt(anak2TextView.getText().toString());
                     int balita = Integer.parseInt(balitaTextview.getText().toString());
-                    datapasser.onDataPass(dewasa, anak, balita, kelas[0]);
-                    dismiss();
+
+                    if (dewasa + anak + balita <= 9) {
+                        datapasser.onDataPass(dewasa, anak, balita, kelas[0]);
+                        dismiss();
+                    } else {
+                        Toast.makeText(getContext(), "Untuk pemesanan lebih dari 9 penumpang, silakan hubungi Contact Person Pacto", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Detail penumpang belum lengkap", Toast.LENGTH_SHORT).show();
                 }

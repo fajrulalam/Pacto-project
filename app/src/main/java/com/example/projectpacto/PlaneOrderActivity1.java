@@ -37,6 +37,11 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
     String tanggal;
     String penumpang;
 
+    int dewasa_int;
+    int anak_int;
+    int balita_int;
+    String kelas_str;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +52,11 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         binding.penumpangTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.kedatanganTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
         binding.keberangkatTextInput.getEditText().setInputType(TextView.AUTO_SIZE_TEXT_TYPE_NONE);
+
+        dewasa_int = -1;
+        anak_int = -1;
+        balita_int = -1;
+        kelas_str = "";
 
         keberangkatan = "";
         kedatangan = "";
@@ -173,7 +183,13 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             public void onFocusChange(View view, boolean b) {
                 if (b==true) {
                     Log.i("CLICK LISTENED", "It's focused...");
+                    Bundle bundle = new Bundle();
+                    bundle.putString("kelas", kelas_str);
+                    bundle.putInt("dewasa", dewasa_int);
+                    bundle.putInt("anak", anak_int);
+                    bundle.putInt("balita", balita_int);
                     PenumpangBottomSheet penumpangBottomSheet = new PenumpangBottomSheet();
+                    penumpangBottomSheet.setArguments(bundle);
                     penumpangBottomSheet.show(getSupportFragmentManager(), penumpangBottomSheet.getTag());
 
                 }
@@ -183,7 +199,13 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             @Override
             public void onClick(View view) {
                 Log.i("CLICK LISTENED", "It's focused...");
+                Bundle bundle = new Bundle();
+                bundle.putString("kelas", kelas_str);
+                bundle.putInt("dewasa", dewasa_int);
+                bundle.putInt("anak", anak_int);
+                bundle.putInt("balita", balita_int);
                 PenumpangBottomSheet penumpangBottomSheet = new PenumpangBottomSheet();
+                penumpangBottomSheet.setArguments(bundle);
                 penumpangBottomSheet.show(getSupportFragmentManager(), penumpangBottomSheet.getTag());
             }
         });
@@ -254,6 +276,11 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 
     @Override
     public void onDataPass(int dewasa, int anak, int balita, String kelas) {
+        balita_int = dewasa;
+        anak_int = anak;
+        dewasa_int = dewasa;
+        kelas_str = kelas;
+        Log.i("KELAS", kelas_str);
         if (anak + balita == 0) {
             binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + kelas);
         } else if (anak > 0 && balita == 0) {
@@ -261,7 +288,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         } else if (anak == 0 && balita > 0) {
             binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + balita + " Balita, " + kelas);
         } else {
-            binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + anak + " Anak, " + + balita + " Balita, " + kelas);
+            binding.penumpangTextInput.getEditText().setText(dewasa + " Dewasa, " + anak + " Anak, " +  balita + " Balita, " + kelas);
 
         }
     }
