@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         android:background="@drawable/curved_bg_outline">
 
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -61,7 +62,7 @@
                     android:letterSpacing="0.05"
                     android:text="06:30"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/bandaraAsal"
@@ -119,7 +120,7 @@
                     android:letterSpacing="0.05"
                     android:text="07:20"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/bandaraTujuan"
@@ -166,7 +167,15 @@
 
 
 
+
+
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.05"/>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="130dp"
@@ -177,7 +186,8 @@
                 android:id="@+id/harga"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="IDR 550.000"
+                android:text="IDR 100.550.000"
+                android:lines="1"
                 android:gravity="right"
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"

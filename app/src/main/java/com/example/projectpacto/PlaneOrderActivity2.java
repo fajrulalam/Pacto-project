@@ -248,6 +248,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     }
 
     public void populateArrayLists(){
+        int hargasatuan;
+        String hargapax;
         logoMaskapai.add(R.drawable.ic_citilink);
         namaMaskapai.add("Citilink");
         waktuBerangkat.add("06:30");
@@ -257,7 +259,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         waktuDatang.add("07:20");
         bandaraTujuan.add("HLP");
         testCovid.add(true);
-        harga.add("IDR 560.000");
+        hargasatuan = 560000;
+        hargapax  = String.format("%,d", hargasatuan*jumlPenumpang).replace(',', '.');
+        harga.add("IDR "+ hargapax);
 
         logoMaskapai.add(R.drawable.ic_citilink);
         namaMaskapai.add("Citilink");
@@ -268,7 +272,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         waktuDatang.add("11:20");
         bandaraTujuan.add("HLP");
         testCovid.add(false);
-        harga.add("IDR 580.000");
+        hargasatuan = 580000;
+        hargapax  = String.format("%,d", hargasatuan*jumlPenumpang).replace(',', '.');
+        harga.add("IDR "+ hargapax);
 
         logoMaskapai.add(R.drawable.ic_citilink);
         namaMaskapai.add("Citilink");
@@ -279,7 +285,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         waktuDatang.add("16:00");
         bandaraTujuan.add("HLP");
         testCovid.add(true);
-        harga.add("IDR 520.000");
+        hargasatuan = 620000;
+        hargapax  = String.format("%,d", hargasatuan*jumlPenumpang).replace(',', '.');
+        harga.add("IDR "+ hargapax);
 
         logoMaskapai.add(R.drawable.ic_lionair);
         namaMaskapai.add("Lion Air");
@@ -290,7 +298,9 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         waktuDatang.add("09:05");
         bandaraTujuan.add("HLP");
         testCovid.add(true);
-        harga.add("IDR 570.000");
+        hargasatuan = 570000;
+        hargapax  = String.format("%,d", hargasatuan*jumlPenumpang).replace(',', '.');
+        harga.add("IDR "+ hargapax);
 
         logoMaskapai.add(R.drawable.ic_lionair);
         namaMaskapai.add("Lion Air");
@@ -301,6 +311,8 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         waktuDatang.add("12:50");
         bandaraTujuan.add("HLP");
         testCovid.add(true);
-        harga.add("IDR 550.000");
+        hargasatuan = 550000;
+        hargapax  = String.format("%,d", hargasatuan*jumlPenumpang).replace(',', '.');
+        harga.add("IDR "+ hargapax);
     }
 }
