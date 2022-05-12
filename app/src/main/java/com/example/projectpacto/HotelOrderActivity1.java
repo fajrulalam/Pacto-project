@@ -39,12 +39,13 @@ public class HotelOrderActivity1 extends AppCompatActivity implements Hotel_Kota
     String tanggal_cekOut;
     long epoch_cekIn;
     long epoch_cekOut;
-    MaterialDatePicker datePicker_end;
 
     int jumlahKamar_int;
     int jumlahTamu_int;
 
     CalendarConstraints.Builder constraints_end;
+    MaterialDatePicker datePicker_end;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

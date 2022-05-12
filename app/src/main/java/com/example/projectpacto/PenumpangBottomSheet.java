@@ -204,7 +204,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
             radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
         }
         if (kelas_str.matches("Premium Ekonomi")){
-            radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+            radioButton2.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
         }
         if (kelas_str.matches("First Class")){
             radioButton4.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));

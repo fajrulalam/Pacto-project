@@ -173,23 +173,86 @@
 
         </FrameLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tanggalKeberangkat_textInput"
+                app:hintEnabled="false"
+                android:focusable="false"
+                app:hintAnimationEnabled="false"
+                android:layout_weight="0.9"
+                android:layout_height="45dp"
+                app:boxStrokeWidth="0dp"
+                android:padding="-10dp"
+                app:startIconDrawable="@drawable/ic_calendar"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_width="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Tanggal Keberangkatan"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:paddingVertical="2dp"
+                    android:textSize="14sp"
+                    android:background="@drawable/curved__even_less_bg"
+                    android:backgroundTint="#1AA31E71"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:background="@drawable/curved__even_less_bg"
+                android:backgroundTint="#1AA31E71">
+
+                <TextView
+                    android:id="@+id/ppTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:lines="1"
+                    android:text="Pulang  pergi?"
+                    android:textSize="11sp" />
+
+                <Switch
+                    android:id="@+id/ppSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:layout_below="@id/ppTextView"
+                    android:scaleX="0.75"
+                    android:scaleY="0.75" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tanggalKeberangkat_textInput"
+            android:id="@+id/tanggalKepulangan_textInput"
+            android:visibility="gone"
             app:hintEnabled="false"
             android:focusable="false"
-            app:hintAnimationEnabled="false"
-            android:layout_width="match_parent"
             android:layout_marginTop="8dp"
-            android:layout_height="40dp"
+            app:hintAnimationEnabled="false"
+            android:layout_weight="0.9"
+            android:layout_height="45dp"
             app:boxStrokeWidth="0dp"
             android:padding="-10dp"
             app:startIconDrawable="@drawable/ic_calendar"
-            app:boxStrokeWidthFocused="0dp">
+            app:boxStrokeWidthFocused="0dp"
+            android:layout_width="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Tanggal Keberangkatn"
+                android:hint="Tanggal Kepulangan"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:paddingVertical="2dp"
@@ -197,6 +260,9 @@
                 android:background="@drawable/curved__even_less_bg"
                 android:backgroundTint="#1AA31E71"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/penumpangTextInput"

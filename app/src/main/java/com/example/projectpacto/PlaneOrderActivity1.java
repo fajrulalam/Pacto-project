@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,8 +35,12 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
     String bandara_keberangkatan;
     String keberangkatan;
     String kedatangan;
-    String tanggal;
+    String tanggalBerangkat;
+    String tanggalPulang;
     String penumpang;
+    CalendarConstraints.Builder constraints_end;
+    MaterialDatePicker datePicker_end;
+
 
     int dewasa_int;
     int anak_int;
@@ -60,21 +65,21 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 
         keberangkatan = "";
         kedatangan = "";
-        tanggal = "";
+        tanggalBerangkat = "";
         penumpang = "";
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             keberangkatan = extras.getString("keberangkatan");
             kedatangan = extras.getString("kedatangan");
-            tanggal = extras.getString("tanggal");
+            tanggalBerangkat = extras.getString("tanggal");
             penumpang = extras.getString("penumpang");
             bandara_keberangkatan = extras.getString("bandara_keberangkatan").split(" \\(")[0];
             bandara_kedatangan = extras.getString("bandara_kedatangan").split(" \\(")[0];
             Log.i("Keberangkatan1", "hello" + keberangkatan);
             binding.keberangkatTextInput.getEditText().setText(keberangkatan);
             binding.kedatanganTextInput.getEditText().setText(kedatangan);
-            binding.tanggalKeberangkatTextInput.getEditText().setText(tanggal);
+            binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat);
             binding.penumpangTextInput.getEditText().setText(penumpang);
         }
 
@@ -85,7 +90,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             public void onClick(View view) {
                 keberangkatan = binding.keberangkatTextInput.getEditText().getText().toString();
                 kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
-                tanggal = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
+                tanggalBerangkat = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
                 penumpang = binding.penumpangTextInput.getEditText().getText().toString();
 //                if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
@@ -95,7 +100,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     intent.putExtra("kota_kedatangan", kota_kedatangan);
                     intent.putExtra("bandara_kedatangan", bandara_kedatangan);
                     intent.putExtra("bandara_keberangkatan", bandara_keberangkatan);
-                    intent.putExtra("tanggal", tanggal);
+                    intent.putExtra("tanggal", tanggalBerangkat);
                     intent.putExtra("penumpang", penumpang);
                     startActivity(intent);
                     overridePendingTransition(0 , 0);
@@ -151,6 +156,8 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 keberangkatanDanKedatangan.show(getSupportFragmentManager(), keberangkatanDanKedatangan.getTag());
             }
         });
+
+
 
         //Kedatangan
         binding.kedatanganTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -223,6 +230,8 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 .setCalendarConstraints(constraints.build())
                 .setTitleText("Pilih Tanggal Keberangkatan").build();
 
+
+
         binding.tanggalKeberangkatTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -234,9 +243,20 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                         public void onPositiveButtonClick(Object selection) {
                             long epoch_long = Long.parseLong(selection.toString());
                             ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
-                            tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                            tanggalBerangkat = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                            
+                            tanggalPulang = "";
+                            binding.tanggalKepulanganTextInput.getEditText().setText("");
 
-                            binding.tanggalKeberangkatTextInput.getEditText().setText(tanggal);
+                            binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat);
+
+                            constraints_end = new CalendarConstraints.Builder()
+                                    .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_long)))
+                                    .setStart(Long.parseLong(""+epoch_long));
+                            datePicker_end = MaterialDatePicker.Builder.datePicker()
+                                    .setSelection(Long.parseLong(""+epoch_long))
+                                    .setCalendarConstraints(constraints_end.build())
+                                    .setTitleText("Pilih Tanggal Kepulangan").build();
 
                         }
                     });
@@ -254,12 +274,108 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     public void onPositiveButtonClick(Object selection) {
                         long epoch_long = Long.parseLong(selection.toString());
                         ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
-                        tanggal = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", new Locale("id", "ID")));
+                        tanggalBerangkat = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", new Locale("id", "ID")));
 
-                        binding.tanggalKeberangkatTextInput.getEditText().setText(tanggal);
+                        tanggalPulang = "";
+                        binding.tanggalKepulanganTextInput.getEditText().setText("");
+
+                        binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat);
+
+                        constraints_end = new CalendarConstraints.Builder()
+                                .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_long)))
+                                .setStart(Long.parseLong(""+epoch_long));
+                        datePicker_end = MaterialDatePicker.Builder.datePicker()
+                                .setSelection(Long.parseLong(""+epoch_long))
+                                .setCalendarConstraints(constraints_end.build())
+                                .setTitleText("Pilih Tanggal Kepulangan").build();
+
                     }
                 });
 
+            }
+        });
+
+        //Handling PP Switch
+        binding.ppSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean true_) {
+                if (true_){
+                    binding.tanggalKepulanganTextInput.setVisibility(View.VISIBLE);
+                    binding.tanggalKepulanganTextInput.getEditText().setText("");
+
+                }
+                if (!true_){
+                    binding.tanggalKepulanganTextInput.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
+
+        binding.tanggalKepulanganTextInput.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b == true) {
+                    if (!binding.tanggalKeberangkatTextInput.getEditText().getText().toString().matches("")) {
+                        datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
+                        datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                            @RequiresApi(api = Build.VERSION_CODES.O)
+                            @Override
+                            public void onPositiveButtonClick(Object selection) {
+                                long epoch_cekOut = Long.parseLong(selection.toString());
+                                ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekOut).atZone(ZoneId.of("Asia/Jakarta"));
+                                tanggalPulang = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+
+                                String yearBerangkat = tanggalBerangkat.substring(tanggalBerangkat.length()-4);
+                                String yearPulang = tanggalPulang.substring(tanggalPulang.length()-4);
+                                if(yearBerangkat.matches(yearPulang)){
+                                    binding.tanggalKepulanganTextInput.getEditText().setText(tanggalPulang.substring(0, tanggalPulang.length()-4));
+                                    binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat.substring(0, tanggalBerangkat.length()-4));
+
+
+                                } else {
+                                    binding.tanggalKepulanganTextInput.getEditText().setText(tanggalPulang);
+                                }
+
+                            }
+                        });
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Tentukan dulu tanggal cek in", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+        binding.tanggalKepulanganTextInput.getEditText().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!binding.tanggalKeberangkatTextInput.getEditText().getText().toString().matches("")) {
+                    datePicker_end.show(getSupportFragmentManager(), "tgl_keberangkatan");
+                    datePicker_end.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onPositiveButtonClick(Object selection) {
+                            long epoch_cekOut = Long.parseLong(selection.toString());
+                            ZonedDateTime dateTime = Instant.ofEpochMilli(epoch_cekOut).atZone(ZoneId.of("Asia/Jakarta"));
+                            tanggalPulang = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+
+                            String yearBerangkat = tanggalBerangkat.substring(tanggalBerangkat.length()-4);
+                            String yearPulang = tanggalPulang.substring(tanggalPulang.length()-4);
+                            if(yearBerangkat.matches(yearPulang)){
+                                binding.tanggalKepulanganTextInput.getEditText().setText(tanggalPulang.substring(0, tanggalPulang.length()-4));
+                                binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat.substring(0, tanggalBerangkat.length()-4));
+
+
+                            } else {
+                                binding.tanggalKepulanganTextInput.getEditText().setText(tanggalPulang);
+                            }
+
+
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Tentukan dulu tanggal cek in", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
