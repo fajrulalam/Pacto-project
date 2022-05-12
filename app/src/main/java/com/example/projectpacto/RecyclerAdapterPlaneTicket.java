@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAdapterPlaneTicket.ViewHolder> {
+    ArrayList<String> jumlahPax;
     ArrayList<Integer> logoMaskapai;
     ArrayList<String>namaMaskapai;
     ArrayList<String>waktuBerangkat;
@@ -24,7 +25,7 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
     ArrayList<Boolean> testCovid;
     ArrayList<String> harga;
 
-    public RecyclerAdapterPlaneTicket(  ArrayList<Integer> logoMaskapai, ArrayList<String> namaMaskapai, ArrayList<String> waktuBerangkat, ArrayList<String> bandaraAsal, ArrayList<String> durasi, ArrayList<String> langsungAtauTransit, ArrayList<String> waktuDatang, ArrayList<String> bandaraTujuan, ArrayList<Boolean> testCovid, ArrayList<String> harga){
+    public RecyclerAdapterPlaneTicket( ArrayList<String> jumlahPax,  ArrayList<Integer> logoMaskapai, ArrayList<String> namaMaskapai, ArrayList<String> waktuBerangkat, ArrayList<String> bandaraAsal, ArrayList<String> durasi, ArrayList<String> langsungAtauTransit, ArrayList<String> waktuDatang, ArrayList<String> bandaraTujuan, ArrayList<Boolean> testCovid, ArrayList<String> harga){
         this.logoMaskapai = logoMaskapai;
         this.namaMaskapai = namaMaskapai;
         this.waktuBerangkat = waktuBerangkat;
@@ -35,6 +36,7 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
         this.bandaraTujuan = bandaraTujuan;
         this.testCovid = testCovid;
         this.harga = harga;
+        this.jumlahPax = jumlahPax;
     }
 
     @NonNull
@@ -49,7 +51,7 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
+        holder.jumlahPax.setText(jumlahPax.get(position));
         holder.logoMaskapai.setImageResource(logoMaskapai.get(position));
         holder.namaMaskapai.setText(namaMaskapai.get(position));
         holder.waktuBerangkat.setText(waktuBerangkat.get(position));
@@ -80,6 +82,7 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
         TextView namaMaskapai;
         TextView waktuBerangkat;
         TextView bandaraAsal;
+        TextView jumlahPax;
         TextView durasi;
         TextView langsungAtauTransit;
         TextView waktuDatang;
@@ -90,7 +93,7 @@ public class RecyclerAdapterPlaneTicket extends RecyclerView.Adapter<RecyclerAda
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
+            jumlahPax = itemView.findViewById(R.id.jumlahPax);
             logoMaskapai = itemView.findViewById(R.id.logoMaskapai);
             namaMaskapai = itemView.findViewById(R.id.namaMaskapai);
             waktuBerangkat = itemView.findViewById(R.id.waktuBerangkat);

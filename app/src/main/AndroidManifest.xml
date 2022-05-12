@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".roundtrip.PlaneOrderActivity2_Pergi"
+            android:exported="false" />
+        <activity
             android:name=".UbahPinActivity3"
             android:exported="false" />
         <activity

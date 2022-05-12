@@ -97,7 +97,6 @@
                 android:layout_gravity="center"
                 android:background="@drawable/curved__even_less_colorized_bg"/>
         </LinearLayout>
-
         <com.google.android.material.divider.MaterialDivider
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -34,6 +34,7 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
     ArrayList<String> bandaraTujuan;
     ArrayList<Boolean> testCovid;
     ArrayList<String> harga;
+    ArrayList<String> jumlahpax;
     String keberangkatan;
     String kedatangan;
     String tanggal;
@@ -69,6 +70,7 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
         bandaraTujuan = new ArrayList<>();
         testCovid = new ArrayList<>();
         harga = new ArrayList<>();
+        jumlahpax = new ArrayList<>();
 
 
         //Recycle View on Click
@@ -216,7 +218,10 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
 
         //Displaying the Tickets.
         populateArrayLists();
-        RecyclerAdapterPlaneTicket recyclerAdapterPlaneTicket = new RecyclerAdapterPlaneTicket(logoMaskapai, namaMaskapai,waktuBerangkat,bandaraAsal,durasi,langsungAtauTransit,waktuDatang, bandaraTujuan,testCovid,harga);
+        for (int i = 0; i <= namaMaskapai.size(); i++){
+            jumlahpax.add("/"+jumlPenumpang + " pax" );
+        }
+        RecyclerAdapterPlaneTicket recyclerAdapterPlaneTicket = new RecyclerAdapterPlaneTicket(jumlahpax, logoMaskapai, namaMaskapai,waktuBerangkat,bandaraAsal,durasi,langsungAtauTransit,waktuDatang, bandaraTujuan,testCovid,harga);
         binding.RecycleViewTicket.setAdapter(recyclerAdapterPlaneTicket);
 
         binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {

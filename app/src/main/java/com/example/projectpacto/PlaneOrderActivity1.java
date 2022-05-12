@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityPlaneOrder1Binding;
 import com.example.projectpacto.databinding.FragmentPenumpangBottomSheetBinding;
+import com.example.projectpacto.roundtrip.PlaneOrderActivity2_Pergi;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -92,7 +93,15 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
                 tanggalBerangkat = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
                 penumpang = binding.penumpangTextInput.getEditText().getText().toString();
-//                if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
+
+                if(binding.ppSwitch.isChecked()){
+                    Intent intent=  new Intent(getApplicationContext(), PlaneOrderActivity2_Pergi.class);
+                    startActivity(intent);
+                    overridePendingTransition(0,0);
+
+
+                } else {
+//                    if (!keberangkatan.matches("") && !kedatangan.matches("") && !tanggal.matches("") && !penumpang.matches("")){
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderActivity2.class);
                     intent.putExtra("keberangkatan", keberangkatan);
                     intent.putExtra("kedatangan", kedatangan);
@@ -107,6 +116,8 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 //                } else {
 //                    Toast.makeText(getApplicationContext(), "Mohon lengkapi data terlebih dahulu", Toast.LENGTH_SHORT).show();
 //                }
+                }
+
 
             }
         });
@@ -392,7 +403,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 
     @Override
     public void onDataPass(int dewasa, int anak, int balita, String kelas) {
-        balita_int = dewasa;
+        balita_int = balita;
         anak_int = anak;
         dewasa_int = dewasa;
         kelas_str = kelas;
