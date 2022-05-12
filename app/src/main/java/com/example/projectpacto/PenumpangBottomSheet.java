@@ -189,7 +189,12 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
 
 
         final String[] kelas = {""};
-        if (!kelas_str.matches("")){
+
+        //Default is ekonomi
+        if (kelas_str.matches("")){
+            kelas[0] = "Ekonomi";
+            radioButton1.setBackground(getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+        } else {
             kelas[0] = kelas_str;
         }
         if (kelas_str.matches("Ekonomi")){
@@ -242,7 +247,7 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!kelas[0].matches("")) {
+
                     int dewasa = Integer.parseInt(dewasaTextView.getText().toString());
                     int anak = Integer.parseInt(anak2TextView.getText().toString());
                     int balita = Integer.parseInt(balitaTextview.getText().toString());
@@ -253,9 +258,6 @@ public class PenumpangBottomSheet extends BottomSheetDialogFragment {
                     } else {
                         Toast.makeText(getContext(), "Untuk pemesanan lebih dari 9 penumpang, silakan hubungi Contact Person Pacto", Toast.LENGTH_LONG).show();
                     }
-                } else {
-                    Toast.makeText(getContext(), "Detail penumpang belum lengkap", Toast.LENGTH_SHORT).show();
-                }
 
             }
         });
