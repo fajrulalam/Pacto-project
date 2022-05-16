@@ -20,11 +20,14 @@ import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangBottomSheet.OnDataPassenger, KeberangkatanDanKedatangan.OnDataKeberangkatanAtauKepulangan {
@@ -48,6 +51,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
     int balita_int;
     String kelas_str;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +72,35 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         kedatangan = "";
         tanggalBerangkat = "";
         penumpang = "";
+        Locale lokal = new Locale("id", "ID");
+
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             keberangkatan = extras.getString("keberangkatan");
             kedatangan = extras.getString("kedatangan");
             tanggalBerangkat = extras.getString("tanggal");
+            try {
+                Date date1=new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat);
+                Long epoch_long= date1.getTime();
+                ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
+                tanggalBerangkat = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
+                tanggalPulang = "";
+                binding.tanggalKepulanganTextInput.getEditText().setText("");
+
+                binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat);
+
+                constraints_end = new CalendarConstraints.Builder()
+                        .setValidator(DateValidatorPointForward.from(Long.parseLong(""+epoch_long)))
+                        .setStart(Long.parseLong(""+epoch_long));
+                datePicker_end = MaterialDatePicker.Builder.datePicker()
+                        .setSelection(Long.parseLong(""+epoch_long))
+                        .setCalendarConstraints(constraints_end.build())
+                        .setTitleText("Pilih Tanggal Kepulangan").build();
+            } catch (ParseException parseException) {
+                parseException.printStackTrace();
+            }
+
             penumpang = extras.getString("penumpang");
             bandara_keberangkatan = extras.getString("bandara_keberangkatan").split(" \\(")[0];
             bandara_kedatangan = extras.getString("bandara_kedatangan").split(" \\(")[0];
@@ -91,11 +118,30 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             public void onClick(View view) {
                 keberangkatan = binding.keberangkatTextInput.getEditText().getText().toString();
                 kedatangan = binding.kedatanganTextInput.getEditText().getText().toString();
-                tanggalBerangkat = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
+//                tanggalBerangkat = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
                 penumpang = binding.penumpangTextInput.getEditText().getText().toString();
 
                 if(binding.ppSwitch.isChecked()){
                     Intent intent=  new Intent(getApplicationContext(), PlaneOrderActivity2_Pergi.class);
+
+                    //for testing purpose
+                    keberangkatan = "Min, 16 Mei 2022";
+                    kedatangan = "Min, 16 Mei 2022";
+                    kota_keberangkatan = "Surabaya";
+                    kota_kedatangan = "Jakarta";
+                    bandara_kedatangan = "Juanda International Airport (SUB)";
+                    bandara_kedatangan = "Halim Perdana Kusuma International Airport (HLP)";
+                    tanggalBerangkat = "Min, 16 Mei 2022";
+                    penumpang = "1 Dewasa, Ekonomi";
+
+                    intent.putExtra("keberangkatan", keberangkatan);
+                    intent.putExtra("kedatangan", kedatangan);
+                    intent.putExtra("kota_keberangkatan", kota_keberangkatan);
+                    intent.putExtra("kota_kedatangan", kota_kedatangan);
+                    intent.putExtra("bandara_kedatangan", bandara_kedatangan);
+                    intent.putExtra("bandara_keberangkatan", bandara_keberangkatan);
+                    intent.putExtra("tanggal", tanggalBerangkat);
+                    intent.putExtra("penumpang", penumpang);
                     startActivity(intent);
                     overridePendingTransition(0,0);
 
@@ -231,7 +277,6 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 
 
         //Calendar Constraints
-        Locale lokal = new Locale("id", "ID");
         long today = MaterialDatePicker.todayInUtcMilliseconds();
         CalendarConstraints.Builder constraints = new CalendarConstraints.Builder()
                 .setValidator(DateValidatorPointForward.now())
@@ -317,7 +362,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                 }
                 if (!true_){
                     binding.tanggalKepulanganTextInput.setVisibility(View.GONE);
-
+                    binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat);
                 }
             }
         });

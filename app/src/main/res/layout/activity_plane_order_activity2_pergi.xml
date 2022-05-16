@@ -125,6 +125,45 @@
             android:paddingHorizontal="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginBottom="30dp"/>
+
+
+        <LinearLayout
+            android:visibility="visible"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="60dp"
+            android:id="@+id/tidakAdaPenerbangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Penerbangan yang kamu cari tidak ada"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_marginTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Penerbangan yang kamu cari tidak ada, yuk temukan lainnya"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="12sp"/>
+            <Button
+                android:id="@+id/tombolKembali"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="Cari penerbangan lainnya"
+                android:textAllCaps="false"
+                android:textSize="16dp"
+                android:letterSpacing="0"/>
+
+
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
