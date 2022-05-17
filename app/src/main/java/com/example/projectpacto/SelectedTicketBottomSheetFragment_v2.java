@@ -68,11 +68,11 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
     ArrayList<String> waktuDatang_ArrayList;
     ArrayList<String> bandaraTujuan_ArrayList;
      ArrayList<String> kabin_ArrayList;
-             ArrayList<String> bagasi_ArrayList;
-     ArrayList<String> booleanMakan_ArrayList;
-             ArrayList<String> keteranganMakan_ArrayList;
-     ArrayList<String> modelPesawat_ArrayList;
-             ArrayList<String> durasi_ArrayList;
+    ArrayList<String> bagasi_ArrayList;
+    ArrayList<Integer> booleanMakan_ArrayList;
+    ArrayList<String> keteranganMakan_ArrayList;
+    ArrayList<String> modelPesawat_ArrayList;
+    ArrayList<String> durasi_ArrayList;
 
     String jmlDewasa_str;
     String jmlAnak_str;
@@ -160,8 +160,8 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         namaMaskapai_ArrayList= bundle.getStringArrayList("namaMaskapai");;
         kabin_ArrayList = bundle.getStringArrayList("kabin");;
         bagasi_ArrayList = bundle.getStringArrayList("bagasi");;
-        booleanMakan_ArrayList = bundle.getStringArrayList("booleanMakan");;
-        Log.i("SELECTED TICKET BS", booleanMakan_ArrayList + "");
+        booleanMakan_ArrayList = bundle.getIntegerArrayList("booleanMakan");;
+        Log.i("SELECTED TICKET MAKAN", booleanMakan_ArrayList + "makan");
         keteranganMakan_ArrayList = bundle.getStringArrayList("keteranganMakan");
         modelPesawat_ArrayList = bundle.getStringArrayList("modelPesawat");
         kelasPesawat_ArrayList= bundle.getStringArrayList("kelasPesawat");;

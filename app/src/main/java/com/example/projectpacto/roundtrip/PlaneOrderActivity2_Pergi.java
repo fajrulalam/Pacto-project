@@ -47,7 +47,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
     ArrayList<ArrayList<String>> tanggalDatang_outer;
     ArrayList<ArrayList<String>> kabin_outer;
     ArrayList<ArrayList<String>> bagasi_outer;
-    ArrayList<ArrayList> booleanMakan_outer;
+    ArrayList<ArrayList<Integer>> booleanMakan_outer;
     ArrayList<ArrayList<String>> keteranganMakan_outer;
     ArrayList<ArrayList<String>> modelPesawat_outer;
     ArrayList<Boolean> testCovid;
@@ -144,7 +144,6 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 String waktuDatang = ((TextView) v.findViewById(R.id.waktuDatang)).getText().toString();
                 String waktuBerangkat = ((TextView) v.findViewById(R.id.waktuBerangkat)).getText().toString();
                 String harga = ((TextView) v.findViewById(R.id.harga)).getText().toString();
-//                int logoMaskapai_selected = (int) logoMaskapai_outer.get(position).get(0);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("harga", harga);
@@ -158,8 +157,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 bundle.putStringArrayList("namaMaskapai", namaMaskapai_outer.get(position));
                 bundle.putStringArrayList("kabin", kabin_outer.get(position));
                 bundle.putStringArrayList("bagasi", bagasi_outer.get(position));
-                bundle.putStringArrayList("boleanMakan", booleanMakan_outer.get(position));
-                bundle.putStringArrayList("keteranganMakan", booleanMakan_outer.get(position));
+                bundle.putIntegerArrayList("booleanMakan", booleanMakan_outer.get(position));
+                bundle.putStringArrayList("keteranganMakan", keteranganMakan_outer.get(position));
                 bundle.putStringArrayList("modelPesawat", modelPesawat_outer.get(position));
                 bundle.putStringArrayList("kelasPesawat", kelas_outer);
                 bundle.putStringArrayList("tanggalDatang", tanggalDatang_outer.get(position));
