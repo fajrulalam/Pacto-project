@@ -156,7 +156,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         kotaAsal_str = bundle.getString("kotaAsal");
         kotaTujuan_str = bundle.getString("kotaTujuan");
         tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat");
-        Log.i("SELECTED TICKET BS", tanggalBerangkat_ArrayList + "");
+        Log.i("SELECTED TICKET BS", tanggalBerangkat_ArrayList + "tes");
 
         waktuBerangkat_ArrayList = bundle.getStringArrayList("waktuBerangkat");
         Log.i("SELECTED TICKET BS", waktuBerangkat_ArrayList + "");
