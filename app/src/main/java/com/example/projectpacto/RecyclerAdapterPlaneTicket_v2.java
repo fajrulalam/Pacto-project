@@ -67,15 +67,15 @@ public class RecyclerAdapterPlaneTicket_v2 extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.jumlahPax.setText(jumlahpax.get(position));
-        Log.i("LOGOMASKAPAI OUTER", logoMaskapai_outer + "");
         holder.logoMaskapai.setImageResource( logoMaskapai_outer.get(position).get(0));
         holder.namaMaskapai.setText(namaMaskapai_outer.get(position).get(0));
         holder.waktuBerangkat.setText(waktuBerangkat_outer.get(position).get(0));
-        holder.bandaraAsal.setText(bandaraAsal_outer.get(position).get(0));
+        String kodeBandaraAsal =  bandaraAsal_outer.get(position).get(0).split("\\(")[1].replace(")", "");
+        holder.bandaraAsal.setText(kodeBandaraAsal);
         holder.durasi.setText(durasi_outer.get(position).get(0));
         holder.waktuDatang.setText(waktuDatang_outer.get(position).get(waktuDatang_outer.get(position).size()-1));
-        Log.i("BANDARATUJUAN OUTER", bandaraTujuan_outer + "");
-        holder.bandaraTujuan.setText(bandaraTujuan_outer.get(position).get(bandaraTujuan_outer.get(position).size()-1));
+        String kodeBandaraTujuan =  bandaraTujuan_outer.get(position).get(0).split("\\(")[1].replace(")", "");
+        holder.bandaraTujuan.setText(kodeBandaraTujuan);
         holder.harga.setText(harga.get(position));
 
         if (bandaraTujuan_outer.get(position).size() == 1){

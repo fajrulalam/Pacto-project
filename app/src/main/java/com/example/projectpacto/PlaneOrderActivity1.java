@@ -125,14 +125,14 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     Intent intent=  new Intent(getApplicationContext(), PlaneOrderActivity2_Pergi.class);
 
                     //for testing purpose
-                    keberangkatan = "Min, 16 Mei 2022";
-                    kedatangan = "Min, 16 Mei 2022";
-                    kota_keberangkatan = "Surabaya";
-                    kota_kedatangan = "Jakarta";
-                    bandara_kedatangan = "Juanda International Airport (SUB)";
-                    bandara_kedatangan = "Halim Perdana Kusuma International Airport (HLP)";
-                    tanggalBerangkat = "Min, 16 Mei 2022";
-                    penumpang = "1 Dewasa, Ekonomi";
+//                    keberangkatan = "Min, 16 Mei 2022";
+//                    kedatangan = "Min, 16 Mei 2022";
+//                    kota_keberangkatan = "Surabaya";
+//                    kota_kedatangan = "Jakarta";
+//                    bandara_kedatangan = "Juanda International Airport (SUB)";
+//                    bandara_kedatangan = "Halim Perdana Kusuma International Airport (HLP)";
+//                    tanggalBerangkat = "Min, 16 Mei 2022";
+//                    penumpang = "1 Dewasa, Ekonomi";
 
                     intent.putExtra("keberangkatan", keberangkatan);
                     intent.putExtra("kedatangan", kedatangan);

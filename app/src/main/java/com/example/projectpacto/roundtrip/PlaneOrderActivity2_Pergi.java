@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.projectpacto.FilterFragment;
 import com.example.projectpacto.ItemClickSupport;
@@ -281,8 +282,22 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
         });
 
 
+
+        String kodeBandara_datang = bandara_kedatangan.split("\\(")[1].replace(")", "");
+        String kodeBandara_berangkat= bandara_keberangkatan.split("\\(")[1].replace(")", "");
+
+        Log.i("kedatangan", kodeBandara_datang);
+        Log.i("keberangkatan", kodeBandara_berangkat);
+
         //Displaying the Tickets.
-        populateArrayLists("SUB", "HLP");
+        if (kodeBandara_berangkat.matches("SUB") && kodeBandara_datang.matches("HLP")){
+            Toast.makeText(getApplicationContext(), "MATCH ANJENG", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "MATCH ANJENG", Toast.LENGTH_SHORT).show();
+            Log.i("kedatangan", bandara_kedatangan);
+            Log.i("MATCH CUK", "match");
+            Log.i("keberangkatan", bandara_keberangkatan);
+        }
+        populateArrayLists(kodeBandara_berangkat, kodeBandara_datang);
         for (int i = 0; i <= namaMaskapai_outer.size(); i++) {
             jumlahpax.add("/" + jumlPenumpang_total + " pax");
         }
@@ -333,7 +348,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
-//            waktuBerangkat_inner = new ArrayList<>();
+            waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("6:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
@@ -342,7 +357,6 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             bandaraAsal_inner.add("Juanda International Airport (SUB)");
             bandaraAsal_outer.add(bandaraAsal_inner);
 
-            logoMaskapai_inner = new ArrayList<>();
             logoMaskapai_inner = new ArrayList<>();
             logoMaskapai_inner.add(R.drawable.ic_citilink);
             logoMaskapai_outer.add(logoMaskapai_inner);
@@ -386,9 +400,9 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             tanggalDatang_outer.add(tanggalDatang_inner);
 
 
-//            waktuBerangkat_inner = new ArrayList<>();
-            waktuDatang_inner.add("9:20");
-            waktuDatang_outer.add(waktuBerangkat_inner);
+            waktuDatang_inner = new ArrayList<>();
+            waktuDatang_inner.add("9:40");
+            waktuDatang_outer.add(waktuDatang_inner);
 //            waktuDatang_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
             calculateDuration(waktuBerangkat_inner, waktuDatang_inner);             //ini sudah memasukkan ke inner dan outer
@@ -416,6 +430,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
             tanggalBerangkat_inner.clear();
 
+            waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("7:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
@@ -461,9 +476,9 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
-//            waktuDatang_inner = new ArrayList<>();
+            waktuDatang_inner = new ArrayList<>();
             waktuDatang_inner.add("10:20");
-            waktuDatang_outer.add(waktuBerangkat_inner);
+            waktuDatang_outer.add(waktuDatang_inner);
 //            waktuDatang_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
             calculateDuration(waktuBerangkat_inner, waktuDatang_inner);             //ini sudah memasukkan ke inner dan outer
@@ -490,65 +505,75 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
 
             //Data dummy 1
+            tanggalBerangkat_inner = new ArrayList<>();
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
-            tanggalBerangkat_inner.clear();
 
+            waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("6:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
-            bandaraAsal_inner.add("Halim Perdana Kususma International Airport (HLP)");
+            bandaraAsal_inner = new ArrayList<>();
+            bandaraAsal_inner.add("Halim Perdana Kusuma International Airport (HLP) ");
             bandaraAsal_outer.add(bandaraAsal_inner);
-            bandaraAsal_inner.clear();
 
+            logoMaskapai_inner = new ArrayList<>();
             logoMaskapai_inner.add(R.drawable.ic_citilink);
             logoMaskapai_outer.add(logoMaskapai_inner);
-            logoMaskapai_inner.clear();
 
+            namaMaskapai_inner = new ArrayList<>();
             namaMaskapai_inner.add("Citilink");
             namaMaskapai_outer.add(namaMaskapai_inner);
-            namaMaskapai_inner.clear();
 
+            kodePenerbangan_inner = new ArrayList<>();
             kodePenerbangan_inner.add("IQC107");
             kodePenerbangan_outer.add(kodePenerbangan_inner);
-            kodePenerbangan_inner.clear();
 
+
+            kabin_inner = new ArrayList<>();
             kabin_inner.add("7kg");
             kabin_outer.add(kabin_inner);
-            kabin_inner.clear();
 
+
+            bagasi_inner = new ArrayList<>();
             bagasi_inner.add("20kg");
             bagasi_outer.add(bagasi_inner);
-            bagasi_inner.clear();
 
+
+            booleanMakan_inner = new ArrayList<>();
             booleanMakan_inner.add(true);
             booleanMakan_outer.add(booleanMakan_inner);
-            booleanMakan_inner.clear();
 
+
+            keteranganMakan_inner = new ArrayList<>();
             keteranganMakan_inner.add("Tidak termasuk makan");
             keteranganMakan_outer.add(keteranganMakan_inner);
-            keteranganMakan_inner.clear();
 
+
+            modelPesawat_inner = new ArrayList<>();
             modelPesawat_inner.add("Airbus");
             modelPesawat_outer.add(modelPesawat_inner);
-            modelPesawat_inner.clear();
 
+
+            tanggalDatang_inner = new ArrayList<>();
             tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
-            tanggalDatang_inner.clear();
 
-            waktuDatang_inner.add("7:20");
-            waktuDatang_outer.add(waktuBerangkat_inner);
+
+            waktuDatang_inner = new ArrayList<>();
+            waktuDatang_inner.add("9:40");
+            waktuDatang_outer.add(waktuDatang_inner);
 //            waktuDatang_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
             calculateDuration(waktuBerangkat_inner, waktuDatang_inner);             //ini sudah memasukkan ke inner dan outer
-            waktuDatang_inner.clear();
-            waktuBerangkat_inner.clear();
 
+
+            bandaraTujuan_inner = new ArrayList<>();
             bandaraTujuan_inner.add("Juanda International Airport (SUB)");
             bandaraTujuan_outer.add(bandaraTujuan_inner);
-            bandaraTujuan_inner.clear();
+
+
 
             testCovid.add(true);
 
@@ -560,65 +585,68 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 //-----------------------------------
 
             //Data dummy 2
+
+            tanggalBerangkat_inner= new ArrayList<>();
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
             tanggalBerangkat_inner.clear();
 
-            waktuBerangkat_inner.add("7:30");
+            waktuBerangkat_inner = new ArrayList<>();
+            waktuBerangkat_inner.add("11:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
+            bandaraTujuan_inner = new ArrayList<>();
             bandaraAsal_inner.add("Halim Perdana Kusuma International Airport (HLP)");
             bandaraAsal_outer.add(bandaraAsal_inner);
-            bandaraAsal_inner.clear();
 
+            logoMaskapai_inner = new ArrayList<>();
             logoMaskapai_inner.add(R.drawable.ic_lionair);
             logoMaskapai_outer.add(logoMaskapai_inner);
-            logoMaskapai_inner.clear();
+//            logoMaskapai_inner.clear();
 
+            namaMaskapai_inner= new ArrayList<>();
             namaMaskapai_inner.add("Lion Air");
             namaMaskapai_outer.add(namaMaskapai_inner);
-            namaMaskapai_inner.clear();
 
-            kodePenerbangan_inner.add("IQC118");
+            kodePenerbangan_inner= new ArrayList<>();
+            kodePenerbangan_inner.add("IQC108");
             kodePenerbangan_outer.add(kodePenerbangan_inner);
-            kodePenerbangan_inner.clear();
 
+            kabin_inner= new ArrayList<>();
             kabin_inner.add("7kg");
             kabin_outer.add(kabin_inner);
-            kabin_inner.clear();
 
+            bagasi_inner= new ArrayList<>();
             bagasi_inner.add("25kg");
             bagasi_outer.add(bagasi_inner);
-            bagasi_inner.clear();
 
+            booleanMakan_inner= new ArrayList<>();
             booleanMakan_inner.add(true);
             booleanMakan_outer.add(booleanMakan_inner);
-            booleanMakan_inner.clear();
 
+            keteranganMakan_inner= new ArrayList<>();
             keteranganMakan_inner.add("Tidak termasuk makan");
             keteranganMakan_outer.add(keteranganMakan_inner);
-            keteranganMakan_inner.clear();
 
+            modelPesawat_inner= new ArrayList<>();
             modelPesawat_inner.add("Boeing 737");
             modelPesawat_outer.add(modelPesawat_inner);
-            modelPesawat_inner.clear();
 
+            tanggalDatang_inner= new ArrayList<>();
             tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
-            tanggalDatang_inner.clear();
 
-            waktuDatang_inner.add("10:20");
-            waktuDatang_outer.add(waktuBerangkat_inner);
+            waktuDatang_inner = new ArrayList<>();
+            waktuDatang_inner.add("13:40");
+            waktuDatang_outer.add(waktuDatang_inner);
 //            waktuDatang_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
             calculateDuration(waktuBerangkat_inner, waktuDatang_inner);             //ini sudah memasukkan ke inner dan outer
-            waktuDatang_inner.clear();
-            waktuBerangkat_inner.clear();
 
+            bandaraTujuan_inner = new ArrayList<>();
             bandaraTujuan_inner.add("Juanda International Airport (SUB)");
             bandaraTujuan_outer.add(bandaraTujuan_inner);
-            bandaraTujuan_inner.clear();
 
             testCovid.add(true);
 
@@ -626,6 +654,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             hargasatuan_balita = 320000;
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
+            Log.i("POPULATE DONE", "INSIDE");
 
 
         }
@@ -740,7 +769,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 durasi_jam = 24 + durasi_jam;
             }
 
-            durasi_inner.add(durasi_jam + " jam " + durasi_menit + " menit");
+            durasi_inner = new ArrayList<>();
+            durasi_inner.add(durasi_jam + "j " + durasi_menit + "m");
 
         }
         durasi_outer.add(durasi_inner);
