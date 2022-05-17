@@ -446,7 +446,6 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             tanggalBerangkat_inner= new ArrayList<>();
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
-            tanggalBerangkat_inner.clear();
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("7:30");

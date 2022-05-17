@@ -72,7 +72,7 @@
                 android:id="@+id/RecycleViewRouteFlight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EAE9E9"
+                android:background="@color/white"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

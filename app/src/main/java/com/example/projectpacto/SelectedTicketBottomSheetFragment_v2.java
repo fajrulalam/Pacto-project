@@ -63,6 +63,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
     ArrayList<String> bandaraAsal_ArrayList;
     ArrayList<Integer> logoMaskapai_ArrayList;
     ArrayList<String> namaMaskapai_ArrayList;
+    ArrayList<String> kodePenerbangan_ArrayList;
     ArrayList<String> kelasPesawat_ArrayList;
     ArrayList<String> tanggalDatang_ArrayList;
     ArrayList<String> waktuDatang_ArrayList;
@@ -90,6 +91,8 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
     String bandara_keberangktan_raw;
     String bandara_kedatangan_raw;
 
+    RecyclerView recyclerView;
+
 
 
 
@@ -115,7 +118,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         tampilkanButton = view.findViewById(R.id.tampilkanButton);
 
 
-
+        recyclerView = view.findViewById(R.id.RecycleViewRouteFlight);
         kotaAsal = view.findViewById(R.id.kotaAsal);
         kotaTujuan = view.findViewById(R.id.kotaTujuan);
         pajakLinearLayout =  view.findViewById(R.id.pajakDetail);
@@ -153,11 +156,14 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         kotaAsal_str = bundle.getString("kotaAsal");
         kotaTujuan_str = bundle.getString("kotaTujuan");
         tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat");
+        Log.i("SELECTED TICKET BS", tanggalBerangkat_ArrayList + "");
+
         waktuBerangkat_ArrayList = bundle.getStringArrayList("waktuBerangkat");
         Log.i("SELECTED TICKET BS", waktuBerangkat_ArrayList + "");
         bandaraAsal_ArrayList = bundle.getStringArrayList("bandaraAsal");
         logoMaskapai_ArrayList =bundle.getIntegerArrayList("logoMaskapai");
         namaMaskapai_ArrayList= bundle.getStringArrayList("namaMaskapai");;
+        kodePenerbangan_ArrayList = bundle.getStringArrayList("kodePenerbangan");
         kabin_ArrayList = bundle.getStringArrayList("kabin");;
         bagasi_ArrayList = bundle.getStringArrayList("bagasi");;
         booleanMakan_ArrayList = bundle.getIntegerArrayList("booleanMakan");;
@@ -232,18 +238,25 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 
             }
         });
+        RecyclerAdapterFlightRoute recyclerAdapterFlightRoute = new  RecyclerAdapterFlightRoute(tanggalBerangkat_ArrayList, waktuBerangkat_ArrayList,  bandaraAsal_ArrayList, logoMaskapai_ArrayList,  namaMaskapai_ArrayList,  kodePenerbangan_ArrayList,  kabin_ArrayList,  bagasi_ArrayList,  booleanMakan_ArrayList, keteranganMakan_ArrayList, modelPesawat_ArrayList, kelasPesawat_ArrayList,  tanggalDatang_ArrayList, waktuDatang_ArrayList, bandaraTujuan_ArrayList);
+        recyclerView.setAdapter(recyclerAdapterFlightRoute);
 
 
-        return dialog;
+
+            return dialog;
     }
 
-    public class RecycleAdapterHotelOptions extends RecyclerView.Adapter<ViewHolder>{
+    public class RecyclerAdapterFlightRoute extends RecyclerView.Adapter<RecyclerAdapterFlightRoute.ViewHolder>{
+
+        private ArrayList<String> tanggalBerangkat_ArrayList;
+        private ArrayList<String>waktuBerangkat_ArrayList;
         private ArrayList<String> bandaraAsal_ArrayList ;
         private ArrayList<Integer> logoMaskapai_ArrayList ;
         private ArrayList<String> namaMaskapai_ArrayList;
+        private ArrayList<String> kodePenerbangan_ArrayList;
         private ArrayList<String> kabin_ArrayList;
         private ArrayList<String> bagasi_ArrayList;
-        private ArrayList<String> booleanMakan_ArrayList;
+        private ArrayList<Integer> booleanMakan_ArrayList;
         private ArrayList<String> keteranganMakan_ArrayList;
         private ArrayList<String> modelPesawat_ArrayList ;
         private ArrayList<String> kelasPesawat_ArrayList;
@@ -251,10 +264,14 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         private ArrayList<String> waktuDatang_ArrayList;
         private ArrayList<String> bandaraTujuan_ArrayList;
 
-        public RecycleAdapterHotelOptions(ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<String> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList) {
+
+        public RecyclerAdapterFlightRoute(ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList) {
+            this.tanggalBerangkat_ArrayList = tanggalBerangkat_ArrayList;
+            this.waktuBerangkat_ArrayList = waktuBerangkat_ArrayList;
             this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
             this.logoMaskapai_ArrayList = logoMaskapai_ArrayList;
             this.namaMaskapai_ArrayList = namaMaskapai_ArrayList;
+            this.kodePenerbangan_ArrayList = kodePenerbangan_ArrayList;
             this.kabin_ArrayList = kabin_ArrayList;
             this.bagasi_ArrayList = bagasi_ArrayList;
             this.booleanMakan_ArrayList = booleanMakan_ArrayList;
@@ -268,29 +285,87 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 
         @NonNull
         @Override
-        public com.example.projectpacto.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View view = layoutInflater.inflate(R.layout.hotel_options_single_view, parent, false);
-            com.example.projectpacto.ViewHolder viewHolder = new com.example.projectpacto.ViewHolder(view);
+            View view = layoutInflater.inflate(R.layout.single_view_flight_route, parent, false);
+            ViewHolder viewHolder = new ViewHolder(view);
             return  viewHolder;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull com.example.projectpacto.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+            holder.tanggalBerangkat.setText(tanggalBerangkat_ArrayList.get(position));
+            holder.waktuBerangkat.setText(waktuBerangkat_ArrayList.get(position));
+//            TextView kotaTujuan;
+//            TextView kotaAsal;
+            holder.bandaraAsal.setText(bandaraAsal_ArrayList.get(position));
+            holder.logoMaskapai.setImageResource(logoMaskapai_ArrayList.get(position));
+            holder.kodePenerbangan.setText(kodePenerbangan_ArrayList.get(position));
+            holder.namaMaskapai.setText(namaMaskapai_ArrayList.get(position));
+            holder.kabin.setText("Kabin: "+ kabin_ArrayList.get(position));
+            holder.bagasi.setText("Bagasi: "+ bagasi_ArrayList.get(position));
+//            TextView keteranganKabibagasi_ArrayListn;
 
+//            holder.keteranganMakanan.setText(keteranganMakanan_ArrayList);
+            holder.modelPesawat.setText(modelPesawat_ArrayList.get(position));
+            holder.kelasPesawat.setText(kelasPesawat_ArrayList.get(position));
+            holder.tanggalDatang.setText(tanggalDatang_ArrayList.get(position));
+            holder.waktuDatang.setText(waktuDatang_ArrayList.get(position));
+            holder.bandaraTujuan.setText(bandaraTujuan_ArrayList.get(position));
+
+            if (booleanMakan_ArrayList.get(position) == 1 ){
+                holder.makanAtauTidak.setText("Termasuk makan");
+                holder.keteranganMakanan.setText(keteranganMakan_ArrayList.get(position));
+            }
         }
 
         @Override
         public int getItemCount() {
-            return bandaraAsal_ArrayList.size();
+            return tanggalBerangkat_ArrayList.size();
         }
 
 
         class ViewHolder extends RecyclerView.ViewHolder{
-
+            TextView tanggalBerangkat;
+            TextView waktuBerangkat;
+//            TextView kotaTujuan;
+//            TextView kotaAsal;
+            TextView bandaraAsal;
+            ImageView logoMaskapai;
+            TextView kodePenerbangan;
+            TextView namaMaskapai;
+            TextView kabin;
+            TextView bagasi;
+//            TextView keteranganKabin;
+            TextView makanAtauTidak;
+            TextView keteranganMakanan;
+            TextView modelPesawat;
+            TextView kelasPesawat;
+            TextView tanggalDatang;
+            TextView waktuDatang;
+            TextView bandaraTujuan;
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
+
+                tanggalBerangkat = itemView.findViewById(R.id.tanggalBerangkat);
+                waktuBerangkat = itemView.findViewById(R.id.waktuBerangkat);
+//                kotaTujuan = itemView.findViewById(R.id.kotaTujuan);
+//                kotaAsal = itemView.findViewById(R.id.kotaAsal);
+                bandaraAsal = itemView.findViewById(R.id.bandaraAsal);
+                logoMaskapai = itemView.findViewById(R.id.logoMaskapai);
+                kodePenerbangan = itemView.findViewById(R.id.kodePenerbangan);
+                namaMaskapai = itemView.findViewById(R.id.namaMaskapai);
+                kabin = itemView.findViewById(R.id.kabin);
+                bagasi = itemView.findViewById(R.id.bagasi);
+//                keteranganKabin = itemView.findViewById(R.id.keteranganKabin);
+                makanAtauTidak = itemView.findViewById(R.id.makanAtauTidak);
+                keteranganMakanan = itemView.findViewById(R.id.keteranganMakanan);
+                modelPesawat = itemView.findViewById(R.id.modelPesawat);
+                kelasPesawat = itemView.findViewById(R.id.kelasPesawat);
+                tanggalDatang = itemView.findViewById(R.id.tanggalDatang);
+                waktuDatang = itemView.findViewById(R.id.waktuDatang);
+                bandaraTujuan = itemView.findViewById(R.id.bandaraTujuan);
 
             }
 
