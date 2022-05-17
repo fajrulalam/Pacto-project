@@ -65,7 +65,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
     ArrayList<String> tanggalDatang_inner;
     ArrayList<String> kabin_inner;
     ArrayList<String> bagasi_inner;
-    ArrayList<Boolean> booleanMakan_inner;
+    ArrayList<Integer> booleanMakan_inner;
     ArrayList<String> keteranganMakan_inner;
     ArrayList<String> modelPesawat_inner;
     ArrayList<String> harga_dewasa;
@@ -398,12 +398,12 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
 
             booleanMakan_inner = new ArrayList<>();
-            booleanMakan_inner.add(true);
+            booleanMakan_inner.add(1);
             booleanMakan_outer.add(booleanMakan_inner);
 
 
             keteranganMakan_inner = new ArrayList<>();
-            keteranganMakan_inner.add("Tidak termasuk makan");
+            keteranganMakan_inner.add("Makanan ringan 1x");
             keteranganMakan_outer.add(keteranganMakan_inner);
 
 
@@ -480,7 +480,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             bagasi_outer.add(bagasi_inner);
 
             booleanMakan_inner= new ArrayList<>();
-            booleanMakan_inner.add(true);
+            booleanMakan_inner.add(0);
             booleanMakan_outer.add(booleanMakan_inner);
 
             keteranganMakan_inner= new ArrayList<>();
@@ -563,7 +563,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
 
             booleanMakan_inner = new ArrayList<>();
-            booleanMakan_inner.add(true);
+            booleanMakan_inner.add(0);
             booleanMakan_outer.add(booleanMakan_inner);
 
 
@@ -644,7 +644,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             bagasi_outer.add(bagasi_inner);
 
             booleanMakan_inner= new ArrayList<>();
-            booleanMakan_inner.add(true);
+            booleanMakan_inner.add(0);
             booleanMakan_outer.add(booleanMakan_inner);
 
             keteranganMakan_inner= new ArrayList<>();
@@ -730,8 +730,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             bagasi_outer.add(bagasi_inner);
 
             booleanMakan_inner= new ArrayList<>();
-            booleanMakan_inner.add(true);
-            booleanMakan_inner.add(false);
+            booleanMakan_inner.add(1);
+            booleanMakan_inner.add(0);
             booleanMakan_outer.add(booleanMakan_inner);
 
             keteranganMakan_inner= new ArrayList<>();
@@ -819,8 +819,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             bagasi_outer.add(bagasi_inner);
 
             booleanMakan_inner= new ArrayList<>();
-            booleanMakan_inner.add(true);
-            booleanMakan_inner.add(false);
+            booleanMakan_inner.add(1);
+            booleanMakan_inner.add(0);
             booleanMakan_outer.add(booleanMakan_inner);
 
             keteranganMakan_inner= new ArrayList<>();

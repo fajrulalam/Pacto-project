@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -158,6 +161,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         kabin_ArrayList = bundle.getStringArrayList("kabin");;
         bagasi_ArrayList = bundle.getStringArrayList("bagasi");;
         booleanMakan_ArrayList = bundle.getStringArrayList("booleanMakan");;
+        Log.i("SELECTED TICKET BS", booleanMakan_ArrayList + "");
         keteranganMakan_ArrayList = bundle.getStringArrayList("keteranganMakan");
         modelPesawat_ArrayList = bundle.getStringArrayList("modelPesawat");
         kelasPesawat_ArrayList= bundle.getStringArrayList("kelasPesawat");;
@@ -230,9 +234,67 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         });
 
 
-
-
-
         return dialog;
+    }
+
+    public class RecycleAdapterHotelOptions extends RecyclerView.Adapter<ViewHolder>{
+        private ArrayList<String> bandaraAsal_ArrayList ;
+        private ArrayList<Integer> logoMaskapai_ArrayList ;
+        private ArrayList<String> namaMaskapai_ArrayList;
+        private ArrayList<String> kabin_ArrayList;
+        private ArrayList<String> bagasi_ArrayList;
+        private ArrayList<String> booleanMakan_ArrayList;
+        private ArrayList<String> keteranganMakan_ArrayList;
+        private ArrayList<String> modelPesawat_ArrayList ;
+        private ArrayList<String> kelasPesawat_ArrayList;
+        private ArrayList<String> tanggalDatang_ArrayList;
+        private ArrayList<String> waktuDatang_ArrayList;
+        private ArrayList<String> bandaraTujuan_ArrayList;
+
+        public RecycleAdapterHotelOptions(ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<String> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList) {
+            this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
+            this.logoMaskapai_ArrayList = logoMaskapai_ArrayList;
+            this.namaMaskapai_ArrayList = namaMaskapai_ArrayList;
+            this.kabin_ArrayList = kabin_ArrayList;
+            this.bagasi_ArrayList = bagasi_ArrayList;
+            this.booleanMakan_ArrayList = booleanMakan_ArrayList;
+            this.keteranganMakan_ArrayList = keteranganMakan_ArrayList;
+            this.modelPesawat_ArrayList = modelPesawat_ArrayList;
+            this.kelasPesawat_ArrayList = kelasPesawat_ArrayList;
+            this.tanggalDatang_ArrayList = tanggalDatang_ArrayList;
+            this.waktuDatang_ArrayList = waktuDatang_ArrayList;
+            this.bandaraTujuan_ArrayList = bandaraTujuan_ArrayList;
+        }
+
+        @NonNull
+        @Override
+        public com.example.projectpacto.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.hotel_options_single_view, parent, false);
+            com.example.projectpacto.ViewHolder viewHolder = new com.example.projectpacto.ViewHolder(view);
+            return  viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull com.example.projectpacto.ViewHolder holder, int position) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return bandaraAsal_ArrayList.size();
+        }
+
+
+        class ViewHolder extends RecyclerView.ViewHolder{
+
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+            }
+
+
+        }
     }
 }
