@@ -21,6 +21,7 @@ import com.example.projectpacto.R;
 import com.example.projectpacto.RecyclerAdapterPlaneTicket;
 import com.example.projectpacto.RecyclerAdapterPlaneTicket_v2;
 import com.example.projectpacto.SelectedTicketBottomSheetFragment;
+import com.example.projectpacto.SelectedTicketBottomSheetFragment_v2;
 import com.example.projectpacto.SortPlaneTicket;
 import com.example.projectpacto.databinding.ActivityPlaneOrder2Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrderActivity2PergiBinding;
@@ -46,7 +47,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
     ArrayList<ArrayList<String>> tanggalDatang_outer;
     ArrayList<ArrayList<String>> kabin_outer;
     ArrayList<ArrayList<String>> bagasi_outer;
-    ArrayList<ArrayList<Boolean>> booleanMakan_outer;
+    ArrayList<ArrayList> booleanMakan_outer;
     ArrayList<ArrayList<String>> keteranganMakan_outer;
     ArrayList<ArrayList<String>> modelPesawat_outer;
     ArrayList<Boolean> testCovid;
@@ -67,6 +68,9 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
     ArrayList<Boolean> booleanMakan_inner;
     ArrayList<String> keteranganMakan_inner;
     ArrayList<String> modelPesawat_inner;
+    ArrayList<String> harga_dewasa;
+    ArrayList<String> harga_balita;
+    ArrayList<String> kelas_outer;
     String keberangkatan;
     String kedatangan;
     String tanggal;
@@ -112,6 +116,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
         tanggalDatang_outer = new ArrayList<>();
         testCovid = new ArrayList<>();
         harga = new ArrayList<>();
+        harga_dewasa = new ArrayList<>();
+        harga_balita = new ArrayList<>();
         jumlahpax = new ArrayList<>();
         kodePenerbangan_inner = new ArrayList();
         logoMaskapai_inner = new ArrayList<>();
@@ -128,6 +134,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
         booleanMakan_inner = new ArrayList<>();
         keteranganMakan_inner = new ArrayList<>();
         modelPesawat_inner = new ArrayList<>();
+        kelas_outer = new ArrayList<>();
 
 
         //Recycle View on Click
@@ -137,25 +144,33 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 String waktuDatang = ((TextView) v.findViewById(R.id.waktuDatang)).getText().toString();
                 String waktuBerangkat = ((TextView) v.findViewById(R.id.waktuBerangkat)).getText().toString();
                 String harga = ((TextView) v.findViewById(R.id.harga)).getText().toString();
-                int logoMaskapai_selected = (int) logoMaskapai_outer.get(position).get(position);
+//                int logoMaskapai_selected = (int) logoMaskapai_outer.get(position).get(0);
 
                 Bundle bundle = new Bundle();
                 bundle.putString("harga", harga);
                 bundle.putString("kotaAsal", kota_keberangkatan);
                 bundle.putString("kotaTujuan", kota_kedatangan);
-                bundle.putString("tanggalBerangkat", tanggal);
-                bundle.putString("waktuBerangkat", waktuBerangkat);
-                bundle.putString("bandaraAsal", bandara_keberangkatan);
-                bundle.putInt("logoMaskapai", logoMaskapai_selected);
+                bundle.putStringArrayList("tanggalBerangkat", tanggalBerangkat_outer.get(position));
+                bundle.putStringArrayList("waktuBerangkat", waktuBerangkat_outer.get(position));
+                bundle.putStringArrayList("bandaraAsal", bandaraAsal_outer.get(position));
+                bundle.putIntegerArrayList("logoMaskapai", logoMaskapai_outer.get(position));
+                bundle.putStringArrayList("kodePenerbangan", kodePenerbangan_outer.get(position));
                 bundle.putStringArrayList("namaMaskapai", namaMaskapai_outer.get(position));
-                bundle.putString("waktuDatang", waktuDatang);
-                bundle.putString("kelasPesawat", kelasPesawat);
-                bundle.putString("tanggalDatang", tanggal);
-                bundle.putString("bandaraTujuan", bandara_kedatangan);
+                bundle.putStringArrayList("kabin", kabin_outer.get(position));
+                bundle.putStringArrayList("bagasi", bagasi_outer.get(position));
+                bundle.putStringArrayList("boleanMakan", booleanMakan_outer.get(position));
+                bundle.putStringArrayList("keteranganMakan", booleanMakan_outer.get(position));
+                bundle.putStringArrayList("modelPesawat", modelPesawat_outer.get(position));
+                bundle.putStringArrayList("kelasPesawat", kelas_outer);
+                bundle.putStringArrayList("tanggalDatang", tanggalDatang_outer.get(position));
+                bundle.putStringArrayList("waktuDatang", waktuDatang_outer.get(position));
+                bundle.putStringArrayList("bandaraTujuan", bandaraTujuan_outer.get(position));
+                bundle.putStringArrayList("durasi", durasi_outer.get(position));
+                bundle.putStringArrayList("hargaBalita", harga_balita);
+                bundle.putStringArrayList("hargaDewasa", harga_dewasa);
                 bundle.putString("jmlDewasa", jmlDewasa);
                 bundle.putString("jmlAnak", jmlAnak);
                 bundle.putString("jmlBalita", jmlBalita);
-
                 bundle.putString("keberangkatan", keberangkatan);
                 bundle.putString("kedatangan", kedatangan);
                 bundle.putString("tanggal", tanggal);
@@ -166,7 +181,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 bundle.putString("bandara_kedatangan", bandara_kedatangan_raw);
 
 
-                SelectedTicketBottomSheetFragment selectedTicketBottomSheetFragment = new SelectedTicketBottomSheetFragment();
+                SelectedTicketBottomSheetFragment_v2 selectedTicketBottomSheetFragment = new SelectedTicketBottomSheetFragment_v2();
                 selectedTicketBottomSheetFragment.setArguments(bundle);
                 selectedTicketBottomSheetFragment.show(getSupportFragmentManager(), selectedTicketBottomSheetFragment.getTag());
             }
@@ -300,6 +315,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
         populateArrayLists(kodeBandara_berangkat, kodeBandara_datang);
         for (int i = 0; i <= namaMaskapai_outer.size(); i++) {
             jumlahpax.add("/" + jumlPenumpang_total + " pax");
+            kelas_outer.add(kelasPesawat);
+
         }
 
 //        RecyclerAdapterPlaneTicket_v2 recyclerAdapterPlaneTicket_v2 = new RecyclerAdapterPlaneTicket_v2(kodePenerbangan_outer, logoMaskapai_outer,  namaMaskapai_outer,  waktuBerangkat_outer,  bandaraAsal_outer,  kabin_outer,  bagasi_outer, booleanMakan_outer, keteranganMakan_outer,  modelPesawat_outer, durasi_outer,  waktuDatang_outer, bandaraTujuan_outer,  tanggalBerangkat_outer, tanggalDatang_outer, testCovid,  harga,  jumlahpax);
@@ -418,6 +435,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 550000;
             hargasatuan_balita = 420000;
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
 
@@ -491,6 +510,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 450000;
             hargasatuan_balita = 320000;
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
             Log.i("POPULATE DONE", "INSIDE");
@@ -579,6 +600,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 550000;
             hargasatuan_balita = 420000;
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
 
@@ -589,7 +612,6 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             tanggalBerangkat_inner= new ArrayList<>();
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
-            tanggalBerangkat_inner.clear();
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("11:30");
@@ -652,6 +674,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 450000;
             hargasatuan_balita = 320000;
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
             Log.i("POPULATE DONE", "INSIDE");
@@ -662,86 +686,181 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
         if (kodeBandara_berangkat.matches("CGK") && kodeBandara_kedatangan.matches("AMS")){
             binding.tidakAdaPenerbangan.setVisibility(View.GONE);
 
-
             //Data dummy 1
+            tanggalBerangkat_inner= new ArrayList<>();
+            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            waktuBerangkat_inner = new ArrayList<>();
+            waktuBerangkat_inner.add("12:30");
+            waktuBerangkat_inner.add("13:30");
+            waktuBerangkat_outer.add(waktuBerangkat_inner);
+//            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
+
+            bandaraTujuan_inner = new ArrayList<>();
+            bandaraAsal_inner.add("Soekarno Hatta International Airport (CGK)");
+            bandaraAsal_inner.add("Doha International Airport (DIA)");
+            bandaraAsal_outer.add(bandaraAsal_inner);
+
+            logoMaskapai_inner = new ArrayList<>();
+            logoMaskapai_inner.add(R.drawable.ic_citilink);
+            logoMaskapai_inner.add(R.drawable.ic_citilink);
+            logoMaskapai_outer.add(logoMaskapai_inner);
+//            logoMaskapai_inner.clear();
+
+            namaMaskapai_inner= new ArrayList<>();
+            namaMaskapai_inner.add("Citilink");
+            namaMaskapai_inner.add("Citilink");
+            namaMaskapai_outer.add(namaMaskapai_inner);
+
+            kodePenerbangan_inner= new ArrayList<>();
+            kodePenerbangan_inner.add("IQC119");
+            kodePenerbangan_inner.add("IQC188");
+            kodePenerbangan_outer.add(kodePenerbangan_inner);
+
+            kabin_inner= new ArrayList<>();
+            kabin_inner.add("7kg");
+            kabin_inner.add("7kg");
+            kabin_outer.add(kabin_inner);
+
+            bagasi_inner= new ArrayList<>();
+            bagasi_inner.add("25kg");
+            bagasi_inner.add("20kg");
+            bagasi_outer.add(bagasi_inner);
+
+            booleanMakan_inner= new ArrayList<>();
+            booleanMakan_inner.add(true);
+            booleanMakan_inner.add(false);
+            booleanMakan_outer.add(booleanMakan_inner);
+
+            keteranganMakan_inner= new ArrayList<>();
+            keteranganMakan_inner.add("2x Makanan berat, 1x Makanan ringan");
+            keteranganMakan_inner.add("Penerbangan ini tidak termasuk makan");
+            keteranganMakan_outer.add(keteranganMakan_inner);
+
+            modelPesawat_inner= new ArrayList<>();
+            modelPesawat_inner.add("Airbus Neo");
+            modelPesawat_inner.add("Airbus Neo 2");
+            modelPesawat_outer.add(modelPesawat_inner);
+
+            tanggalDatang_inner= new ArrayList<>();
+            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_outer.add(tanggalDatang_inner);
+
+            waktuDatang_inner = new ArrayList<>();
+            waktuDatang_inner.add("18:30");
+            waktuDatang_inner.add("08:25");
+            waktuDatang_outer.add(waktuDatang_inner);
+//            waktuDatang_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
+
+            calculateDuration(waktuBerangkat_inner, waktuDatang_inner);             //ini sudah memasukkan ke inner dan outer
+
+            bandaraTujuan_inner = new ArrayList<>();
+            bandaraTujuan_inner.add("Doha International Airport (DIA)");
+            bandaraTujuan_inner.add("Amsterdam Airport Schiphol (AMS)");
+            bandaraTujuan_outer.add(bandaraTujuan_inner);
+
+            testCovid.add(true);
+
+            hargasatuan_dewasa_anak = 1450000;
+            hargasatuan_balita = 1320000;
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
+            harga.add("IDR " + hargapax);
+            Log.i("POPULATE DONE", "INSIDE");
+
+//-----------------------------------
+
+            //Data dummy 2
+
+            tanggalBerangkat_inner= new ArrayList<>();
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
             tanggalBerangkat_inner.clear();
 
-            waktuBerangkat_inner.add("6:30");
+            waktuBerangkat_inner = new ArrayList<>();
+            waktuBerangkat_inner.add("11:30");
             waktuBerangkat_inner.add("19:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
-            bandaraAsal_inner.add("Halim Perdana Kususma International Airport (HLP)");
+            bandaraTujuan_inner = new ArrayList<>();
+            bandaraAsal_inner.add("Soekarno Hatta International Airport (CGK)");
             bandaraAsal_inner.add("Doha International Airport (DIA)");
             bandaraAsal_outer.add(bandaraAsal_inner);
-            bandaraAsal_inner.clear();
 
-            logoMaskapai_inner.add(R.drawable.ic_citilink);
+            logoMaskapai_inner = new ArrayList<>();
+            logoMaskapai_inner.add(R.drawable.ic_lionair);
+            logoMaskapai_inner.add(R.drawable.ic_lionair);
             logoMaskapai_outer.add(logoMaskapai_inner);
-            logoMaskapai_inner.clear();
+//            logoMaskapai_inner.clear();
 
-            namaMaskapai_inner.add("Citilink");
-            namaMaskapai_inner.add("Citilink");
+            namaMaskapai_inner= new ArrayList<>();
+            namaMaskapai_inner.add("Lion Air");
+            namaMaskapai_inner.add("Lion Air");
             namaMaskapai_outer.add(namaMaskapai_inner);
-            namaMaskapai_inner.clear();
 
-            kodePenerbangan_inner.add("IQC107");
-            kodePenerbangan_inner.add("IQC290");
+            kodePenerbangan_inner= new ArrayList<>();
+            kodePenerbangan_inner.add("IQC108");
+            kodePenerbangan_inner.add("IQC118");
             kodePenerbangan_outer.add(kodePenerbangan_inner);
-            kodePenerbangan_inner.clear();
 
+            kabin_inner= new ArrayList<>();
             kabin_inner.add("7kg");
-            kabin_inner.add("10kg");
+            kabin_inner.add("7kg");
             kabin_outer.add(kabin_inner);
-            kabin_inner.clear();
 
-            bagasi_inner.add("20kg");
+            bagasi_inner= new ArrayList<>();
             bagasi_inner.add("25kg");
+            bagasi_inner.add("20kg");
             bagasi_outer.add(bagasi_inner);
-            bagasi_inner.clear();
 
+            booleanMakan_inner= new ArrayList<>();
             booleanMakan_inner.add(true);
             booleanMakan_inner.add(false);
             booleanMakan_outer.add(booleanMakan_inner);
-            booleanMakan_inner.clear();
 
+            keteranganMakan_inner= new ArrayList<>();
             keteranganMakan_inner.add("2x Makanan berat, 1x Makanan ringan");
             keteranganMakan_inner.add("Penerbangan ini tidak termasuk makan");
             keteranganMakan_outer.add(keteranganMakan_inner);
-            keteranganMakan_inner.clear();
 
-            modelPesawat_inner.add("Airbus CCC");
-            modelPesawat_inner.add("Boeing 747 Max");
+            modelPesawat_inner= new ArrayList<>();
+            modelPesawat_inner.add("Boeing 737");
+            modelPesawat_inner.add("Boeing 737 Max");
             modelPesawat_outer.add(modelPesawat_inner);
-            modelPesawat_inner.clear();
 
+            tanggalDatang_inner= new ArrayList<>();
             tanggalDatang_inner.add(tanggal);
             tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
-            tanggalDatang_inner.clear();
 
+            waktuDatang_inner = new ArrayList<>();
             waktuDatang_inner.add("17:30");
             waktuDatang_inner.add("07:25");
-            waktuDatang_outer.add(waktuBerangkat_inner);
+            waktuDatang_outer.add(waktuDatang_inner);
 //            waktuDatang_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
             calculateDuration(waktuBerangkat_inner, waktuDatang_inner);             //ini sudah memasukkan ke inner dan outer
-            waktuDatang_inner.clear();
-            waktuBerangkat_inner.clear();
 
+            bandaraTujuan_inner = new ArrayList<>();
             bandaraTujuan_inner.add("Doha International Airport (DIA)");
             bandaraTujuan_inner.add("Amsterdam Airport Schiphol (AMS)");
             bandaraTujuan_outer.add(bandaraTujuan_inner);
-            bandaraTujuan_inner.clear();
 
             testCovid.add(true);
 
-            hargasatuan_dewasa_anak = 1550000;
-            hargasatuan_balita = 1420000;
+            hargasatuan_dewasa_anak = 1450000;
+            hargasatuan_balita = 1320000;
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
+            Log.i("POPULATE DONE", "INSIDE");
+
 
          }
 

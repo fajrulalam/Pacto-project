@@ -178,6 +178,12 @@ public class KeberangkatanDanKedatangan extends BottomSheetDialogFragment {
                 kodeBandara.add("CGK");
                 recyclerAdapaterBandara.notifyDataSetChanged();
                 break;
+            case "amsterdam":
+                namaKota.add("Amsterdam");
+                namaBandara.add("Amsterdam Airport Schiphol");
+                kodeBandara.add("AMS");
+                recyclerAdapaterBandara.notifyDataSetChanged();
+                break;
         }
     }
 

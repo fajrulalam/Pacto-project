@@ -21,7 +21,7 @@ public class RecyclerAdapterPlaneTicket_v2 extends RecyclerView.Adapter<Recycler
     ArrayList<ArrayList<String>> bandaraAsal_outer;
     ArrayList<ArrayList<String>> kabin_outer;
     ArrayList<ArrayList<String>> bagasi_outer;
-    ArrayList<ArrayList<Boolean>> booleanMakan_outer;
+    ArrayList<ArrayList> booleanMakan_outer;
     ArrayList<ArrayList<String>> keteranganMakan_outer;
     ArrayList<ArrayList<String>> modelPesawat_outer;
     ArrayList<ArrayList<String>> durasi_outer;
@@ -33,7 +33,7 @@ public class RecyclerAdapterPlaneTicket_v2 extends RecyclerView.Adapter<Recycler
     ArrayList<String> harga;
     ArrayList<String> jumlahpax;
 
-    public RecyclerAdapterPlaneTicket_v2(ArrayList<ArrayList<String>> kodePenerbangan_outer, ArrayList<ArrayList<Integer>> logoMaskapai_outer, ArrayList<ArrayList<String>> namaMaskapai_outer, ArrayList<ArrayList<String>> waktuBerangkat_outer, ArrayList<ArrayList<String>> bandaraAsal_outer, ArrayList<ArrayList<String>> kabin_outer, ArrayList<ArrayList<String>> bagasi_outer, ArrayList<ArrayList<Boolean>> booleanMakan_outer, ArrayList<ArrayList<String>> keteranganMakan_outer, ArrayList<ArrayList<String>> modelPesawat_outer, ArrayList<ArrayList<String>> durasi_outer, ArrayList<ArrayList<String>> waktuDatang_outer, ArrayList<ArrayList<String>> bandaraTujuan_outer, ArrayList<ArrayList<String>> tanggalBerangkat_outer, ArrayList<ArrayList<String>> tanggalDatang_outer, ArrayList<Boolean> testCovid, ArrayList<String> harga, ArrayList<String> jumlahpax) {
+    public RecyclerAdapterPlaneTicket_v2(ArrayList<ArrayList<String>> kodePenerbangan_outer, ArrayList<ArrayList<Integer>> logoMaskapai_outer, ArrayList<ArrayList<String>> namaMaskapai_outer, ArrayList<ArrayList<String>> waktuBerangkat_outer, ArrayList<ArrayList<String>> bandaraAsal_outer, ArrayList<ArrayList<String>> kabin_outer, ArrayList<ArrayList<String>> bagasi_outer, ArrayList<ArrayList> booleanMakan_outer, ArrayList<ArrayList<String>> keteranganMakan_outer, ArrayList<ArrayList<String>> modelPesawat_outer, ArrayList<ArrayList<String>> durasi_outer, ArrayList<ArrayList<String>> waktuDatang_outer, ArrayList<ArrayList<String>> bandaraTujuan_outer, ArrayList<ArrayList<String>> tanggalBerangkat_outer, ArrayList<ArrayList<String>> tanggalDatang_outer, ArrayList<Boolean> testCovid, ArrayList<String> harga, ArrayList<String> jumlahpax) {
         this.kodePenerbangan_outer = kodePenerbangan_outer;
         this.logoMaskapai_outer = logoMaskapai_outer;
         this.namaMaskapai_outer = namaMaskapai_outer;
