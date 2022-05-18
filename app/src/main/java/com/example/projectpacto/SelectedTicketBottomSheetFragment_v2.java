@@ -317,6 +317,36 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
                 holder.makanAtauTidak.setText("Termasuk makan");
                 holder.keteranganMakanan.setText(keteranganMakan_ArrayList.get(position));
             }
+
+            if (position - bandaraTujuan_ArrayList.size() + 1 != 0) {
+                //then show the keterangan transit
+                holder.ketaranganTransitLayout.setVisibility(View.VISIBLE);
+                String durasiTransit = calculateDuration(waktuDatang_ArrayList.get(position), waktuBerangkat_ArrayList.get(position+1));
+                holder.keteranganDurasi.setText(durasiTransit +" transit di " + bandaraTujuan_ArrayList.get(position));
+            }
+        }
+
+        public String  calculateDuration(String waktuDatang, String waktuTerbangLagi) {
+
+            int jam_waktuDatang = Integer.parseInt(waktuDatang.split(":")[0]);
+            int menit_waktuDatang = Integer.parseInt(waktuDatang.split(":")[1]);
+            int jam_waktuTerbangLagi = Integer.parseInt(waktuTerbangLagi.split(":")[0]);
+            int menit_waktuTerbangLagi = Integer.parseInt(waktuTerbangLagi.split(":")[1]);
+
+            int durasi_menit = menit_waktuTerbangLagi - menit_waktuDatang;
+            int durasi_jam = jam_waktuTerbangLagi - jam_waktuDatang;
+            if (durasi_menit < 0) {
+                durasi_menit = 60 + durasi_menit;
+                durasi_jam = durasi_jam - 1;
+            }
+            if (durasi_jam < 0) {
+                durasi_jam = 24 + durasi_jam;
+            }
+
+
+            return durasi_jam + "j " + durasi_menit + "m";
+
+
         }
 
         @Override
@@ -326,6 +356,11 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 
 
         class ViewHolder extends RecyclerView.ViewHolder{
+            LinearLayout ketaranganTransitLayout;
+            LinearLayout layoutDurasiTransit;
+            TextView keteranganDurasi;
+            LinearLayout layoutVisa;
+            TextView keteranganVisa;
             TextView tanggalBerangkat;
             TextView waktuBerangkat;
 //            TextView kotaTujuan;
@@ -348,6 +383,12 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
+
+                ketaranganTransitLayout = itemView.findViewById(R.id.keteranganTransit);
+                layoutDurasiTransit = itemView.findViewById(R.id.layoutDurasiTransit);
+                keteranganDurasi = itemView.findViewById(R.id.keteranganDurasiTransit);
+                layoutVisa = itemView.findViewById(R.id.layoutVisa);
+                keteranganVisa = itemView.findViewById(R.id.keteranganVisa);
                 tanggalBerangkat = itemView.findViewById(R.id.tanggalBerangkat);
                 waktuBerangkat = itemView.findViewById(R.id.waktuBerangkat);
 //                kotaTujuan = itemView.findViewById(R.id.kotaTujuan);
