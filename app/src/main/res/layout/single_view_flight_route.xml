@@ -1,6 +1,6 @@
 <RelativeLayout android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
-    android:layout_height="409dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -96,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tanggalDatang"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_toRightOf="@id/upperCircle"
         android:fontFamily="@font/roboto_light"
         android:text="Soekarno Hatta (CGK)"
@@ -322,6 +323,63 @@
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@id/bandaraTujuan"
+        android:background="@drawable/curved_less_bg"
+        android:backgroundTint="@color/secondary_light"
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:padding="15dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingVertical="20dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="0.2"
+            android:src="@drawable/ic_transit" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.85"
+            android:orientation="vertical"
+            android:paddingLeft="20dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Yang penting sebelum keberangkatan!"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Segera hubungi admin dan lakukan penambahan kredit untuk pengalaman pemesanan yang lebih menyenangkan"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="5dp"
+                android:text="Hubungi admin"
+                android:textColor="@color/primary_dark"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 
 
 
