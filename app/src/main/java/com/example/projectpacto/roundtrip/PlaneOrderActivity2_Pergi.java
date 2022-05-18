@@ -165,8 +165,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 bundle.putStringArrayList("waktuDatang", waktuDatang_outer.get(position));
                 bundle.putStringArrayList("bandaraTujuan", bandaraTujuan_outer.get(position));
                 bundle.putStringArrayList("durasi", durasi_outer.get(position));
-                bundle.putStringArrayList("hargaBalita", harga_balita);
-                bundle.putStringArrayList("hargaDewasa", harga_dewasa);
+                bundle.putString("hargaBalita", harga_balita.get(position));
+                bundle.putString("hargaDewasa", harga_dewasa.get(position));
                 bundle.putString("jmlDewasa", jmlDewasa);
                 bundle.putString("jmlAnak", jmlAnak);
                 bundle.putString("jmlBalita", jmlBalita);
@@ -434,8 +434,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 550000;
             hargasatuan_balita = 420000;
-            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
-            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak*jumlPenumpang_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita*juml_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
 
@@ -508,8 +508,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 450000;
             hargasatuan_balita = 320000;
-            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
-            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak*jumlPenumpang_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita*juml_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
             Log.i("POPULATE DONE", "INSIDE");
@@ -598,8 +598,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 550000;
             hargasatuan_balita = 420000;
-            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
-            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak*jumlPenumpang_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita*juml_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
 
@@ -672,8 +672,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 450000;
             hargasatuan_balita = 320000;
-            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
-            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak*jumlPenumpang_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita*juml_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
             Log.i("POPULATE DONE", "INSIDE");
@@ -764,8 +764,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 1450000;
             hargasatuan_balita = 1320000;
-            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
-            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak*jumlPenumpang_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita*juml_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
             Log.i("POPULATE DONE", "INSIDE");
@@ -853,8 +853,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
 
             hargasatuan_dewasa_anak = 1450000;
             hargasatuan_balita = 1320000;
-            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak ).replace(',', '.'));
-            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita ).replace(',', '.'));
+            harga_dewasa.add("IDR " + String.format("%,d", hargasatuan_dewasa_anak*jumlPenumpang_dewasa_anak ).replace(',', '.'));
+            harga_balita.add("IDR " +  String.format("%,d", hargasatuan_balita*juml_balita ).replace(',', '.'));
             hargapax = String.format("%,d", (hargasatuan_dewasa_anak * jumlPenumpang_dewasa_anak) + (hargasatuan_balita*juml_balita)).replace(',', '.');
             harga.add("IDR " + hargapax);
             Log.i("POPULATE DONE", "INSIDE");

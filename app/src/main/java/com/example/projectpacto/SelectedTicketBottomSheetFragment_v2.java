@@ -81,6 +81,8 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
     String kotaTujuan_str;
     String kotaAsal_str;
     String harga_str;
+    String harga_dewasa;
+    String harga_balita;
 
     String keberangkatan;
     String kedatangan;
@@ -153,6 +155,8 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 
         Bundle bundle = this.getArguments();
         harga_str =bundle.getString("harga");
+        harga_dewasa = bundle.getString("hargaDewasa");
+        harga_balita = bundle.getString("hargaBalita");
         kotaAsal_str = bundle.getString("kotaAsal");
         kotaTujuan_str = bundle.getString("kotaTujuan");
         tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat");
@@ -203,17 +207,21 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 //        tanggalDatang.setText(tanggalDatang_str);
 //        waktuDatang.setText(waktuDatang_str);
 //        bandaraTujuan.setText(bandaraTujuan_str);
-        jmlPenumpangDewasa.setText("Dewasa (x"+jmlDewasa_str +")");
+        int jumlDewasa_anak = Integer.parseInt(jmlDewasa_str) + Integer.parseInt(jmlAnak_str);
+        jmlPenumpangDewasa.setText("Dewasa dan Anak (x"+jumlDewasa_anak +")");
+        subtotalDewasa.setText(harga_dewasa);
 
 
         if (!jmlAnak_str.matches("0")){
             jmlPenumpangAnak.setText("Anak-Anak (x"+jmlAnak_str+")");
-            penumpangAnakLinearLayout.setVisibility(View.VISIBLE);
+            subtotalAnak.setText(harga_dewasa);
+//            penumpangAnakLinearLayout.setVisibility(View.VISIBLE);
         }
 
 
         if (!jmlBalita_str.matches("0")){
             jmlPenumpangBalita.setText("Balita (x"+jmlBalita_str+")");
+            subtotalBalita.setText(harga_balita);
             penumpangBalitaLinearLayout.setVisibility(View.VISIBLE);
         }
 
