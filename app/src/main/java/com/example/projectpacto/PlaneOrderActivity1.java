@@ -72,6 +72,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
         kedatangan = "";
         tanggalBerangkat = "";
         penumpang = "";
+        tanggalPulang = "";
         Locale lokal = new Locale("id", "ID");
 
 
@@ -80,13 +81,24 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
             keberangkatan = extras.getString("keberangkatan");
             kedatangan = extras.getString("kedatangan");
             tanggalBerangkat = extras.getString("tanggal");
+            tanggalPulang = extras.getString("tanggal_pulang");
+            Log.i("TanggalPulang", tanggalPulang +"tes");
+            try {
+                if (!tanggalPulang.matches("")) {
+                    binding.ppSwitch.setChecked(true);
+                    binding.tanggalKepulanganTextInput.setVisibility(View.VISIBLE);
+                    binding.tanggalKepulanganTextInput.getEditText().setText(tanggalPulang);
+                }
+            } catch (Exception e){
+                Log.i("Exception", "Ini adalah trip one way");
+            }
             try {
                 Date date1=new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat);
                 Long epoch_long= date1.getTime();
                 ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
                 tanggalBerangkat = dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM YYYY", lokal));
                 tanggalPulang = "";
-                binding.tanggalKepulanganTextInput.getEditText().setText("");
+//                binding.tanggalKepulanganTextInput.getEditText().setText("");
 
                 binding.tanggalKeberangkatTextInput.getEditText().setText(tanggalBerangkat);
 
@@ -141,6 +153,7 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
                     intent.putExtra("bandara_kedatangan", bandara_kedatangan);
                     intent.putExtra("bandara_keberangkatan", bandara_keberangkatan);
                     intent.putExtra("tanggal", tanggalBerangkat);
+                    intent.putExtra("tanggal_pulang", tanggalPulang);
                     intent.putExtra("penumpang", penumpang);
                     startActivity(intent);
                     overridePendingTransition(0,0);
