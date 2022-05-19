@@ -87,6 +87,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
     String keberangkatan;
     String kedatangan;
     String tanggal;
+    String tanggalPulang;
     String penumpang;
     String kota_kedatangan;
     String kota_keberangkatan;
