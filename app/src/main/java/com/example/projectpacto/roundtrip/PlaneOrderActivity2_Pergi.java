@@ -149,6 +149,7 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 String harga = ((TextView) v.findViewById(R.id.harga)).getText().toString();
 
                 Bundle bundle = new Bundle();
+                bundle.putString("type", "pp_pergi");
                 bundle.putString("harga", harga);
                 bundle.putString("kotaAsal", kota_keberangkatan);
                 bundle.putString("kotaTujuan", kota_kedatangan);

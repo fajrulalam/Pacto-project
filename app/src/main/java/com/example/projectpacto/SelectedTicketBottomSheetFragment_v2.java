@@ -85,6 +85,8 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
     String harga_dewasa;
     String harga_balita;
 
+    String pp_check;
+
     String keberangkatan;
     String kedatangan;
     String tanggal;
@@ -156,50 +158,98 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
         total_bottomcorner = view.findViewById(R.id.total_bottomCorner);
 
         Bundle bundle = this.getArguments();
-        harga_str =bundle.getString("harga");
-        harga_dewasa = bundle.getString("hargaDewasa");
-        harga_balita = bundle.getString("hargaBalita");
-        kotaAsal_str = bundle.getString("kotaAsal");
-        kotaTujuan_str = bundle.getString("kotaTujuan");
-        tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat");
-        Log.i("SELECTED TICKET BS", tanggalBerangkat_ArrayList + "tes");
-
-        waktuBerangkat_ArrayList = bundle.getStringArrayList("waktuBerangkat");
-        Log.i("SELECTED TICKET BS", waktuBerangkat_ArrayList + "");
-        bandaraAsal_ArrayList = bundle.getStringArrayList("bandaraAsal");
-        logoMaskapai_ArrayList =bundle.getIntegerArrayList("logoMaskapai");
-        namaMaskapai_ArrayList= bundle.getStringArrayList("namaMaskapai");;
-        kodePenerbangan_ArrayList = bundle.getStringArrayList("kodePenerbangan");
-        kabin_ArrayList = bundle.getStringArrayList("kabin");;
-        bagasi_ArrayList = bundle.getStringArrayList("bagasi");;
-        booleanMakan_ArrayList = bundle.getIntegerArrayList("booleanMakan");;
-        Log.i("SELECTED TICKET MAKAN", booleanMakan_ArrayList + "makan");
-        keteranganMakan_ArrayList = bundle.getStringArrayList("keteranganMakan");
-        modelPesawat_ArrayList = bundle.getStringArrayList("modelPesawat");
-        kelasPesawat_ArrayList= bundle.getStringArrayList("kelasPesawat");;
-        tanggalDatang_ArrayList= bundle.getStringArrayList("tanggalDatang");;
-        waktuDatang_ArrayList= bundle.getStringArrayList("waktuDatang");;
-        bandaraTujuan_ArrayList= bundle.getStringArrayList("bandaraTujuan");
-        durasi_ArrayList = bundle.getStringArrayList("durasi");
-        jmlDewasa_str= bundle.getString("jmlDewasa");;
-        jmlAnak_str= bundle.getString("jmlAnak"); ;
-        jmlBalita_str= bundle.getString("jmlBalita");;
-
-        keberangkatan = bundle.getString("keberangkatan");
-        kedatangan = bundle.getString("kedatangan");
-        tanggal = bundle.getString("tanggal");
-        penumpang = bundle.getString("penumpang");
-        kota_keberangkatan = bundle.getString("kota_keberangkatan");
-        kota_kedatangan = bundle.getString("kota_kedatangan");
-        bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
-        bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+        pp_check = bundle.getString("type");
+        Log.i("PULANG atau Pergi", pp_check + "tes");
 
 
+        if (pp_check.matches("pp_pergi")){
+            Log.i("PULANG atau Pergi", "Pergi");
+            harga_str =bundle.getString("harga");
+            harga_dewasa = bundle.getString("hargaDewasa");
+            harga_balita = bundle.getString("hargaBalita");
+            kotaAsal_str = bundle.getString("kotaAsal");
+            kotaTujuan_str = bundle.getString("kotaTujuan");
+            tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat");
+            Log.i("SELECTED TICKET BS", tanggalBerangkat_ArrayList + "tes");
+
+            waktuBerangkat_ArrayList = bundle.getStringArrayList("waktuBerangkat");
+            Log.i("SELECTED TICKET BS", waktuBerangkat_ArrayList + "");
+            bandaraAsal_ArrayList = bundle.getStringArrayList("bandaraAsal");
+            logoMaskapai_ArrayList =bundle.getIntegerArrayList("logoMaskapai");
+            namaMaskapai_ArrayList= bundle.getStringArrayList("namaMaskapai");;
+            kodePenerbangan_ArrayList = bundle.getStringArrayList("kodePenerbangan");
+            kabin_ArrayList = bundle.getStringArrayList("kabin");;
+            bagasi_ArrayList = bundle.getStringArrayList("bagasi");;
+            booleanMakan_ArrayList = bundle.getIntegerArrayList("booleanMakan");;
+            Log.i("SELECTED TICKET MAKAN", booleanMakan_ArrayList + "makan");
+            keteranganMakan_ArrayList = bundle.getStringArrayList("keteranganMakan");
+            modelPesawat_ArrayList = bundle.getStringArrayList("modelPesawat");
+            kelasPesawat_ArrayList= bundle.getStringArrayList("kelasPesawat");;
+            tanggalDatang_ArrayList= bundle.getStringArrayList("tanggalDatang");;
+            waktuDatang_ArrayList= bundle.getStringArrayList("waktuDatang");;
+            bandaraTujuan_ArrayList= bundle.getStringArrayList("bandaraTujuan");
+            durasi_ArrayList = bundle.getStringArrayList("durasi");
+            jmlDewasa_str= bundle.getString("jmlDewasa");;
+            jmlAnak_str= bundle.getString("jmlAnak"); ;
+            jmlBalita_str= bundle.getString("jmlBalita");;
+
+            keberangkatan = bundle.getString("keberangkatan");
+            kedatangan = bundle.getString("kedatangan");
+            tanggal = bundle.getString("tanggal");
+            tanggalPulang = bundle.getString("tanggal_pulang");
+            penumpang = bundle.getString("penumpang");
+            kota_keberangkatan = bundle.getString("kota_keberangkatan");
+            kota_kedatangan = bundle.getString("kota_kedatangan");
+            bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
+            bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+
+        } else {
+            Log.i("PULANG atau Pergi", "Pulang");
+            harga_str =bundle.getString("harga_pulang");
+            harga_dewasa = bundle.getString("hargaDewasa_pulang");
+            harga_balita = bundle.getString("hargaBalita_pulang");
+            kotaAsal_str = bundle.getString("kotaAsal_pulang");
+            kotaTujuan_str = bundle.getString("kotaTujuan_pulang");
+            tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat_pulang");
+            Log.i("SELECTED TICKET BS", tanggalBerangkat_ArrayList + "tes");
+
+            waktuBerangkat_ArrayList = bundle.getStringArrayList("waktuBerangkat_pulang");
+            Log.i("SELECTED TICKET BS", waktuBerangkat_ArrayList + "");
+            bandaraAsal_ArrayList = bundle.getStringArrayList("bandaraAsal_pulang");
+            logoMaskapai_ArrayList =bundle.getIntegerArrayList("logoMaskapai_pulang");
+            namaMaskapai_ArrayList= bundle.getStringArrayList("namaMaskapai_pulang");;
+            kodePenerbangan_ArrayList = bundle.getStringArrayList("kodePenerbangan_pulang");
+            kabin_ArrayList = bundle.getStringArrayList("kabin_pulang");;
+            bagasi_ArrayList = bundle.getStringArrayList("bagasi_pulang");;
+            booleanMakan_ArrayList = bundle.getIntegerArrayList("booleanMakan_pulang");;
+            Log.i("SELECTED TICKET MAKAN", booleanMakan_ArrayList + "makan");
+            keteranganMakan_ArrayList = bundle.getStringArrayList("keteranganMakan_pulang");
+            modelPesawat_ArrayList = bundle.getStringArrayList("modelPesawat_pulang");
+            kelasPesawat_ArrayList= bundle.getStringArrayList("kelasPesawat_pulang");;
+            tanggalDatang_ArrayList= bundle.getStringArrayList("tanggalDatang_pulang");;
+            waktuDatang_ArrayList= bundle.getStringArrayList("waktuDatang_pulang");;
+            bandaraTujuan_ArrayList= bundle.getStringArrayList("bandaraTujuan_pulang");
+            durasi_ArrayList = bundle.getStringArrayList("durasi_pulang");
+            jmlDewasa_str= bundle.getString("jmlDewasa_pulang");;
+            jmlAnak_str= bundle.getString("jmlAnak_pulang"); ;
+            jmlBalita_str= bundle.getString("jmlBalita_pulang");;
+
+            keberangkatan = bundle.getString("keberangkatan_pulang");
+            kedatangan = bundle.getString("kedatangan_pulang");
+            tanggal = bundle.getString("tanggal");
+            tanggalPulang = bundle.getString("tanggal_pulang");
+            penumpang = bundle.getString("penumpang_pulang");
+            kota_keberangkatan = bundle.getString("kota_keberangkatan_pulang");
+            kota_kedatangan = bundle.getString("kota_kedatangan_pulang");
+            bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan_pulang");
+            bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan_pulang");
+        }
 
         total.setText(harga_str);
         total_bottomcorner.setText(harga_str);
         kotaAsal.setText(kotaAsal_str);
         kotaTujuan.setText(kotaTujuan_str);
+
 //        tanggalBerangkat.setText(tanggalBerangkat_str);
 //        waktuBerangkat.setText(waktuBerangkat_str);
 //        bandaraAsal.setText(bandaraAsal_str);
@@ -238,11 +288,14 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
             @Override
             public void onClick(View view) {
 
+                if (pp_check.matches("pp_pergi")) {
+                    bundle.putString("tanggal_pulang", tanggalPulang);
+                    Intent intent = new Intent(getActivity(), PlaneOrderActivity2_Pulang.class);
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                } else if (pp_check.matches("pp_pulang")) {
 
-                Intent intent = new Intent(getActivity(), PlaneOrderActivity2_Pulang.class);
-                intent.putExtra("bundle", bundle);
-
-                startActivity(intent);
+                }
 
 
 
