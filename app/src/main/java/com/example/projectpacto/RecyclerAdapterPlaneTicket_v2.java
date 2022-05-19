@@ -74,9 +74,16 @@ public class RecyclerAdapterPlaneTicket_v2 extends RecyclerView.Adapter<Recycler
         holder.bandaraAsal.setText(kodeBandaraAsal);
         holder.durasi.setText(durasi_outer.get(position).get(0));
         holder.waktuDatang.setText(waktuDatang_outer.get(position).get(waktuDatang_outer.get(position).size()-1));
-        String kodeBandaraTujuan =  bandaraTujuan_outer.get(position).get(bandaraTujuan_outer.size() -1).split("\\(")[1].replace(")", "");
-        holder.bandaraTujuan.setText(kodeBandaraTujuan);
+        try {
+            String kodeBandaraTujuan =  bandaraTujuan_outer.get(position).get(bandaraTujuan_outer.size() -1).split("\\(")[1].replace(")", "");
+            holder.bandaraTujuan.setText(kodeBandaraTujuan);
+        } catch (Exception e) {
+            String kodeBandaraTujuan = bandaraTujuan_outer.get(position).get(0).split("\\(")[1].replace(")", "");
+            holder.bandaraTujuan.setText(kodeBandaraTujuan);
+        }
         holder.harga.setText(harga.get(position));
+        Log.i("POPULATE HARGA Adapter", harga.toString());
+
 
         if (bandaraTujuan_outer.get(position).size() == 1){
             holder.langsungAtauTransit.setText("langsung");

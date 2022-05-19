@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.projectpacto.roundtrip.PlaneOrderActivity2_Pulang;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -238,7 +239,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
             public void onClick(View view) {
 
 
-                Intent intent = new Intent(getActivity(), PlaneOrderActivity3.class);
+                Intent intent = new Intent(getActivity(), PlaneOrderActivity2_Pulang.class);
                 intent.putExtra("bundle", bundle);
 
                 startActivity(intent);

@@ -77,6 +77,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
     String tanggalPulang;
     String penumpang;
 
+
+
     String jmlDewasa;
     String jmlAnak;
     String jmlBalita;
@@ -204,6 +206,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             bandara_kedatangan_raw = extras.getString("bandara_kedatangan");
             bandara_keberangkatan = extras.getString("bandara_keberangkatan") + " " + keberangkatan.split(" ")[1].replace(" ", "");
             bandara_kedatangan = extras.getString("bandara_kedatangan") + " " + kedatangan.split(" ")[1];
+
+
 
 
             String[] passengerRaw = penumpang.split(", ");
@@ -1048,8 +1052,11 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
             Log.i("POPULATE DONE", "INSIDE");        }
 
         Log.i("POPULATE DONE", "OUTSIDE");
+        Log.i("POPULATE HARGA", harga.toString());
         RecyclerAdapterPlaneTicket_v2 recyclerAdapterPlaneTicket_v2 = new RecyclerAdapterPlaneTicket_v2(kodePenerbangan_outer, logoMaskapai_outer,  namaMaskapai_outer,  waktuBerangkat_outer,  bandaraAsal_outer,  kabin_outer,  bagasi_outer, booleanMakan_outer, keteranganMakan_outer,  modelPesawat_outer, durasi_outer,  waktuDatang_outer, bandaraTujuan_outer,  tanggalBerangkat_outer, tanggalDatang_outer, testCovid,  harga,  jumlahpax);
         binding.RecycleViewTicket.setAdapter(recyclerAdapterPlaneTicket_v2);
+
+
 
 
     }

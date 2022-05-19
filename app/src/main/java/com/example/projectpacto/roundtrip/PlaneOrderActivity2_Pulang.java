@@ -71,6 +71,13 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
     String tanggalPulang;
     String penumpang;
 
+    //Display Tiket Berangkat
+    int logoPergi;
+    String maskapaiPergi;
+    String tanggalPergi;
+    String waktuPergi;
+    String hargaPergi;
+
     String jmlDewasa;
     String jmlAnak;
     String jmlBalita;
@@ -185,7 +192,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
 
         //Setting the top Bar
-        Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getBundleExtra("bundle");
         if (extras != null) {
             keberangkatan = extras.getString("keberangkatan");
             kedatangan = extras.getString("kedatangan");
@@ -198,6 +205,12 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             bandara_kedatangan_raw = extras.getString("bandara_kedatangan");
             bandara_keberangkatan = extras.getString("bandara_keberangkatan") + " " + keberangkatan.split(" ")[1].replace(" ", "");
             bandara_kedatangan = extras.getString("bandara_kedatangan") + " " + kedatangan.split(" ")[1];
+            logoPergi = extras.getIntegerArrayList("logoMaskapai").get(0);
+            tanggalPergi = extras.getStringArrayList("tanggalBerangkat").get(0);
+            waktuPergi = extras.getStringArrayList("waktuBerangkat").get(0);
+            hargaPergi = extras.getString("harga");
+            maskapaiPergi = extras.getStringArrayList("namaMaskapai").get(0);
+
 
 
             String[] passengerRaw = penumpang.split(", ");
@@ -244,6 +257,14 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
         } else {
             Log.i("Keberangkatan2", "gamasuk");
         }
+
+        //Setting the Pergi details
+        binding.logoMaskapaiPergi.setImageResource(logoPergi);
+        binding.namaMaskapaiPergi.setText(maskapaiPergi);
+        binding.tanggalPergi.setText(tanggalPergi);
+        binding.waktuPergi.setText(waktuPergi);
+        binding.hargaPergi.setText(hargaPergi);
+        binding.jumlahPenumpangPax.setText("/" +jumlPenumpang_total+ " pax");
 
 
         //Back Button
