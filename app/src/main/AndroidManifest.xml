@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".roundtrip.PlaneOrderActivity3_pulangPergi"
+            android:exported="false" />
+        <activity
             android:name=".roundtrip.PlaneOrderActivity2_Pulang"
             android:exported="false" />
         <activity

@@ -18,6 +18,7 @@ import com.example.projectpacto.RecyclerAdapterPenumpangList;
 import com.example.projectpacto.TambahanBagasiBottomSheet;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3PpBinding;
+import com.example.projectpacto.databinding.ActivityPlaneOrderActivity3PulangPergiBinding;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,10 +32,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class PlaneOrderActivity3_pp extends AppCompatActivity implements DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail, TambahanBagasiBottomSheet.OnDataBagasi {
+public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implements DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail, TambahanBagasiBottomSheet.OnDataBagasi {
     Bundle bundle;
 
-    ActivityPlaneOrder3PpBinding binding;
+    ActivityPlaneOrderActivity3PulangPergiBinding binding;
 
 
     String tanggalBerangkat_str;
@@ -114,7 +115,7 @@ public class PlaneOrderActivity3_pp extends AppCompatActivity implements DataPen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPlaneOrder3PpBinding.inflate(getLayoutInflater());
+        binding = ActivityPlaneOrderActivity3PulangPergiBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -178,7 +179,7 @@ public class PlaneOrderActivity3_pp extends AppCompatActivity implements DataPen
 
         rincianPenumpang = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
         if (!bundle.getString("jmlAnak").matches("0")){
-                rincianPenumpang = rincianPenumpang + ", Anak (" +bundle.getString("jmlAnak")+"x)";
+            rincianPenumpang = rincianPenumpang + ", Anak (" +bundle.getString("jmlAnak")+"x)";
         }
         if (!bundle.getString("jmlBalita").matches("0")){
             rincianPenumpang = rincianPenumpang + ", Balita ("+bundle.getString("jmlBalita")+"x)";

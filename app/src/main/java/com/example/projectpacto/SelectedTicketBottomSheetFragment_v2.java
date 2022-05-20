@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectpacto.roundtrip.PlaneOrderActivity2_Pulang;
+import com.example.projectpacto.roundtrip.PlaneOrderActivity3_pp;
+import com.example.projectpacto.roundtrip.PlaneOrderActivity3_pulangPergi;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -294,7 +296,10 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
                     intent.putExtra("bundle", bundle);
                     startActivity(intent);
                 } else if (pp_check.matches("pp_pulang")) {
-
+                    bundle.putString("tanggal_pulang", tanggalPulang);
+                    Intent intent = new Intent(getActivity(), PlaneOrderActivity3_pulangPergi.class);
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
                 }
 
 

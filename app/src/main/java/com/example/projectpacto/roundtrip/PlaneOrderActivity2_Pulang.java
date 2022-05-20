@@ -71,6 +71,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
     String tanggalPulang;
     String penumpang;
 
+    Bundle extras;
+
     //Display Tiket Berangkat
     int logoPergi;
     String maskapaiPergi;
@@ -147,45 +149,45 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
                 String waktuBerangkat = ((TextView) v.findViewById(R.id.waktuBerangkat)).getText().toString();
                 String harga = ((TextView) v.findViewById(R.id.harga)).getText().toString();
 
-                Bundle bundle = new Bundle();
-                bundle.putString("type", "pp_pulang");
-                bundle.putString("harga_pulang", harga);
-                bundle.putString("kotaAsal_pulang", kota_keberangkatan);
-                bundle.putString("kotaTujuan_pulang", kota_kedatangan);
-                bundle.putStringArrayList("tanggalBerangkat_pulang", tanggalBerangkat_outer.get(position));
-                bundle.putStringArrayList("waktuBerangkat_pulang", waktuBerangkat_outer.get(position));
-                bundle.putStringArrayList("bandaraAsal_pulang", bandaraAsal_outer.get(position));
-                bundle.putIntegerArrayList("logoMaskapai_pulang", logoMaskapai_outer.get(position));
-                bundle.putStringArrayList("kodePenerbangan_pulang", kodePenerbangan_outer.get(position));
-                bundle.putStringArrayList("namaMaskapai_pulang", namaMaskapai_outer.get(position));
-                bundle.putStringArrayList("kabin_pulang", kabin_outer.get(position));
-                bundle.putStringArrayList("bagasi_pulang", bagasi_outer.get(position));
-                bundle.putIntegerArrayList("booleanMakan_pulang", booleanMakan_outer.get(position));
-                bundle.putStringArrayList("keteranganMakan_pulang", keteranganMakan_outer.get(position));
-                bundle.putStringArrayList("modelPesawat_pulang", modelPesawat_outer.get(position));
-                bundle.putStringArrayList("kelasPesawat_pulang", kelas_outer);
-                bundle.putStringArrayList("tanggalDatang_pulang", tanggalDatang_outer.get(position));
-                bundle.putStringArrayList("waktuDatang_pulang", waktuDatang_outer.get(position));
-                bundle.putStringArrayList("bandaraTujuan_pulang", bandaraTujuan_outer.get(position));
-                bundle.putStringArrayList("durasi_pulang", durasi_outer.get(position));
-                bundle.putString("hargaBalita_pulang", harga_balita.get(position));
-                bundle.putString("hargaDewasa_pulang", harga_dewasa.get(position));
-                bundle.putString("jmlDewasa_pulang", jmlDewasa);
-                bundle.putString("jmlAnak_pulang", jmlAnak);
-                bundle.putString("jmlBalita_pulang", jmlBalita);
-                bundle.putString("keberangkatan_pulang", keberangkatan);
-                bundle.putString("kedatangan_pulang", kedatangan);
-                bundle.putString("tanggal", tanggal);
-                bundle.putString("tanggal_pulang", tanggalPulang);
-                bundle.putString("penumpang_pulang", penumpang);
-                bundle.putString("kota_keberangkatan_pulang", kota_keberangkatan);
-                bundle.putString("kota_kedatangan_pulang", kota_kedatangan);
-                bundle.putString("bandara_keberangkatan_pulang", bandara_keberangktan_raw);
-                bundle.putString("bandara_kedatangan_pulang", bandara_kedatangan_raw);
+//                Bundle bundle = new Bundle();
+                extras.putString("type", "pp_pulang");
+                extras.putString("harga_pulang", harga);
+                extras.putString("kotaAsal_pulang", kota_keberangkatan);
+                extras.putString("kotaTujuan_pulang", kota_kedatangan);
+                extras.putStringArrayList("tanggalBerangkat_pulang", tanggalBerangkat_outer.get(position));
+                extras.putStringArrayList("waktuBerangkat_pulang", waktuBerangkat_outer.get(position));
+                extras.putStringArrayList("bandaraAsal_pulang", bandaraAsal_outer.get(position));
+                extras.putIntegerArrayList("logoMaskapai_pulang", logoMaskapai_outer.get(position));
+                extras.putStringArrayList("kodePenerbangan_pulang", kodePenerbangan_outer.get(position));
+                extras.putStringArrayList("namaMaskapai_pulang", namaMaskapai_outer.get(position));
+                extras.putStringArrayList("kabin_pulang", kabin_outer.get(position));
+                extras.putStringArrayList("bagasi_pulang", bagasi_outer.get(position));
+                extras.putIntegerArrayList("booleanMakan_pulang", booleanMakan_outer.get(position));
+                extras.putStringArrayList("keteranganMakan_pulang", keteranganMakan_outer.get(position));
+                extras.putStringArrayList("modelPesawat_pulang", modelPesawat_outer.get(position));
+                extras.putStringArrayList("kelasPesawat_pulang", kelas_outer);
+                extras.putStringArrayList("tanggalDatang_pulang", tanggalDatang_outer.get(position));
+                extras.putStringArrayList("waktuDatang_pulang", waktuDatang_outer.get(position));
+                extras.putStringArrayList("bandaraTujuan_pulang", bandaraTujuan_outer.get(position));
+                extras.putStringArrayList("durasi_pulang", durasi_outer.get(position));
+                extras.putString("hargaBalita_pulang", harga_balita.get(position));
+                extras.putString("hargaDewasa_pulang", harga_dewasa.get(position));
+                extras.putString("jmlDewasa_pulang", jmlDewasa);
+                extras.putString("jmlAnak_pulang", jmlAnak);
+                extras.putString("jmlBalita_pulang", jmlBalita);
+                extras.putString("keberangkatan_pulang", keberangkatan);
+                extras.putString("kedatangan_pulang", kedatangan);
+                extras.putString("tanggal", tanggal);
+                extras.putString("tanggal_pulang", tanggalPulang);
+                extras.putString("penumpang_pulang", penumpang);
+                extras.putString("kota_keberangkatan_pulang", kota_keberangkatan);
+                extras.putString("kota_kedatangan_pulang", kota_kedatangan);
+                extras.putString("bandara_keberangkatan_pulang", bandara_keberangktan_raw);
+                extras.putString("bandara_kedatangan_pulang", bandara_kedatangan_raw);
 
 
                 SelectedTicketBottomSheetFragment_v2 selectedTicketBottomSheetFragment = new SelectedTicketBottomSheetFragment_v2();
-                selectedTicketBottomSheetFragment.setArguments(bundle);
+                selectedTicketBottomSheetFragment.setArguments(extras);
                 selectedTicketBottomSheetFragment.show(getSupportFragmentManager(), selectedTicketBottomSheetFragment.getTag());
             }
         });
@@ -193,7 +195,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
 
         //Setting the top Bar
-        Bundle extras = getIntent().getBundleExtra("bundle");
+        extras = getIntent().getBundleExtra("bundle");
         if (extras != null) {
             keberangkatan = extras.getString("kedatangan"); //kedatangan dan keberangkatan di balik
             kedatangan = extras.getString("keberangkatan");
