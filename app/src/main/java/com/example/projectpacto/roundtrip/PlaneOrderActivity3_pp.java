@@ -64,6 +64,16 @@ public class PlaneOrderActivity3_pp extends AppCompatActivity implements DataPen
     String bandara_kedatangan_raw;
     String rincianPenumpang;
 
+    String keberangkatan_pulang;
+    String kedatangan_pulang;
+    String tanggal_pulang;
+    String penumpang_pulang;
+    String kota_kedatangan_pulang;
+    String kota_keberangkatan_pulang;
+    String bandara_keberangktan_raw_pulang;
+    String bandara_kedatangan_raw_pulang;
+    String rincianPenumpang_pulang;
+
     ArrayList<String> namaPassenger;
     ArrayList<String> tglLahir;
     ArrayList<String> titel;
@@ -225,6 +235,9 @@ public class PlaneOrderActivity3_pp extends AppCompatActivity implements DataPen
         binding.tanggalDatang.setText(tanggalDatang_str);
         binding.logoMaskapai.setImageResource(logoMaskapai_int);
         binding.namaMaskapai.setText(namaMaskapai_str);
+
+        //DISPLAYING PULANG DATA
+
 
         rincianPenumpang = "Dewasa ("+jmlDewasa_str+"x)";
         if (!jmlAnak_str.matches("0")){
