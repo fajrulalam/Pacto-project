@@ -127,15 +127,15 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         harga_str =bundle.getString("harga");
         kotaAsal_str = bundle.getString("kotaAsal");
         kotaTujuan_str = bundle.getString("kotaTujuan");
-        tanggalBerangkat_str = bundle.getString("tanggalBerangkat");
-        waktuBerangkat_str= bundle.getString("waktuBerangkat");
-        bandaraAsal_str= bundle.getString("bandaraAsal");
-        logoMaskapai_int =bundle.getInt("logoMaskapai");
-        namaMaskapai_str= bundle.getString("namaMaskapai");;
+        tanggalBerangkat_str = bundle.getStringArrayList("tanggalBerangkat").get(0);
+        waktuBerangkat_str= bundle.getStringArrayList("waktuBerangkat").get(0);
+        bandaraAsal_str= bundle.getStringArrayList("bandaraAsal").get(0);
+        logoMaskapai_int =bundle.getIntegerArrayList("logoMaskapai").get(0);
+        namaMaskapai_str= bundle.getStringArrayList("namaMaskapai").get(0);
         kelasPesawat_str= bundle.getString("kelasPesawat");;
-        tanggalDatang_str= bundle.getString("tanggalDatang");;
-        waktuDatang_str= bundle.getString("waktuDatang");;
-        bandaraTujuan_str= bundle.getString("bandaraTujuan");
+        tanggalDatang_str= bundle.getStringArrayList("tanggalDatang").get(0);
+        waktuDatang_str= bundle.getStringArrayList("waktuDatang").get(0);
+        bandaraTujuan_str= bundle.getStringArrayList("bandaraTujuan").get(0);
         jmlDewasa_str= bundle.getString("jmlDewasa");;
         jmlAnak_str= bundle.getString("jmlAnak"); ;
         jmlBalita_str= bundle.getString("jmlBalita");;
@@ -149,21 +149,21 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
 
         //data pulang
-        tanggalBerangkat_str_pulang = bundle.getString("tanggalBerangkat_str_pulang");
-        waktuBerangkat_str_pulang = bundle.getString("waktuBerangkat_str_pulang");
-        bandaraAsal_str_pulang = bundle.getString("bandaraAsal_str_pulang");
-        logoMaskapai_int_pulang = bundle.getInt("logoMaskapai_int_pulang");
-        namaMaskapai_str_pulang = bundle.getString("namaMaskapai_str_pulang");
-        kelasPesawat_str_pulang = bundle.getString("kelasPesawat_str_pulang");
-        tanggalDatang_str_pulang = bundle.getString("tanggalDatang_str_pulang");
-        waktuDatang_str_pulang = bundle.getString("waktuDatang_str_pulang");
-        bandaraTujuan_str_pulang = bundle.getString("bandaraTujuan_str_pulang");
-        jmlDewasa_str_pulang = bundle.getString("jmlDewasa_str_pulang");
-        jmlAnak_str_pulang = bundle.getString("jmlAnak_str_pulang");
-        jmlBalita_str_pulang = bundle.getString("jmlBalita_str_pulang");
-        kotaTujuan_str_pulang = bundle.getString("kotaTujuan_str_pulang");
-        kotaAsal_str_pulang = bundle.getString("kotaAsal_str_pulang");
-        harga_str_pulang = bundle.getString("harga_str_pulang");
+        tanggalBerangkat_str_pulang = bundle.getStringArrayList("tanggalBerangkat_pulang").get(0);
+        waktuBerangkat_str_pulang = bundle.getStringArrayList("waktuBerangkat_pulang").get(0);
+        bandaraAsal_str_pulang = bundle.getStringArrayList("bandaraAsal_pulang").get(0);
+        logoMaskapai_int_pulang = bundle.getIntegerArrayList("logoMaskapai_pulang").get(0);
+        namaMaskapai_str_pulang = bundle.getStringArrayList("namaMaskapai_pulang").get(0);
+        kelasPesawat_str_pulang = bundle.getString("kelasPesawat_pulang");
+        tanggalDatang_str_pulang = bundle.getStringArrayList("tanggalDatang_pulang").get(0);
+        waktuDatang_str_pulang = bundle.getStringArrayList("waktuDatang_pulang").get(0);
+        bandaraTujuan_str_pulang = bundle.getStringArrayList("bandaraTujuan_pulang").get(0);
+        jmlDewasa_str_pulang = bundle.getString("jmlDewasa_pulang");
+        jmlAnak_str_pulang = bundle.getString("jmlAnak_pulang");
+        jmlBalita_str_pulang = bundle.getString("jmlBalita_pulang");
+        kotaTujuan_str_pulang = bundle.getString("kotaTujuan_pulang");
+        kotaAsal_str_pulang = bundle.getString("kotaAsal_pulang");
+        harga_str_pulang = bundle.getString("harga_pulang");
         jmlPenumpang_pulang = bundle.getInt("jmlPenumpang_pulang");
 
         keberangkatan_pulang = bundle.getString("keberangkatan_pulang");
@@ -279,6 +279,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
         //DISPLAYING THE DATA
         binding.kotaAsal.setText(kotaAsal_str);
+
+        Log.i("kotaAsal", kotaAsal_str);
         binding.kotaTujuan.setText(kotaTujuan_str);
         binding.tanggalBerangkat.setText(tanggalBerangkat_str);
         binding.tanggalDatang.setText(tanggalDatang_str);
@@ -296,6 +298,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
         //DISPLAYING PULANG DATA
         binding.kotaAsalPulang.setText(kotaAsal_str_pulang);
+        Log.i("KotaAsalPulang", kotaAsal_str_pulang);
         binding.kotaTujuanPulang.setText(kotaTujuan_str_pulang);
         binding.tanggalBerangkatPulang.setText(tanggalBerangkat_str_pulang);
         binding.tanggalDatangPulang.setText(tanggalDatang_str_pulang);

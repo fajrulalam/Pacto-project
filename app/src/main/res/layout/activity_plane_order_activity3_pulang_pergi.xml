@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
                     android:paddingBottom="17.5dp"
+                    android:paddingVertical="12dp"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/curved_less_bg_outline">
@@ -105,7 +106,7 @@
                             android:id="@+id/kotaAsal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_medium"
                             android:paddingVertical="5dp"
                             android:paddingRight="5dp"
                             android:text="ASAL"
@@ -127,7 +128,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/panah"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_medium"
                             android:padding="5dp"
                             android:text="TUJUAN"
                             android:textColor="@color/black"
@@ -197,9 +198,11 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:layout_gravity="center_vertical"
                             android:layout_width="18dp"
                             android:layout_height="19dp"
                             android:src="@drawable/ic_person"
@@ -224,6 +227,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
                     android:paddingBottom="17.5dp"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
@@ -239,7 +243,7 @@
                             android:id="@+id/kotaAsal_pulang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_medium"
                             android:paddingVertical="5dp"
                             android:paddingRight="5dp"
                             android:text="ASAL"
@@ -261,7 +265,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/panah_pulang"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_medium"
                             android:padding="5dp"
                             android:text="TUJUAN"
                             android:textColor="@color/black"
@@ -334,6 +338,7 @@
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:layout_gravity="center_vertical"
                             android:layout_width="18dp"
                             android:layout_height="19dp"
                             android:src="@drawable/ic_person"
@@ -341,6 +346,7 @@
                             android:layout_marginLeft="2.5dp"/>
 
                         <TextView
+                            android:paddingVertical="5dp"
                             android:id="@+id/rincianPenumpang_pulang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
