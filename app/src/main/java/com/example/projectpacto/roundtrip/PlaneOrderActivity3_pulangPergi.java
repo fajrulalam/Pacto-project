@@ -102,6 +102,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
     ArrayList<String> tambahan_kg;
     ArrayList<String> harga_tambahan;
+    ArrayList<String> tambahan_kg_pulang;
+    ArrayList<String> harga_tambahan_pulang;
 
     List<Map<String, String>> ArrayofPenumpangMaps;
     Map<String, String> dataPenumpangMap;
@@ -196,6 +198,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         NIKatauPaspor = new ArrayList<>();
         tambahan_kg = new ArrayList<>();
         harga_tambahan = new ArrayList<>();
+        tambahan_kg_pulang = new ArrayList<>();
+        harga_tambahan_pulang = new ArrayList<>();
 
         ArrayofPenumpangMaps = new ArrayList<>();
 
@@ -228,13 +232,17 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         binding.tambahFasilitasEkstraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("namaList", namaPassenger);
-                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
-                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
-                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
-                tambahanBagasiBottomSheet.setArguments(bundle);
-                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
+//                Bundle bundle = new Bundle();
+//                bundle.putStringArrayList("namaList", namaPassenger);
+//                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
+//                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
+//                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
+//                tambahanBagasiBottomSheet.setArguments(bundle);
+//                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
+                bagasi_bottomsheet_redesign bagasi_bottomsheet_redesign = new bagasi_bottomsheet_redesign();
+                bagasi_bottomsheet_redesign.show(getSupportFragmentManager(), bagasi_bottomsheet_redesign.getTag());
+
+
             }
         });
 
@@ -252,8 +260,6 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
             }
         });
-
-
 
 
         //BACK BUTTON

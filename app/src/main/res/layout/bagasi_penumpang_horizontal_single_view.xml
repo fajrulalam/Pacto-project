@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="180dp"
+    android:layout_marginRight="12dp"
+    android:background="@drawable/curved__even_less_colorized_bg"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/nomordanNamaPassenger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Tuan M. Asad Al Balad"
+        android:maxLines="1"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black"
+        android:ellipsize="end"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pergi: "
+
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_medium"/>
+
+        <TextView
+            android:id="@+id/bagasiPergi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20kg + 5kg"
+
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bagasiPulang_linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pulang: "
+
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_medium"/>
+
+        <TextView
+            android:id="@+id/bagasiPulang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20kg"
+
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
