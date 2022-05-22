@@ -1,6 +1,7 @@
 package com.example.projectpacto.roundtrip;
 
 import android.app.Dialog;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,9 +9,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.projectpacto.Hotel_KotaAtauAkomodasi;
@@ -76,13 +79,29 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
         position_int = 0;
 
 
-        RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
+        RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
         holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
+
+
 
         ItemClickSupport.addTo(holder.RecyclerViewTambahanBagasi).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                position_int = position;
+               int scrollStateX = recyclerView.computeHorizontalScrollOffset();
+               int scrollStateY = recyclerView.computeVerticalScrollOffset();
+                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
+                holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
+
+
+//                recyclerView.scrollTo(scrollStateX, scrollStateY);
+                recyclerView.scrollBy(scrollStateX, scrollStateY);
+                Log.i("SCROLL TO POS", "it executed the message");
+//                recyclerView.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+//                v.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+
+
+
             }
         });
 
@@ -106,7 +125,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
                 tambahan_kg.set(position_int, "0kg");
                 harga_tambahan.set(position_int, "IDR 0");
 
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
+                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
                 holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
 
             }
@@ -133,7 +152,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
                 tambahan_kg.set(position_int, holder.tambahanKG1.getText().toString().replace("+ ", ""));
                 harga_tambahan.set(position_int, holder.hargaTambahan1.getText().toString());
 
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
+                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
                 holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
             }
         });
@@ -156,10 +175,10 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
                 holder.tambahanKG2.setTextColor(getResources().getColor(R.color.primary));
                 holder.hargaTambahan2.setTextColor(getResources().getColor(R.color.primary));
 
-                tambahan_kg.set(position_int, holder.tambahanKG2.getText().toString()).replace("+ ", "");
+                tambahan_kg.set(position_int, holder.tambahanKG2.getText().toString().replace("+ ", ""));
                 harga_tambahan.set(position_int, holder.hargaTambahan2.getText().toString());
 
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
+                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
                 holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
             }
         });
@@ -186,25 +205,6 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
 
 
 
-
-
-        //tes aja sih
-
-
-
-
-//        recyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
-
-
-
-
-
-
-
-
-
-
-
         return dialog;
     }
 
@@ -215,14 +215,16 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
         ArrayList<String> tambahan_kg_pulang;
         ArrayList<String> harga_tambahan_pulang;
         String bagasi_default;
+        int position_int;
 
-        public RecyclerAdapterBagasiHorizontal(String bagasi_default, ArrayList<String> namaPassenger, ArrayList<String> tambahan_kg, ArrayList<String> harga_tambahan, ArrayList<String> tambahan_kg_pulang, ArrayList<String> harga_tambahan_pulang) {
+        public RecyclerAdapterBagasiHorizontal(int position_int, String bagasi_default, ArrayList<String> namaPassenger, ArrayList<String> tambahan_kg, ArrayList<String> harga_tambahan, ArrayList<String> tambahan_kg_pulang, ArrayList<String> harga_tambahan_pulang) {
             this.namaPassenger = namaPassenger;
             this.tambahan_kg = tambahan_kg;
             this.harga_tambahan = harga_tambahan;
             this.tambahan_kg_pulang = tambahan_kg_pulang;
             this.harga_tambahan_pulang = harga_tambahan_pulang;
             this.bagasi_default = bagasi_default;
+            this.position_int = position_int;
         }
 
         @NonNull
@@ -245,6 +247,15 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
             holder.plus1.setVisibility(View.GONE);
             holder.tambahanbagasiPulang.setVisibility(View.GONE);
             holder.tambahanbagasiPergi.setVisibility(View.GONE);
+
+            if (position == position_int){
+                holder.linearLayout.setBackground(holder.itemView.getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
+                holder.linearLayout.setPadding(12, 12, 12, 12);
+            } else {
+                holder.linearLayout.setBackground(holder.itemView.getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
+                holder.linearLayout.setPadding(12, 12, 12, 12);
+
+            }
 
 
             if (!tambahan_kg.get(position).matches("0kg")){
@@ -276,11 +287,13 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
             TextView tambahanbagasiPulang;
             TextView plus;
             TextView plus1;
+            LinearLayout linearLayout;
 
 
             public ViewHolder(@NonNull View itemView) {
                 super(itemView);
 
+                linearLayout = itemView.findViewById(R.id.linearLayout);
                 nomordanNamaPassenger = itemView.findViewById(R.id.nomordanNamaPassenger);
                 defaultbagasiPergi = itemView.findViewById(R.id.defaultbagasiPergi);
                 defaultbagasiPulang = itemView.findViewById(R.id.defaultbagasiPulang);
