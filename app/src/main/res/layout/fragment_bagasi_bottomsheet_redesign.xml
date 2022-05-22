@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:context=".DataPenumpang">
+    tools:context=".roundtrip.bagasi_bottomsheet_redesign">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -127,7 +127,7 @@
                     android:id="@+id/tambahanKG_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+5 kg"
+                    android:text="+ 5kg"
                     android:fontFamily="@font/roboto_bold"
                     android:layout_gravity="center"
                     android:textColor="@color/black"

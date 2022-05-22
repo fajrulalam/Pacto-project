@@ -119,8 +119,7 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
                     holder.default_harga.setTextColor(getResources().getColor(R.color.primary));
                     holder.default_weight.setTextColor(getResources().getColor(R.color.primary));
 
-                    tambahan_kg.set(position_int, holder.default_weight.getText().toString());
-                    hargaTambahanBagasi.set(position_int, holder.default_harga.getText().toString());
+
 
                 }
             });
@@ -143,7 +142,7 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
                     holder.tambahanKG_1.setTextColor(getResources().getColor(R.color.primary));
                     holder.hargaTambahan_1.setTextColor(getResources().getColor(R.color.primary));
 
-                    tambahan_kg.set(position_int, holder.tambahanKG_1.getText().toString());
+                    tambahan_kg.set(position_int, holder.tambahanKG_1.getText().toString().replace("+ ", ""));
                     hargaTambahanBagasi.set(position_int, holder.hargaTambahan_1.getText().toString());
                 }
             });
@@ -166,7 +165,7 @@ public class TambahanBagasiBottomSheet extends BottomSheetDialogFragment {
                     holder.tambahanKG_2.setTextColor(getResources().getColor(R.color.primary));
                     holder.hargaTambahan_2.setTextColor(getResources().getColor(R.color.primary));
 
-                    tambahan_kg.set(position_int, holder.tambahanKG_2.getText().toString());
+                    tambahan_kg.set(position_int, holder.tambahanKG_2.getText().toString().replace("+ ", ""));
                     hargaTambahanBagasi.set(position_int, holder.hargaTambahan_2.getText().toString());
                 }
             });

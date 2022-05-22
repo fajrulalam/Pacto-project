@@ -34,11 +34,26 @@
             android:fontFamily="@font/roboto_medium"/>
 
         <TextView
-            android:id="@+id/bagasiPergi"
+            android:id="@+id/defaultbagasiPergi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20kg + 5kg"
+            android:text="20kg"
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"/>
 
+        <TextView
+            android:id="@+id/plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" + "
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"/>
+
+        <TextView
+            android:id="@+id/tambahanbagasi_pergi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20kg"
             android:textSize="12dp"
             android:fontFamily="@font/roboto_regular"/>
 
@@ -61,11 +76,26 @@
             android:fontFamily="@font/roboto_medium"/>
 
         <TextView
-            android:id="@+id/bagasiPulang"
+            android:id="@+id/defaultbagasiPulang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20kg"
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"/>
 
+        <TextView
+            android:id="@+id/plus1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" + "
+            android:textSize="12dp"
+            android:fontFamily="@font/roboto_regular"/>
+
+        <TextView
+            android:id="@+id/tambahanbagasi_pulang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20kg"
             android:textSize="12dp"
             android:fontFamily="@font/roboto_regular"/>
 
