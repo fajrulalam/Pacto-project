@@ -36,7 +36,12 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
     ArrayList<String> harga_tambahan;
     ArrayList<String> tambahan_kg_pulang;
     ArrayList<String> harga_tambahan_pulang;
-    int position_int;
+    int position_int; //penumpang
+
+    ArrayList<Integer> selected_position_opsibagasi;
+    ArrayList<String> tambahan_kg_option;
+    ArrayList<String> hargaTambahan_kg_option;
+
 
 
 
@@ -52,10 +57,14 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
         View view = holder.getRoot();
 
         namaPassenger = new ArrayList<>();
+        selected_position_opsibagasi = new ArrayList<>();
         tambahan_kg = new ArrayList<>();
         harga_tambahan = new ArrayList<>();
         tambahan_kg_pulang = new ArrayList<>();
         harga_tambahan_pulang = new ArrayList<>();
+        tambahan_kg_option = new ArrayList<>();
+        hargaTambahan_kg_option = new ArrayList<>();
+
         bagasi = "20kg";
 
 
@@ -75,12 +84,35 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
         tambahan_kg_pulang.add("0kg");
         harga_tambahan_pulang.add("tes bruh");
 
+        tambahan_kg_option.add("5kg");
+        hargaTambahan_kg_option.add("IDR 115.000");
+        tambahan_kg_option.add("10kg");
+        hargaTambahan_kg_option.add("IDR 215.000");
+        tambahan_kg_option.add("15kg");
+        hargaTambahan_kg_option.add("IDR 315.000");
+        tambahan_kg_option.add("15kg");
+        hargaTambahan_kg_option.add("IDR 415.000");
+        tambahan_kg_option.add("20kg");
+        hargaTambahan_kg_option.add("IDR 515.000");
+        tambahan_kg_option.add("25kg");
+        hargaTambahan_kg_option.add("IDR 615.000");
+        selected_position_opsibagasi.add(0);
+        selected_position_opsibagasi.add(1);
+        selected_position_opsibagasi.add(2);
+
+
+
+
 
         position_int = 0;
 
 
+
         RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
         holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
+
+        RecyclerAdapterOpsiBagasi_Pergi recyclerAdapterOpsiBagasi_pergi = new RecyclerAdapterOpsiBagasi_Pergi(position_int, selected_position_opsibagasi, tambahan_kg_option, hargaTambahan_kg_option);
+        holder.RecyclerViewOpsiBagasiPergi.setAdapter(recyclerAdapterOpsiBagasi_pergi);
 
 
 
@@ -302,6 +334,67 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment {
 
                 plus = itemView.findViewById(R.id.plus);
                 plus1 = itemView.findViewById(R.id.plus1);
+            }
+
+
+        }
+
+
+
+
+    }
+
+
+    public static class RecyclerAdapterOpsiBagasi_Pergi extends RecyclerView.Adapter<RecyclerAdapterOpsiBagasi_Pergi.ViewHolder> {
+        int position_int;
+        ArrayList<Integer> selected_position;
+        ArrayList<String> tambahan_kg_option;
+        ArrayList<String> hargaTambahan_kg_option;
+
+        public RecyclerAdapterOpsiBagasi_Pergi(int position_int, ArrayList<Integer> selected_position, ArrayList<String> tambahan_kg_option, ArrayList<String> hargaTambahan_kg_option) {
+            this.position_int = position_int;
+            this.selected_position = selected_position;
+            this.tambahan_kg_option = tambahan_kg_option;
+            this.hargaTambahan_kg_option = hargaTambahan_kg_option;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.opsi_bagas_single_view, parent, false);
+            ViewHolder viewHolder = new ViewHolder(view);
+            return  viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+            holder.tambahan_kilo.setText("+ " + tambahan_kg_option.get(position));
+            holder.tambahan_harga.setText(hargaTambahan_kg_option.get(position));
+
+            if (position == selected_position.get(position_int)) {
+                holder.tambahan_harga.setTextColor(holder.itemView.getResources().getColor(R.color.primary));
+                holder.tambahan_kilo.setTextColor(holder.itemView.getResources().getColor(R.color.primary));
+            }
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return tambahan_kg_option.size();
+        }
+
+        static class ViewHolder extends RecyclerView.ViewHolder{
+            TextView tambahan_kilo;
+            TextView tambahan_harga;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                tambahan_kilo = itemView.findViewById(R.id.tambahan_kilo);
+                tambahan_harga = itemView.findViewById(R.id.tambahan_harga);
+
             }
 
 
