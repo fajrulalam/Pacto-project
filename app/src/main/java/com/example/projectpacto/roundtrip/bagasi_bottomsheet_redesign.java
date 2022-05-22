@@ -34,12 +34,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.ArrayList;
 
 
-public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment implements RecyclerAdapterOpsiBagasi_Pergi.OnDataBagasi {
+public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment implements RecyclerAdapterOpsiBagasi_Pergi.OnDataBagasi, RecyclerAdapterOpsiBagasi_Pulang.OnDataBagasi_pulang {
 
     FragmentBagasiBottomsheetRedesignBinding holder;
     //    OnDataBagasi datapasser;
     RecyclerView recyclerViewTambahanBagasi;
     RecyclerView recyclerViewTambahanBagasiOpsi_Pergi;
+    RecyclerView recyclerViewTambahanBagasiOpsi_Pulang;
     ArrayList<String> namaPassenger;
     ArrayList<String> tambahan_kg;
     String bagasi;
@@ -49,6 +50,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
     int position_int; //penumpang
 
     ArrayList<Integer> selected_position_opsibagasi;
+    ArrayList<Integer> selected_position_opsibagasi_pulang;
     ArrayList<String> tambahan_kg_option;
     ArrayList<String> hargaTambahan_kg_option;
 
@@ -65,6 +67,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
 
         namaPassenger = new ArrayList<>();
         selected_position_opsibagasi = new ArrayList<>();
+        selected_position_opsibagasi_pulang = new ArrayList<>();
         tambahan_kg = new ArrayList<>();
         harga_tambahan = new ArrayList<>();
         tambahan_kg_pulang = new ArrayList<>();
@@ -91,6 +94,8 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         tambahan_kg_pulang.add("0kg");
         harga_tambahan_pulang.add("tes bruh");
 
+        tambahan_kg_option.add("0kg");
+        hargaTambahan_kg_option.add("IDR 0");
         tambahan_kg_option.add("5kg");
         hargaTambahan_kg_option.add("IDR 115.000");
         tambahan_kg_option.add("10kg");
@@ -104,10 +109,14 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         selected_position_opsibagasi.add(0);
         selected_position_opsibagasi.add(0);
         selected_position_opsibagasi.add(0);
+        selected_position_opsibagasi_pulang.add(0);
+        selected_position_opsibagasi_pulang.add(0);
+        selected_position_opsibagasi_pulang.add(0);
 
 
         recyclerViewTambahanBagasi = view.findViewById(R.id.RecyclerViewTambahanBagasi);
         recyclerViewTambahanBagasiOpsi_Pergi = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pergi);
+        recyclerViewTambahanBagasiOpsi_Pulang = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pulang);
 
 
         position_int = 0;
@@ -119,6 +128,9 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         RecyclerAdapterOpsiBagasi_Pergi recyclerAdapterOpsiBagasi_pergi = new RecyclerAdapterOpsiBagasi_Pergi(this, position_int, selected_position_opsibagasi, tambahan_kg_option, hargaTambahan_kg_option);
         holder.RecyclerViewOpsiBagasiPergi.setAdapter(recyclerAdapterOpsiBagasi_pergi);
 
+        RecyclerAdapterOpsiBagasi_Pulang recyclerAdapterOpsiBagasi_pulang = new RecyclerAdapterOpsiBagasi_Pulang(this, position_int, selected_position_opsibagasi_pulang, tambahan_kg_option, hargaTambahan_kg_option);
+        holder.RecyclerViewOpsiBagasiPulang.setAdapter(recyclerAdapterOpsiBagasi_pulang);
+
 
         ItemClickSupport2.addTo(holder.RecyclerViewTambahanBagasi).setOnItemClickListener(new ItemClickSupport2.OnItemClickListener() {
             @Override
@@ -126,13 +138,24 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
                 position_int = position;
                 int scrollStateX = recyclerView.computeHorizontalScrollOffset();
                 int scrollStateY = recyclerView.computeVerticalScrollOffset();
+                int scrollStateY_pulang = holder.RecyclerViewOpsiBagasiPulang.computeVerticalScrollOffset();
+                int scrollStateX_pulang = holder.RecyclerViewOpsiBagasiPulang.computeHorizontalScrollOffset();
+                int scrollStateY_pergi = holder.RecyclerViewOpsiBagasiPergi.computeVerticalScrollOffset();
+                int scrollStateX_pergi = holder.RecyclerViewOpsiBagasiPergi.computeHorizontalScrollOffset();
                 RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
                 holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
 
                 RecyclerAdapterOpsiBagasi_Pergi recyclerAdapterOpsiBagasi_pergi = new RecyclerAdapterOpsiBagasi_Pergi(bagasi_bottomsheet_redesign.this, position_int, selected_position_opsibagasi, tambahan_kg_option, hargaTambahan_kg_option);
                 holder.RecyclerViewOpsiBagasiPergi.setAdapter(recyclerAdapterOpsiBagasi_pergi);
 
-                holder.RecyclerViewOpsiBagasiPergi.scrollToPosition(selected_position_opsibagasi.get(position));
+                RecyclerAdapterOpsiBagasi_Pulang recyclerAdapterOpsiBagasi_pulang = new RecyclerAdapterOpsiBagasi_Pulang(bagasi_bottomsheet_redesign.this, position_int, selected_position_opsibagasi_pulang, tambahan_kg_option, hargaTambahan_kg_option);
+                holder.RecyclerViewOpsiBagasiPulang.setAdapter(recyclerAdapterOpsiBagasi_pulang);
+
+                holder.RecyclerViewOpsiBagasiPergi.scrollBy(scrollStateX_pergi, scrollStateY_pergi);
+                holder.RecyclerViewOpsiBagasiPulang.scrollBy(scrollStateX_pulang, scrollStateY_pulang);
+//
+//                holder.RecyclerViewOpsiBagasiPergi.scrollToPosition(selected_position_opsibagasi.get(position));
+//                holder.RecyclerViewOpsiBagasiPulang.scrollToPosition(selected_position_opsibagasi_pulang.get(position));
 
 //                recyclerView.scrollTo(scrollStateX, scrollStateY);
                 recyclerView.scrollBy(scrollStateX, scrollStateY);
@@ -144,137 +167,8 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
             }
         });
 
-        ItemClickSupport.addTo(recyclerViewTambahanBagasiOpsi_Pergi).setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
-                int pcc = position;
-                Toast.makeText(getContext(), "pcc " + pcc, Toast.LENGTH_SHORT).show();
-                Log.i("Change position", "posisi " + selected_position_opsibagasi);
-                selected_position_opsibagasi.set(position_int, pcc);
-                int scrollStateX = recyclerView.computeHorizontalScrollOffset();
-                int scrollStateY = recyclerView.computeVerticalScrollOffset();
-                int scrollStateX_penumpang = holder.RecyclerViewTambahanBagasi.computeHorizontalScrollOffset();
-                int scrollStateY_penumpang = holder.RecyclerViewTambahanBagasi.computeVerticalScrollOffset();
-
-                Log.i("Change position", "posisi " + selected_position_opsibagasi);
-                RecyclerAdapterOpsiBagasi_Pergi recyclerAdapterOpsiBagasi_pergi = new RecyclerAdapterOpsiBagasi_Pergi(bagasi_bottomsheet_redesign.this, position_int, selected_position_opsibagasi, tambahan_kg_option, hargaTambahan_kg_option);
-                recyclerViewTambahanBagasiOpsi_Pergi.setAdapter(recyclerAdapterOpsiBagasi_pergi);
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
-                recyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
 
 
-                recyclerView.scrollBy(scrollStateX, scrollStateY);
-                recyclerViewTambahanBagasi.scrollBy(scrollStateX_penumpang, scrollStateY_penumpang);
-
-                return false;
-            }
-        });
-
-
-        ItemClickSupport.addTo(recyclerViewTambahanBagasiOpsi_Pergi).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                int pcc = position;
-                Toast.makeText(getContext(), "pcc " + pcc, Toast.LENGTH_SHORT).show();
-                Log.i("Change position", "posisi " + selected_position_opsibagasi);
-                selected_position_opsibagasi.set(position_int, pcc);
-                int scrollStateX = recyclerView.computeHorizontalScrollOffset();
-                int scrollStateY = recyclerView.computeVerticalScrollOffset();
-                int scrollStateX_penumpang = holder.RecyclerViewTambahanBagasi.computeHorizontalScrollOffset();
-                int scrollStateY_penumpang = holder.RecyclerViewTambahanBagasi.computeVerticalScrollOffset();
-
-                Log.i("Change position", "posisi " + selected_position_opsibagasi);
-                RecyclerAdapterOpsiBagasi_Pergi recyclerAdapterOpsiBagasi_pergi = new RecyclerAdapterOpsiBagasi_Pergi(bagasi_bottomsheet_redesign.this, position_int, selected_position_opsibagasi, tambahan_kg_option, hargaTambahan_kg_option);
-                recyclerViewTambahanBagasiOpsi_Pergi.setAdapter(recyclerAdapterOpsiBagasi_pergi);
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
-                recyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
-
-
-                recyclerView.scrollBy(scrollStateX, scrollStateY);
-                recyclerViewTambahanBagasi.scrollBy(scrollStateX_penumpang, scrollStateY_penumpang);
-
-
-            }
-        });
-
-
-        holder.radioButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                    holder.radioButton1.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-                holder.radioButton2.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-                holder.radioButton3.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-//                    holder.default_harga.setTextColor(getResources().getColor(R.color.black));
-//                    holder.default_weight.setTextColor(getResources().getColor(R.color.black));
-                holder.hargaTambahan1.setTextColor(getResources().getColor(R.color.black));
-                holder.tambahanKG1.setTextColor(getResources().getColor(R.color.black));
-                holder.tambahanKG2.setTextColor(getResources().getColor(R.color.black));
-                holder.hargaTambahan2.setTextColor(getResources().getColor(R.color.black));
-
-                holder.radioButton1.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-                holder.defaultHarga.setTextColor(getResources().getColor(R.color.primary));
-                holder.defaultWeight.setTextColor(getResources().getColor(R.color.primary));
-
-                tambahan_kg.set(position_int, "0kg");
-                harga_tambahan.set(position_int, "IDR 0");
-
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
-                holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
-
-            }
-        });
-
-        holder.radioButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.radioButton1.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-//                    holder.radioButton2.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-                holder.radioButton3.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-                holder.defaultHarga.setTextColor(getResources().getColor(R.color.black));
-                holder.defaultWeight.setTextColor(getResources().getColor(R.color.black));
-//                    holder.hargaTambahan_1.setTextColor(getResources().getColor(R.color.black));
-//                    holder.tambahanKG_1.setTextColor(getResources().getColor(R.color.black));
-                holder.tambahanKG2.setTextColor(getResources().getColor(R.color.black));
-                holder.hargaTambahan2.setTextColor(getResources().getColor(R.color.black));
-
-
-                holder.radioButton2.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-                holder.tambahanKG1.setTextColor(getResources().getColor(R.color.primary));
-                holder.hargaTambahan1.setTextColor(getResources().getColor(R.color.primary));
-
-                tambahan_kg.set(position_int, holder.tambahanKG1.getText().toString().replace("+ ", ""));
-                harga_tambahan.set(position_int, holder.hargaTambahan1.getText().toString());
-
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
-                holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
-            }
-        });
-
-        holder.radioButton3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.radioButton1.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-                holder.radioButton2.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-//                    holder.radioButton3.setBackground(getResources().getDrawable(R.drawable.curved_less_bg_outline));
-                holder.defaultHarga.setTextColor(getResources().getColor(R.color.black));
-                holder.defaultWeight.setTextColor(getResources().getColor(R.color.black));
-                holder.tambahanKG1.setTextColor(getResources().getColor(R.color.black));
-                holder.hargaTambahan1.setTextColor(getResources().getColor(R.color.black));
-//                    holder.tambahanKG_2.setTextColor(getResources().getColor(R.color.black));
-//                    holder.hargaTambahan_2.setTextColor(getResources().getColor(R.color.black));
-
-
-                holder.radioButton3.setBackground(getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-                holder.tambahanKG2.setTextColor(getResources().getColor(R.color.primary));
-                holder.hargaTambahan2.setTextColor(getResources().getColor(R.color.primary));
-
-                tambahan_kg.set(position_int, holder.tambahanKG2.getText().toString().replace("+ ", ""));
-                harga_tambahan.set(position_int, holder.hargaTambahan2.getText().toString());
-
-                RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
-                holder.RecyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
-            }
-        });
 
         holder.closeSheet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,6 +190,8 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
 
         recyclerViewTambahanBagasi = view.findViewById(R.id.RecyclerViewTambahanBagasi);
         recyclerViewTambahanBagasiOpsi_Pergi = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pergi);
+        recyclerViewTambahanBagasiOpsi_Pulang = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pulang);
+
 
 
         return dialog;
@@ -307,12 +203,15 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         Toast.makeText(getContext(), "pcc " + pcc, Toast.LENGTH_SHORT).show();
         Log.i("Change position", "posisi " + selected_position_opsibagasi);
         selected_position_opsibagasi.set(position_int, pcc);
+        tambahan_kg.set(position_int, tambahan_kg_option.get(pcc));
+        harga_tambahan.set(position_int, hargaTambahan_kg_option.get(pcc));
         int scrollStateX = recyclerViewTambahanBagasiOpsi_Pergi.computeHorizontalScrollOffset();
         int scrollStateY = recyclerViewTambahanBagasiOpsi_Pergi.computeVerticalScrollOffset();
         int scrollStateX_penumpang = holder.RecyclerViewTambahanBagasi.computeHorizontalScrollOffset();
         int scrollStateY_penumpang = holder.RecyclerViewTambahanBagasi.computeVerticalScrollOffset();
 
-        Log.i("Change position", "posisi " + selected_position_opsibagasi);
+        Log.i("tambahankg", "kg " + tambahan_kg);
+        Log.i("tambahankg harga", "harga " + tambahan_kg);
         RecyclerAdapterOpsiBagasi_Pergi recyclerAdapterOpsiBagasi_pergi = new RecyclerAdapterOpsiBagasi_Pergi(bagasi_bottomsheet_redesign.this, position_int, selected_position_opsibagasi, tambahan_kg_option, hargaTambahan_kg_option);
         recyclerViewTambahanBagasiOpsi_Pergi.setAdapter(recyclerAdapterOpsiBagasi_pergi);
         RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
@@ -320,6 +219,31 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
 
 
         recyclerViewTambahanBagasiOpsi_Pergi.scrollBy(scrollStateX, scrollStateY);
+        recyclerViewTambahanBagasi.scrollBy(scrollStateX_penumpang, scrollStateY_penumpang);
+    }
+
+    @Override
+    public void OnDataBagasi_pulang(int bagasiOptionPosition_int) {
+        int pcc = bagasiOptionPosition_int;
+        Toast.makeText(getContext(), "pcc " + pcc, Toast.LENGTH_SHORT).show();
+        Log.i("Change position", "posisi " + selected_position_opsibagasi_pulang);
+        selected_position_opsibagasi_pulang.set(position_int, pcc);
+        tambahan_kg_pulang.set(position_int, tambahan_kg_option.get(pcc));
+        harga_tambahan_pulang.set(position_int, hargaTambahan_kg_option.get(pcc));
+        int scrollStateX = recyclerViewTambahanBagasiOpsi_Pulang.computeHorizontalScrollOffset();
+        int scrollStateY = recyclerViewTambahanBagasiOpsi_Pulang.computeVerticalScrollOffset();
+        int scrollStateX_penumpang = holder.RecyclerViewTambahanBagasi.computeHorizontalScrollOffset();
+        int scrollStateY_penumpang = holder.RecyclerViewTambahanBagasi.computeVerticalScrollOffset();
+
+        Log.i("tambahankg_pulang", "kg pulang" + tambahan_kg_pulang);
+        Log.i("tambahankg harga pulang", "harga pulang " + harga_tambahan_pulang);
+        RecyclerAdapterOpsiBagasi_Pulang recyclerAdapterOpsiBagasi_pulang = new RecyclerAdapterOpsiBagasi_Pulang(this, position_int, selected_position_opsibagasi_pulang, tambahan_kg_option, hargaTambahan_kg_option);
+        holder.RecyclerViewOpsiBagasiPulang.setAdapter(recyclerAdapterOpsiBagasi_pulang);
+        RecyclerAdapterBagasiHorizontal recyclerAdapterBagasiHorizontal = new RecyclerAdapterBagasiHorizontal(position_int, bagasi, namaPassenger, tambahan_kg, harga_tambahan, tambahan_kg_pulang, harga_tambahan_pulang);
+        recyclerViewTambahanBagasi.setAdapter(recyclerAdapterBagasiHorizontal);
+
+
+        recyclerViewTambahanBagasiOpsi_Pulang.scrollBy(scrollStateX, scrollStateY);
         recyclerViewTambahanBagasi.scrollBy(scrollStateX_penumpang, scrollStateY_penumpang);
     }
 
@@ -385,7 +309,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
                 holder.plus1.setVisibility(View.VISIBLE);
                 holder.tambahanbagasiPulang.setVisibility(View.VISIBLE);
 
-                holder.tambahanbagasiPulang.setText(tambahan_kg.get(position));
+                holder.tambahanbagasiPulang.setText(tambahan_kg_pulang.get(position));
             }
 
         }

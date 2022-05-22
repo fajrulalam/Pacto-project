@@ -78,126 +78,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="18dp"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="55dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:id="@+id/radioButton1"
-                android:orientation="vertical"
-                android:background="@drawable/curved_less_bg_outline"
-                android:layout_marginRight="5dp">
-
-                <TextView
-                    android:id="@+id/default_weight"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="20 kg"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/default_harga"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 0"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:id="@+id/radioButton2"
-                style="@style/radioButtonStyle"
-                android:orientation="vertical"
-                android:background="@drawable/curved_less_bg_outline"
-                android:layout_marginRight="5dp">
-
-                <TextView
-                    android:id="@+id/tambahanKG_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="+ 5kg"
-                    android:fontFamily="@font/roboto_bold"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/hargaTambahan_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 115.000"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:id="@+id/radioButton3"
-                style="@style/radioButtonStyle"
-                android:orientation="vertical"
-                android:background="@drawable/curved_less_bg_outline"
-                android:padding="10dp"
-                android:layout_marginRight="5dp">
-
-                <TextView
-                    android:id="@+id/tambahanKG_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="+ 10kg"
-                    android:fontFamily="@font/roboto_bold"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/hargaTambahan_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 205.000"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-
-
-
-        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -209,125 +90,14 @@
             android:fontFamily="@font/roboto_bold"
             android:paddingVertical="8dp"/>
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingLeft="16dp"
+            android:id="@+id/RecyclerViewOpsiBagasi_Pulang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="150dp"
-            android:paddingHorizontal="18dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:id="@+id/radioButton1_pulang"
-                android:orientation="vertical"
-                android:background="@drawable/curved_less_bg_outline"
-                android:layout_marginRight="5dp">
-
-                <TextView
-                    android:id="@+id/default_weight_pulang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="20 kg"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/default_harga_pulang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 0"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:id="@+id/radioButton2_pulang"
-                style="@style/radioButtonStyle"
-                android:orientation="vertical"
-                android:background="@drawable/curved_less_bg_outline"
-                android:layout_marginRight="5dp">
-
-                <TextView
-                    android:id="@+id/tambahanKG_1_pulang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="+5 kg"
-                    android:fontFamily="@font/roboto_bold"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/hargaTambahan_1_pulang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 115.000"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/selectable_view_notsocurved"
-                android:id="@+id/radioButton3_pulang"
-                style="@style/radioButtonStyle"
-                android:orientation="vertical"
-                android:background="@drawable/curved_less_bg_outline"
-                android:padding="10dp"
-                android:layout_marginRight="5dp">
-
-                <TextView
-                    android:id="@+id/tambahanKG_2_pulang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="+ 10kg"
-                    android:fontFamily="@font/roboto_bold"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:gravity="center"/>
-
-                <TextView
-                    android:id="@+id/hargaTambahan_2_pulang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="IDR 205.000"
-                    android:layout_marginTop="3dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
+            android:layout_marginBottom="60dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 
         <LinearLayout
@@ -346,6 +116,7 @@
                 android:layout_height="match_parent"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Simpan perubahan"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/primary_dark"
                 android:textAllCaps="false"
                 tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
