@@ -289,7 +289,13 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
                         String tglLahir_namaTerimpan_str = map.get("tglLahir").toString();
                         String  titel_namaTerimpan_str = map.get("titel").toString();
                         String kewarganegaraan_namaTerimpan_str = map.get("kewarganegaraan").toString();
-                        String NIKatauPaspor_namaTerimpan_str = map.get("NIKatauPaspor").toString();
+                        String NIKatauPaspor_namaTerimpan_str = "";
+                        try {
+                             NIKatauPaspor_namaTerimpan_str = map.get("NIKatauPaspor").toString();
+                        } catch (Exception e) {
+                             NIKatauPaspor_namaTerimpan_str = map.get("nikatauPaspor").toString();
+
+                        }
 
                         nama_namaTersimpan.add(nama_namaTersimpan_str);
                         tglLahir_namaTersimpan.add(tglLahir_namaTerimpan_str);

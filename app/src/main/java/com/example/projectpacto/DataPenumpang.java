@@ -46,8 +46,12 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     TextInputLayout tglLahir;
     TextInputLayout kewarganegaraan;
     TextInputEditText NIKatauPaspor;
-    ArrayList<String> titel;
-    ArrayList<String> nama;
+    ArrayList<String>  titel;
+    ArrayList<String> nama_namaTersimpan;
+    ArrayList<String> tglLahir_namaTersimpan;
+    ArrayList<String> titel_namaTersimpan;
+    ArrayList<String> kewarganegaraan_namaTersimpan;
+    ArrayList<String> NIKatauPaspor_namaTersimpan;
     OnDataPassenger datapasser;
     int index;
 
@@ -89,6 +93,19 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         tglLahir = view.findViewById(R.id.tglLahir);
         NIKatauPaspor = view.findViewById(R.id.NIKatauPasporAutoComplete);
 
+        nama_namaTersimpan = new ArrayList<>();
+        tglLahir_namaTersimpan = new ArrayList<>();
+        titel_namaTersimpan = new ArrayList<>();
+        kewarganegaraan_namaTersimpan = new ArrayList<>();
+        NIKatauPaspor_namaTersimpan = new ArrayList<>();
+
+
+
+        nama_namaTersimpan = bundle.getStringArrayList("nama_namaTersimpan");
+        tglLahir_namaTersimpan = bundle.getStringArrayList("tglLahir_namaTersimpan");
+        titel_namaTersimpan = bundle.getStringArrayList("titel_namaTersimpan");
+        kewarganegaraan_namaTersimpan = bundle.getStringArrayList("kewarganegaraan_namaTersimpan");
+        NIKatauPaspor_namaTersimpan = bundle.getStringArrayList("NIKatauPaspor_namaTersimpan");
         tglLahir_str = bundle.getString("tglLahir_str");
         nama_str = bundle.getString("nama_str");
         kewarganegaraan_str = bundle.getString("kewarganegaraan_str");
@@ -157,9 +174,8 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         }
 
 
-        nama = new ArrayList<>();
-        nama.add("Asad"); nama.add("Fajrul"); nama.add("Rekyan"); nama.add("Yoga");
-        ArrayAdapter arrayAdapter1 = new ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, nama);
+
+        ArrayAdapter arrayAdapter1 = new ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, nama_namaTersimpan);
         namaAutoComplete.setAdapter(arrayAdapter1);
 
 
@@ -179,32 +195,38 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         namaAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                switch (String.valueOf(adapterView.getItemAtPosition(position))){
-                    case "Asad":
-                        tglLahir.getEditText().setText("19/11/2001");
-                        titelDropdown.setText("Tuan");
-                        kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.setText("081351");
-                        break;
-                    case "Fajrul":
-                        tglLahir.getEditText().setText("16/06/2001");
-                        titelDropdown.setText("Tuan");
-                        kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.setText("3517173209235832");
-                        break;
-                    case "Yoga":
-                        tglLahir.getEditText().setText("16/04/2000");
-                        titelDropdown.setText("Tuan");
-                        kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.setText("081336");
-                        break;
-                    case "Rekyan":
-                        tglLahir.getEditText().setText("16/06/1991");
-                        titelDropdown.setText("Nyonya");
-                        kewarganegaraan.getEditText().setText("Indonesia");
-                        NIKatauPaspor.setText("623336");
-                        break;
-                }
+
+                int index = nama_namaTersimpan.indexOf(String.valueOf(adapterView.getItemAtPosition(position)));
+                tglLahir.getEditText().setText(tglLahir_namaTersimpan.get(index));
+                titelDropdown.setText(titel_namaTersimpan.get(index));
+                kewarganegaraan.getEditText().setText(kewarganegaraan_namaTersimpan.get(index));
+                NIKatauPaspor.setText(NIKatauPaspor_namaTersimpan.get(index));
+//                switch (String.valueOf(adapterView.getItemAtPosition(position))){
+//                    case "Asad":
+//                        tglLahir.getEditText().setText("19/11/2001");
+//                        titelDropdown.setText("Tuan");
+//                        kewarganegaraan.getEditText().setText("Indonesia");
+//                        NIKatauPaspor.setText("081351");
+//                        break;
+//                    case "Fajrul":
+//                        tglLahir.getEditText().setText("16/06/2001");
+//                        titelDropdown.setText("Tuan");
+//                        kewarganegaraan.getEditText().setText("Indonesia");
+//                        NIKatauPaspor.setText("3517173209235832");
+//                        break;
+//                    case "Yoga":
+//                        tglLahir.getEditText().setText("16/04/2000");
+//                        titelDropdown.setText("Tuan");
+//                        kewarganegaraan.getEditText().setText("Indonesia");
+//                        NIKatauPaspor.setText("081336");
+//                        break;
+//                    case "Rekyan":
+//                        tglLahir.getEditText().setText("16/06/1991");
+//                        titelDropdown.setText("Nyonya");
+//                        kewarganegaraan.getEditText().setText("Indonesia");
+//                        NIKatauPaspor.setText("623336");
+//                        break;
+//                }
                 Log.i("NIK/PASSOPRT INPUT", NIKatauPaspor.getText().toString());
             }
         });
