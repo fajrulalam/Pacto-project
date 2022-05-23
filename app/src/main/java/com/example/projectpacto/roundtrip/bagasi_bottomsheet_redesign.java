@@ -78,17 +78,17 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         bagasi = "20kg";
 
 
-        namaPassenger.add("tes bruh");
+        namaPassenger.add("Fajrul Alam");
         tambahan_kg.add("0kg");
         harga_tambahan.add("tes bruh");
         tambahan_kg_pulang.add("0kg");
         harga_tambahan_pulang.add("0kg");
-        namaPassenger.add("tes bruh");
+        namaPassenger.add("Asad Albalad");
         tambahan_kg.add("0kg");
         harga_tambahan.add("tes bruh");
         tambahan_kg_pulang.add("0kg");
         harga_tambahan_pulang.add("tes bruh");
-        namaPassenger.add("tes bruh");
+        namaPassenger.add("Yoga Cahyo");
         tambahan_kg.add("0kg");
         harga_tambahan.add("tes bruh");
         tambahan_kg_pulang.add("0kg");
@@ -290,10 +290,10 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
 
             if (position == position_int) {
                 holder.linearLayout.setBackground(holder.itemView.getResources().getDrawable(R.drawable.curved__even_less_fillcolorized_bg));
-                holder.linearLayout.setPadding(12, 12, 12, 12);
+                holder.linearLayout.setPadding(42, 32, 22, 32);
             } else {
                 holder.linearLayout.setBackground(holder.itemView.getResources().getDrawable(R.drawable.curved__even_less_colorized_bg));
-                holder.linearLayout.setPadding(12, 12, 12, 12);
+                holder.linearLayout.setPadding(42, 32, 22, 32);
 
             }
 
