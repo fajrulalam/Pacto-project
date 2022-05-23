@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implements DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail, TambahanBagasiBottomSheet.OnDataBagasi {
+public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implements bagasi_bottomsheet_redesign.OnDataBagasiBottomSheetRedesign, DataPenumpang.OnDataPassenger, RecyclerAdapterPenumpangList.AddPassengerDetail, TambahanBagasiBottomSheet.OnDataBagasi {
     Bundle bundle;
 
     ActivityPlaneOrderActivity3PulangPergiBinding binding;
@@ -59,6 +59,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
     String kedatangan;
     String tanggal;
     String penumpang;
+    String bagasi_default;
     String kota_kedatangan;
     String kota_keberangkatan;
     String bandara_keberangktan_raw;
@@ -102,8 +103,11 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
     ArrayList<String> tambahan_kg;
     ArrayList<String> harga_tambahan;
+    ArrayList<Integer> selected_position_opsi_bagasi;
+
     ArrayList<String> tambahan_kg_pulang;
     ArrayList<String> harga_tambahan_pulang;
+    ArrayList<Integer> selected_position_opsi_bagasi_pulang;
 
     List<Map<String, String>> ArrayofPenumpangMaps;
     Map<String, String> dataPenumpangMap;
@@ -141,6 +145,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         jmlDewasa_str= bundle.getString("jmlDewasa");;
         jmlAnak_str= bundle.getString("jmlAnak"); ;
         jmlBalita_str= bundle.getString("jmlBalita");;
+        bagasi_default = bundle.getStringArrayList("bagasi").get(0);
         keberangkatan = bundle.getString("keberangkatan");
         kedatangan = bundle.getString("kedatangan");
         tanggal = bundle.getString("tanggal");
@@ -188,6 +193,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         }
 
 
+
         jmlPenumpang = Integer.parseInt(jmlDewasa_str) +  Integer.parseInt(jmlAnak_str) + Integer.parseInt(jmlBalita_str);
 
         namaPassenger = new ArrayList<>();
@@ -198,8 +204,10 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         NIKatauPaspor = new ArrayList<>();
         tambahan_kg = new ArrayList<>();
         harga_tambahan = new ArrayList<>();
+        selected_position_opsi_bagasi = new ArrayList<>();
         tambahan_kg_pulang = new ArrayList<>();
         harga_tambahan_pulang = new ArrayList<>();
+        selected_position_opsi_bagasi_pulang = new ArrayList<>();
 
         ArrayofPenumpangMaps = new ArrayList<>();
 
@@ -211,8 +219,14 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             tglLahir.add("");
             NIKatauPaspor.add("");
             kewarganegaraan.add("");
-            tambahan_kg.add("Bagasi +0 kg");
+
+            tambahan_kg.add("0kg");
             harga_tambahan.add("IDR 0");
+            selected_position_opsi_bagasi.add(0);
+
+            tambahan_kg_pulang.add("0kg");
+            harga_tambahan_pulang.add("IDR 0");
+            selected_position_opsi_bagasi_pulang.add(0);
 
             dataPenumpangMap = new HashMap<>();
             dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i-1));
@@ -222,6 +236,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             dataPenumpangMap.put("kewarganegaraan", kewarganegaraan.get(i-1));
             dataPenumpangMap.put("tambahan_kg", tambahan_kg.get(i-1));
             dataPenumpangMap.put("harga_tambahan", harga_tambahan.get(i-1));
+            dataPenumpangMap.put("tambahan_kg_pulang", tambahan_kg_pulang.get(i-1));
+            dataPenumpangMap.put("harga_tambahan_pulang", harga_tambahan_pulang.get(i-1));
 
             ArrayofPenumpangMaps.add(dataPenumpangMap);
             Log.i("ArrayofPenumpangMaps"+i, "" + ArrayofPenumpangMaps);
@@ -232,14 +248,18 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         binding.tambahFasilitasEkstraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Bundle bundle = new Bundle();
-//                bundle.putStringArrayList("namaList", namaPassenger);
-//                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
-//                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
-//                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
-//                tambahanBagasiBottomSheet.setArguments(bundle);
-//                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("namaList", namaPassenger);
+                bundle.putString("bagasi_default", bagasi_default);
+                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
+                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
+                bundle.putStringArrayList("tambahan_kg_pulang", tambahan_kg_pulang);
+                bundle.putStringArrayList("harga_tambahan_pulang", harga_tambahan_pulang);
+                bundle.putIntegerArrayList("selected_position_opsi_bagasi", selected_position_opsi_bagasi);
+                bundle.putIntegerArrayList("selected_position_opsi_bagasi_pulang", selected_position_opsi_bagasi_pulang);
+
                 bagasi_bottomsheet_redesign bagasi_bottomsheet_redesign = new bagasi_bottomsheet_redesign();
+                bagasi_bottomsheet_redesign.setArguments(bundle);
                 bagasi_bottomsheet_redesign.show(getSupportFragmentManager(), bagasi_bottomsheet_redesign.getTag());
 
 
@@ -287,6 +307,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         binding.kotaAsal.setText(kotaAsal_str);
 
         Log.i("kotaAsal", kotaAsal_str);
+        Log.i("Bagasi default", "default: " + bagasi_default);
         binding.kotaTujuan.setText(kotaTujuan_str);
         binding.tanggalBerangkat.setText(tanggalBerangkat_str);
         binding.tanggalDatang.setText(tanggalDatang_str);
@@ -410,6 +431,13 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             dataPenumpangMap.put("tambahan_kg", tambahan_kg.get(i));
             dataPenumpangMap.put("harga_tambahan", harga_tambahan.get(i));
 
+            dataPenumpangMap.put("tambahan_kg", tambahan_kg.get(i));
+            dataPenumpangMap.put("harga_tambahan", harga_tambahan.get(i));
+            dataPenumpangMap.put("tambahan_kg_pulang", tambahan_kg_pulang.get(i));
+            dataPenumpangMap.put("harga_tambahan_pulang", harga_tambahan_pulang.get(i));
+
+
+
             ArrayofPenumpangMaps.add(i, dataPenumpangMap);
         }
 
@@ -471,6 +499,32 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         binding.bagasi.setVisibility(View.GONE);
         binding.bagasiTambahan.setVisibility(View.GONE);
         binding.hargaBagasiTambahan.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void OnDataBagasiBottomSheetRedesign(ArrayList<String> mtambahan_kg, ArrayList<String> mharga_tambahan, ArrayList<Integer> mselectIntegered_position_opsi_bagasi, ArrayList<String> mtambahan_kg_pulang, ArrayList<String> mharga_tambahan_pulang, ArrayList<Integer> mselected_position_opsi_bagasi_pulang) {
+        ArrayofPenumpangMaps.clear();
+        selected_position_opsi_bagasi = mselectIntegered_position_opsi_bagasi;
+        selected_position_opsi_bagasi_pulang = mselected_position_opsi_bagasi_pulang;
+
+
+        for (int i = 1; i < jmlPenumpang+1 ; i ++) {
+
+            dataPenumpangMap = new HashMap<>();
+            dataPenumpangMap.put("namaPenumpang", namaPassenger.get(i-1));
+            dataPenumpangMap.put("titel", titel.get(i-1));
+            dataPenumpangMap.put("tglLahir", tglLahir.get(i-1));
+            dataPenumpangMap.put("NIKatauPaspor", NIKatauPaspor.get(i-1));
+            dataPenumpangMap.put("kewarganegaraan", kewarganegaraan.get(i-1));
+            dataPenumpangMap.put("tambahan_kg", mtambahan_kg.get(i-1));
+            dataPenumpangMap.put("harga_tambahan", mharga_tambahan.get(i-1));
+            dataPenumpangMap.put("tambahan_kg_pulang", mtambahan_kg_pulang.get(i-1));
+            dataPenumpangMap.put("harga_tambahan_pulang", mharga_tambahan_pulang.get(i-1));
+
+            ArrayofPenumpangMaps.add(dataPenumpangMap);
+            Log.i("ArrayofPenumpangMaps"+i, "" + ArrayofPenumpangMaps);
+
+        }
     }
 
     public class PenumpangData {

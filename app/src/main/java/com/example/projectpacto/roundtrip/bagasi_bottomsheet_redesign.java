@@ -2,6 +2,7 @@ package com.example.projectpacto.roundtrip;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
@@ -28,6 +29,7 @@ import com.example.projectpacto.RecyclerAdapterOpsiBagasi_Pergi;
 import com.example.projectpacto.RecyclerItemClickListener;
 import com.example.projectpacto.TambahanBagasiBottomSheet;
 import com.example.projectpacto.databinding.FragmentBagasiBottomsheetRedesignBinding;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -37,10 +39,19 @@ import java.util.ArrayList;
 public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment implements RecyclerAdapterOpsiBagasi_Pergi.OnDataBagasi, RecyclerAdapterOpsiBagasi_Pulang.OnDataBagasi_pulang {
 
     FragmentBagasiBottomsheetRedesignBinding holder;
-    //    OnDataBagasi datapasser;
+    OnDataBagasiBottomSheetRedesign datapasser;
     RecyclerView recyclerViewTambahanBagasi;
     RecyclerView recyclerViewTambahanBagasiOpsi_Pergi;
     RecyclerView recyclerViewTambahanBagasiOpsi_Pulang;
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        datapasser.OnDataBagasiBottomSheetRedesign(tambahan_kg, harga_tambahan, selected_position_opsibagasi,
+                tambahan_kg_pulang, harga_tambahan_pulang, selected_position_opsibagasi_pulang);
+
+    }
+
     ArrayList<String> namaPassenger;
     ArrayList<String> tambahan_kg;
     String bagasi;
@@ -75,25 +86,46 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         tambahan_kg_option = new ArrayList<>();
         hargaTambahan_kg_option = new ArrayList<>();
 
-        bagasi = "20kg";
+
+        Bundle bundle = this.getArguments();
+
+        namaPassenger = bundle.getStringArrayList("namaList");
+        bagasi = bundle.getString("bagasi_default");
+        selected_position_opsibagasi = bundle.getIntegerArrayList("selected_position_opsi_bagasi");
+        selected_position_opsibagasi_pulang = bundle.getIntegerArrayList("selected_position_opsi_bagasi_pulang");
+        tambahan_kg = bundle.getStringArrayList("tambahan_kg");
+        harga_tambahan = bundle.getStringArrayList("harga_tambahan");
+        tambahan_kg_pulang = bundle.getStringArrayList("tambahan_kg_pulang");
+        harga_tambahan_pulang = bundle.getStringArrayList("harga_tambahan_pulang");
 
 
-        namaPassenger.add("Fajrul Alam");
-        tambahan_kg.add("0kg");
-        harga_tambahan.add("tes bruh");
-        tambahan_kg_pulang.add("0kg");
-        harga_tambahan_pulang.add("0kg");
-        namaPassenger.add("Asad Albalad");
-        tambahan_kg.add("0kg");
-        harga_tambahan.add("tes bruh");
-        tambahan_kg_pulang.add("0kg");
-        harga_tambahan_pulang.add("tes bruh");
-        namaPassenger.add("Yoga Cahyo");
-        tambahan_kg.add("0kg");
-        harga_tambahan.add("tes bruh");
-        tambahan_kg_pulang.add("0kg");
-        harga_tambahan_pulang.add("tes bruh");
+//        bagasi = "20kg";
 
+//        //DUMMY
+//        namaPassenger.add("Fajrul Alam");
+//        tambahan_kg.add("0kg");
+//        harga_tambahan.add("tes bruh");
+//        tambahan_kg_pulang.add("0kg");
+//        harga_tambahan_pulang.add("0kg");
+//        namaPassenger.add("Asad Albalad");
+//        tambahan_kg.add("0kg");
+//        harga_tambahan.add("tes bruh");
+//        tambahan_kg_pulang.add("0kg");
+//        harga_tambahan_pulang.add("tes bruh");
+//        namaPassenger.add("Yoga Cahyo");
+//        tambahan_kg.add("0kg");
+//        harga_tambahan.add("tes bruh");
+//        tambahan_kg_pulang.add("0kg");
+//        harga_tambahan_pulang.add("tes bruh");
+//        selected_position_opsibagasi.add(0);
+//        selected_position_opsibagasi.add(0);
+//        selected_position_opsibagasi.add(0);
+//        selected_position_opsibagasi_pulang.add(0);
+//        selected_position_opsibagasi_pulang.add(0);
+//        selected_position_opsibagasi_pulang.add(0);
+
+
+        //Nanti ngambil dari API
         tambahan_kg_option.add("0kg");
         hargaTambahan_kg_option.add("IDR 0");
         tambahan_kg_option.add("5kg");
@@ -106,12 +138,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         hargaTambahan_kg_option.add("IDR 515.000");
         tambahan_kg_option.add("25kg");
         hargaTambahan_kg_option.add("IDR 615.000");
-        selected_position_opsibagasi.add(0);
-        selected_position_opsibagasi.add(0);
-        selected_position_opsibagasi.add(0);
-        selected_position_opsibagasi_pulang.add(0);
-        selected_position_opsibagasi_pulang.add(0);
-        selected_position_opsibagasi_pulang.add(0);
+
 
 
         recyclerViewTambahanBagasi = view.findViewById(R.id.RecyclerViewTambahanBagasi);
@@ -169,13 +196,28 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
 
 
 
-
+        //CLOSE BOTTOM SHEET
         holder.closeSheet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                datapasser.OnDataBagasiBottomSheetRedesign(tambahan_kg, harga_tambahan, selected_position_opsibagasi,
+                        tambahan_kg_pulang, harga_tambahan_pulang, selected_position_opsibagasi_pulang);
                 dismiss();
             }
         });
+
+        //ACTION BUTTON
+        holder.actionButtonSimpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datapasser.OnDataBagasiBottomSheetRedesign(tambahan_kg, harga_tambahan, selected_position_opsibagasi,
+                        tambahan_kg_pulang, harga_tambahan_pulang, selected_position_opsibagasi_pulang);
+                dismiss();
+            }
+        });
+
+
+
 
 
         return view;
@@ -187,6 +229,32 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
         final View view = View.inflate(getContext(), R.layout.fragment_bagasi_bottomsheet_redesign, null);
         dialog.setContentView(view);
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
+        bottomSheetBehavior.setPeekHeight(3000);
+
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                datapasser.OnDataBagasiBottomSheetRedesign(tambahan_kg, harga_tambahan, selected_position_opsibagasi,
+                        tambahan_kg_pulang, harga_tambahan_pulang, selected_position_opsibagasi_pulang);
+            }
+        });
+        //BOTTOM SHEET BEHAVIOR
+        bottomSheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                datapasser.OnDataBagasiBottomSheetRedesign(tambahan_kg, harga_tambahan, selected_position_opsibagasi,
+                        tambahan_kg_pulang, harga_tambahan_pulang, selected_position_opsibagasi_pulang);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+//                datapasser.OnDataBagasiBottomSheetRedesign(tambahan_kg, harga_tambahan, selected_position_opsibagasi,
+//                        tambahan_kg_pulang, harga_tambahan_pulang, selected_position_opsibagasi_pulang);
+            }
+        });
+
 
         recyclerViewTambahanBagasi = view.findViewById(R.id.RecyclerViewTambahanBagasi);
         recyclerViewTambahanBagasiOpsi_Pergi = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pergi);
@@ -348,6 +416,24 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
         }
 
 
+    }
+
+    public interface OnDataBagasiBottomSheetRedesign {
+        void OnDataBagasiBottomSheetRedesign(ArrayList<String> mtambahan_kg,
+                                             ArrayList<String> mharga_tambahan,
+                                             ArrayList<Integer> mselectIntegered_position_opsi_bagasi,
+                                             ArrayList<String> mtambahan_kg_pulang,
+                                             ArrayList<String> mharga_tambahan_pulang,
+                                             ArrayList<Integer> mselected_position_opsi_bagasi_pulang
+                                             );
+
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        datapasser = (bagasi_bottomsheet_redesign.OnDataBagasiBottomSheetRedesign) context;
     }
 
 
