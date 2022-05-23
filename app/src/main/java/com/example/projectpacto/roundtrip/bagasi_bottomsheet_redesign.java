@@ -141,6 +141,7 @@ public class bagasi_bottomsheet_redesign extends BottomSheetDialogFragment imple
 
 
 
+
         recyclerViewTambahanBagasi = view.findViewById(R.id.RecyclerViewTambahanBagasi);
         recyclerViewTambahanBagasiOpsi_Pergi = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pergi);
         recyclerViewTambahanBagasiOpsi_Pulang = view.findViewById(R.id.RecyclerViewOpsiBagasi_Pulang);

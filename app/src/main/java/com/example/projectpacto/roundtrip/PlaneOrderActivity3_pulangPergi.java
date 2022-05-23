@@ -16,11 +16,15 @@ import com.example.projectpacto.R;
 import com.example.projectpacto.RecyclerAdapterBagasi;
 import com.example.projectpacto.RecyclerAdapterPenumpangList;
 import com.example.projectpacto.TambahanBagasiBottomSheet;
+import com.example.projectpacto.TrankasiActivity;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3PpBinding;
 import com.example.projectpacto.databinding.ActivityPlaneOrderActivity3PulangPergiBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -101,6 +105,14 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
     ArrayList<String> kewarganegaraan;
     ArrayList<String> NIKatauPaspor;
 
+    ArrayList<String> nama_namaTersimpan;
+    ArrayList<String> tglLahir_namaTersimpan;
+    ArrayList<String> titel_namaTersimpan;
+    ArrayList<String> kewarganegaraan_namaTersimpan;
+    ArrayList<String> NIKatauPaspor_namaTersimpan;
+
+
+
     ArrayList<String> tambahan_kg;
     ArrayList<String> harga_tambahan;
     ArrayList<Integer> selected_position_opsi_bagasi;
@@ -126,62 +138,73 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         setContentView(view);
 
         fs = FirebaseFirestore.getInstance();
+        String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
 
 
+        //FETCH Bundle
         bundle = getIntent().getBundleExtra("bundle");
-        //data pergi
-        harga_str =bundle.getString("harga");
-        kotaAsal_str = bundle.getString("kotaAsal");
-        kotaTujuan_str = bundle.getString("kotaTujuan");
-        tanggalBerangkat_str = bundle.getStringArrayList("tanggalBerangkat").get(0);
-        waktuBerangkat_str= bundle.getStringArrayList("waktuBerangkat").get(0);
-        bandaraAsal_str= bundle.getStringArrayList("bandaraAsal").get(0);
-        logoMaskapai_int =bundle.getIntegerArrayList("logoMaskapai").get(0);
-        namaMaskapai_str= bundle.getStringArrayList("namaMaskapai").get(0);
-        kelasPesawat_str= bundle.getString("kelasPesawat");;
-        tanggalDatang_str= bundle.getStringArrayList("tanggalDatang").get(0);
-        waktuDatang_str= bundle.getStringArrayList("waktuDatang").get(0);
-        bandaraTujuan_str= bundle.getStringArrayList("bandaraTujuan").get(0);
-        jmlDewasa_str= bundle.getString("jmlDewasa");;
-        jmlAnak_str= bundle.getString("jmlAnak"); ;
-        jmlBalita_str= bundle.getString("jmlBalita");;
-        bagasi_default = bundle.getStringArrayList("bagasi").get(0);
-        keberangkatan = bundle.getString("keberangkatan");
-        kedatangan = bundle.getString("kedatangan");
-        tanggal = bundle.getString("tanggal");
-        penumpang = bundle.getString("penumpang");
-        kota_keberangkatan = bundle.getString("kota_keberangkatan");
-        kota_kedatangan = bundle.getString("kota_kedatangan");
-        bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
-        bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+        if (!bundle.isEmpty()) {
+            //data pergi
+            harga_str = bundle.getString("harga");
+            kotaAsal_str = bundle.getString("kotaAsal");
+            kotaTujuan_str = bundle.getString("kotaTujuan");
+            tanggalBerangkat_str = bundle.getStringArrayList("tanggalBerangkat").get(0);
+            waktuBerangkat_str = bundle.getStringArrayList("waktuBerangkat").get(0);
+            bandaraAsal_str = bundle.getStringArrayList("bandaraAsal").get(0);
+            logoMaskapai_int = bundle.getIntegerArrayList("logoMaskapai").get(0);
+            namaMaskapai_str = bundle.getStringArrayList("namaMaskapai").get(0);
+            kelasPesawat_str = bundle.getString("kelasPesawat");
+            ;
+            tanggalDatang_str = bundle.getStringArrayList("tanggalDatang").get(0);
+            waktuDatang_str = bundle.getStringArrayList("waktuDatang").get(0);
+            bandaraTujuan_str = bundle.getStringArrayList("bandaraTujuan").get(0);
+            jmlDewasa_str = bundle.getString("jmlDewasa");
+            ;
+            jmlAnak_str = bundle.getString("jmlAnak");
+            ;
+            jmlBalita_str = bundle.getString("jmlBalita");
+            ;
+            bagasi_default = bundle.getStringArrayList("bagasi").get(0);
+            keberangkatan = bundle.getString("keberangkatan");
+            kedatangan = bundle.getString("kedatangan");
+            tanggal = bundle.getString("tanggal");
+            penumpang = bundle.getString("penumpang");
+            kota_keberangkatan = bundle.getString("kota_keberangkatan");
+            kota_kedatangan = bundle.getString("kota_kedatangan");
+            bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
+            bandara_kedatangan_raw = bundle.getString("bandara_kedatangan");
 
-        //data pulang
-        tanggalBerangkat_str_pulang = bundle.getStringArrayList("tanggalBerangkat_pulang").get(0);
-        waktuBerangkat_str_pulang = bundle.getStringArrayList("waktuBerangkat_pulang").get(0);
-        bandaraAsal_str_pulang = bundle.getStringArrayList("bandaraAsal_pulang").get(0);
-        logoMaskapai_int_pulang = bundle.getIntegerArrayList("logoMaskapai_pulang").get(0);
-        namaMaskapai_str_pulang = bundle.getStringArrayList("namaMaskapai_pulang").get(0);
-        kelasPesawat_str_pulang = bundle.getString("kelasPesawat_pulang");
-        tanggalDatang_str_pulang = bundle.getStringArrayList("tanggalDatang_pulang").get(0);
-        waktuDatang_str_pulang = bundle.getStringArrayList("waktuDatang_pulang").get(0);
-        bandaraTujuan_str_pulang = bundle.getStringArrayList("bandaraTujuan_pulang").get(0);
-        jmlDewasa_str_pulang = bundle.getString("jmlDewasa_pulang");
-        jmlAnak_str_pulang = bundle.getString("jmlAnak_pulang");
-        jmlBalita_str_pulang = bundle.getString("jmlBalita_pulang");
-        kotaTujuan_str_pulang = bundle.getString("kotaTujuan_pulang");
-        kotaAsal_str_pulang = bundle.getString("kotaAsal_pulang");
-        harga_str_pulang = bundle.getString("harga_pulang");
-        jmlPenumpang_pulang = bundle.getInt("jmlPenumpang_pulang");
+            //data pulang
+            tanggalBerangkat_str_pulang = bundle.getStringArrayList("tanggalBerangkat_pulang").get(0);
+            waktuBerangkat_str_pulang = bundle.getStringArrayList("waktuBerangkat_pulang").get(0);
+            bandaraAsal_str_pulang = bundle.getStringArrayList("bandaraAsal_pulang").get(0);
+            logoMaskapai_int_pulang = bundle.getIntegerArrayList("logoMaskapai_pulang").get(0);
+            namaMaskapai_str_pulang = bundle.getStringArrayList("namaMaskapai_pulang").get(0);
+            kelasPesawat_str_pulang = bundle.getString("kelasPesawat_pulang");
+            tanggalDatang_str_pulang = bundle.getStringArrayList("tanggalDatang_pulang").get(0);
+            waktuDatang_str_pulang = bundle.getStringArrayList("waktuDatang_pulang").get(0);
+            bandaraTujuan_str_pulang = bundle.getStringArrayList("bandaraTujuan_pulang").get(0);
+            jmlDewasa_str_pulang = bundle.getString("jmlDewasa_pulang");
+            jmlAnak_str_pulang = bundle.getString("jmlAnak_pulang");
+            jmlBalita_str_pulang = bundle.getString("jmlBalita_pulang");
+            kotaTujuan_str_pulang = bundle.getString("kotaTujuan_pulang");
+            kotaAsal_str_pulang = bundle.getString("kotaAsal_pulang");
+            harga_str_pulang = bundle.getString("harga_pulang");
+            jmlPenumpang_pulang = bundle.getInt("jmlPenumpang_pulang");
 
-        keberangkatan_pulang = bundle.getString("keberangkatan_pulang");
-        kedatangan_pulang = bundle.getString("kedatangan_pulang");
-        tanggal_pulang = bundle.getString("tanggal_pulang");
-        penumpang_pulang = bundle.getString("penumpang_pulang");
-        kota_kedatangan_pulang = bundle.getString("kota_kedatangan_pulang");
-        kota_keberangkatan_pulang = bundle.getString("kota_keberangkatan_pulang");
-        bandara_keberangktan_raw_pulang = bundle.getString("bandara_keberangktan_raw_pulang");
-        bandara_kedatangan_raw_pulang = bundle.getString("bandara_kedatangan_raw_pulang");
-        rincianPenumpang_pulang = bundle.getString("rincianPenumpang_pulang");
+            keberangkatan_pulang = bundle.getString("keberangkatan_pulang");
+            kedatangan_pulang = bundle.getString("kedatangan_pulang");
+            tanggal_pulang = bundle.getString("tanggal_pulang");
+            penumpang_pulang = bundle.getString("penumpang_pulang");
+            kota_kedatangan_pulang = bundle.getString("kota_kedatangan_pulang");
+            kota_keberangkatan_pulang = bundle.getString("kota_keberangkatan_pulang");
+            bandara_keberangktan_raw_pulang = bundle.getString("bandara_keberangktan_raw_pulang");
+            bandara_kedatangan_raw_pulang = bundle.getString("bandara_kedatangan_raw_pulang");
+            rincianPenumpang_pulang = bundle.getString("rincianPenumpang_pulang");
+        }
+
+
+
 
 
         rincianPenumpang = "Dewasa ("+bundle.getString("jmlDewasa")+"x)";
@@ -208,6 +231,12 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         tambahan_kg_pulang = new ArrayList<>();
         harga_tambahan_pulang = new ArrayList<>();
         selected_position_opsi_bagasi_pulang = new ArrayList<>();
+
+        nama_namaTersimpan = new ArrayList<>();
+        tglLahir_namaTersimpan = new ArrayList<>();
+        titel_namaTersimpan = new ArrayList<>();
+        kewarganegaraan_namaTersimpan = new ArrayList<>();
+        NIKatauPaspor_namaTersimpan = new ArrayList<>();
 
         ArrayofPenumpangMaps = new ArrayList<>();
 
@@ -243,6 +272,39 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             Log.i("ArrayofPenumpangMaps"+i, "" + ArrayofPenumpangMaps);
 
         }
+
+        //FETCH NAMA TERSIMPAN
+        fs.collection("namaTersimpan").whereEqualTo("userID", userID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
+
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Map<String, Object> map = (Map<String, Object>) snapshot.getData();
+//                        String id = snapshot.getId();
+//                        documentID.add(id);
+                        String nama_namaTersimpan_str = map.get("nama").toString();
+                        String tglLahir_namaTerimpan_str = map.get("tglLahir").toString();
+                        String  titel_namaTerimpan_str = map.get("titel").toString();
+                        String kewarganegaraan_namaTerimpan_str = map.get("kewarganegaraan").toString();
+                        String NIKatauPaspor_namaTerimpan_str = map.get("NIKatauPaspor").toString();
+
+                        nama_namaTersimpan.add(nama_namaTersimpan_str);
+                        tglLahir_namaTersimpan.add(tglLahir_namaTerimpan_str);
+                        titel_namaTersimpan.add( titel_namaTerimpan_str);
+                        kewarganegaraan_namaTersimpan.add(kewarganegaraan_namaTerimpan_str);
+                        NIKatauPaspor_namaTersimpan.add(NIKatauPaspor_namaTerimpan_str);
+
+                    }
+//                    TrankasiActivity.RecyclerAdapterTransaksi recyclerAdapterTransaksi = new TrankasiActivity.RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
+//                    binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+                }
+
+
+            }
+        });
 
         //EDIT TAMBAHAN BAGASI
         binding.tambahFasilitasEkstraButton.setOnClickListener(new View.OnClickListener() {
@@ -389,7 +451,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
                 }
 
 
-                PenumpangData penumpangData = new PenumpangData(false, true, waktuArsip, expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3", waktuBerangkat_str, waktuDatang_str);
+                PenumpangData penumpangData = new PenumpangData(false, true, waktuArsip, expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", userID, waktuBerangkat_str, waktuDatang_str);
                 fs.collection("bookingHistory").add(penumpangData);
 
 
@@ -463,6 +525,11 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         int index = Integer.parseInt(nomorPelanggan) - 1;
         DataPenumpang dataPenumpang = new DataPenumpang();
         Bundle bundle = new Bundle();
+        bundle.putStringArrayList("nama_namaTersimpan", nama_namaTersimpan);
+        bundle.putStringArrayList("tglLahir_namaTersimpan", tglLahir_namaTersimpan);
+        bundle.putStringArrayList("titel_namaTersimpan", titel_namaTersimpan);
+        bundle.putStringArrayList("kewarganegaraan_namaTersimpan", kewarganegaraan_namaTersimpan);
+        bundle.putStringArrayList("NIKatauPaspor_namaTersimpan", NIKatauPaspor_namaTersimpan);
         bundle.putString("penumpangKe_n", nomorPelanggan);
         bundle.putString("tglLahir_str", tglLahir.get(index));
         bundle.putString("nama_str", namaPassenger.get(index));
