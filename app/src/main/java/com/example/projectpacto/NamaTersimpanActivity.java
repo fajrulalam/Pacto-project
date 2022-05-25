@@ -230,7 +230,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
     }
 
 
-    public class SimpanNamaBaru {
+    public static class SimpanNamaBaru {
         String nama;
         String titel;
         String tglLahir;

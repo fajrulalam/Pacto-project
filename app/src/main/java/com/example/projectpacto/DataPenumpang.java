@@ -28,6 +28,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.time.Instant;
@@ -201,32 +202,6 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                 titelDropdown.setText(titel_namaTersimpan.get(index));
                 kewarganegaraan.getEditText().setText(kewarganegaraan_namaTersimpan.get(index));
                 NIKatauPaspor.setText(NIKatauPaspor_namaTersimpan.get(index));
-//                switch (String.valueOf(adapterView.getItemAtPosition(position))){
-//                    case "Asad":
-//                        tglLahir.getEditText().setText("19/11/2001");
-//                        titelDropdown.setText("Tuan");
-//                        kewarganegaraan.getEditText().setText("Indonesia");
-//                        NIKatauPaspor.setText("081351");
-//                        break;
-//                    case "Fajrul":
-//                        tglLahir.getEditText().setText("16/06/2001");
-//                        titelDropdown.setText("Tuan");
-//                        kewarganegaraan.getEditText().setText("Indonesia");
-//                        NIKatauPaspor.setText("3517173209235832");
-//                        break;
-//                    case "Yoga":
-//                        tglLahir.getEditText().setText("16/04/2000");
-//                        titelDropdown.setText("Tuan");
-//                        kewarganegaraan.getEditText().setText("Indonesia");
-//                        NIKatauPaspor.setText("081336");
-//                        break;
-//                    case "Rekyan":
-//                        tglLahir.getEditText().setText("16/06/1991");
-//                        titelDropdown.setText("Nyonya");
-//                        kewarganegaraan.getEditText().setText("Indonesia");
-//                        NIKatauPaspor.setText("623336");
-//                        break;
-//                }
                 Log.i("NIK/PASSOPRT INPUT", NIKatauPaspor.getText().toString());
             }
         });
@@ -240,6 +215,19 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                 String tglLahir_str = tglLahir.getEditText().getText().toString();
                 String kewarganegaraan_str = kewarganegaraan.getEditText().getText().toString();
                 String NIKatauPasport_str = NIKatauPaspor.getText().toString();
+                String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
+                if (NIKatauPaspor_namaTersimpan.indexOf(NIKatauPasport_str)==-1) {
+                    NamaTersimpanActivity.SimpanNamaBaru simpanNamaBaru = new NamaTersimpanActivity.SimpanNamaBaru(
+                            NIKatauPasport_str, kewarganegaraan_str, nama, tglLahir_str,titel,  userID);
+
+                    fs.collection("namaTersimpan").add(simpanNamaBaru).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(getContext(), "Data penumpang berhasil disimpan", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
 
 
                 try {
@@ -268,4 +256,73 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         datapasser = (DataPenumpang.OnDataPassenger) context;
     }
 
+    public class  simpanPenumpangBaru {
+
+        String NIKatauPaspor;
+        String kewarganegaraan;
+        String nama;
+        String tglLahir;
+        String titel;
+        String userID;
+
+        public simpanPenumpangBaru(String NIKatauPaspor, String kewarganegaraan, String nama, String tglLahir, String titel, String userID) {
+            this.NIKatauPaspor = NIKatauPaspor;
+            this.kewarganegaraan = kewarganegaraan;
+            this.nama = nama;
+            this.tglLahir = tglLahir;
+            this.titel = titel;
+            this.userID = userID;
+        }
+
+        public String getNIKatauPaspor() {
+            return NIKatauPaspor;
+        }
+
+        public void setNIKatauPaspor(String NIKatauPaspor) {
+            this.NIKatauPaspor = NIKatauPaspor;
+        }
+
+        public String getKewarganegaraan() {
+            return kewarganegaraan;
+        }
+
+        public void setKewarganegaraan(String kewarganegaraan) {
+            this.kewarganegaraan = kewarganegaraan;
+        }
+
+        public String getNama() {
+            return nama;
+        }
+
+        public void setNama(String nama) {
+            this.nama = nama;
+        }
+
+        public String getTglLahir() {
+            return tglLahir;
+        }
+
+        public void setTglLahir(String tglLahir) {
+            this.tglLahir = tglLahir;
+        }
+
+        public String getTitel() {
+            return titel;
+        }
+
+        public void setTitel(String titel) {
+            this.titel = titel;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+    }
+
+
 }
+
