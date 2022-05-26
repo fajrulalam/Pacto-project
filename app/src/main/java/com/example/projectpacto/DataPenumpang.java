@@ -181,7 +181,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
 
 
         titel = new ArrayList<>();
-        titel.add("Tuan"); titel.add("Nyonya");
+        titel.add("Tuan"); titel.add("Nyonya"); titel.add("Nona");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, titel);
         titelDropdown.setAdapter(arrayAdapter);
