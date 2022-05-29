@@ -98,7 +98,6 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
     String rincianPenumpang_pulang;
 
 
-
     ArrayList<String> namaPassenger;
     ArrayList<String> tglLahir;
     ArrayList<String> titel;
@@ -112,14 +111,60 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
     ArrayList<String> NIKatauPaspor_namaTersimpan;
 
 
+    //Keperluan Firestore -- Pergi
+    ArrayList<String> tanggalBerangkat_ArrayList;
+    ArrayList<String> waktuBerangkat_ArrayList;
+    ArrayList<String> bandaraAsal_ArrayList;
+    ArrayList<Integer> logoMaskapai_ArrayList;
+    ArrayList<String> namaMaskapai_ArrayList;
+    ArrayList<String> kodePenerbangan_ArrayList;
+    ArrayList<String> kelasPesawat_ArrayList;
+    ArrayList<String> tanggalDatang_ArrayList;
+    ArrayList<String> waktuDatang_ArrayList;
+    ArrayList<String> bandaraTujuan_ArrayList;
+    ArrayList<String> kabin_ArrayList;
+    ArrayList<String> bagasi_ArrayList;
+    ArrayList<Integer> booleanMakan_ArrayList;
+    ArrayList<String> keteranganMakan_ArrayList;
+    ArrayList<String> modelPesawat_ArrayList;
+    ArrayList<String> durasi_ArrayList;
+    String tanggalPulang;
+
+    //Keperluang Firestore -- Pulang
+    ArrayList<String> tanggalBerangkat_ArrayList_pulang;
+    ArrayList<String> waktuBerangkat_ArrayList_pulang;
+    ArrayList<String> bandaraAsal_ArrayList_pulang;
+    ArrayList<Integer> logoMaskapai_ArrayList_pulang;
+    ArrayList<String> namaMaskapai_ArrayList_pulang;
+    ArrayList<String> kodePenerbangan_ArrayList_pulang;
+    ArrayList<String> kelasPesawat_ArrayList_pulang;
+    ArrayList<String> tanggalDatang_ArrayList_pulang;
+    ArrayList<String> waktuDatang_ArrayList_pulang;
+    ArrayList<String> bandaraTujuan_ArrayList_pulang;
+    ArrayList<String> kabin_ArrayList_pulang;
+    ArrayList<String> bagasi_ArrayList_pulang;
+    ArrayList<Integer> booleanMakan_ArrayList_pulang;
+    ArrayList<String> keteranganMakan_ArrayList_pulang;
+    ArrayList<String> modelPesawat_ArrayList_pulang;
+    ArrayList<String> durasi_ArrayList_pulang;
+    String tanggalPulang_pulang;
+
+
+
 
     ArrayList<String> tambahan_kg;
     ArrayList<String> harga_tambahan;
     ArrayList<Integer> selected_position_opsi_bagasi;
 
+    //Keperluan Rincian harga
+    String harga_dewasa;
+    String harga_dewasa_pulang;
+    String harga_balita_pulang;
+    String harga_balita;
     ArrayList<String> tambahan_kg_pulang;
     ArrayList<String> harga_tambahan_pulang;
     ArrayList<Integer> selected_position_opsi_bagasi_pulang;
+
 
     List<Map<String, String>> ArrayofPenumpangMaps;
     Map<String, String> dataPenumpangMap;
@@ -141,7 +186,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
 
 
-        //FETCH Bundle
+        //FETCH Bundle -- essential for this page
         bundle = getIntent().getBundleExtra("bundle");
         if (!bundle.isEmpty()) {
             //data pergi
@@ -154,16 +199,12 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             logoMaskapai_int = bundle.getIntegerArrayList("logoMaskapai").get(0);
             namaMaskapai_str = bundle.getStringArrayList("namaMaskapai").get(0);
             kelasPesawat_str = bundle.getString("kelasPesawat");
-            ;
             tanggalDatang_str = bundle.getStringArrayList("tanggalDatang").get(0);
             waktuDatang_str = bundle.getStringArrayList("waktuDatang").get(0);
             bandaraTujuan_str = bundle.getStringArrayList("bandaraTujuan").get(0);
             jmlDewasa_str = bundle.getString("jmlDewasa");
-            ;
             jmlAnak_str = bundle.getString("jmlAnak");
-            ;
             jmlBalita_str = bundle.getString("jmlBalita");
-            ;
             bagasi_default = bundle.getStringArrayList("bagasi").get(0);
             keberangkatan = bundle.getString("keberangkatan");
             kedatangan = bundle.getString("kedatangan");
@@ -201,6 +242,86 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             bandara_keberangktan_raw_pulang = bundle.getString("bandara_keberangktan_raw_pulang");
             bandara_kedatangan_raw_pulang = bundle.getString("bandara_kedatangan_raw_pulang");
             rincianPenumpang_pulang = bundle.getString("rincianPenumpang_pulang");
+
+
+            //Essential for Firebase -- Pergi
+            harga_str =bundle.getString("harga");
+            harga_dewasa = bundle.getString("hargaDewasa");
+            harga_balita = bundle.getString("hargaBalita");
+            kotaAsal_str = bundle.getString("kotaAsal");
+            kotaTujuan_str = bundle.getString("kotaTujuan");
+            tanggalBerangkat_ArrayList = bundle.getStringArrayList("tanggalBerangkat");
+            Log.i("A3 tglBerangkatI", tanggalBerangkat_ArrayList + "tes");
+
+            waktuBerangkat_ArrayList = bundle.getStringArrayList("waktuBerangkat");
+            Log.i("A3 WAKTU", waktuBerangkat_ArrayList + "");
+            bandaraAsal_ArrayList = bundle.getStringArrayList("bandaraAsal");
+            logoMaskapai_ArrayList =bundle.getIntegerArrayList("logoMaskapai");
+            namaMaskapai_ArrayList= bundle.getStringArrayList("namaMaskapai");;
+            kodePenerbangan_ArrayList = bundle.getStringArrayList("kodePenerbangan");
+            kabin_ArrayList = bundle.getStringArrayList("kabin");;
+            bagasi_ArrayList = bundle.getStringArrayList("bagasi");;
+            booleanMakan_ArrayList = bundle.getIntegerArrayList("booleanMakan");;
+            Log.i("A3 MAKAN", booleanMakan_ArrayList + "makan");
+            keteranganMakan_ArrayList = bundle.getStringArrayList("keteranganMakan");
+            modelPesawat_ArrayList = bundle.getStringArrayList("modelPesawat");
+            kelasPesawat_ArrayList= bundle.getStringArrayList("kelasPesawat");;
+            tanggalDatang_ArrayList= bundle.getStringArrayList("tanggalDatang");;
+            waktuDatang_ArrayList= bundle.getStringArrayList("waktuDatang");;
+            bandaraTujuan_ArrayList= bundle.getStringArrayList("bandaraTujuan");
+            durasi_ArrayList = bundle.getStringArrayList("durasi");
+
+
+            keberangkatan = bundle.getString("keberangkatan");
+            kedatangan = bundle.getString("kedatangan");
+            tanggal = bundle.getString("tanggal");
+            tanggalPulang = bundle.getString("tanggal_pulang");
+            penumpang = bundle.getString("penumpang");
+            kota_keberangkatan = bundle.getString("kota_keberangkatan");
+            kota_kedatangan = bundle.getString("kota_kedatangan");
+            bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
+            bandara_kedatangan_raw =  bundle.getString("bandara_kedatangan");
+
+
+            //Essential for Firebase -- Pulang
+            harga_str_pulang =bundle.getString("harga_pulang");
+            harga_dewasa_pulang = bundle.getString("hargaDewasa_pulang");
+            harga_balita_pulang = bundle.getString("hargaBalita_pulang");
+            kotaAsal_str_pulang = bundle.getString("kotaAsal_pulang");
+            kotaTujuan_str_pulang = bundle.getString("kotaTujuan_pulang");
+            tanggalBerangkat_ArrayList_pulang = bundle.getStringArrayList("tanggalBerangkat_pulang");
+            Log.i("SELECTED TICKET PULANG", tanggalBerangkat_ArrayList + "tes");
+
+            waktuBerangkat_ArrayList_pulang = bundle.getStringArrayList("waktuBerangkat_pulang");
+            Log.i("SELECTED TICKET BS", waktuBerangkat_ArrayList + "");
+            bandaraAsal_ArrayList_pulang = bundle.getStringArrayList("bandaraAsal_pulang");
+            logoMaskapai_ArrayList_pulang =bundle.getIntegerArrayList("logoMaskapai_pulang");
+            namaMaskapai_ArrayList_pulang= bundle.getStringArrayList("namaMaskapai_pulang");;
+            kodePenerbangan_ArrayList_pulang = bundle.getStringArrayList("kodePenerbangan_pulang");
+            kabin_ArrayList_pulang = bundle.getStringArrayList("kabin_pulang");;
+            bagasi_ArrayList_pulang = bundle.getStringArrayList("bagasi_pulang");;
+            booleanMakan_ArrayList_pulang = bundle.getIntegerArrayList("booleanMakan_pulang");;
+            Log.i("SELECTED TICKET MAKAN", booleanMakan_ArrayList + "makan");
+            keteranganMakan_ArrayList_pulang = bundle.getStringArrayList("keteranganMakan_pulang");
+            modelPesawat_ArrayList_pulang = bundle.getStringArrayList("modelPesawat_pulang");
+            kelasPesawat_ArrayList_pulang= bundle.getStringArrayList("kelasPesawat_pulang");;
+            tanggalDatang_ArrayList_pulang= bundle.getStringArrayList("tanggalDatang_pulang");;
+            waktuDatang_ArrayList_pulang= bundle.getStringArrayList("waktuDatang_pulang");;
+            bandaraTujuan_ArrayList_pulang= bundle.getStringArrayList("bandaraTujuan_pulang");
+            durasi_ArrayList_pulang = bundle.getStringArrayList("durasi_pulang");
+            jmlDewasa_str_pulang= bundle.getString("jmlDewasa_pulang");;
+            jmlAnak_str_pulang= bundle.getString("jmlAnak_pulang"); ;
+            jmlBalita_str_pulang= bundle.getString("jmlBalita_pulang");;
+
+            keberangkatan_pulang = bundle.getString("keberangkatan_pulang");
+            kedatangan_pulang = bundle.getString("kedatangan_pulang");
+            tanggal_pulang = bundle.getString("tanggal");
+            tanggalPulang_pulang = bundle.getString("tanggal_pulang");
+            penumpang_pulang = bundle.getString("penumpang_pulang");
+            kota_keberangkatan_pulang = bundle.getString("kota_keberangkatan_pulang");
+            kota_kedatangan_pulang = bundle.getString("kota_kedatangan_pulang");
+            bandara_keberangktan_raw_pulang = bundle.getString("bandara_keberangkatan_pulang");
+            bandara_kedatangan_raw_pulang =  bundle.getString("bandara_kedatangan_pulang");
         }
 
 
@@ -446,18 +567,96 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
 
                 long waktuArsip = 0;
+                long waktuArsip_pulang = 0;
 
 
                 Locale lokal = new Locale("id", "ID");
                 try {
                     Date date1 = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat_str);
+                    Date date2 = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat_str_pulang);
                     waktuArsip = date1.getTime() + 86400000;
+                    waktuArsip = date2.getTime() + 86400000;
                 } catch (ParseException parseException) {
                     parseException.printStackTrace();
                 }
 
+                ArrayList<String> bookingCode_pergi = new ArrayList<>();
+                ArrayList<String> bookingCode_pulang = new ArrayList<>();
+                for (int i = 0; i < bandaraAsal_ArrayList.size(); i++) {
+                    bookingCode_pergi.add("BookingCode_Pergi" + i);
+                    bookingCode_pulang.add("BookingCode_Pulang" + i);
+                }
 
-                PenumpangData penumpangData = new PenumpangData(false, true, waktuArsip, expTime_long, harga_str, logoMaskapai_int, tanggalBerangkat_str, rincianPenumpang, kotaAsal_str, kotaTujuan_str, "Pesawat", timestamp, bandaraAsal_str, bandaraTujuan_str, "B0OK1NGC0D3", "K0D3P3N3RB4N94N", namaMaskapai_str, "As'ad AlBalad", "17381738", ArrayofPenumpangMaps, "081317381738", "Belum bayar", userID, waktuBerangkat_str, waktuDatang_str);
+
+                PenumpangData penumpangData = new PenumpangData(
+                        //Informasi sintaksis Firebase
+                        true, //boolean pulang pergi
+                        expTime_long,
+                        waktuArsip,
+                        waktuArsip_pulang,
+                        true, //boolean on going
+                        true, //boolean on going pulang
+                        "Belum bayar", //status
+                        "Belum bayar", //status pulang
+                        userID,
+                        "Pesawat", //tipePesanan
+                        timestamp,
+
+                        //Primary keys
+                        bookingCode_pergi,
+                        bookingCode_pulang,
+
+                        //Data Penumpang
+                        ArrayofPenumpangMaps,
+                        rincianPenumpang,
+
+                        //Data Pergi
+                        tanggalBerangkat_ArrayList,
+                        waktuBerangkat_ArrayList,
+                        bandaraAsal_ArrayList,
+                        logoMaskapai_ArrayList,
+                        namaMaskapai_ArrayList,
+                        kodePenerbangan_ArrayList,
+                        kelasPesawat_ArrayList,
+                        tanggalDatang_ArrayList,
+                        waktuDatang_ArrayList,
+                        bandaraTujuan_ArrayList,
+                        kabin_ArrayList,
+                        bagasi_ArrayList,
+                        booleanMakan_ArrayList,
+                        keteranganMakan_ArrayList,
+                        modelPesawat_ArrayList,
+                        durasi_ArrayList,
+                        tanggalPulang,
+                        kotaAsal_str,
+                        kotaTujuan_str,
+
+
+                        //Data Pulang
+                        tanggalBerangkat_ArrayList_pulang,
+                        waktuBerangkat_ArrayList_pulang,
+                        bandaraAsal_ArrayList_pulang,
+                        logoMaskapai_ArrayList_pulang,
+                        namaMaskapai_ArrayList_pulang,
+                        kodePenerbangan_ArrayList_pulang,
+                        kelasPesawat_ArrayList_pulang,
+                        tanggalDatang_ArrayList_pulang,
+                        waktuDatang_ArrayList_pulang,
+                        bandaraTujuan_ArrayList_pulang,
+                        kabin_ArrayList_pulang,
+                        bagasi_ArrayList_pulang,
+                        booleanMakan_ArrayList_pulang,
+                        keteranganMakan_ArrayList_pulang,
+                        modelPesawat_ArrayList_pulang,
+                        durasi_ArrayList_pulang,
+                        tanggalPulang_pulang,
+                        kotaAsal_str_pulang,
+                        kotaTujuan_str_pulang
+                );
+
+
+
+
                 fs.collection("bookingHistory").add(penumpangData);
 
 
@@ -602,119 +801,133 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
     public class PenumpangData {
 
+        //Informasi sintaksis Firebase
         boolean pulangPergi;
-        String kotaAsal;
-        String kotaTujuan;
-        String rincianPenumpang;
-        String tanggalBerangkat;
-        int logoMaskapai;
         Long expTime;
         Long waktuArsip;
-
+        Long waktuArsip_pulang;
         private boolean ongoing;
-        private String hargaTotal;
-        private String bandaraAsal;
-        private String bandara_kedatangan;
-        private String bookingCode;
-        private String kodePenerbangan;
-        private String namaMaskapai;
-        private String namaPemesan;
-        private String orderNumber;
-        private List<Map<String, String>> penumpang;
-        private String phoneNumber;
+        private boolean ongoing_pulang;
         private String status;
+        private String status_pulang;
         private String userID;
-        private String waktuBerangkat;
-        private String waktuDatang;
         private String tipePesanan;
         private FieldValue timeStampPesanan;
+
+        //Primary keys
+        ArrayList<String> bookingCode_pergi;
+        ArrayList<String> bookingCode_pulang;
+
+
+        //Penumpang
+        private List<Map<String, String>> penumpang;
+        String rincianPenumpang;
+
+        //Pergi
+        ArrayList<String> tanggalBerangkat_ArrayList;
+        ArrayList<String> waktuBerangkat_ArrayList;
+        ArrayList<String> bandaraAsal_ArrayList;
+        ArrayList<Integer> logoMaskapai_ArrayList;
+        ArrayList<String> namaMaskapai_ArrayList;
+        ArrayList<String> kodePenerbangan_ArrayList;
+        ArrayList<String> kelasPesawat_ArrayList;
+        ArrayList<String> tanggalDatang_ArrayList;
+        ArrayList<String> waktuDatang_ArrayList;
+        ArrayList<String> bandaraTujuan_ArrayList;
+        ArrayList<String> kabin_ArrayList;
+        ArrayList<String> bagasi_ArrayList;
+        ArrayList<Integer> booleanMakan_ArrayList;
+        ArrayList<String> keteranganMakan_ArrayList;
+        ArrayList<String> modelPesawat_ArrayList;
+        ArrayList<String> durasi_ArrayList;
+        String tanggalPulang;
+        String kotaAsal;
+        String kotaTujuan;
+
+
+        //Pergi
+        ArrayList<String> tanggalBerangkat_ArrayList_pulang;
+        ArrayList<String> waktuBerangkat_ArrayList_pulang;
+        ArrayList<String> bandaraAsal_ArrayList_pulang;
+        ArrayList<Integer> logoMaskapai_ArrayList_pulang;
+        ArrayList<String> namaMaskapai_ArrayList_pulang;
+        ArrayList<String> kodePenerbangan_ArrayList_pulang;
+        ArrayList<String> kelasPesawat_ArrayList_pulang;
+        ArrayList<String> tanggalDatang_ArrayList_pulang;
+        ArrayList<String> waktuDatang_ArrayList_pulang;
+        ArrayList<String> bandaraTujuan_ArrayList_pulang;
+        ArrayList<String> kabin_ArrayList_pulang;
+        ArrayList<String> bagasi_ArrayList_pulang;
+        ArrayList<Integer> booleanMakan_ArrayList_pulang;
+        ArrayList<String> keteranganMakan_ArrayList_pulang;
+        ArrayList<String> modelPesawat_ArrayList_pulang;
+        ArrayList<String> durasi_ArrayList_pulang;
+        String tanggalPulang_pulang;
+        String kotaAsal_pulang;
+        String kotaTujuan_pulang;
+
+
+
+
 
         public PenumpangData(){
 
         }
 
-        public PenumpangData(boolean pulangPergi, boolean ongoing, Long waktuArsip, Long expTime, String hargaTotal, int logoMaskapai, String tanggalBerangkat, String rincianPenumpang, String kotaAsal, String kotaTujuan, String tipePesanan, FieldValue timeStampPesanan, String bandaraAsal, String bandara_kedatangan, String bookingCode, String kodePenerbangan, String namaMaskapai, String namaPemesan, String orderNumber, List<Map<String, String>> penumpang, String phoneNumber, String status, String userID, String waktuBerangkat, String waktuDatang) {
-            this.bandaraAsal = bandaraAsal;
-            this.bandara_kedatangan = bandara_kedatangan;
-            this.bookingCode = bookingCode;
-            this.kodePenerbangan = kodePenerbangan;
-            this.namaMaskapai = namaMaskapai;
-            this.namaPemesan = namaPemesan;
-            this.orderNumber = orderNumber;
-            this.penumpang = penumpang;
-            this.phoneNumber = phoneNumber;
+        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, Long waktuArsip_pulang, boolean ongoing, boolean ongoing_pulang, String status, String status_pulang, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, ArrayList<String> bookingCode_pulang, List<Map<String, String>> penumpang, String rincianPenumpang, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, String tanggalPulang, String kotaAsal, String kotaTujuan, ArrayList<String> tanggalBerangkat_ArrayList_pulang, ArrayList<String> waktuBerangkat_ArrayList_pulang, ArrayList<String> bandaraAsal_ArrayList_pulang, ArrayList<Integer> logoMaskapai_ArrayList_pulang, ArrayList<String> namaMaskapai_ArrayList_pulang, ArrayList<String> kodePenerbangan_ArrayList_pulang, ArrayList<String> kelasPesawat_ArrayList_pulang, ArrayList<String> tanggalDatang_ArrayList_pulang, ArrayList<String> waktuDatang_ArrayList_pulang, ArrayList<String> bandaraTujuan_ArrayList_pulang, ArrayList<String> kabin_ArrayList_pulang, ArrayList<String> bagasi_ArrayList_pulang, ArrayList<Integer> booleanMakan_ArrayList_pulang, ArrayList<String> keteranganMakan_ArrayList_pulang, ArrayList<String> modelPesawat_ArrayList_pulang, ArrayList<String> durasi_ArrayList_pulang, String tanggalPulang_pulang, String kotaAsal_pulang, String kotaTujuan_pulang) {
+            this.pulangPergi = pulangPergi;
+            this.expTime = expTime;
+            this.waktuArsip = waktuArsip;
+            this.waktuArsip_pulang = waktuArsip_pulang;
+            this.ongoing = ongoing;
+            this.ongoing_pulang = ongoing_pulang;
             this.status = status;
+            this.status_pulang = status_pulang;
             this.userID = userID;
-            this.waktuBerangkat = waktuBerangkat;
-            this.waktuDatang = waktuDatang;
             this.tipePesanan = tipePesanan;
             this.timeStampPesanan = timeStampPesanan;
+            this.bookingCode_pergi = bookingCode_pergi;
+            this.bookingCode_pulang = bookingCode_pulang;
+            this.penumpang = penumpang;
+            this.rincianPenumpang = rincianPenumpang;
+            this.tanggalBerangkat_ArrayList = tanggalBerangkat_ArrayList;
+            this.waktuBerangkat_ArrayList = waktuBerangkat_ArrayList;
+            this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
+            this.logoMaskapai_ArrayList = logoMaskapai_ArrayList;
+            this.namaMaskapai_ArrayList = namaMaskapai_ArrayList;
+            this.kodePenerbangan_ArrayList = kodePenerbangan_ArrayList;
+            this.kelasPesawat_ArrayList = kelasPesawat_ArrayList;
+            this.tanggalDatang_ArrayList = tanggalDatang_ArrayList;
+            this.waktuDatang_ArrayList = waktuDatang_ArrayList;
+            this.bandaraTujuan_ArrayList = bandaraTujuan_ArrayList;
+            this.kabin_ArrayList = kabin_ArrayList;
+            this.bagasi_ArrayList = bagasi_ArrayList;
+            this.booleanMakan_ArrayList = booleanMakan_ArrayList;
+            this.keteranganMakan_ArrayList = keteranganMakan_ArrayList;
+            this.modelPesawat_ArrayList = modelPesawat_ArrayList;
+            this.durasi_ArrayList = durasi_ArrayList;
+            this.tanggalPulang = tanggalPulang;
             this.kotaAsal = kotaAsal;
             this.kotaTujuan = kotaTujuan;
-            this.rincianPenumpang = rincianPenumpang;
-            this.tanggalBerangkat = tanggalBerangkat;
-            this.logoMaskapai = logoMaskapai;
-            this.hargaTotal = hargaTotal;
-            this.expTime = expTime;
-            this.waktuArsip = waktuArsip;
-            this.ongoing = ongoing;
-            this.pulangPergi = pulangPergi;
-        }
-
-        public boolean isPulangPergi() {
-            return pulangPergi;
-        }
-
-        public void setPulangPergi(boolean pulangPergi) {
-            this.pulangPergi = pulangPergi;
-        }
-
-        public boolean isOngoing() {
-            return ongoing;
-        }
-
-        public void setOngoing(boolean ongoing) {
-            this.ongoing = ongoing;
-        }
-
-        public Long getWaktuArsip() {
-            return waktuArsip;
-        }
-
-        public void setWaktuArsip(Long waktuArsip) {
-            this.waktuArsip = waktuArsip;
-        }
-
-        public Long getExpTime() {
-            return expTime;
-        }
-
-        public void setExpTime(Long expTime) {
-            this.expTime = expTime;
-        }
-
-        public String getHargaTotal() {
-            return hargaTotal;
-        }
-
-        public void setHargaTotal(String hargaTotal) {
-            this.hargaTotal = hargaTotal;
-        }
-
-        public int getLogoMaskapai() {
-            return logoMaskapai;
-        }
-
-        public void setLogoMaskapai(int logoMaskapai) {
-            this.logoMaskapai = logoMaskapai;
-        }
-
-        public String getTanggalBerangkat() {
-            return tanggalBerangkat;
-        }
-
-        public void setTanggalBerangkat(String tanggalBerangkat) {
-            this.tanggalBerangkat = tanggalBerangkat;
+            this.tanggalBerangkat_ArrayList_pulang = tanggalBerangkat_ArrayList_pulang;
+            this.waktuBerangkat_ArrayList_pulang = waktuBerangkat_ArrayList_pulang;
+            this.bandaraAsal_ArrayList_pulang = bandaraAsal_ArrayList_pulang;
+            this.logoMaskapai_ArrayList_pulang = logoMaskapai_ArrayList_pulang;
+            this.namaMaskapai_ArrayList_pulang = namaMaskapai_ArrayList_pulang;
+            this.kodePenerbangan_ArrayList_pulang = kodePenerbangan_ArrayList_pulang;
+            this.kelasPesawat_ArrayList_pulang = kelasPesawat_ArrayList_pulang;
+            this.tanggalDatang_ArrayList_pulang = tanggalDatang_ArrayList_pulang;
+            this.waktuDatang_ArrayList_pulang = waktuDatang_ArrayList_pulang;
+            this.bandaraTujuan_ArrayList_pulang = bandaraTujuan_ArrayList_pulang;
+            this.kabin_ArrayList_pulang = kabin_ArrayList_pulang;
+            this.bagasi_ArrayList_pulang = bagasi_ArrayList_pulang;
+            this.booleanMakan_ArrayList_pulang = booleanMakan_ArrayList_pulang;
+            this.keteranganMakan_ArrayList_pulang = keteranganMakan_ArrayList_pulang;
+            this.modelPesawat_ArrayList_pulang = modelPesawat_ArrayList_pulang;
+            this.durasi_ArrayList_pulang = durasi_ArrayList_pulang;
+            this.tanggalPulang_pulang = tanggalPulang_pulang;
+            this.kotaAsal_pulang = kotaAsal_pulang;
+            this.kotaTujuan_pulang = kotaTujuan_pulang;
         }
 
         public String getRincianPenumpang() {
@@ -741,6 +954,94 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.kotaTujuan = kotaTujuan;
         }
 
+        public String getKotaAsal_pulang() {
+            return kotaAsal_pulang;
+        }
+
+        public void setKotaAsal_pulang(String kotaAsal_pulang) {
+            this.kotaAsal_pulang = kotaAsal_pulang;
+        }
+
+        public String getKotaTujuan_pulang() {
+            return kotaTujuan_pulang;
+        }
+
+        public void setKotaTujuan_pulang(String kotaTujuan_pulang) {
+            this.kotaTujuan_pulang = kotaTujuan_pulang;
+        }
+
+        public boolean isPulangPergi() {
+            return pulangPergi;
+        }
+
+        public void setPulangPergi(boolean pulangPergi) {
+            this.pulangPergi = pulangPergi;
+        }
+
+        public Long getExpTime() {
+            return expTime;
+        }
+
+        public void setExpTime(Long expTime) {
+            this.expTime = expTime;
+        }
+
+        public Long getWaktuArsip() {
+            return waktuArsip;
+        }
+
+        public void setWaktuArsip(Long waktuArsip) {
+            this.waktuArsip = waktuArsip;
+        }
+
+        public Long getWaktuArsip_pulang() {
+            return waktuArsip_pulang;
+        }
+
+        public void setWaktuArsip_pulang(Long waktuArsip_pulang) {
+            this.waktuArsip_pulang = waktuArsip_pulang;
+        }
+
+        public boolean isOngoing() {
+            return ongoing;
+        }
+
+        public void setOngoing(boolean ongoing) {
+            this.ongoing = ongoing;
+        }
+
+        public boolean isOngoing_pulang() {
+            return ongoing_pulang;
+        }
+
+        public void setOngoing_pulang(boolean ongoing_pulang) {
+            this.ongoing_pulang = ongoing_pulang;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getStatus_pulang() {
+            return status_pulang;
+        }
+
+        public void setStatus_pulang(String status_pulang) {
+            this.status_pulang = status_pulang;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
         public String getTipePesanan() {
             return tipePesanan;
         }
@@ -757,60 +1058,20 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.timeStampPesanan = timeStampPesanan;
         }
 
-        public String getBandaraAsal() {
-            return bandaraAsal;
+        public ArrayList<String> getBookingCode_pergi() {
+            return bookingCode_pergi;
         }
 
-        public void setBandaraAsal(String bandaraAsal) {
-            this.bandaraAsal = bandaraAsal;
+        public void setBookingCode_pergi(ArrayList<String> bookingCode_pergi) {
+            this.bookingCode_pergi = bookingCode_pergi;
         }
 
-        public String getBandara_kedatangan() {
-            return bandara_kedatangan;
+        public ArrayList<String> getBookingCode_pulang() {
+            return bookingCode_pulang;
         }
 
-        public void setBandara_kedatangan(String bandara_kedatangan) {
-            this.bandara_kedatangan = bandara_kedatangan;
-        }
-
-        public String getBookingCode() {
-            return bookingCode;
-        }
-
-        public void setBookingCode(String bookingCode) {
-            this.bookingCode = bookingCode;
-        }
-
-        public String getKodePenerbangan() {
-            return kodePenerbangan;
-        }
-
-        public void setKodePenerbangan(String kodePenerbangan) {
-            this.kodePenerbangan = kodePenerbangan;
-        }
-
-        public String getNamaMaskapai() {
-            return namaMaskapai;
-        }
-
-        public void setNamaMaskapai(String namaMaskapai) {
-            this.namaMaskapai = namaMaskapai;
-        }
-
-        public String getNamaPemesan() {
-            return namaPemesan;
-        }
-
-        public void setNamaPemesan(String namaPemesan) {
-            this.namaPemesan = namaPemesan;
-        }
-
-        public String getOrderNumber() {
-            return orderNumber;
-        }
-
-        public void setOrderNumber(String orderNumber) {
-            this.orderNumber = orderNumber;
+        public void setBookingCode_pulang(ArrayList<String> bookingCode_pulang) {
+            this.bookingCode_pulang = bookingCode_pulang;
         }
 
         public List<Map<String, String>> getPenumpang() {
@@ -821,44 +1082,276 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.penumpang = penumpang;
         }
 
-        public String getPhoneNumber() {
-            return phoneNumber;
+        public ArrayList<String> getTanggalBerangkat_ArrayList() {
+            return tanggalBerangkat_ArrayList;
         }
 
-        public void setPhoneNumber(String phoneNumber) {
-            this.phoneNumber = phoneNumber;
+        public void setTanggalBerangkat_ArrayList(ArrayList<String> tanggalBerangkat_ArrayList) {
+            this.tanggalBerangkat_ArrayList = tanggalBerangkat_ArrayList;
         }
 
-        public String getStatus() {
-            return status;
+        public ArrayList<String> getWaktuBerangkat_ArrayList() {
+            return waktuBerangkat_ArrayList;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setWaktuBerangkat_ArrayList(ArrayList<String> waktuBerangkat_ArrayList) {
+            this.waktuBerangkat_ArrayList = waktuBerangkat_ArrayList;
         }
 
-        public String getUserID() {
-            return userID;
+        public ArrayList<String> getBandaraAsal_ArrayList() {
+            return bandaraAsal_ArrayList;
         }
 
-        public void setUserID(String userID) {
-            this.userID = userID;
+        public void setBandaraAsal_ArrayList(ArrayList<String> bandaraAsal_ArrayList) {
+            this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
         }
 
-        public String getWaktuBerangkat() {
-            return waktuBerangkat;
+        public ArrayList<Integer> getLogoMaskapai_ArrayList() {
+            return logoMaskapai_ArrayList;
         }
 
-        public void setWaktuBerangkat(String waktuBerangkat) {
-            this.waktuBerangkat = waktuBerangkat;
+        public void setLogoMaskapai_ArrayList(ArrayList<Integer> logoMaskapai_ArrayList) {
+            this.logoMaskapai_ArrayList = logoMaskapai_ArrayList;
         }
 
-        public String getWaktuDatang() {
-            return waktuDatang;
+        public ArrayList<String> getNamaMaskapai_ArrayList() {
+            return namaMaskapai_ArrayList;
         }
 
-        public void setWaktuDatang(String waktuDatang) {
-            this.waktuDatang = waktuDatang;
+        public void setNamaMaskapai_ArrayList(ArrayList<String> namaMaskapai_ArrayList) {
+            this.namaMaskapai_ArrayList = namaMaskapai_ArrayList;
+        }
+
+        public ArrayList<String> getKodePenerbangan_ArrayList() {
+            return kodePenerbangan_ArrayList;
+        }
+
+        public void setKodePenerbangan_ArrayList(ArrayList<String> kodePenerbangan_ArrayList) {
+            this.kodePenerbangan_ArrayList = kodePenerbangan_ArrayList;
+        }
+
+        public ArrayList<String> getKelasPesawat_ArrayList() {
+            return kelasPesawat_ArrayList;
+        }
+
+        public void setKelasPesawat_ArrayList(ArrayList<String> kelasPesawat_ArrayList) {
+            this.kelasPesawat_ArrayList = kelasPesawat_ArrayList;
+        }
+
+        public ArrayList<String> getTanggalDatang_ArrayList() {
+            return tanggalDatang_ArrayList;
+        }
+
+        public void setTanggalDatang_ArrayList(ArrayList<String> tanggalDatang_ArrayList) {
+            this.tanggalDatang_ArrayList = tanggalDatang_ArrayList;
+        }
+
+        public ArrayList<String> getWaktuDatang_ArrayList() {
+            return waktuDatang_ArrayList;
+        }
+
+        public void setWaktuDatang_ArrayList(ArrayList<String> waktuDatang_ArrayList) {
+            this.waktuDatang_ArrayList = waktuDatang_ArrayList;
+        }
+
+        public ArrayList<String> getBandaraTujuan_ArrayList() {
+            return bandaraTujuan_ArrayList;
+        }
+
+        public void setBandaraTujuan_ArrayList(ArrayList<String> bandaraTujuan_ArrayList) {
+            this.bandaraTujuan_ArrayList = bandaraTujuan_ArrayList;
+        }
+
+        public ArrayList<String> getKabin_ArrayList() {
+            return kabin_ArrayList;
+        }
+
+        public void setKabin_ArrayList(ArrayList<String> kabin_ArrayList) {
+            this.kabin_ArrayList = kabin_ArrayList;
+        }
+
+        public ArrayList<String> getBagasi_ArrayList() {
+            return bagasi_ArrayList;
+        }
+
+        public void setBagasi_ArrayList(ArrayList<String> bagasi_ArrayList) {
+            this.bagasi_ArrayList = bagasi_ArrayList;
+        }
+
+        public ArrayList<Integer> getBooleanMakan_ArrayList() {
+            return booleanMakan_ArrayList;
+        }
+
+        public void setBooleanMakan_ArrayList(ArrayList<Integer> booleanMakan_ArrayList) {
+            this.booleanMakan_ArrayList = booleanMakan_ArrayList;
+        }
+
+        public ArrayList<String> getKeteranganMakan_ArrayList() {
+            return keteranganMakan_ArrayList;
+        }
+
+        public void setKeteranganMakan_ArrayList(ArrayList<String> keteranganMakan_ArrayList) {
+            this.keteranganMakan_ArrayList = keteranganMakan_ArrayList;
+        }
+
+        public ArrayList<String> getModelPesawat_ArrayList() {
+            return modelPesawat_ArrayList;
+        }
+
+        public void setModelPesawat_ArrayList(ArrayList<String> modelPesawat_ArrayList) {
+            this.modelPesawat_ArrayList = modelPesawat_ArrayList;
+        }
+
+        public ArrayList<String> getDurasi_ArrayList() {
+            return durasi_ArrayList;
+        }
+
+        public void setDurasi_ArrayList(ArrayList<String> durasi_ArrayList) {
+            this.durasi_ArrayList = durasi_ArrayList;
+        }
+
+        public String getTanggalPulang() {
+            return tanggalPulang;
+        }
+
+        public void setTanggalPulang(String tanggalPulang) {
+            this.tanggalPulang = tanggalPulang;
+        }
+
+        public ArrayList<String> getTanggalBerangkat_ArrayList_pulang() {
+            return tanggalBerangkat_ArrayList_pulang;
+        }
+
+        public void setTanggalBerangkat_ArrayList_pulang(ArrayList<String> tanggalBerangkat_ArrayList_pulang) {
+            this.tanggalBerangkat_ArrayList_pulang = tanggalBerangkat_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getWaktuBerangkat_ArrayList_pulang() {
+            return waktuBerangkat_ArrayList_pulang;
+        }
+
+        public void setWaktuBerangkat_ArrayList_pulang(ArrayList<String> waktuBerangkat_ArrayList_pulang) {
+            this.waktuBerangkat_ArrayList_pulang = waktuBerangkat_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getBandaraAsal_ArrayList_pulang() {
+            return bandaraAsal_ArrayList_pulang;
+        }
+
+        public void setBandaraAsal_ArrayList_pulang(ArrayList<String> bandaraAsal_ArrayList_pulang) {
+            this.bandaraAsal_ArrayList_pulang = bandaraAsal_ArrayList_pulang;
+        }
+
+        public ArrayList<Integer> getLogoMaskapai_ArrayList_pulang() {
+            return logoMaskapai_ArrayList_pulang;
+        }
+
+        public void setLogoMaskapai_ArrayList_pulang(ArrayList<Integer> logoMaskapai_ArrayList_pulang) {
+            this.logoMaskapai_ArrayList_pulang = logoMaskapai_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getNamaMaskapai_ArrayList_pulang() {
+            return namaMaskapai_ArrayList_pulang;
+        }
+
+        public void setNamaMaskapai_ArrayList_pulang(ArrayList<String> namaMaskapai_ArrayList_pulang) {
+            this.namaMaskapai_ArrayList_pulang = namaMaskapai_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getKodePenerbangan_ArrayList_pulang() {
+            return kodePenerbangan_ArrayList_pulang;
+        }
+
+        public void setKodePenerbangan_ArrayList_pulang(ArrayList<String> kodePenerbangan_ArrayList_pulang) {
+            this.kodePenerbangan_ArrayList_pulang = kodePenerbangan_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getKelasPesawat_ArrayList_pulang() {
+            return kelasPesawat_ArrayList_pulang;
+        }
+
+        public void setKelasPesawat_ArrayList_pulang(ArrayList<String> kelasPesawat_ArrayList_pulang) {
+            this.kelasPesawat_ArrayList_pulang = kelasPesawat_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getTanggalDatang_ArrayList_pulang() {
+            return tanggalDatang_ArrayList_pulang;
+        }
+
+        public void setTanggalDatang_ArrayList_pulang(ArrayList<String> tanggalDatang_ArrayList_pulang) {
+            this.tanggalDatang_ArrayList_pulang = tanggalDatang_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getWaktuDatang_ArrayList_pulang() {
+            return waktuDatang_ArrayList_pulang;
+        }
+
+        public void setWaktuDatang_ArrayList_pulang(ArrayList<String> waktuDatang_ArrayList_pulang) {
+            this.waktuDatang_ArrayList_pulang = waktuDatang_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getBandaraTujuan_ArrayList_pulang() {
+            return bandaraTujuan_ArrayList_pulang;
+        }
+
+        public void setBandaraTujuan_ArrayList_pulang(ArrayList<String> bandaraTujuan_ArrayList_pulang) {
+            this.bandaraTujuan_ArrayList_pulang = bandaraTujuan_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getKabin_ArrayList_pulang() {
+            return kabin_ArrayList_pulang;
+        }
+
+        public void setKabin_ArrayList_pulang(ArrayList<String> kabin_ArrayList_pulang) {
+            this.kabin_ArrayList_pulang = kabin_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getBagasi_ArrayList_pulang() {
+            return bagasi_ArrayList_pulang;
+        }
+
+        public void setBagasi_ArrayList_pulang(ArrayList<String> bagasi_ArrayList_pulang) {
+            this.bagasi_ArrayList_pulang = bagasi_ArrayList_pulang;
+        }
+
+        public ArrayList<Integer> getBooleanMakan_ArrayList_pulang() {
+            return booleanMakan_ArrayList_pulang;
+        }
+
+        public void setBooleanMakan_ArrayList_pulang(ArrayList<Integer> booleanMakan_ArrayList_pulang) {
+            this.booleanMakan_ArrayList_pulang = booleanMakan_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getKeteranganMakan_ArrayList_pulang() {
+            return keteranganMakan_ArrayList_pulang;
+        }
+
+        public void setKeteranganMakan_ArrayList_pulang(ArrayList<String> keteranganMakan_ArrayList_pulang) {
+            this.keteranganMakan_ArrayList_pulang = keteranganMakan_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getModelPesawat_ArrayList_pulang() {
+            return modelPesawat_ArrayList_pulang;
+        }
+
+        public void setModelPesawat_ArrayList_pulang(ArrayList<String> modelPesawat_ArrayList_pulang) {
+            this.modelPesawat_ArrayList_pulang = modelPesawat_ArrayList_pulang;
+        }
+
+        public ArrayList<String> getDurasi_ArrayList_pulang() {
+            return durasi_ArrayList_pulang;
+        }
+
+        public void setDurasi_ArrayList_pulang(ArrayList<String> durasi_ArrayList_pulang) {
+            this.durasi_ArrayList_pulang = durasi_ArrayList_pulang;
+        }
+
+        public String getTanggalPulang_pulang() {
+            return tanggalPulang_pulang;
+        }
+
+        public void setTanggalPulang_pulang(String tanggalPulang_pulang) {
+            this.tanggalPulang_pulang = tanggalPulang_pulang;
         }
     }
 }

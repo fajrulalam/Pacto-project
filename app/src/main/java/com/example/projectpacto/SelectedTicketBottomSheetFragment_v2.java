@@ -125,7 +125,6 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 
         tampilkanButton = view.findViewById(R.id.tampilkanButton);
 
-
         recyclerView = view.findViewById(R.id.RecycleViewRouteFlight);
         kotaAsal = view.findViewById(R.id.kotaAsal);
         kotaTujuan = view.findViewById(R.id.kotaTujuan);

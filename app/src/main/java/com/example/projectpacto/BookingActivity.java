@@ -57,6 +57,7 @@ public class BookingActivity extends AppCompatActivity {
     ArrayList<String> tipePesanan;
     ArrayList<String> jumlahMalam;
     ArrayList<String> documentID;
+    ArrayList<Boolean> pulangPergi_boolean;
     long epoch_timeNow;
 
     FirebaseFirestore fs;
@@ -86,6 +87,7 @@ public class BookingActivity extends AppCompatActivity {
         logoMaskapai = new ArrayList<>(); //khusus pesawat, hotel diisi string kosong saja
         tipePesanan = new ArrayList<>(); //semuaClear
         jumlahMalam = new ArrayList<>(); //khusus hotel, pesawat diisi string kosong saja
+        pulangPergi_boolean = new ArrayList<>(); //khusus pesawat, diisi 'false' untuk Hotel
         Date date = new Date();
         epoch_timeNow = date.getTime();
 
@@ -184,7 +186,7 @@ public class BookingActivity extends AppCompatActivity {
         tipePesanan.clear();
         jumlahMalam.clear();
         documentID.clear();
-        BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
+        BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(pulangPergi_boolean, jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
         );
         binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
 
@@ -211,6 +213,7 @@ public class BookingActivity extends AppCompatActivity {
 
                             if (tipePesanan_str.matches("Hotel")) {
 
+
                                 String namaHotel_str = map.get("namaHotel").toString();
                                 String alamatTambahan_str = map.get("tambahanAlamat").toString();
                                 String tglCek_in_str = map.get("tglCek_in").toString();
@@ -221,6 +224,7 @@ public class BookingActivity extends AppCompatActivity {
                                 String jumlahTamu_str = arrayTamu.size() + " Tamu";
 
 
+                                pulangPergi_boolean.add(false);
                                 kotaAsal_atau_namaHotel.add(namaHotel_str);
                                 kotaTujuan.add("");
                                 statusPesanan.add(status);
@@ -239,14 +243,18 @@ public class BookingActivity extends AppCompatActivity {
                             }
                             if (tipePesanan_str.matches("Pesawat")) {
 
-                                String kotaAsal_str = map.get("kotaAsal").toString();
-                                String kotaTujuan_str = map.get("kotaTujuan").toString();
-                                String tglBerangkat_str = map.get("tanggalBerangkat").toString();
-                                String namaMaskapai_str = map.get("namaMaskapai").toString();
-                                String kodePenerbangan_str = map.get("kodePenerbangan").toString();
+                                boolean pulangPergi = (boolean) map.get("pulangPergi");
+                                String kotaAsal_str = (map.get("kotaAsal")).toString();
+                                String kotaTujuan_str = (map.get("kotaTujuan")).toString();
+                                String tglBerangkat_str =((ArrayList<String>) map.get("tanggalBerangkat_ArrayList")).get(0);
+                                String namaMaskapai_str =((ArrayList<String>) map.get("namaMaskapai_ArrayList")).get(0);
+                                String kodePenerbangan_str =((ArrayList<String>) map.get("kodePenerbangan_ArrayList")).get(0);
                                 String rincianPenumpang_str = map.get("rincianPenumpang").toString();
-                                Integer logoMaskapai_int = Integer.parseInt(map.get("logoMaskapai").toString());
+                                ArrayList logoMaskapai_obj = (ArrayList)  map.get("logoMaskapai_ArrayList");
+                                Long logoMaskapai_long = Long.parseLong(logoMaskapai_obj.get(0).toString());
 
+
+                                pulangPergi_boolean.add(pulangPergi);
                                 kotaAsal_atau_namaHotel.add(kotaAsal_str);
                                 kotaTujuan.add(kotaTujuan_str);
                                 statusPesanan.add(status);
@@ -256,14 +264,14 @@ public class BookingActivity extends AppCompatActivity {
                                 kodePenerbangan.add(kodePenerbangan_str);
                                 rincianPenumpang.add(rincianPenumpang_str);
                                 jumlahKamar.add("");
-                                logoMaskapai.add(logoMaskapai_int);
+                                logoMaskapai.add(logoMaskapai_long.intValue());
                                 tipePesanan.add(tipePesanan_str);
                                 jumlahMalam.add("");
 
 
                             }
 
-                            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
+                            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(pulangPergi_boolean, jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
                             );
 
                             binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
@@ -356,7 +364,7 @@ public class BookingActivity extends AppCompatActivity {
 
                             }
 
-                            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
+                            BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(pulangPergi_boolean, jumlahMalam, kotaAsal_atau_namaHotel, kotaTujuan, statusPesanan, tglBerangkat_atau_alamat, tglCek_in, namaMaskapai, kodePenerbangan, rincianPenumpang, jumlahKamar, logoMaskapai, tipePesanan
                             );
 
                             binding.RecyclerViewPesanan.setAdapter(bookingStatusRecyclerAdapter);
@@ -452,6 +460,7 @@ public class BookingActivity extends AppCompatActivity {
                         }
                     }
                     BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(
+                            pulangPergi_boolean,
                             jumlahMalam,
                             kotaAsal_atau_namaHotel,
                             kotaTujuan,
@@ -540,6 +549,7 @@ public class BookingActivity extends AppCompatActivity {
                         }
                     }
                     BookingStatusRecyclerAdapter bookingStatusRecyclerAdapter = new BookingStatusRecyclerAdapter(
+                            pulangPergi_boolean,
                             jumlahMalam,
                             kotaAsal_atau_namaHotel,
                             kotaTujuan,
@@ -563,6 +573,7 @@ public class BookingActivity extends AppCompatActivity {
 
 
     public class BookingStatusRecyclerAdapter extends RecyclerView.Adapter<BookingStatusRecyclerAdapter.ViewHolder> {
+        ArrayList<Boolean> pulangPergi_boolean;
         ArrayList<String> kotaAsal_atau_namaHotel;
         ArrayList<String> kotaTujuan;
         ArrayList<String> statusPesanan;
@@ -576,10 +587,11 @@ public class BookingActivity extends AppCompatActivity {
         ArrayList<String> tipePesanan;
         ArrayList<String> jumlahMalam;
 
-        public BookingStatusRecyclerAdapter(ArrayList<String> jumlahMalam, ArrayList<String> kotaAsal_atau_namaHotel, ArrayList<String> kotaTujuan, ArrayList<String> statusPesanan,
+        public BookingStatusRecyclerAdapter(ArrayList<Boolean> pulangPergi_boolean, ArrayList<String> jumlahMalam, ArrayList<String> kotaAsal_atau_namaHotel, ArrayList<String> kotaTujuan, ArrayList<String> statusPesanan,
                                             ArrayList<String> tglBerangkat_atau_alamat, ArrayList<String> tglCek_in,  ArrayList<String> namaMaskapai,  ArrayList<String> kodePenerbangan,
                                             ArrayList<String> rincianPenumpang, ArrayList<String> jumlahKamar, ArrayList<Integer> logoMaskapai, ArrayList<String> tipePesanan){
 
+            this.pulangPergi_boolean = pulangPergi_boolean;
             this.kotaAsal_atau_namaHotel = kotaAsal_atau_namaHotel;
             this.kotaTujuan = kotaTujuan;
             this.statusPesanan =statusPesanan;
@@ -608,8 +620,12 @@ public class BookingActivity extends AppCompatActivity {
 
             String tipePesanan_str = tipePesanan.get(position);
             String status_str = statusPesanan.get(position);
+            boolean pulangPergi = pulangPergi_boolean.get(position);
 
 
+            if (pulangPergi == true) {
+                holder.arrow.setImageResource(R.drawable.ic_pulangpergi);
+            }
 
             holder.kotaAsal_atau_namaHotel.setText(kotaAsal_atau_namaHotel.get(position));
             holder.kotaTujuan.setText(kotaTujuan.get(position));
@@ -662,6 +678,7 @@ public class BookingActivity extends AppCompatActivity {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
+
             TextView kotaAsal_atau_namaHotel;
             ImageView arrow;
             TextView kotaTujuan;
