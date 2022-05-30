@@ -549,6 +549,19 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             }
         });
 
+        binding.detailPembayaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DetailHarga_BottemSheet_PulangPergi detailHarga_bottemSheet_pulangPergi = new DetailHarga_BottemSheet_PulangPergi();
+                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
+                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
+                bundle.putStringArrayList("harga_tambahan_pulang", harga_tambahan_pulang);
+                bundle.putStringArrayList("tambahan_kg_pulang", tambahan_kg_pulang);
+                detailHarga_bottemSheet_pulangPergi.setArguments(bundle);
+                detailHarga_bottemSheet_pulangPergi.show(getSupportFragmentManager(), detailHarga_bottemSheet_pulangPergi.getTag());
+            }
+        });
+
         binding.pesanButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
