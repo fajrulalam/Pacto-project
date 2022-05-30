@@ -460,19 +460,19 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         });
 
         //TAMBAHAN BAGASI
-        binding.tambahanBagasiRelativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putStringArrayList("namaList", namaPassenger);
-                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
-                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
-                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
-                tambahanBagasiBottomSheet.setArguments(bundle);
-                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
-
-            }
-        });
+//        binding.tambahanBagasiRelativeLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Bundle bundle = new Bundle();
+//                bundle.putStringArrayList("namaList", namaPassenger);
+//                bundle.putStringArrayList("tambahan_kg", tambahan_kg);
+//                bundle.putStringArrayList("harga_tambahan", harga_tambahan);
+//                TambahanBagasiBottomSheet tambahanBagasiBottomSheet = new TambahanBagasiBottomSheet();
+//                tambahanBagasiBottomSheet.setArguments(bundle);
+//                tambahanBagasiBottomSheet.show(getSupportFragmentManager(), tambahanBagasiBottomSheet.getTag());
+//
+//            }
+//        });
 
 
         //BACK BUTTON
@@ -646,6 +646,16 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
                         //Data Penumpang
                         ArrayofPenumpangMaps,
                         rincianPenumpang,
+
+                        //Harga
+                        harga_dewasa,
+                        harga_balita,
+                        harga_dewasa_pulang,
+                        harga_balita_pulang,
+                        harga_str,
+                        harga_str_pulang,
+                        binding.harga.getText().toString(), //grand total
+
 
                         //Data Pergi
                         tanggalBerangkat_ArrayList,
@@ -875,6 +885,15 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         private List<Map<String, String>> penumpang;
         String rincianPenumpang;
 
+        //harga
+        String harga_dewasa;
+        String harga_balita;
+        String harga_dewasa_pulang;
+        String harga_balita_pulang;
+        String harga_total_pergi;
+        String harga_total_pulang;
+        String grand_total;
+
         //Pergi
         ArrayList<String> tanggalBerangkat_ArrayList;
         ArrayList<String> waktuBerangkat_ArrayList;
@@ -926,7 +945,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
         }
 
-        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, Long waktuArsip_pulang, boolean ongoing, boolean ongoing_pulang, String status, String status_pulang, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, ArrayList<String> bookingCode_pulang, List<Map<String, String>> penumpang, String rincianPenumpang, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, String tanggalPulang, String kotaAsal, String kotaTujuan, ArrayList<String> tanggalBerangkat_ArrayList_pulang, ArrayList<String> waktuBerangkat_ArrayList_pulang, ArrayList<String> bandaraAsal_ArrayList_pulang, ArrayList<Integer> logoMaskapai_ArrayList_pulang, ArrayList<String> namaMaskapai_ArrayList_pulang, ArrayList<String> kodePenerbangan_ArrayList_pulang, ArrayList<String> kelasPesawat_ArrayList_pulang, ArrayList<String> tanggalDatang_ArrayList_pulang, ArrayList<String> waktuDatang_ArrayList_pulang, ArrayList<String> bandaraTujuan_ArrayList_pulang, ArrayList<String> kabin_ArrayList_pulang, ArrayList<String> bagasi_ArrayList_pulang, ArrayList<Integer> booleanMakan_ArrayList_pulang, ArrayList<String> keteranganMakan_ArrayList_pulang, ArrayList<String> modelPesawat_ArrayList_pulang, ArrayList<String> durasi_ArrayList_pulang, String tanggalPulang_pulang, String kotaAsal_pulang, String kotaTujuan_pulang) {
+
+        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, Long waktuArsip_pulang, boolean ongoing, boolean ongoing_pulang, String status, String status_pulang, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, ArrayList<String> bookingCode_pulang, List<Map<String, String>> penumpang, String rincianPenumpang, String harga_dewasa, String harga_balita, String harga_dewasa_pulang, String harga_balita_pulang, String harga_total_pergi, String harga_total_pulang, String grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, String tanggalPulang, String kotaAsal, String kotaTujuan, ArrayList<String> tanggalBerangkat_ArrayList_pulang, ArrayList<String> waktuBerangkat_ArrayList_pulang, ArrayList<String> bandaraAsal_ArrayList_pulang, ArrayList<Integer> logoMaskapai_ArrayList_pulang, ArrayList<String> namaMaskapai_ArrayList_pulang, ArrayList<String> kodePenerbangan_ArrayList_pulang, ArrayList<String> kelasPesawat_ArrayList_pulang, ArrayList<String> tanggalDatang_ArrayList_pulang, ArrayList<String> waktuDatang_ArrayList_pulang, ArrayList<String> bandaraTujuan_ArrayList_pulang, ArrayList<String> kabin_ArrayList_pulang, ArrayList<String> bagasi_ArrayList_pulang, ArrayList<Integer> booleanMakan_ArrayList_pulang, ArrayList<String> keteranganMakan_ArrayList_pulang, ArrayList<String> modelPesawat_ArrayList_pulang, ArrayList<String> durasi_ArrayList_pulang, String tanggalPulang_pulang, String kotaAsal_pulang, String kotaTujuan_pulang) {
             this.pulangPergi = pulangPergi;
             this.expTime = expTime;
             this.waktuArsip = waktuArsip;
@@ -942,6 +962,13 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.bookingCode_pulang = bookingCode_pulang;
             this.penumpang = penumpang;
             this.rincianPenumpang = rincianPenumpang;
+            this.harga_dewasa = harga_dewasa;
+            this.harga_balita = harga_balita;
+            this.harga_dewasa_pulang = harga_dewasa_pulang;
+            this.harga_balita_pulang = harga_balita_pulang;
+            this.harga_total_pergi = harga_total_pergi;
+            this.harga_total_pulang = harga_total_pulang;
+            this.grand_total = grand_total;
             this.tanggalBerangkat_ArrayList = tanggalBerangkat_ArrayList;
             this.waktuBerangkat_ArrayList = waktuBerangkat_ArrayList;
             this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
@@ -980,6 +1007,62 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.tanggalPulang_pulang = tanggalPulang_pulang;
             this.kotaAsal_pulang = kotaAsal_pulang;
             this.kotaTujuan_pulang = kotaTujuan_pulang;
+        }
+
+        public String getHarga_dewasa() {
+            return harga_dewasa;
+        }
+
+        public void setHarga_dewasa(String harga_dewasa) {
+            this.harga_dewasa = harga_dewasa;
+        }
+
+        public String getHarga_balita() {
+            return harga_balita;
+        }
+
+        public void setHarga_balita(String harga_balita) {
+            this.harga_balita = harga_balita;
+        }
+
+        public String getHarga_dewasa_pulang() {
+            return harga_dewasa_pulang;
+        }
+
+        public void setHarga_dewasa_pulang(String harga_dewasa_pulang) {
+            this.harga_dewasa_pulang = harga_dewasa_pulang;
+        }
+
+        public String getHarga_balita_pulang() {
+            return harga_balita_pulang;
+        }
+
+        public void setHarga_balita_pulang(String harga_balita_pulang) {
+            this.harga_balita_pulang = harga_balita_pulang;
+        }
+
+        public String getHarga_total_pergi() {
+            return harga_total_pergi;
+        }
+
+        public void setHarga_total_pergi(String harga_total_pergi) {
+            this.harga_total_pergi = harga_total_pergi;
+        }
+
+        public String getHarga_total_pulang() {
+            return harga_total_pulang;
+        }
+
+        public void setHarga_total_pulang(String harga_total_pulang) {
+            this.harga_total_pulang = harga_total_pulang;
+        }
+
+        public String getGrand_total() {
+            return grand_total;
+        }
+
+        public void setGrand_total(String grand_total) {
+            this.grand_total = grand_total;
         }
 
         public String getRincianPenumpang() {
