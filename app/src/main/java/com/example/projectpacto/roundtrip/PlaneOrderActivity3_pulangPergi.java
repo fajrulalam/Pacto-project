@@ -214,6 +214,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             kota_kedatangan = bundle.getString("kota_kedatangan");
             bandara_keberangktan_raw = bundle.getString("bandara_keberangkatan");
             bandara_kedatangan_raw = bundle.getString("bandara_kedatangan");
+            harga_dewasa = bundle.getString("hargaDewasa");
+            harga_balita = bundle.getString("hargaBalita");
 
             //data pulang
             tanggalBerangkat_str_pulang = bundle.getStringArrayList("tanggalBerangkat_pulang").get(0);
@@ -232,6 +234,8 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             kotaAsal_str_pulang = bundle.getString("kotaAsal_pulang");
             harga_str_pulang = bundle.getString("harga_pulang");
             jmlPenumpang_pulang = bundle.getInt("jmlPenumpang_pulang");
+            harga_dewasa_pulang = bundle.getString("hargaDewasa_pulang");
+            harga_balita_pulang = bundle.getString("hargaBalita_pulang");
 
             keberangkatan_pulang = bundle.getString("keberangkatan_pulang");
             kedatangan_pulang = bundle.getString("kedatangan_pulang");
