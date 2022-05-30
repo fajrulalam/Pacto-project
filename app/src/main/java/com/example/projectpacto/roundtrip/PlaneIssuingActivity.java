@@ -1,36 +1,38 @@
-package com.example.projectpacto;
+package com.example.projectpacto.roundtrip;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.example.projectpacto.BookingActivity;
+import com.example.projectpacto.MasukkanPIN_Activity;
+import com.example.projectpacto.R;
+import com.example.projectpacto.RecyclerAdapterBagasi;
+import com.example.projectpacto.RecyclerAdapterPenumpangList_IssueForm;
 import com.example.projectpacto.databinding.ActivityFormIssuingBinding;
+import com.example.projectpacto.databinding.ActivityPlaneIssuingBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+public class PlaneIssuingActivity extends AppCompatActivity {
 
-public class FormIssuingActivity extends AppCompatActivity {
 
-    ActivityFormIssuingBinding binding;
+
+    ActivityPlaneIssuingBinding binding;
     FirebaseFirestore fs;
 
     CountDownTimer timer;
@@ -84,7 +86,7 @@ public class FormIssuingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityFormIssuingBinding.inflate(getLayoutInflater());
+        binding = ActivityPlaneIssuingBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -100,14 +102,13 @@ public class FormIssuingActivity extends AppCompatActivity {
 
         documentID = getIntent().getStringExtra("documentID");
         String tipePesanan_ = getIntent().getStringExtra("tipePesanan");
-        if (tipePesanan_.matches("Hotel")){
-            binding.timer.setVisibility(View.GONE);
-            binding.pesawatLinearLayout.setVisibility(View.GONE);
-            binding.bagasiTambahan.setText("Permintaan khusus");
-            binding.hargaBagasiTambahan.setText("Permintaan khusus Anda akan tertulis di sini jika ada.");
-        } else if (tipePesanan_.matches("Pesawat")){
-            binding.hotelLinearLayout.setVisibility(View.GONE);
-        }
+//        if (tipePesanan_.matches("Hotel")){
+//            binding.timer.setVisibility(View.GONE);
+//            binding.bagasiTambahan.setText("Permintaan khusus");
+//            binding.hargaBagasiTambahan.setText("Permintaan khusus Anda akan tertulis di sini jika ada.");
+//        } else if (tipePesanan_.matches("Pesawat")){
+//            binding.hotelLinearLayout.setVisibility(View.GONE);
+//        }
 
 
 
@@ -147,53 +148,7 @@ public class FormIssuingActivity extends AppCompatActivity {
 
 
 
-                    if (tipePesanan.matches("Hotel")) {
-
-                        namaHotel = map.get("namaHotel").toString();
-                        tambahanAlamat = map.get("tambahanAlamat").toString();
-                        tglCek_in = map.get("tglCek_in").toString();
-                        tglCek_out = map.get("tglCek_out").toString();
-                        jumlahMalam = map.get("jumlahMalam").toString();
-                        dataTamu = (List<Map<String, String>>) map.get("dataTamu");
-                        jumlahKamar = map.get("jumlahKamar").toString();
-                        namaKamar = map.get("namaKamar").toString();
-                        hargaTotal = map.get("hargaTotal").toString();
-                        String permintaanKhusus = map.get("permintaanKhusus").toString();
-
-                        String tglCekout_jmlMalam = tglCek_out + " ("+jumlahMalam +" Malam)";
-                        String jmldanPilihanKamar = jumlahKamar + " Kamar (" +namaKamar+")";
-
-                        for (int i = 0; i < dataTamu.size(); i++) {
-                            Map<String, String> penumpangMap = dataTamu.get(i);
-                            namaPenumpang.add(penumpangMap.get("namaPenumpang"));
-                            titel.add(penumpangMap.get("titel"));
-
-                        }
-
-                        if (permintaanKhusus.matches("")) {
-                            binding.hargaBagasiTambahan.setText("Anda tidak mengajukan permintaan khusus");
-                        }
-
-
-                        binding.harga.setText(hargaTotal);
-                        binding.namaHotelTxt.setText(namaHotel);
-                        binding.alamatTambahan.setText(tambahanAlamat);
-                        binding.tglCekIn.setText(tglCek_in);
-                        binding.tglCekOut.setText(tglCekout_jmlMalam);
-                        binding.detailTamu.setText(dataTamu.size() + " Tamu");
-                        binding.jmldanPilihanKamar.setText(jmldanPilihanKamar);
-
-                        RecyclerAdapterPenumpangList_IssueForm recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList_IssueForm(namaPenumpang);
-                        binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
-
-
-                        //Insert Hotel shit here
-                        Log.i("Tipe Pesanan", "Hotel");
-
-
-
-
-                    } else if (tipePesanan.matches("Pesawat")) {
+//                     else if (tipePesanan.matches("Pesawat")) {
                         Date date = new Date();
                         long timeNow = date.getTime();
 
@@ -254,16 +209,16 @@ public class FormIssuingActivity extends AppCompatActivity {
                         }
                         Log.i("NamaPenumpang", namaPenumpang.toString());
 
-                        binding.kotaAsal.setText(kota_dan_bandaraAsal);
-                        binding.kotaTujuan.setText(kota_dan_bandaraTujuan);
-                        binding.tanggalBerangkat.setText(tanggalBerangkat);
-                        binding.tanggalDatang.setText(waktuBerangkat);
-                        binding.logoMaskapai.setImageResource(logoMaskapai);
-                        binding.namaMaskapai.setText(namaMaskapai);
-                        binding.kodePenerbangan.setText(kodePenerbangan);
-                        binding.rincianPenumpang.setText(rincianPenumpang);
-                        binding.namaPemesan.setText(namaPemesan);
-                        binding.nomorPemesan.setText(phoneNumber);
+//                        binding.kotaAsal.setText(kota_dan_bandaraAsal);
+//                        binding.kotaTujuan.setText(kota_dan_bandaraTujuan);
+//                        binding.tanggalBerangkat.setText(tanggalBerangkat);
+//                        binding.tanggalDatang.setText(waktuBerangkat);
+//                        binding.logoMaskapai.setImageResource(logoMaskapai);
+//                        binding.namaMaskapai.setText(namaMaskapai);
+//                        binding.kodePenerbangan.setText(kodePenerbangan);
+//                        binding.rincianPenumpang.setText(rincianPenumpang);
+//                        binding.namaPemesan.setText(namaPemesan);
+//                        binding.nomorPemesan.setText(phoneNumber);
 
                         RecyclerAdapterPenumpangList_IssueForm recyclerAdapterPenumpangList = new RecyclerAdapterPenumpangList_IssueForm(namaPenumpang);
                         binding.NamaPenumpangRecycleView.setAdapter(recyclerAdapterPenumpangList);
@@ -282,7 +237,7 @@ public class FormIssuingActivity extends AppCompatActivity {
 
                 }
 
-            }
+//            }
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -401,6 +356,7 @@ public class FormIssuingActivity extends AppCompatActivity {
         binding.secondTens.setText("0");
         binding.secondOnes.setText("0");
     }
+
 
 
 
