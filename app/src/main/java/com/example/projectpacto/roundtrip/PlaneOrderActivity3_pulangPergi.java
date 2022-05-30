@@ -549,6 +549,26 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             }
         });
 
+
+
+
+        //Total
+
+        int totalBagasi = 0;
+        for (int i = 0; i < harga_tambahan.size(); i++){
+            Integer harga_satuan_bagasi = Integer.parseInt(harga_tambahan.get(i).split("IDR ")[1].replace(".", ""));
+            Integer harga_satuan_bagasi_pulang = Integer.parseInt(harga_tambahan_pulang.get(i).split("IDR ")[1].replace(".", ""));
+            totalBagasi = totalBagasi + harga_satuan_bagasi + harga_satuan_bagasi_pulang;
+        }
+
+        int harga_int = Integer.parseInt(harga_str.split("IDR ")[1].replace(".", ""));
+        int harga_int_pulang = Integer.parseInt(harga_str_pulang.split("IDR ")[1].replace(".", ""));
+        int grandTotal_int = harga_int + harga_int_pulang + totalBagasi;
+
+        String grandTotal_str = "IDR " + String.format("%,d", grandTotal_int).replace(',', '.');
+
+        binding.harga.setText(grandTotal_str);
+
         binding.detailPembayaran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -814,6 +834,21 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             Log.i("ArrayofPenumpangMaps"+i, "" + ArrayofPenumpangMaps);
 
         }
+
+        int totalBagasi = 0;
+        for (int i = 0; i < harga_tambahan.size(); i++){
+            Integer harga_satuan_bagasi = Integer.parseInt(harga_tambahan.get(i).split("IDR ")[1].replace(".", ""));
+            Integer harga_satuan_bagasi_pulang = Integer.parseInt(harga_tambahan_pulang.get(i).split("IDR ")[1].replace(".", ""));
+            totalBagasi = totalBagasi + harga_satuan_bagasi + harga_satuan_bagasi_pulang;
+        }
+
+        int harga_int = Integer.parseInt(harga_str.split("IDR ")[1].replace(".", ""));
+        int harga_int_pulang = Integer.parseInt(harga_str_pulang.split("IDR ")[1].replace(".", ""));
+        int grandTotal_int = harga_int + harga_int_pulang + totalBagasi;
+
+        String grandTotal_str = "IDR " + String.format("%,d", grandTotal_int).replace(',', '.');
+
+        binding.harga.setText(grandTotal_str);
     }
 
     public class PenumpangData {

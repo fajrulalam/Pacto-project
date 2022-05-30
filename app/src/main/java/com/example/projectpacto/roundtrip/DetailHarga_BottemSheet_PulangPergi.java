@@ -5,12 +5,15 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.projectpacto.R;
@@ -36,11 +39,15 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
     TextView subtotalDewasa_pulang;
     TextView subtotalBalita;
     TextView subtotalBalita_pulang;
+    RecyclerView bagasiPulang;
+    RecyclerView bagasiPergi;
 
 
 
 
     //Variables
+    String harga;
+    String harga_pulang;
     String kotaAsal_str;
     String kotaTujuan_str;
     String kotaAsal_str_pulang;
@@ -85,6 +92,10 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         subtotalBalita_pulang = view.findViewById(R.id.subtotalBalita_pulang);
         grandtotal = view.findViewById(R.id.grandtotal);
 
+        //RecyclerView Binding
+        bagasiPulang = view.findViewById(R.id.fasilitasEkstra_Pulang_RecyclerView);
+        bagasiPergi = view.findViewById(R.id.fasilitasEkstra_Pergi_RecyclerView);
+
 
         kotaAsal_str = bundle.getString("kotaAsal");
         kotaTujuan_str = bundle.getString("kotaTujuan");
@@ -101,6 +112,8 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         harga_balita = bundle.getString("hargaBalita");
         harga_dewasa_pulang = bundle.getString("hargaDewasa_pulang");
         harga_balita_pulang = bundle.getString("hargaBalita_pulang");
+        harga = bundle.getString("harga");
+        harga_pulang = bundle.getString("harga_pulang");
 
 
         kotaAsal_pulang.setText(kotaAsal_str_pulang);
@@ -138,23 +151,38 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         }
 
 
-        int total = 0;
+
+
+
+        //RecyclerAdapater
+        RincianHargaBagasiRecyclerAdapater rincianHargaBagasiRecyclerAdapater = new RincianHargaBagasiRecyclerAdapater(tambahan_kg, harga_tambahan);
+        bagasiPergi.setAdapter(rincianHargaBagasiRecyclerAdapater);
+
+        RincianHargaBagasiRecyclerAdapater rincianHargaBagasiRecyclerAdapater_pulang = new RincianHargaBagasiRecyclerAdapater(tambahan_kg_pulang, harga_tambahan_pulang);
+        bagasiPulang.setAdapter(rincianHargaBagasiRecyclerAdapater_pulang);
+
+        //Hitung Grand total
+        int totalBagasi = 0;
         for (int i = 0; i < harga_tambahan.size(); i++){
             Integer harga_satuan_bagasi = Integer.parseInt(harga_tambahan.get(i).split("IDR ")[1].replace(".", ""));
-            total = total + harga_satuan_bagasi;
+            Integer harga_satuan_bagasi_pulang = Integer.parseInt(harga_tambahan_pulang.get(i).split("IDR ")[1].replace(".", ""));
+            totalBagasi = totalBagasi + harga_satuan_bagasi + harga_satuan_bagasi_pulang;
         }
-        Log.i("total bagasi pergi", "IDR " + total );
+        Log.i("total bagasi pergi", "IDR " + totalBagasi );
+        int harga_int = Integer.parseInt(harga.split("IDR ")[1].replace(".", ""));
+        int harga_int_pulang = Integer.parseInt(harga_pulang.split("IDR ")[1].replace(".", ""));
+        int grandTotal_int = harga_int + harga_int_pulang + totalBagasi;
 
+        String grandTotal_str = "IDR " + String.format("%,d", grandTotal_int).replace(',', '.');
 
+        grandtotal.setText(grandTotal_str);
 
-
-
-
-
-
-
-
-
+        view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
 
 
 
@@ -163,5 +191,61 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
 
 
     }
+
+    public class RincianHargaBagasiRecyclerAdapater extends RecyclerView.Adapter<RincianHargaBagasiRecyclerAdapater.ViewHolder>{
+        ArrayList<String> mtambahan_kg;
+        ArrayList<String> mharga_tambahanKG;
+
+        public RincianHargaBagasiRecyclerAdapater(ArrayList<String> mtambahan_kg, ArrayList<String> mharga_tambahanKG) {
+            this.mtambahan_kg = mtambahan_kg;
+            this.mharga_tambahanKG = mharga_tambahanKG;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.detail_harga_single_view, parent, false);
+            ViewHolder viewHolder = new ViewHolder(view);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+
+            if (!mharga_tambahanKG.get(position).matches("IDR 0")){
+                holder.row.setVisibility(View.VISIBLE);
+                holder.tambahan_kg.setText("Bagasi (" +mtambahan_kg.get(position)+")");
+                holder.harga_tambahanKG.setText(mharga_tambahanKG.get(position));
+            }
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return harga_tambahan.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            ConstraintLayout row;
+            TextView tambahan_kg;
+            TextView harga_tambahanKG;
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                row = itemView.findViewById(R.id.row);
+                tambahan_kg = itemView.findViewById(R.id.tambahan_kg);
+                harga_tambahanKG = itemView.findViewById(R.id.harga_tambahanKG);
+
+
+            }
+        }
+    }
+
+
+
+
 }
 
