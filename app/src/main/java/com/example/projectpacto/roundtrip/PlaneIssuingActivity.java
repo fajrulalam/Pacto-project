@@ -4,13 +4,20 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.arch.core.internal.SafeIterableMap;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.projectpacto.BookingActivity;
 import com.example.projectpacto.MasukkanPIN_Activity;
@@ -59,12 +66,14 @@ public class PlaneIssuingActivity extends AppCompatActivity {
     ArrayList<String> terminalDatang_ArrayList;
     ArrayList<String> tanggalDatang_ArrayList;
     ArrayList<String> waktuDatangArrayList;
+    ArrayList<String> bagasiDefault;
     String harga_balita;
     String harga_dewasa;
     String jmlDewasa;
     String jmlAnak;
     String jmlBalita;
     String harga_total_pergi;
+
 
     //Keperluan Activity -- Pulang
     String kotaAsal_pulang;
@@ -83,6 +92,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
     ArrayList<String> terminalDatang_ArrayList_pulang;
     ArrayList<String> tanggalDatang_ArrayList_pulang;
     ArrayList<String> waktuDatangArrayList_pulang;
+    ArrayList<String> bagasiDefault_pulang;
     String harga_balita_pulang;
     String harga_dewasa_pulang;
     String jmlDewasa_pulang;
@@ -191,6 +201,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
                     terminalDatang_ArrayList = ((ArrayList<String>) map.get("terminalDatang"));
                     tanggalDatang_ArrayList = ((ArrayList<String>) map.get("tanggalDatang_ArrayList"));
                     waktuDatangArrayList = ((ArrayList<String>) map.get("waktuDatang_ArrayList"));
+                    bagasiDefault = ((ArrayList<String>) map.get("bagasi_ArrayList"));
                     harga_balita = (String) map.get("harga_balita");
                     harga_dewasa = (String) map.get("harga_dewasa");
                     jmlDewasa = (String) map.get("jmlDewasa");
@@ -217,6 +228,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
                     terminalDatang_ArrayList_pulang = ((ArrayList<String>) map.get("terminalDatang_pulang"));
                     tanggalDatang_ArrayList_pulang = ((ArrayList<String>) map.get("tanggalDatang_ArrayList_pulang"));
                     waktuDatangArrayList_pulang = ((ArrayList<String>) map.get("waktuDatang_ArrayList_pulang"));
+                    bagasiDefault_pulang = ((ArrayList<String>) map.get("bagasi_ArrayList_pulang"));
                     harga_balita_pulang = (String) map.get("harga_balita_pulang");
                     harga_dewasa_pulang = (String) map.get("harga_dewasa_pulang");
                     jmlDewasa_pulang = (String) map.get("jmlDewasa_pulang");
@@ -247,18 +259,18 @@ public class PlaneIssuingActivity extends AppCompatActivity {
                     int transits_pulang = bandaraTujuan_ArrayList_pulang.size() - 1;
                     String airportTransitCodes = "";
                     String airportTransitCodes_pulang = "";
-                    for (int i = 0; i < bandaraTujuan_ArrayList.size(); i++){
+                    for (int i = 0; i < bandaraTujuan_ArrayList.size() - 1; i++){
                         String singleAiportCode = bandaraTujuan_ArrayList.get(i).split("\\(")[1].replace(")", "");
-                        if (i+1 != bandaraAsal_ArrayList.size()){
+                        if (i+1 != bandaraAsal_ArrayList.size() -1){
                             airportTransitCodes = airportTransitCodes + singleAiportCode + ",";
                         } else {
                             airportTransitCodes = airportTransitCodes + singleAiportCode;
                         }
                     }
-                    for (int i = 0; i < bandaraTujuan_ArrayList_pulang.size(); i++){
+                    for (int i = 0; i < bandaraTujuan_ArrayList_pulang.size() - 1; i++){
                         String singleAiportCode_pulang = bandaraTujuan_ArrayList_pulang.get(i).split("\\(")[1].replace(")", "");
-                        if (i+1 != bandaraAsal_ArrayList_pulang.size()){
-                            airportTransitCodes_pulang = airportTransitCodes_pulang + singleAiportCode_pulang + ",";
+                        if (i+1 != bandaraAsal_ArrayList_pulang.size() -1){
+                            airportTransitCodes_pulang = airportTransitCodes_pulang + singleAiportCode_pulang + ", ";
                         } else {
                             airportTransitCodes_pulang = airportTransitCodes_pulang + singleAiportCode_pulang;
                         }
@@ -274,23 +286,26 @@ public class PlaneIssuingActivity extends AppCompatActivity {
                     binding.namaMaskapai.setText(namaMaskapai_ArrayList.get(0));
                     binding.kodePenerbangan.setText(kodePenerbangan_ArrayList.get(0));
                     binding.logoMaskapai.setImageResource(logoMaskapai_long.intValue());
-                    binding.bandaraTerminalBerangkat.setText(bandaraAsal_ArrayList.get(0) + " " + terminalBerangkat_ArrayList.get(0));
+                    binding.bandaraTerminalBerangkat.setText(bandaraAsal_ArrayList.get(0).replace("International Airport", "") + " " + terminalBerangkat_ArrayList.get(0));
                     binding.tanggalWaktuBerangkat.setText(tanggalBerangkat_ArrayList.get(0) + " - " + waktuBerangkat_ArrayList.get(0));
-                    binding.durasiJmlTransitTransits.setText(durasi_ArrayList.get(0) + " - " + transits + " " + airportTransitCodes);
-                    binding.bandaraTerminalDatang.setText(bandaraTujuan_ArrayList.get(bandaraTujuan_ArrayList.size()-1) + " " + terminalDatang_ArrayList.get(terminalDatang_ArrayList.size() -1));
+                    binding.durasiJmlTransitTransits.setText(durasi_ArrayList.get(0) + " - " + transits + " transits " + airportTransitCodes);
+                    binding.bandaraTerminalDatang.setText(bandaraTujuan_ArrayList.get(bandaraTujuan_ArrayList.size()-1).replace("International Airport", "") + " " + terminalDatang_ArrayList.get(terminalDatang_ArrayList.size() -1));
                     binding.tanggalWaktuDatang.setText(tanggalDatang_ArrayList.get(tanggalDatang_ArrayList.size()-1) + " - " + waktuDatangArrayList.get(waktuDatangArrayList.size()-1));
 
                     //Binding --pulang
                     binding.namaMaskapaiPulang.setText(namaMaskapai_ArrayList_pulang.get(0));
                     binding.kodePenerbanganPulang.setText(kodePenerbangan_ArrayList_pulang.get(0));
                     binding.logoMaskapaiPulang.setImageResource(logoMaskapai_long_pulang.intValue());
-                    binding.bandaraTerminalBerangkatPulang.setText(bandaraAsal_ArrayList_pulang.get(0) + " " + terminalBerangkat_ArrayList_pulang.get(0));
+                    binding.bandaraTerminalBerangkatPulang.setText(bandaraAsal_ArrayList_pulang.get(0).replace("International Airport", "") + " " + terminalBerangkat_ArrayList_pulang.get(0));
                     binding.tanggalWaktuBerangkatPulang.setText(tanggalBerangkat_ArrayList_pulang.get(0) + " - " + waktuBerangkat_ArrayList_pulang.get(0));
-                    binding.durasiJmlTransitTransitsPulang.setText(durasi_ArrayList_pulang.get(0) + " - " + transits_pulang + " " + airportTransitCodes_pulang);
-                    binding.bandaraTerminalDatangPulang.setText(bandaraTujuan_ArrayList_pulang.get(bandaraTujuan_ArrayList_pulang.size()-1) + " " + terminalDatang_ArrayList_pulang.get(terminalDatang_ArrayList_pulang.size() -1));
+                    binding.durasiJmlTransitTransitsPulang.setText(durasi_ArrayList_pulang.get(0) + " - " + transits_pulang + " transits " + airportTransitCodes_pulang);
+                    binding.bandaraTerminalDatangPulang.setText(bandaraTujuan_ArrayList_pulang.get(bandaraTujuan_ArrayList_pulang.size()-1).replace("International Airport", "") + " " + terminalDatang_ArrayList_pulang.get(terminalDatang_ArrayList_pulang.size() -1));
                     binding.tanggalWaktuDatangPulang.setText(tanggalDatang_ArrayList_pulang.get(tanggalDatang_ArrayList_pulang.size()-1) + " - " + waktuDatangArrayList_pulang.get(waktuDatangArrayList_pulang.size()-1));
 
-
+                    String kodeBandaraBerangkat = bandaraAsal_ArrayList.get(0).split("\\(")[1].replace(")", "");
+                    String kodeBandaraDatang = bandaraTujuan_ArrayList.get(bandaraTujuan_ArrayList.size() -1).split("\\(")[1].replace(")", "");
+                    DetailPenumpangRecyclerAdapter detailPenumpangRecyclerAdapter = new DetailPenumpangRecyclerAdapter(status, kodeBandaraBerangkat, kodeBandaraDatang, bagasiDefault.get(0), bagasiDefault_pulang.get(0), titel, namaPenumpang, tambahan_kg, tambahan_kg_pulang);
+                    binding.DetailPenumpangRecyclerView.setAdapter(detailPenumpangRecyclerAdapter);
 
                 }
 
@@ -442,6 +457,120 @@ public class PlaneIssuingActivity extends AppCompatActivity {
         binding.minuteOnes.setText("0");
         binding.secondTens.setText("0");
         binding.secondOnes.setText("0");
+    }
+
+
+    public class DetailPenumpangRecyclerAdapter extends RecyclerView.Adapter<DetailPenumpangRecyclerAdapter.ViewHolder>{
+
+        String status;
+        String kode_bandaraAsal;
+        String kode_bandaraDatang;
+        String bagasi;
+        String bagasi_pulang;
+        ArrayList<String> titel;
+        ArrayList<String> nama;
+        ArrayList<String> tambahan_kg;
+        ArrayList<String> tambahan_kg_pulang;
+
+        public DetailPenumpangRecyclerAdapter(String status, String kode_bandaraAsal, String kode_bandaraDatang, String bagasi, String bagasi_pulang, ArrayList<String> titel, ArrayList<String> nama, ArrayList<String> tambahan_kg, ArrayList<String> tambahan_kg_pulang) {
+            this.status = status;
+            this.kode_bandaraAsal = kode_bandaraAsal;
+            this.kode_bandaraDatang = kode_bandaraDatang;
+            this.bagasi = bagasi;
+            this.bagasi_pulang = bagasi_pulang;
+            this.titel = titel;
+            this.nama = nama;
+            this.tambahan_kg = tambahan_kg;
+            this.tambahan_kg_pulang = tambahan_kg_pulang;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+            View view = layoutInflater.inflate(R.layout.detail_penumpang_fasilitas_pp_singleview, parent, false);
+            ViewHolder viewHolder = new ViewHolder(view);
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+            int pcc = position +1;
+            String nomor_titel_namaLengkap = pcc + ". " + titel.get(position) + " " + nama.get(position);
+            holder.nomor_titel_namaLengkap.setText(nomor_titel_namaLengkap);
+
+            holder.kode_bandaraAsal.setText(kode_bandaraAsal);
+            holder.kode_bandaraTujuan.setText(kode_bandaraDatang);
+
+            //balik arah shg bandara asal dan tujuan dibalik
+            holder.kode_bandaraAsal_pulang.setText(kode_bandaraDatang);
+            holder.kode_bandaraTujuan_pulang.setText(kode_bandaraAsal);
+
+            holder.bagasiDefault.setText(bagasi);
+            holder.bagasiDefault_pulang.setText(bagasi_pulang);
+
+            holder.bagasiTambahan_kg.setText("+" + tambahan_kg.get(position));
+            holder.bagasiTambahan_kg_pulang.setText("+" + tambahan_kg_pulang.get(position));
+
+            if (status.matches("Issued")){
+                holder.nomorKursiLayout.setVisibility(View.VISIBLE);
+                holder.nomorKursiLayout_pulang.setVisibility(View.VISIBLE);
+                //insert nomor kursi code here....
+
+
+                //
+            }
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return nama.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            TextView nomor_titel_namaLengkap;
+            TextView kode_bandaraAsal;
+            TextView kode_bandaraTujuan;
+            TextView bagasiDefault;
+            TextView bagasiTambahan_kg;
+            TextView nomorKursi;
+            LinearLayout nomorKursiLayout;
+
+            TextView kode_bandaraAsal_pulang;
+            TextView kode_bandaraTujuan_pulang;
+            TextView bagasiDefault_pulang;
+            TextView bagasiTambahan_kg_pulang;
+            TextView nomorKursi_pulang;
+            LinearLayout nomorKursiLayout_pulang;
+
+
+
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
+
+                nomor_titel_namaLengkap =  itemView.findViewById(R.id.nomor_titel_namaLengkap);
+
+
+                kode_bandaraAsal =  itemView.findViewById(R.id.kodeBandaraAsal);
+                kode_bandaraTujuan =  itemView.findViewById(R.id.kodeBandaraTujuan);
+                bagasiDefault =  itemView.findViewById(R.id.bagasiDefault);
+                bagasiTambahan_kg =  itemView.findViewById(R.id.bagasiTambahan);
+                nomorKursi =  itemView.findViewById(R.id.nomorKursi);
+                nomorKursiLayout =  itemView.findViewById(R.id.nomorKursi_layout);
+
+                kode_bandaraAsal_pulang =  itemView.findViewById(R.id.kodeBandaraAsal_pulang);
+                kode_bandaraTujuan_pulang =  itemView.findViewById(R.id.kodeBandaraTujuan_pulang);
+                bagasiDefault_pulang =  itemView.findViewById(R.id.bagasiDefault_pulang);
+                bagasiTambahan_kg_pulang =  itemView.findViewById(R.id.bagasiTambahan_pulang);
+                nomorKursi_pulang =  itemView.findViewById(R.id.nomorKursi_pulang);
+                nomorKursiLayout_pulang =  itemView.findViewById(R.id.nomorKursi_layout_pulang);
+
+
+            }
+        }
     }
 
 

@@ -287,7 +287,7 @@
                 <HorizontalScrollView
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="214dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:background="@color/primary_light2">
 
@@ -315,7 +315,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingVertical="3dp"
                                 android:paddingHorizontal="8dp"
-                                android:text="Pulang"
+                                android:text="Berangkat"
                                 android:background="@drawable/curved__even_less_bg"
                                 android:backgroundTint="@color/primary_light2"
                                 android:textColor="@color/primary"
@@ -362,11 +362,11 @@
                                 <View
                                     android:id="@+id/imageView7"
                                     android:layout_width="1dp"
-                                    android:layout_height="53dp"
+                                    android:layout_height="match_parent"
                                     android:layout_below="@id/titikBerangkat"
                                     android:layout_marginLeft="11.5dp"
                                     android:background="@drawable/vertical_dashed_line"
-                                    android:layerType="software"/>
+                                    android:layerType="software" />
 
 
                                 <ImageView
@@ -437,13 +437,21 @@
                                     android:textColor="@color/dark_grey"
                                     android:textSize="13sp" />
 
+                                <View
+                                    android:layout_width="10dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@id/titikDatang"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginTop="-12dp"
+                                    android:background="@color/white" />
+
                                 <ImageView
                                     android:id="@+id/titikDatang"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/logoMaskapai"
+                                    android:layout_below="@id/durasi_jmlTransit_transits"
                                     android:layout_marginLeft="6dp"
-                                    android:layout_marginTop="67dp"
+                                    android:layout_marginTop="3dp"
                                     android:layout_marginRight="6dp"
                                     android:src="@drawable/ic_titik_datang" />
 
@@ -472,7 +480,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingVertical="3dp"
                                 android:paddingHorizontal="8dp"
-                                android:text="Berangkat"
+                                android:text="Pulang"
                                 android:background="@drawable/curved__even_less_bg"
                                 android:backgroundTint="@color/primary_light2"
                                 android:textColor="@color/primary"
@@ -519,11 +527,11 @@
                                 <View
                                     android:id="@+id/imageView7_pulang"
                                     android:layout_width="1dp"
-                                    android:layout_height="53dp"
+                                    android:layout_height="match_parent"
                                     android:layout_below="@id/titikBerangkat_pulang"
                                     android:layout_marginLeft="11.5dp"
                                     android:background="@drawable/vertical_dashed_line"
-                                    android:layerType="software"/>
+                                    android:layerType="software" />
 
 
                                 <ImageView
@@ -593,13 +601,21 @@
                                     android:textColor="@color/dark_grey"
                                     android:textSize="13sp" />
 
+                                <View
+                                    android:layout_width="10dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@id/titikDatang_pulang"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginTop="-12dp"
+                                    android:background="@color/white" />
+
                                 <ImageView
                                     android:id="@+id/titikDatang_pulang"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/logoMaskapai_pulang"
+                                    android:layout_below="@id/durasi_jmlTransit_transits_pulang"
                                     android:layout_marginLeft="6dp"
-                                    android:layout_marginTop="67dp"
+                                    android:layout_marginTop="3dp"
                                     android:layout_marginRight="6dp"
                                     android:src="@drawable/ic_titik_datang" />
 
@@ -658,7 +674,7 @@
 
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/NamaPenumpangRecycleView"
+                        android:id="@+id/DetailPenumpangRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="14dp"
