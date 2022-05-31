@@ -654,6 +654,9 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
                         //Data Penumpang
                         ArrayofPenumpangMaps,
                         rincianPenumpang,
+                        jmlDewasa_str,
+                        jmlAnak_str,
+                        jmlBalita_str,
 
                         //Harga
                         harga_dewasa,
@@ -896,6 +899,10 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         //Penumpang
         private List<Map<String, String>> penumpang;
         String rincianPenumpang;
+        String jmlDewasa;
+        String jmlAnak;
+        String jmlBalita;
+
 
         //harga
         String harga_dewasa;
@@ -962,7 +969,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
         }
 
 
-        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, Long waktuArsip_pulang, boolean ongoing, boolean ongoing_pulang, String status, String status_pulang, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, ArrayList<String> bookingCode_pulang, List<Map<String, String>> penumpang, String rincianPenumpang, String harga_dewasa, String harga_balita, String harga_dewasa_pulang, String harga_balita_pulang, String harga_total_pergi, String harga_total_pulang, String grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String tanggalPulang, String kotaAsal, String kotaTujuan, ArrayList<String> tanggalBerangkat_ArrayList_pulang, ArrayList<String> waktuBerangkat_ArrayList_pulang, ArrayList<String> bandaraAsal_ArrayList_pulang, ArrayList<Integer> logoMaskapai_ArrayList_pulang, ArrayList<String> namaMaskapai_ArrayList_pulang, ArrayList<String> kodePenerbangan_ArrayList_pulang, ArrayList<String> kelasPesawat_ArrayList_pulang, ArrayList<String> tanggalDatang_ArrayList_pulang, ArrayList<String> waktuDatang_ArrayList_pulang, ArrayList<String> bandaraTujuan_ArrayList_pulang, ArrayList<String> kabin_ArrayList_pulang, ArrayList<String> bagasi_ArrayList_pulang, ArrayList<Integer> booleanMakan_ArrayList_pulang, ArrayList<String> keteranganMakan_ArrayList_pulang, ArrayList<String> modelPesawat_ArrayList_pulang, ArrayList<String> durasi_ArrayList_pulang, ArrayList<String> terminalBerangkat_pulang, ArrayList<String> terminalDatang_pulang, String tanggalPulang_pulang, String kotaAsal_pulang, String kotaTujuan_pulang) {
+        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, Long waktuArsip_pulang, boolean ongoing, boolean ongoing_pulang, String status, String status_pulang, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, ArrayList<String> bookingCode_pulang, List<Map<String, String>> penumpang, String rincianPenumpang, String jmlDewasa, String jmlAnak, String jmlBalita, String harga_dewasa, String harga_balita, String harga_dewasa_pulang, String harga_balita_pulang, String harga_total_pergi, String harga_total_pulang, String grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String tanggalPulang, String kotaAsal, String kotaTujuan, ArrayList<String> tanggalBerangkat_ArrayList_pulang, ArrayList<String> waktuBerangkat_ArrayList_pulang, ArrayList<String> bandaraAsal_ArrayList_pulang, ArrayList<Integer> logoMaskapai_ArrayList_pulang, ArrayList<String> namaMaskapai_ArrayList_pulang, ArrayList<String> kodePenerbangan_ArrayList_pulang, ArrayList<String> kelasPesawat_ArrayList_pulang, ArrayList<String> tanggalDatang_ArrayList_pulang, ArrayList<String> waktuDatang_ArrayList_pulang, ArrayList<String> bandaraTujuan_ArrayList_pulang, ArrayList<String> kabin_ArrayList_pulang, ArrayList<String> bagasi_ArrayList_pulang, ArrayList<Integer> booleanMakan_ArrayList_pulang, ArrayList<String> keteranganMakan_ArrayList_pulang, ArrayList<String> modelPesawat_ArrayList_pulang, ArrayList<String> durasi_ArrayList_pulang, ArrayList<String> terminalBerangkat_pulang, ArrayList<String> terminalDatang_pulang, String tanggalPulang_pulang, String kotaAsal_pulang, String kotaTujuan_pulang) {
             this.pulangPergi = pulangPergi;
             this.expTime = expTime;
             this.waktuArsip = waktuArsip;
@@ -978,6 +985,9 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.bookingCode_pulang = bookingCode_pulang;
             this.penumpang = penumpang;
             this.rincianPenumpang = rincianPenumpang;
+            this.jmlDewasa = jmlDewasa;
+            this.jmlAnak = jmlAnak;
+            this.jmlBalita = jmlBalita;
             this.harga_dewasa = harga_dewasa;
             this.harga_balita = harga_balita;
             this.harga_dewasa_pulang = harga_dewasa_pulang;

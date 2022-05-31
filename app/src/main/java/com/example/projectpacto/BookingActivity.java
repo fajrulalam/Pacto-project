@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityBookingBinding;
+import com.example.projectpacto.roundtrip.PlaneIssuingActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -129,11 +130,20 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.i("Document ID clicked", ""+ documentID.get(position));
-                Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
-                intent.putExtra("documentID", documentID.get(position));
-                intent.putExtra("tipePesanan", tipePesanan.get(position));
-                startActivity(intent);
-                overridePendingTransition(0, 0);
+                if (pulangPergi_boolean.get(position) == true) {
+                    Intent intent = new Intent(getApplicationContext(), PlaneIssuingActivity.class);
+                    intent.putExtra("documentID", documentID.get(position));
+                    intent.putExtra("tipePesanan", tipePesanan.get(position));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
+                    intent.putExtra("documentID", documentID.get(position));
+                    intent.putExtra("tipePesanan", tipePesanan.get(position));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+
             }
         });
 
