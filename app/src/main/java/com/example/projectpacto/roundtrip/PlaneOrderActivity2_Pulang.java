@@ -34,6 +34,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
     ArrayList<ArrayList<String>> bandaraAsal_outer;
     ArrayList<ArrayList<String>> durasi_outer;
     ArrayList<String> langsungAtauTransit;
+    ArrayList<ArrayList<String>> terminalBerangkat_outer;
+    ArrayList<ArrayList<String>> terminalDatang_outer;
     ArrayList<ArrayList<String>> waktuDatang_outer;
     ArrayList<ArrayList<String>> kodePenerbangan_outer;
     ArrayList<ArrayList<String>> bandaraTujuan_outer;
@@ -50,6 +52,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
     ArrayList<Integer> logoMaskapai_inner;
     ArrayList<String> namaMaskapai_inner;
     ArrayList<String> waktuBerangkat_inner;
+    ArrayList<String> terminalDatang_inner;
+    ArrayList<String> terminalBerangkat_inner;
     ArrayList<String> bandaraAsal_inner;
     ArrayList<String> durasi_inner;
     ArrayList<String> waktuDatang_inner;
@@ -139,6 +143,10 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
         keteranganMakan_inner = new ArrayList<>();
         modelPesawat_inner = new ArrayList<>();
         kelas_outer = new ArrayList<>();
+        terminalBerangkat_outer=new ArrayList<>();
+        terminalBerangkat_inner =new ArrayList<>();
+        terminalDatang_inner = new ArrayList<>();
+        terminalDatang_outer =new ArrayList<>();
 
 
         //Recycle View on Click
@@ -149,6 +157,13 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
                 String waktuBerangkat = ((TextView) v.findViewById(R.id.waktuBerangkat)).getText().toString();
                 String harga = ((TextView) v.findViewById(R.id.harga)).getText().toString();
 
+                for (int i = 0; i < namaMaskapai_outer.get(position).size(); i++) {
+//                    jumlahpax.add("/" + jumlPenumpang_total + " pax");
+
+                    kelas_outer.add(kelasPesawat);
+
+                }
+
 //                Bundle bundle = new Bundle();
                 extras.putString("type", "pp_pulang");
                 extras.putString("harga_pulang", harga);
@@ -157,6 +172,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
                 extras.putStringArrayList("tanggalBerangkat_pulang", tanggalBerangkat_outer.get(position));
                 extras.putStringArrayList("waktuBerangkat_pulang", waktuBerangkat_outer.get(position));
                 extras.putStringArrayList("bandaraAsal_pulang", bandaraAsal_outer.get(position));
+                extras.putStringArrayList("terminalBerangkat_pulang", terminalBerangkat_outer.get(position));
                 extras.putIntegerArrayList("logoMaskapai_pulang", logoMaskapai_outer.get(position));
                 extras.putStringArrayList("kodePenerbangan_pulang", kodePenerbangan_outer.get(position));
                 extras.putStringArrayList("namaMaskapai_pulang", namaMaskapai_outer.get(position));
@@ -169,6 +185,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
                 extras.putStringArrayList("tanggalDatang_pulang", tanggalDatang_outer.get(position));
                 extras.putStringArrayList("waktuDatang_pulang", waktuDatang_outer.get(position));
                 extras.putStringArrayList("bandaraTujuan_pulang", bandaraTujuan_outer.get(position));
+                extras.putStringArrayList("terminalDatang_pulang", terminalDatang_outer.get(position));
                 extras.putStringArrayList("durasi_pulang", durasi_outer.get(position));
                 extras.putString("hargaBalita_pulang", harga_balita.get(position));
                 extras.putString("hargaDewasa_pulang", harga_dewasa.get(position));
@@ -332,7 +349,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
         populateArrayLists(kodeBandara_berangkat, kodeBandara_datang);
         for (int i = 0; i <= namaMaskapai_outer.size(); i++) {
             jumlahpax.add("/" + jumlPenumpang_total + " pax");
-            kelas_outer.add(kelasPesawat);
+//            kelas_outer.add(kelasPesawat);
 
         }
 
@@ -379,8 +396,16 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner = new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_outer.add(terminalDatang_inner);
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("6:30");
@@ -430,7 +455,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
 
             tanggalDatang_inner = new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
 
@@ -465,12 +490,20 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_outer.add(terminalDatang_inner);
+
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("7:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
-            bandaraTujuan_inner = new ArrayList<>();
+            bandaraAsal_inner = new ArrayList<>();
             bandaraAsal_inner.add("Juanda International Airport (SUB)");
             bandaraAsal_outer.add(bandaraAsal_inner);
 
@@ -543,8 +576,16 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner = new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_outer.add(terminalDatang_inner);
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("6:30");
@@ -594,7 +635,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
 
             tanggalDatang_inner = new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
 
@@ -626,15 +667,23 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             //Data dummy 2
 
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_outer.add(terminalDatang_inner);
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("11:30");
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
-            bandaraTujuan_inner = new ArrayList<>();
+            bandaraAsal_inner = new ArrayList<>();
             bandaraAsal_inner.add("Halim Perdana Kusuma International Airport (HLP)");
             bandaraAsal_outer.add(bandaraAsal_inner);
 
@@ -672,7 +721,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -704,9 +753,20 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_inner.add("Terminal 3");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_inner.add("Terminal 2");
+            terminalDatang_outer.add(terminalDatang_inner);
+
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("12:30");
@@ -714,7 +774,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
-            bandaraTujuan_inner = new ArrayList<>();
+            bandaraAsal_inner = new ArrayList<>();
             bandaraAsal_inner.add("Soekarno Hatta International Airport (CGK)");
             bandaraAsal_inner.add("Doha International Airport (DIA)");
             bandaraAsal_outer.add(bandaraAsal_inner);
@@ -761,8 +821,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -793,9 +853,19 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             //Data dummy 2
 
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_inner.add("Terminal 3");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_inner.add("Terminal 2");
+            terminalDatang_outer.add(terminalDatang_inner);
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("11:30");
@@ -803,7 +873,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             waktuBerangkat_outer.add(waktuBerangkat_inner);
 //            waktuBerangkat_inner.clear(); //ngga di clear dulu karena mau calculate flight duration
 
-            bandaraTujuan_inner = new ArrayList<>();
+            bandaraAsal_inner = new ArrayList<>();
             bandaraAsal_inner.add("Soekarno Hatta International Airport (CGK)");
             bandaraAsal_inner.add("Doha International Airport (DIA)");
             bandaraAsal_outer.add(bandaraAsal_inner);
@@ -850,8 +920,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -885,9 +955,19 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_inner.add("Terminal 3");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_inner.add("Terminal 2");
+            terminalDatang_outer.add(terminalDatang_inner);
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("22:30");
@@ -942,8 +1022,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -975,9 +1055,19 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggalPulang);
-            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggal);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
+
+            terminalBerangkat_inner = new ArrayList<>();
+            terminalBerangkat_inner.add("Terminal 2");
+            terminalBerangkat_inner.add("Terminal 3");
+            terminalBerangkat_outer.add(terminalBerangkat_inner);
+
+            terminalDatang_inner = new ArrayList<>();
+            terminalDatang_inner.add("Terminal 1");
+            terminalDatang_inner.add("Terminal 2");
+            terminalDatang_outer.add(terminalDatang_inner);
 
             waktuBerangkat_inner = new ArrayList<>();
             waktuBerangkat_inner.add("22:30");
@@ -1032,8 +1122,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggalPulang);
-            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggal);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -1060,8 +1150,11 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             Log.i("POPULATE DONE", "INSIDE");        }
 
         Log.i("POPULATE DONE", "OUTSIDE");
+        Log.i("POPULATE HARGA", harga.toString());
         RecyclerAdapterPlaneTicket_v2 recyclerAdapterPlaneTicket_v2 = new RecyclerAdapterPlaneTicket_v2(kodePenerbangan_outer, logoMaskapai_outer,  namaMaskapai_outer,  waktuBerangkat_outer,  bandaraAsal_outer,  kabin_outer,  bagasi_outer, booleanMakan_outer, keteranganMakan_outer,  modelPesawat_outer, durasi_outer,  waktuDatang_outer, bandaraTujuan_outer,  tanggalBerangkat_outer, tanggalDatang_outer, testCovid,  harga,  jumlahpax);
         binding.RecycleViewTicket.setAdapter(recyclerAdapterPlaneTicket_v2);
+
+
 
 
     }
