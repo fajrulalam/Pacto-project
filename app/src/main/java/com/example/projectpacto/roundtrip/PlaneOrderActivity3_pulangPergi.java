@@ -1044,6 +1044,30 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             this.kotaTujuan_pulang = kotaTujuan_pulang;
         }
 
+        public String getJmlDewasa() {
+            return jmlDewasa;
+        }
+
+        public void setJmlDewasa(String jmlDewasa) {
+            this.jmlDewasa = jmlDewasa;
+        }
+
+        public String getJmlAnak() {
+            return jmlAnak;
+        }
+
+        public void setJmlAnak(String jmlAnak) {
+            this.jmlAnak = jmlAnak;
+        }
+
+        public String getJmlBalita() {
+            return jmlBalita;
+        }
+
+        public void setJmlBalita(String jmlBalita) {
+            this.jmlBalita = jmlBalita;
+        }
+
         public ArrayList<String> getTerminalBerangkat() {
             return terminalBerangkat;
         }
