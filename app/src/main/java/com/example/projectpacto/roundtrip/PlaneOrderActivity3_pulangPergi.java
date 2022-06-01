@@ -620,7 +620,7 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
                     Date date1 = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat_str);
                     Date date2 = new SimpleDateFormat("E, dd MMM yyyy", lokal).parse(tanggalBerangkat_str_pulang);
                     waktuArsip = date1.getTime() + 86400000;
-                    waktuArsip = date2.getTime() + 86400000;
+                    waktuArsip_pulang = date2.getTime() + 86400000;
                 } catch (ParseException parseException) {
                     parseException.printStackTrace();
                 }
