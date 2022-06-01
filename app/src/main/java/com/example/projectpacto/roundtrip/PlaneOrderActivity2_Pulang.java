@@ -218,6 +218,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             kedatangan = extras.getString("keberangkatan");
             tanggal = extras.getString("tanggal");
             tanggalPulang = extras.getString("tanggal_pulang");
+            Log.i("Str tanggal_pulang", tanggalPulang +"tes");
+            Log.i("TANGGAL PULANG", tanggalPulang + "tgl Pulang");
             penumpang = extras.getString("penumpang");
             kota_keberangkatan = extras.getString("kota_kedatangan"); //kota kedatangan dan keberangkatan di balik
             kota_kedatangan = extras.getString("kota_keberangkatan");
@@ -396,7 +398,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner = new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -455,7 +457,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
 
             tanggalDatang_inner = new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
 
@@ -487,7 +489,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             //Data dummy 2
 
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -541,7 +543,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -576,7 +578,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner = new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -635,7 +637,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
 
             tanggalDatang_inner = new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
 
@@ -667,7 +669,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             //Data dummy 2
 
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -721,7 +723,7 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -753,8 +755,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -821,8 +823,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -853,8 +855,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             //Data dummy 2
 
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -920,8 +922,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -955,8 +957,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -1022,8 +1024,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();
@@ -1055,8 +1057,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
 
             //Data dummy 1
             tanggalBerangkat_inner= new ArrayList<>();
-            tanggalBerangkat_inner.add(tanggal);
-            tanggalBerangkat_inner.add(tanggal);
+            tanggalBerangkat_inner.add(tanggalPulang);
+            tanggalBerangkat_inner.add(tanggalPulang);
             tanggalBerangkat_outer.add(tanggalBerangkat_inner);
 
             terminalBerangkat_inner = new ArrayList<>();
@@ -1122,8 +1124,8 @@ public class PlaneOrderActivity2_Pulang extends AppCompatActivity {
             modelPesawat_outer.add(modelPesawat_inner);
 
             tanggalDatang_inner= new ArrayList<>();
-            tanggalDatang_inner.add(tanggal);
-            tanggalDatang_inner.add(tanggal);
+            tanggalDatang_inner.add(tanggalPulang);
+            tanggalDatang_inner.add(tanggalPulang);
             tanggalDatang_outer.add(tanggalDatang_inner);
 
             waktuDatang_inner = new ArrayList<>();

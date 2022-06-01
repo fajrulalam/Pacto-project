@@ -44,6 +44,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     String decrypt;
 
+    boolean pulangPergi;
+
     String hargaPesawat;
 
     int gambarKamar;
@@ -186,8 +188,9 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Map<String, Object> map = documentSnapshot.getData();
-                    hargaPesawat = map.get("hargaTotal").toString();
-                    namaHotel = map.get("kodePenerbangan").toString();
+                    hargaPesawat = map.get("grand_total").toString();
+                    namaHotel = ((ArrayList<String>) map.get("kodePenerbangan_ArrayList")).get(0);
+                    pulangPergi = (boolean) map.get("pulangPergi");
                     if (hargaPesawat.matches("")){
                         hargaPesawat = map.get("harga").toString();
                     }
@@ -471,11 +474,28 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 public void onSuccess(DocumentReference documentReference) {
                     fs.collection("user").document(userID).update("kredit", FieldValue.increment(hargaPesawat_int));
                     fs.collection("bookingHistory").document(documentID).update("status", "Issued");
-                    Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
+
+
+                    if (pulangPergi == false){
+                        Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                    } else {
+
+                        //add two new records, one for pergi and one for pulang
+                        addPulangPergiRecords();
+
+
+                    }
+//
                 }
             });
+
+
+    }
+
+
+    public void addPulangPergiRecords(){
 
 
     }
