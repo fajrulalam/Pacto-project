@@ -101,6 +101,90 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     Map<String, String> dataPenumpangMap;
 
 
+    //Informasi sintaksis Firebase
+//    boolean pulangPergi;
+    Long expTime;
+//    Long waktuArsip;
+    Long waktuArsip_pulang;
+//    private boolean ongoing;
+    private boolean ongoing_pulang;
+    private String status;
+    private String status_pulang;
+//    private String userID;
+    private String tipePesanan;
+//    private String timeStampPesanan;
+
+    //Primary keys
+    ArrayList<String> bookingCode_pergi;
+    ArrayList<String> bookingCode_pulang;
+
+
+    //Penumpang
+    private List<Map<String, String>> penumpang;
+    String rincianPenumpang;
+    String jmlDewasa;
+    String jmlAnak;
+    String jmlBalita;
+
+
+    //harga
+    String harga_dewasa;
+    String harga_balita;
+    String harga_dewasa_pulang;
+    String harga_balita_pulang;
+    String harga_total_pergi;
+    String harga_total_pulang;
+    String grand_total;
+
+    //Pergi
+    ArrayList<String> tanggalBerangkat_ArrayList;
+    ArrayList<String> waktuBerangkat_ArrayList;
+    ArrayList<String> bandaraAsal_ArrayList;
+    ArrayList<Integer> logoMaskapai_ArrayList;
+    ArrayList<String> namaMaskapai_ArrayList;
+    ArrayList<String> kodePenerbangan_ArrayList;
+    ArrayList<String> kelasPesawat_ArrayList;
+    ArrayList<String> tanggalDatang_ArrayList;
+    ArrayList<String> waktuDatang_ArrayList;
+    ArrayList<String> bandaraTujuan_ArrayList;
+    ArrayList<String> kabin_ArrayList;
+    ArrayList<String> bagasi_ArrayList;
+    ArrayList<Integer> booleanMakan_ArrayList;
+    ArrayList<String> keteranganMakan_ArrayList;
+    ArrayList<String> modelPesawat_ArrayList;
+    ArrayList<String> durasi_ArrayList;
+    ArrayList<String> terminalBerangkat;
+    ArrayList<String> terminalDatang;
+    String tanggalPulang;
+    String kotaAsal;
+    String kotaTujuan;
+
+
+    //Pergi
+    ArrayList<String> tanggalBerangkat_ArrayList_pulang;
+    ArrayList<String> waktuBerangkat_ArrayList_pulang;
+    ArrayList<String> bandaraAsal_ArrayList_pulang;
+    ArrayList<Integer> logoMaskapai_ArrayList_pulang;
+    ArrayList<String> namaMaskapai_ArrayList_pulang;
+    ArrayList<String> kodePenerbangan_ArrayList_pulang;
+    ArrayList<String> kelasPesawat_ArrayList_pulang;
+    ArrayList<String> tanggalDatang_ArrayList_pulang;
+    ArrayList<String> waktuDatang_ArrayList_pulang;
+    ArrayList<String> bandaraTujuan_ArrayList_pulang;
+    ArrayList<String> kabin_ArrayList_pulang;
+    ArrayList<String> bagasi_ArrayList_pulang;
+    ArrayList<Integer> booleanMakan_ArrayList_pulang;
+    ArrayList<String> keteranganMakan_ArrayList_pulang;
+    ArrayList<String> modelPesawat_ArrayList_pulang;
+    ArrayList<String> durasi_ArrayList_pulang;
+    ArrayList<String> terminalBerangkat_pulang;
+    ArrayList<String> terminalDatang_pulang;
+    String tanggalPulang_pulang;
+    String kotaAsal_pulang;
+    String kotaTujuan_pulang;
+
+
+
 
 
     Bundle extras;
@@ -112,7 +196,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         View view = binding.getRoot();
         setContentView(view);
 
-        String tipePesanan = this.getIntent().getStringExtra("tipePesanan");
+        tipePesanan = this.getIntent().getStringExtra("tipePesanan");
         fs = FirebaseFirestore.getInstance();
         binding.pin1.requestFocus();
 
@@ -194,6 +278,91 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     if (hargaPesawat.matches("")){
                         hargaPesawat = map.get("harga").toString();
                     }
+
+
+                    //Get all
+                    //Informasi sintaksis Firebase
+                    pulangPergi = (boolean) map.get("pulangPergi");
+                    expTime = (Long) map.get("expTime");
+                    waktuArsip = (long) map.get("waktuArsip");
+                    waktuArsip_pulang = (Long) map.get("waktuArsip_pulang");
+                    ongoing = (boolean) map.get("ongoing");
+                    ongoing_pulang = (boolean) map.get("ongoing_pulang");
+                    status = (String) map.get("status");
+                    status_pulang = (String) map.get("status_pulang");
+                    userID = (String) map.get("userID");
+//                    tipePesanan = (String) map.get("tipePesanan");
+//                    timeStampPesanan = (String) map.get("timeStampPesanan");
+
+                    //Primary keys
+                    bookingCode_pergi = (ArrayList<String>) map.get("bookingCode_pergi");
+                    bookingCode_pulang = (ArrayList<String>) map.get("bookingCode_pulang");
+
+
+                    //Penumpang
+                    penumpang = (List<Map<String, String>>) map.get("penumpang");
+                    rincianPenumpang = (String) map.get("rincianPenumpang");
+                    jmlDewasa =(String) map.get("jmlDewasa");
+                    jmlAnak =(String) map.get("jmlAnak");
+                    jmlBalita =(String) map.get("jmlBalita");
+
+
+                    //harga
+                    harga_dewasa = (String) map.get("harga_dewasa");
+                    harga_balita = (String) map.get("harga_balita");
+                    harga_dewasa_pulang =(String)  map.get("harga_dewasa_pulang");
+                    harga_balita_pulang = (String) map.get("harga_balita_pulang");
+                    harga_total_pergi =(String)  map.get("harga_total_pergi");
+                    harga_total_pulang = (String) map.get("harga_total_pulang");
+                    grand_total = (String) map.get("grand_total");
+
+                    //Pergi
+                    tanggalBerangkat_ArrayList = (ArrayList<String>) map.get("tanggalBerangkat_ArrayList");
+                    waktuBerangkat_ArrayList = (ArrayList<String>) map.get("waktuBerangkat_ArrayList");
+                    bandaraAsal_ArrayList = (ArrayList<String>) map.get("bandaraAsal_ArrayList");
+                    logoMaskapai_ArrayList = (ArrayList<Integer>) map.get("logoMaskapai_ArrayList");
+                    namaMaskapai_ArrayList = (ArrayList<String>) map.get("namaMaskapai_ArrayList");
+                    kodePenerbangan_ArrayList = (ArrayList<String>) map.get("kodePenerbangan_ArrayList");
+                    kelasPesawat_ArrayList = (ArrayList<String>) map.get("kelasPesawat_ArrayList");
+                    tanggalDatang_ArrayList = (ArrayList<String>) map.get("tanggalDatang_ArrayList");
+                    waktuDatang_ArrayList = (ArrayList<String>) map.get("waktuDatang_ArrayList");
+                    bandaraTujuan_ArrayList = (ArrayList<String>) map.get("bandaraTujuan_ArrayList");
+                    kabin_ArrayList = (ArrayList<String>) map.get("kabin_ArrayList");
+                    bagasi_ArrayList = (ArrayList<String>) map.get("bagasi_ArrayList");
+                    booleanMakan_ArrayList = (ArrayList<Integer>) map.get("booleanMakan_ArrayList");
+                    keteranganMakan_ArrayList = (ArrayList<String>) map.get("keteranganMakan_ArrayList");
+                    modelPesawat_ArrayList = (ArrayList<String>) map.get("modelPesawat_ArrayList");
+                    durasi_ArrayList =(ArrayList<String>) map.get("durasi_ArrayList");
+                    terminalBerangkat = (ArrayList<String>) map.get("terminalBerangkat");
+                    terminalDatang = (ArrayList<String>) map.get("terminalDatang");
+                    tanggalPulang = (String) map.get("tanggalPulang");
+                    kotaAsal = (String) map.get("kotaAsal");
+                    kotaTujuan = (String) map.get("kotaTujuan");
+
+
+                    //Pergi
+                    tanggalBerangkat_ArrayList_pulang = (ArrayList<String>) map.get("tanggalBerangkat_ArrayList_pulang");
+                    waktuBerangkat_ArrayList_pulang = (ArrayList<String>) map.get("waktuBerangkat_ArrayList_pulang");
+                    bandaraAsal_ArrayList_pulang = (ArrayList<String>) map.get("bandaraAsal_ArrayList_pulang");
+                    logoMaskapai_ArrayList_pulang =  (ArrayList<Integer>) map.get("logoMaskapai_ArrayList_pulang");
+                    namaMaskapai_ArrayList_pulang = (ArrayList<String>) map.get("namaMaskapai_ArrayList_pulang");
+                    kodePenerbangan_ArrayList_pulang =  (ArrayList<String>) map.get("kodePenerbangan_ArrayList_pulang");
+                    kelasPesawat_ArrayList_pulang =  (ArrayList<String>) map.get("kelasPesawat_ArrayList_pulang");
+                    tanggalDatang_ArrayList_pulang = (ArrayList<String>) map.get("tanggalDatang_ArrayList_pulang");
+                    waktuDatang_ArrayList_pulang =  (ArrayList<String>) map.get("waktuDatang_ArrayList_pulang");
+                    bandaraTujuan_ArrayList_pulang =  (ArrayList<String>) map.get("bandaraTujuan_ArrayList_pulang");
+                    kabin_ArrayList_pulang = (ArrayList<String>) map.get("kabin_ArrayList_pulang");
+                    bagasi_ArrayList_pulang = (ArrayList<String>) map.get("bagasi_ArrayList_pulang");
+                    booleanMakan_ArrayList_pulang =  (ArrayList<Integer>) map.get("booleanMakan_ArrayList_pulang");
+                    keteranganMakan_ArrayList_pulang =  (ArrayList<String>) map.get("keteranganMakan_ArrayList_pulang");
+                    modelPesawat_ArrayList_pulang =  (ArrayList<String>) map.get("modelPesawat_ArrayList_pulang");
+                    durasi_ArrayList_pulang =  (ArrayList<String>) map.get("durasi_ArrayList_pulang");
+                    terminalBerangkat_pulang = (ArrayList<String>) map.get("terminalBerangkat_pulang");
+                    terminalDatang_pulang = (ArrayList<String>) map.get("terminalDatang_pulang");
+                    tanggalPulang_pulang = (String) map.get("tanggalPulang_pulang");
+                    kotaAsal_pulang = (String) map.get("kotaAsal_pulang");
+                    kotaTujuan_pulang = (String) map.get("kotaTujuan_pulang");
+
 
                 }
             });
@@ -473,7 +642,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     fs.collection("user").document(userID).update("kredit", FieldValue.increment(hargaPesawat_int));
-                    fs.collection("bookingHistory").document(documentID).update("status", "Issued");
+//                    fs.collection("bookingHistory").document(documentID).update("status", "Issued");
 
 
                     if (pulangPergi == false){
@@ -496,8 +665,495 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
 
     public void addPulangPergiRecords(){
+        FieldValue timestamp = FieldValue.serverTimestamp();
 
 
+        //Pergi
+        CreateSingleBookingData createSingleBookingData_pergi = new CreateSingleBookingData(
+                //Informasi Sintaksis
+                false, //sudah tidak pulang pergi
+                expTime, waktuArsip, ongoing,
+                "Issued",
+                userID, tipePesanan, timestamp,
+
+                //Primary Keys
+                bookingCode_pergi,
+
+                //Penumpang
+                penumpang, rincianPenumpang, jmlDewasa, jmlAnak, jmlBalita,
+
+                //harga
+                harga_dewasa, harga_balita, harga_total_pergi,
+
+                //Arraylistss
+                tanggalBerangkat_ArrayList,
+                waktuBerangkat_ArrayList,
+                bandaraAsal_ArrayList,
+                logoMaskapai_ArrayList,
+                namaMaskapai_ArrayList,
+                kodePenerbangan_ArrayList,
+                kelasPesawat_ArrayList,
+                tanggalDatang_ArrayList,
+                waktuDatang_ArrayList,
+                bandaraTujuan_ArrayList,
+                kabin_ArrayList,
+                bagasi_ArrayList,
+                booleanMakan_ArrayList,
+                keteranganMakan_ArrayList,
+                modelPesawat_ArrayList,
+                durasi_ArrayList,
+                terminalBerangkat,
+                terminalDatang,
+                kotaAsal,
+                kotaTujuan
+        );
+
+        CreateSingleBookingData createSingleBookingData_pulang = new CreateSingleBookingData(
+
+                //Informasi Sintaksis
+                false,  //sudah tidak pulang pergi
+                expTime, waktuArsip_pulang, ongoing,
+                "Issued",
+                userID, tipePesanan, timestamp,
+
+                //Primary Keys
+                bookingCode_pulang,
+
+                //Penumpang
+                penumpang, rincianPenumpang, jmlDewasa, jmlAnak, jmlBalita,
+
+                //harga
+                harga_dewasa_pulang, harga_balita_pulang, harga_total_pulang,
+
+                //Arraylistss
+                tanggalBerangkat_ArrayList_pulang,
+                waktuBerangkat_ArrayList_pulang,
+                bandaraAsal_ArrayList_pulang,
+                logoMaskapai_ArrayList_pulang,
+                namaMaskapai_ArrayList_pulang,
+                kodePenerbangan_ArrayList_pulang,
+                kelasPesawat_ArrayList_pulang,
+                tanggalDatang_ArrayList_pulang,
+                waktuDatang_ArrayList_pulang,
+                bandaraTujuan_ArrayList_pulang,
+                kabin_ArrayList_pulang,
+                bagasi_ArrayList_pulang,
+                booleanMakan_ArrayList_pulang,
+                keteranganMakan_ArrayList_pulang,
+                modelPesawat_ArrayList_pulang,
+                durasi_ArrayList_pulang,
+                terminalBerangkat_pulang,
+                terminalDatang_pulang,
+                kotaAsal_pulang,
+                kotaTujuan_pulang
+
+        );
+
+
+        fs.collection("bookingHistory").add(createSingleBookingData_pergi).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                fs.collection("bookingHistory").add(createSingleBookingData_pulang).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        fs.collection("bookingHistory").document(documentID).delete();
+                        Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                    }
+                });
+            }
+        });
+
+    }
+
+
+    public class CreateSingleBookingData {
+
+        //Informasi sintaksis Firebase
+        boolean pulangPergi;
+        Long expTime;
+        Long waktuArsip;
+        private boolean ongoing;
+        private String status;
+        private String userID;
+        private String tipePesanan;
+        private FieldValue timeStampPesanan;
+
+        //Primary keys
+        ArrayList<String> bookingCode_pergi;
+
+
+        //Penumpang
+        private List<Map<String, String>> penumpang;
+        String rincianPenumpang;
+        String jmlDewasa;
+        String jmlAnak;
+        String jmlBalita;
+
+
+        //harga
+        String harga_dewasa;
+        String harga_balita;
+        String grand_total;
+
+        //Pergi
+        ArrayList<String> tanggalBerangkat_ArrayList;
+        ArrayList<String> waktuBerangkat_ArrayList;
+        ArrayList<String> bandaraAsal_ArrayList;
+        ArrayList<Integer> logoMaskapai_ArrayList;
+        ArrayList<String> namaMaskapai_ArrayList;
+        ArrayList<String> kodePenerbangan_ArrayList;
+        ArrayList<String> kelasPesawat_ArrayList;
+        ArrayList<String> tanggalDatang_ArrayList;
+        ArrayList<String> waktuDatang_ArrayList;
+        ArrayList<String> bandaraTujuan_ArrayList;
+        ArrayList<String> kabin_ArrayList;
+        ArrayList<String> bagasi_ArrayList;
+        ArrayList<Integer> booleanMakan_ArrayList;
+        ArrayList<String> keteranganMakan_ArrayList;
+        ArrayList<String> modelPesawat_ArrayList;
+        ArrayList<String> durasi_ArrayList;
+        ArrayList<String> terminalBerangkat;
+        ArrayList<String> terminalDatang;
+        String kotaAsal;
+        String kotaTujuan;
+
+        public CreateSingleBookingData(boolean pulangPergi, Long expTime, Long waktuArsip, boolean ongoing, String status, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, List<Map<String, String>> penumpang, String rincianPenumpang, String jmlDewasa, String jmlAnak, String jmlBalita, String harga_dewasa, String harga_balita, String grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String kotaAsal, String kotaTujuan) {
+            this.pulangPergi = pulangPergi;
+            this.expTime = expTime;
+            this.waktuArsip = waktuArsip;
+            this.ongoing = ongoing;
+            this.status = status;
+            this.userID = userID;
+            this.tipePesanan = tipePesanan;
+            this.timeStampPesanan = timeStampPesanan;
+            this.bookingCode_pergi = bookingCode_pergi;
+            this.penumpang = penumpang;
+            this.rincianPenumpang = rincianPenumpang;
+            this.jmlDewasa = jmlDewasa;
+            this.jmlAnak = jmlAnak;
+            this.jmlBalita = jmlBalita;
+            this.harga_dewasa = harga_dewasa;
+            this.harga_balita = harga_balita;
+            this.grand_total = grand_total;
+            this.tanggalBerangkat_ArrayList = tanggalBerangkat_ArrayList;
+            this.waktuBerangkat_ArrayList = waktuBerangkat_ArrayList;
+            this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
+            this.logoMaskapai_ArrayList = logoMaskapai_ArrayList;
+            this.namaMaskapai_ArrayList = namaMaskapai_ArrayList;
+            this.kodePenerbangan_ArrayList = kodePenerbangan_ArrayList;
+            this.kelasPesawat_ArrayList = kelasPesawat_ArrayList;
+            this.tanggalDatang_ArrayList = tanggalDatang_ArrayList;
+            this.waktuDatang_ArrayList = waktuDatang_ArrayList;
+            this.bandaraTujuan_ArrayList = bandaraTujuan_ArrayList;
+            this.kabin_ArrayList = kabin_ArrayList;
+            this.bagasi_ArrayList = bagasi_ArrayList;
+            this.booleanMakan_ArrayList = booleanMakan_ArrayList;
+            this.keteranganMakan_ArrayList = keteranganMakan_ArrayList;
+            this.modelPesawat_ArrayList = modelPesawat_ArrayList;
+            this.durasi_ArrayList = durasi_ArrayList;
+            this.terminalBerangkat = terminalBerangkat;
+            this.terminalDatang = terminalDatang;
+            this.kotaAsal = kotaAsal;
+            this.kotaTujuan = kotaTujuan;
+        }
+
+        public boolean isPulangPergi() {
+            return pulangPergi;
+        }
+
+        public void setPulangPergi(boolean pulangPergi) {
+            this.pulangPergi = pulangPergi;
+        }
+
+        public Long getExpTime() {
+            return expTime;
+        }
+
+        public void setExpTime(Long expTime) {
+            this.expTime = expTime;
+        }
+
+        public Long getWaktuArsip() {
+            return waktuArsip;
+        }
+
+        public void setWaktuArsip(Long waktuArsip) {
+            this.waktuArsip = waktuArsip;
+        }
+
+        public boolean isOngoing() {
+            return ongoing;
+        }
+
+        public void setOngoing(boolean ongoing) {
+            this.ongoing = ongoing;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getUserID() {
+            return userID;
+        }
+
+        public void setUserID(String userID) {
+            this.userID = userID;
+        }
+
+        public String getTipePesanan() {
+            return tipePesanan;
+        }
+
+        public void setTipePesanan(String tipePesanan) {
+            this.tipePesanan = tipePesanan;
+        }
+
+        public FieldValue getTimeStampPesanan() {
+            return timeStampPesanan;
+        }
+
+        public void setTimeStampPesanan(FieldValue timeStampPesanan) {
+            this.timeStampPesanan = timeStampPesanan;
+        }
+
+        public ArrayList<String> getBookingCode_pergi() {
+            return bookingCode_pergi;
+        }
+
+        public void setBookingCode_pergi(ArrayList<String> bookingCode_pergi) {
+            this.bookingCode_pergi = bookingCode_pergi;
+        }
+
+        public List<Map<String, String>> getPenumpang() {
+            return penumpang;
+        }
+
+        public void setPenumpang(List<Map<String, String>> penumpang) {
+            this.penumpang = penumpang;
+        }
+
+        public String getRincianPenumpang() {
+            return rincianPenumpang;
+        }
+
+        public void setRincianPenumpang(String rincianPenumpang) {
+            this.rincianPenumpang = rincianPenumpang;
+        }
+
+        public String getJmlDewasa() {
+            return jmlDewasa;
+        }
+
+        public void setJmlDewasa(String jmlDewasa) {
+            this.jmlDewasa = jmlDewasa;
+        }
+
+        public String getJmlAnak() {
+            return jmlAnak;
+        }
+
+        public void setJmlAnak(String jmlAnak) {
+            this.jmlAnak = jmlAnak;
+        }
+
+        public String getJmlBalita() {
+            return jmlBalita;
+        }
+
+        public void setJmlBalita(String jmlBalita) {
+            this.jmlBalita = jmlBalita;
+        }
+
+        public String getHarga_dewasa() {
+            return harga_dewasa;
+        }
+
+        public void setHarga_dewasa(String harga_dewasa) {
+            this.harga_dewasa = harga_dewasa;
+        }
+
+        public String getHarga_balita() {
+            return harga_balita;
+        }
+
+        public void setHarga_balita(String harga_balita) {
+            this.harga_balita = harga_balita;
+        }
+
+        public String getGrand_total() {
+            return grand_total;
+        }
+
+        public void setGrand_total(String grand_total) {
+            this.grand_total = grand_total;
+        }
+
+        public ArrayList<String> getTanggalBerangkat_ArrayList() {
+            return tanggalBerangkat_ArrayList;
+        }
+
+        public void setTanggalBerangkat_ArrayList(ArrayList<String> tanggalBerangkat_ArrayList) {
+            this.tanggalBerangkat_ArrayList = tanggalBerangkat_ArrayList;
+        }
+
+        public ArrayList<String> getWaktuBerangkat_ArrayList() {
+            return waktuBerangkat_ArrayList;
+        }
+
+        public void setWaktuBerangkat_ArrayList(ArrayList<String> waktuBerangkat_ArrayList) {
+            this.waktuBerangkat_ArrayList = waktuBerangkat_ArrayList;
+        }
+
+        public ArrayList<String> getBandaraAsal_ArrayList() {
+            return bandaraAsal_ArrayList;
+        }
+
+        public void setBandaraAsal_ArrayList(ArrayList<String> bandaraAsal_ArrayList) {
+            this.bandaraAsal_ArrayList = bandaraAsal_ArrayList;
+        }
+
+        public ArrayList<Integer> getLogoMaskapai_ArrayList() {
+            return logoMaskapai_ArrayList;
+        }
+
+        public void setLogoMaskapai_ArrayList(ArrayList<Integer> logoMaskapai_ArrayList) {
+            this.logoMaskapai_ArrayList = logoMaskapai_ArrayList;
+        }
+
+        public ArrayList<String> getNamaMaskapai_ArrayList() {
+            return namaMaskapai_ArrayList;
+        }
+
+        public void setNamaMaskapai_ArrayList(ArrayList<String> namaMaskapai_ArrayList) {
+            this.namaMaskapai_ArrayList = namaMaskapai_ArrayList;
+        }
+
+        public ArrayList<String> getKodePenerbangan_ArrayList() {
+            return kodePenerbangan_ArrayList;
+        }
+
+        public void setKodePenerbangan_ArrayList(ArrayList<String> kodePenerbangan_ArrayList) {
+            this.kodePenerbangan_ArrayList = kodePenerbangan_ArrayList;
+        }
+
+        public ArrayList<String> getKelasPesawat_ArrayList() {
+            return kelasPesawat_ArrayList;
+        }
+
+        public void setKelasPesawat_ArrayList(ArrayList<String> kelasPesawat_ArrayList) {
+            this.kelasPesawat_ArrayList = kelasPesawat_ArrayList;
+        }
+
+        public ArrayList<String> getTanggalDatang_ArrayList() {
+            return tanggalDatang_ArrayList;
+        }
+
+        public void setTanggalDatang_ArrayList(ArrayList<String> tanggalDatang_ArrayList) {
+            this.tanggalDatang_ArrayList = tanggalDatang_ArrayList;
+        }
+
+        public ArrayList<String> getWaktuDatang_ArrayList() {
+            return waktuDatang_ArrayList;
+        }
+
+        public void setWaktuDatang_ArrayList(ArrayList<String> waktuDatang_ArrayList) {
+            this.waktuDatang_ArrayList = waktuDatang_ArrayList;
+        }
+
+        public ArrayList<String> getBandaraTujuan_ArrayList() {
+            return bandaraTujuan_ArrayList;
+        }
+
+        public void setBandaraTujuan_ArrayList(ArrayList<String> bandaraTujuan_ArrayList) {
+            this.bandaraTujuan_ArrayList = bandaraTujuan_ArrayList;
+        }
+
+        public ArrayList<String> getKabin_ArrayList() {
+            return kabin_ArrayList;
+        }
+
+        public void setKabin_ArrayList(ArrayList<String> kabin_ArrayList) {
+            this.kabin_ArrayList = kabin_ArrayList;
+        }
+
+        public ArrayList<String> getBagasi_ArrayList() {
+            return bagasi_ArrayList;
+        }
+
+        public void setBagasi_ArrayList(ArrayList<String> bagasi_ArrayList) {
+            this.bagasi_ArrayList = bagasi_ArrayList;
+        }
+
+        public ArrayList<Integer> getBooleanMakan_ArrayList() {
+            return booleanMakan_ArrayList;
+        }
+
+        public void setBooleanMakan_ArrayList(ArrayList<Integer> booleanMakan_ArrayList) {
+            this.booleanMakan_ArrayList = booleanMakan_ArrayList;
+        }
+
+        public ArrayList<String> getKeteranganMakan_ArrayList() {
+            return keteranganMakan_ArrayList;
+        }
+
+        public void setKeteranganMakan_ArrayList(ArrayList<String> keteranganMakan_ArrayList) {
+            this.keteranganMakan_ArrayList = keteranganMakan_ArrayList;
+        }
+
+        public ArrayList<String> getModelPesawat_ArrayList() {
+            return modelPesawat_ArrayList;
+        }
+
+        public void setModelPesawat_ArrayList(ArrayList<String> modelPesawat_ArrayList) {
+            this.modelPesawat_ArrayList = modelPesawat_ArrayList;
+        }
+
+        public ArrayList<String> getDurasi_ArrayList() {
+            return durasi_ArrayList;
+        }
+
+        public void setDurasi_ArrayList(ArrayList<String> durasi_ArrayList) {
+            this.durasi_ArrayList = durasi_ArrayList;
+        }
+
+        public ArrayList<String> getTerminalBerangkat() {
+            return terminalBerangkat;
+        }
+
+        public void setTerminalBerangkat(ArrayList<String> terminalBerangkat) {
+            this.terminalBerangkat = terminalBerangkat;
+        }
+
+        public ArrayList<String> getTerminalDatang() {
+            return terminalDatang;
+        }
+
+        public void setTerminalDatang(ArrayList<String> terminalDatang) {
+            this.terminalDatang = terminalDatang;
+        }
+
+        public String getKotaAsal() {
+            return kotaAsal;
+        }
+
+        public void setKotaAsal(String kotaAsal) {
+            this.kotaAsal = kotaAsal;
+        }
+
+        public String getKotaTujuan() {
+            return kotaTujuan;
+        }
+
+        public void setKotaTujuan(String kotaTujuan) {
+            this.kotaTujuan = kotaTujuan;
+        }
     }
 
     public class BookingPesawat {
