@@ -35,8 +35,6 @@ public class DetailHargaBottomSheet_Pergi extends BottomSheetDialogFragment {
     RecyclerView bagasiPergi;
 
 
-
-
     //Variables
     String harga;
     String kotaAsal_str;

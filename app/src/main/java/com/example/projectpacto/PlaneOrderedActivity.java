@@ -175,6 +175,7 @@ public class PlaneOrderedActivity extends AppCompatActivity {
                         titel.add(penumpangMap.get("titel"));
 
                     }
+                    binding.harga.setText(grand_total);
                     ArrayList<String> bagasiDefault_pulang = new ArrayList<>();
                     bagasiDefault_pulang.add("kosong");
                     Log.i("NamaPenumpang", namaPenumpang.toString());
@@ -211,6 +212,7 @@ public class PlaneOrderedActivity extends AppCompatActivity {
                 detailHargaBottomSheet_pergi.show(getSupportFragmentManager(), detailHargaBottomSheet_pergi.getTag());
             }
         });
+
     }
 
     public void adjustStatus (String status) {
