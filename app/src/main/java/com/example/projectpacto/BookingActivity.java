@@ -130,13 +130,25 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.i("Document ID clicked", ""+ documentID.get(position));
-                if (pulangPergi_boolean.get(position) == true) {
+                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Belum bayar")) {
                     Intent intent = new Intent(getApplicationContext(), PlaneIssuingActivity.class);
                     intent.putExtra("documentID", documentID.get(position));
                     intent.putExtra("tipePesanan", tipePesanan.get(position));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
-                } else {
+                }
+
+                if (tipePesanan.get(position).matches("Pesawat") && !statusPesanan.get(position).matches("Belum bayar")) {
+                    Intent intent = new Intent(getApplicationContext(), PlaneOrderedActivity.class);
+                    intent.putExtra("documentID", documentID.get(position));
+                    intent.putExtra("tipePesanan", tipePesanan.get(position));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+
+
+                if (tipePesanan.get(position).matches("Hotel")) {
+
                     Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);
                     intent.putExtra("documentID", documentID.get(position));
                     intent.putExtra("tipePesanan", tipePesanan.get(position));

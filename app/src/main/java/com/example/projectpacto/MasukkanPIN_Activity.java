@@ -160,7 +160,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     String kotaTujuan;
 
 
-    //Pergi
+    //Pulang
     ArrayList<String> tanggalBerangkat_ArrayList_pulang;
     ArrayList<String> waktuBerangkat_ArrayList_pulang;
     ArrayList<String> bandaraAsal_ArrayList_pulang;

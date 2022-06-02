@@ -192,7 +192,7 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
 
     }
 
-    public class RincianHargaBagasiRecyclerAdapater extends RecyclerView.Adapter<RincianHargaBagasiRecyclerAdapater.ViewHolder>{
+    public static class RincianHargaBagasiRecyclerAdapater extends RecyclerView.Adapter<RincianHargaBagasiRecyclerAdapater.ViewHolder>{
         ArrayList<String> mtambahan_kg;
         ArrayList<String> mharga_tambahanKG;
 
@@ -224,7 +224,7 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
 
         @Override
         public int getItemCount() {
-            return harga_tambahan.size();
+            return mharga_tambahanKG.size();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {

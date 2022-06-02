@@ -313,7 +313,7 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
             return dialog;
     }
 
-    public class RecyclerAdapterFlightRoute extends RecyclerView.Adapter<RecyclerAdapterFlightRoute.ViewHolder>{
+    public static class RecyclerAdapterFlightRoute extends RecyclerView.Adapter<RecyclerAdapterFlightRoute.ViewHolder>{
 
         private ArrayList<String> tanggalBerangkat_ArrayList;
         private ArrayList<String>waktuBerangkat_ArrayList;
@@ -366,7 +366,9 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
 //            TextView kotaTujuan;
 //            TextView kotaAsal;
             holder.bandaraAsal.setText(bandaraAsal_ArrayList.get(position));
-            holder.logoMaskapai.setImageResource(logoMaskapai_ArrayList.get(position));
+            String logoMasakapai_str = logoMaskapai_ArrayList.get(position) +"";
+            Long logoMaskapai_long = Long.parseLong(logoMasakapai_str);
+            holder.logoMaskapai.setImageResource(logoMaskapai_long.intValue());
             holder.kodePenerbangan.setText(kodePenerbangan_ArrayList.get(position));
             holder.namaMaskapai.setText(namaMaskapai_ArrayList.get(position));
             holder.kabin.setText("Kabin: "+ kabin_ArrayList.get(position));
@@ -379,8 +381,9 @@ public class SelectedTicketBottomSheetFragment_v2 extends BottomSheetDialogFragm
             holder.tanggalDatang.setText(tanggalDatang_ArrayList.get(position));
             holder.waktuDatang.setText(waktuDatang_ArrayList.get(position));
             holder.bandaraTujuan.setText(bandaraTujuan_ArrayList.get(position));
-
-            if (booleanMakan_ArrayList.get(position) == 1 ){
+            String booleanMakan_str = booleanMakan_ArrayList.get(position) +"";
+            Long booleanMakan_long = Long.parseLong(logoMasakapai_str);
+            if (booleanMakan_long.intValue() == 1 ){
                 holder.makanAtauTidak.setText("Termasuk makan");
                 holder.keteranganMakanan.setText(keteranganMakan_ArrayList.get(position));
             }

@@ -304,7 +304,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
 
                     String kodeBandaraBerangkat = bandaraAsal_ArrayList.get(0).split("\\(")[1].replace(")", "");
                     String kodeBandaraDatang = bandaraTujuan_ArrayList.get(bandaraTujuan_ArrayList.size() -1).split("\\(")[1].replace(")", "");
-                    DetailPenumpangRecyclerAdapter detailPenumpangRecyclerAdapter = new DetailPenumpangRecyclerAdapter(status, kodeBandaraBerangkat, kodeBandaraDatang, bagasiDefault.get(0), bagasiDefault_pulang.get(0), titel, namaPenumpang, tambahan_kg, tambahan_kg_pulang);
+                    DetailPenumpangRecyclerAdapter detailPenumpangRecyclerAdapter = new DetailPenumpangRecyclerAdapter(status, true,  kodeBandaraBerangkat, kodeBandaraDatang, bagasiDefault.get(0), bagasiDefault_pulang.get(0), titel, namaPenumpang, tambahan_kg, tambahan_kg_pulang);
                     binding.DetailPenumpangRecyclerView.setAdapter(detailPenumpangRecyclerAdapter);
 
                 }
@@ -460,9 +460,10 @@ public class PlaneIssuingActivity extends AppCompatActivity {
     }
 
 
-    public class DetailPenumpangRecyclerAdapter extends RecyclerView.Adapter<DetailPenumpangRecyclerAdapter.ViewHolder>{
+    public static class DetailPenumpangRecyclerAdapter extends RecyclerView.Adapter<DetailPenumpangRecyclerAdapter.ViewHolder>{
 
         String status;
+        boolean pulangPergi;
         String kode_bandaraAsal;
         String kode_bandaraDatang;
         String bagasi;
@@ -472,8 +473,9 @@ public class PlaneIssuingActivity extends AppCompatActivity {
         ArrayList<String> tambahan_kg;
         ArrayList<String> tambahan_kg_pulang;
 
-        public DetailPenumpangRecyclerAdapter(String status, String kode_bandaraAsal, String kode_bandaraDatang, String bagasi, String bagasi_pulang, ArrayList<String> titel, ArrayList<String> nama, ArrayList<String> tambahan_kg, ArrayList<String> tambahan_kg_pulang) {
+        public DetailPenumpangRecyclerAdapter(String status, boolean pulangPergi, String kode_bandaraAsal, String kode_bandaraDatang, String bagasi, String bagasi_pulang, ArrayList<String> titel, ArrayList<String> nama, ArrayList<String> tambahan_kg, ArrayList<String> tambahan_kg_pulang) {
             this.status = status;
+            this.pulangPergi = pulangPergi;
             this.kode_bandaraAsal = kode_bandaraAsal;
             this.kode_bandaraDatang = kode_bandaraDatang;
             this.bagasi = bagasi;
@@ -496,6 +498,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+
             int pcc = position +1;
             String nomor_titel_namaLengkap = pcc + ". " + titel.get(position) + " " + nama.get(position);
             holder.nomor_titel_namaLengkap.setText(nomor_titel_namaLengkap);
@@ -505,13 +508,19 @@ public class PlaneIssuingActivity extends AppCompatActivity {
 
             //balik arah shg bandara asal dan tujuan dibalik
             holder.kode_bandaraAsal_pulang.setText(kode_bandaraDatang);
-            holder.kode_bandaraTujuan_pulang.setText(kode_bandaraAsal);
 
             holder.bagasiDefault.setText(bagasi);
-            holder.bagasiDefault_pulang.setText(bagasi_pulang);
 
             holder.bagasiTambahan_kg.setText("+" + tambahan_kg.get(position));
-            holder.bagasiTambahan_kg_pulang.setText("+" + tambahan_kg_pulang.get(position));
+
+
+            //Pulang
+            if (pulangPergi==true) {
+                holder.pulangPergi.setVisibility(View.VISIBLE);
+                holder.bagasiDefault_pulang.setText(bagasi_pulang);
+                holder.kode_bandaraTujuan_pulang.setText(kode_bandaraAsal);
+                holder.bagasiTambahan_kg_pulang.setText("+" + tambahan_kg_pulang.get(position));
+            }
 
             if (status.matches("Issued")){
                 holder.nomorKursiLayout.setVisibility(View.VISIBLE);
@@ -538,6 +547,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
             TextView bagasiTambahan_kg;
             TextView nomorKursi;
             LinearLayout nomorKursiLayout;
+            LinearLayout pulangPergi;
 
             TextView kode_bandaraAsal_pulang;
             TextView kode_bandaraTujuan_pulang;
@@ -552,7 +562,7 @@ public class PlaneIssuingActivity extends AppCompatActivity {
                 super(itemView);
 
                 nomor_titel_namaLengkap =  itemView.findViewById(R.id.nomor_titel_namaLengkap);
-
+                pulangPergi = itemView.findViewById(R.id.pulangPergi);
 
                 kode_bandaraAsal =  itemView.findViewById(R.id.kodeBandaraAsal);
                 kode_bandaraTujuan =  itemView.findViewById(R.id.kodeBandaraTujuan);
