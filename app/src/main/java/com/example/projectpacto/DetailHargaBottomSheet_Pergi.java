@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.projectpacto.roundtrip.DetailHarga_BottemSheet_PulangPergi;
@@ -33,6 +34,7 @@ public class DetailHargaBottomSheet_Pergi extends BottomSheetDialogFragment {
     TextView subtotalDewasa;
     TextView subtotalBalita;
     RecyclerView bagasiPergi;
+    ImageView dotpointBalita;
 
 
     //Variables
@@ -68,6 +70,7 @@ public class DetailHargaBottomSheet_Pergi extends BottomSheetDialogFragment {
         subtotalDewasa = view.findViewById(R.id.subtotalDewasa);
         subtotalBalita = view.findViewById(R.id.subtotalBalita);
         grandtotal = view.findViewById(R.id.grandtotal);
+        dotpointBalita = view.findViewById(R.id.dotpoinBalita);
 
         //RecyclerView Binding
         bagasiPergi = view.findViewById(R.id.fasilitasEkstra_Pergi_RecyclerView);
@@ -96,7 +99,9 @@ public class DetailHargaBottomSheet_Pergi extends BottomSheetDialogFragment {
 
         jmlBalita.setVisibility(View.GONE);
         subtotalBalita.setVisibility(View.GONE);
+        dotpointBalita.setVisibility(View.GONE);
         if (!jmlBalita_str.matches("0")){
+            dotpointBalita.setVisibility(View.VISIBLE);
             jmlBalita.setVisibility(View.VISIBLE);
             subtotalBalita.setVisibility(View.VISIBLE);
             subtotalBalita.setText(harga_balita);

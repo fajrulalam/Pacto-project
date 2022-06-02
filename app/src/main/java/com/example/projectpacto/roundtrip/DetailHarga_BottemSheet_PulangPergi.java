@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ import java.util.ArrayList;
 public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragment {
 
     //Views
+    ImageView dotpointBalita;
+    ImageView dotpointBalita_pulang;
     TextView jmlDewasa;
     TextView jmlBalita;
     TextView jmlDewasa_pulang;
@@ -91,6 +94,8 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         subtotalBalita = view.findViewById(R.id.subtotalBalita);
         subtotalBalita_pulang = view.findViewById(R.id.subtotalBalita_pulang);
         grandtotal = view.findViewById(R.id.grandtotal);
+        dotpointBalita = view.findViewById(R.id.dotpoinBalita);
+        dotpointBalita_pulang = view.findViewById(R.id.dotpoinBalita_pulang);
 
         //RecyclerView Binding
         bagasiPulang = view.findViewById(R.id.fasilitasEkstra_Pulang_RecyclerView);
@@ -136,8 +141,12 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         jmlBalita_pulang.setVisibility(View.GONE);
         jmlBalita.setVisibility(View.GONE);
         subtotalBalita.setVisibility(View.GONE);
+        dotpointBalita.setVisibility(View.GONE);
+        dotpointBalita_pulang.setVisibility(View.GONE);
         subtotalBalita_pulang.setVisibility(View.GONE);
         if (!jmlBalita_str.matches("0")){
+            dotpointBalita.setVisibility(View.VISIBLE);
+            dotpointBalita_pulang.setVisibility(View.VISIBLE);
             jmlBalita_pulang.setVisibility(View.VISIBLE);
             jmlBalita.setVisibility(View.VISIBLE);
             subtotalBalita.setVisibility(View.VISIBLE);
@@ -170,8 +179,8 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         }
         Log.i("total bagasi pergi", "IDR " + totalBagasi );
         int harga_int = Integer.parseInt(harga.split("IDR ")[1].replace(".", ""));
-        int harga_int_pulang = Integer.parseInt(harga_pulang.split("IDR ")[1].replace(".", ""));
-        int grandTotal_int = harga_int + harga_int_pulang + totalBagasi;
+//        int harga_int_pulang = Integer.parseInt(harga_pulang.split("IDR ")[1].replace(".", ""));
+        int grandTotal_int = harga_int  + totalBagasi;
 
         String grandTotal_str = "IDR " + String.format("%,d", grandTotal_int).replace(',', '.');
 
@@ -216,7 +225,7 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
 
             if (!mharga_tambahanKG.get(position).matches("IDR 0")){
                 holder.row.setVisibility(View.VISIBLE);
-                holder.tambahan_kg.setText("Bagasi (" +mtambahan_kg.get(position)+")");
+                holder.tambahan_kg.setText("Bagasi (+" +mtambahan_kg.get(position)+")");
                 holder.harga_tambahanKG.setText(mharga_tambahanKG.get(position));
             }
 

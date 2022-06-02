@@ -53,17 +53,17 @@
                 android:layout_marginLeft="12dp"/>
 
 
-<!--            <RadioButton-->
-<!--                android:id="@+id/ubahButton"-->
-<!--                android:layout_width="60dp"-->
-<!--                android:layout_height="35dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:layout_marginLeft="12dp"-->
-<!--                style="@style/ubahButtonStyle"-->
-<!--                android:foreground="@drawable/selectable_view_notsocurved"-->
-<!--                android:text="Ubah"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:background="@drawable/curved__even_less_colorized_bg"/>-->
+            <!--            <RadioButton-->
+            <!--                android:id="@+id/ubahButton"-->
+            <!--                android:layout_width="60dp"-->
+            <!--                android:layout_height="35dp"-->
+            <!--                android:layout_marginRight="10dp"-->
+            <!--                android:layout_marginLeft="12dp"-->
+            <!--                style="@style/ubahButtonStyle"-->
+            <!--                android:foreground="@drawable/selectable_view_notsocurved"-->
+            <!--                android:text="Ubah"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:background="@drawable/curved__even_less_colorized_bg"/>-->
         </LinearLayout>
 
         <com.google.android.material.divider.MaterialDivider
@@ -91,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="16dp"
                     android:paddingBottom="17.5dp"
+                    android:paddingVertical="12dp"
                     android:orientation="vertical"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/curved_less_bg_outline">
@@ -105,7 +106,7 @@
                             android:id="@+id/kotaAsal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_medium"
                             android:paddingVertical="5dp"
                             android:paddingRight="5dp"
                             android:text="ASAL"
@@ -127,7 +128,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_toRightOf="@+id/panah"
-                            android:fontFamily="@font/roboto_regular"
+                            android:fontFamily="@font/roboto_medium"
                             android:padding="5dp"
                             android:text="TUJUAN"
                             android:textColor="@color/black"
@@ -197,9 +198,11 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingVertical="5dp"
                         android:orientation="horizontal">
 
                         <ImageView
+                            android:layout_gravity="center_vertical"
                             android:layout_width="18dp"
                             android:layout_height="19dp"
                             android:src="@drawable/ic_person"
@@ -219,6 +222,8 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:id="@+id/kreditWarning"
@@ -400,12 +405,12 @@
                         android:layout_height="1dp"
                         android:layout_weight="1"/>
 
-                    <ImageView
-                        android:id="@+id/editFasilitasEkstra"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/ic_baseline_edit_24"
-                        android:paddingHorizontal="20dp"/>
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/editFasilitasEkstra"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        android:src="@drawable/ic_baseline_edit_24"-->
+                    <!--                        android:paddingHorizontal="20dp"/>-->
 
                 </LinearLayout>
 
@@ -424,32 +429,56 @@
                         android:id="@+id/bagasiTambahan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@id/bagasi"
+                        android:layout_marginLeft="35dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="Bagasi Tambahan"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
-                    <ImageView
-                        android:id="@+id/bagasi"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginTop="10dp"
-                        android:src="@drawable/ic_bagasi" />
 
-                    <TextView
-                        android:id="@+id/hargaBagasiTambahan"
-                        android:layout_width="wrap_content"
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/bagasiTambahan"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_toRightOf="@id/bagasi"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Tambah bagasi tambahan dengan penawaran mulai dari IDR 20.000/kg"
-                        android:textColor="@color/dark_grey"
-                        android:textSize="12dp" />
+                        android:layout_below="@id/bagasiTambahan"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/bagasi"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/ic_bagasi" />
+
+                        <TextView
+                            android:id="@+id/hargaBagasiTambahan"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/bagasiTambahan"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@id/bagasi"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Tambah bagasi tambahan dengan penawaran mulai dari IDR 20.000/kg"
+                            android:textColor="@color/dark_grey"
+                            android:textSize="12dp"
+                            android:layout_weight="0.9"/>
+
+                        <ImageView
+                            android:id="@+id/tambahFasilitasEkstraButton"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="8dp"
+                            android:src="@drawable/ic_btn_add"
+                            android:layout_weight="0.1"
+                            android:layout_gravity="center_vertical"/>
+
+
+                    </LinearLayout>
+
+
+
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/BagasiRecyclerView"
@@ -517,6 +546,7 @@
 
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/detailPembayaran"
                     android:layout_width="match_parent"
                     android:paddingHorizontal="14dp"
                     android:layout_height="wrap_content"
@@ -528,8 +558,13 @@
                         android:layout_height="wrap_content"
                         android:text="Total Pembayaran"
                         android:textSize="16dp"
+                        android:layout_marginRight="5dp"
                         android:fontFamily="@font/roboto_light"
                         android:textColor="@color/dark_grey"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
 
                     <View
                         android:layout_width="0dp"

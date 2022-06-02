@@ -142,6 +142,7 @@
                     android:paddingHorizontal="5dp">
 
                     <ImageView
+                        android:id="@+id/dotpoinBalita"
                         android:layout_width="8dp"
                         android:layout_height="8dp"
                         android:background="@drawable/circle"
