@@ -630,7 +630,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements BagasiRede
 
                 PenumpangData penumpangData = new PenumpangData(
                         //Informasi sintaksis Firebase
-                        true, //boolean pulang pergi
+                        false, //boolean pulang pergi
                         expTime_long,
                         waktuArsip,
                         true, //boolean on going

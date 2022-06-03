@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjectPacto">
         <activity
+            android:name=".PlaneIssuingActivityPergi"
+            android:exported="false" />
+        <activity
             android:name=".PlaneOrderedActivity"
             android:exported="false" />
         <activity
-            android:name=".roundtrip.PlaneIssuingActivity"
+            android:name=".roundtrip.PlaneIssuingActivity_PulangPergi"
             android:exported="false" />
         <activity
             android:name=".roundtrip.PlaneOrderActivity3_pulangPergi"

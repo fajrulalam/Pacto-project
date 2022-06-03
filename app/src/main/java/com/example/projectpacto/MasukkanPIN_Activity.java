@@ -279,7 +279,41 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                         hargaPesawat = map.get("harga").toString();
                     }
 
+                    if (pulangPergi){
+                        ongoing_pulang = (boolean) map.get("ongoing_pulang");
+                        status_pulang = (String) map.get("status_pulang");
+                        bookingCode_pulang = (ArrayList<String>) map.get("bookingCode_pulang");
 
+                        //harga pulang
+                        harga_dewasa_pulang =(String)  map.get("harga_dewasa_pulang");
+                        harga_balita_pulang = (String) map.get("harga_balita_pulang");
+                        harga_total_pulang = (String) map.get("harga_total_pulang");
+
+
+                        //Pulang
+                        tanggalBerangkat_ArrayList_pulang = (ArrayList<String>) map.get("tanggalBerangkat_ArrayList_pulang");
+                        waktuBerangkat_ArrayList_pulang = (ArrayList<String>) map.get("waktuBerangkat_ArrayList_pulang");
+                        bandaraAsal_ArrayList_pulang = (ArrayList<String>) map.get("bandaraAsal_ArrayList_pulang");
+                        logoMaskapai_ArrayList_pulang =  (ArrayList<Integer>) map.get("logoMaskapai_ArrayList_pulang");
+                        namaMaskapai_ArrayList_pulang = (ArrayList<String>) map.get("namaMaskapai_ArrayList_pulang");
+                        kodePenerbangan_ArrayList_pulang =  (ArrayList<String>) map.get("kodePenerbangan_ArrayList_pulang");
+                        kelasPesawat_ArrayList_pulang =  (ArrayList<String>) map.get("kelasPesawat_ArrayList_pulang");
+                        tanggalDatang_ArrayList_pulang = (ArrayList<String>) map.get("tanggalDatang_ArrayList_pulang");
+                        waktuDatang_ArrayList_pulang =  (ArrayList<String>) map.get("waktuDatang_ArrayList_pulang");
+                        bandaraTujuan_ArrayList_pulang =  (ArrayList<String>) map.get("bandaraTujuan_ArrayList_pulang");
+                        kabin_ArrayList_pulang = (ArrayList<String>) map.get("kabin_ArrayList_pulang");
+                        bagasi_ArrayList_pulang = (ArrayList<String>) map.get("bagasi_ArrayList_pulang");
+                        booleanMakan_ArrayList_pulang =  (ArrayList<Integer>) map.get("booleanMakan_ArrayList_pulang");
+                        keteranganMakan_ArrayList_pulang =  (ArrayList<String>) map.get("keteranganMakan_ArrayList_pulang");
+                        modelPesawat_ArrayList_pulang =  (ArrayList<String>) map.get("modelPesawat_ArrayList_pulang");
+                        durasi_ArrayList_pulang =  (ArrayList<String>) map.get("durasi_ArrayList_pulang");
+                        terminalBerangkat_pulang = (ArrayList<String>) map.get("terminalBerangkat_pulang");
+                        terminalDatang_pulang = (ArrayList<String>) map.get("terminalDatang_pulang");
+                        tanggalPulang_pulang = (String) map.get("tanggalPulang_pulang");
+                        kotaAsal_pulang = (String) map.get("kotaAsal_pulang");
+                        kotaTujuan_pulang = (String) map.get("kotaTujuan_pulang");
+
+                    }
                     //Get all
                     //Informasi sintaksis Firebase
                     pulangPergi = (boolean) map.get("pulangPergi");
@@ -287,16 +321,13 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     waktuArsip = (long) map.get("waktuArsip");
                     waktuArsip_pulang = (Long) map.get("waktuArsip_pulang");
                     ongoing = (boolean) map.get("ongoing");
-                    ongoing_pulang = (boolean) map.get("ongoing_pulang");
                     status = (String) map.get("status");
-                    status_pulang = (String) map.get("status_pulang");
                     userID = (String) map.get("userID");
 //                    tipePesanan = (String) map.get("tipePesanan");
 //                    timeStampPesanan = (String) map.get("timeStampPesanan");
 
                     //Primary keys
                     bookingCode_pergi = (ArrayList<String>) map.get("bookingCode_pergi");
-                    bookingCode_pulang = (ArrayList<String>) map.get("bookingCode_pulang");
 
 
                     //Penumpang
@@ -310,10 +341,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     //harga
                     harga_dewasa = (String) map.get("harga_dewasa");
                     harga_balita = (String) map.get("harga_balita");
-                    harga_dewasa_pulang =(String)  map.get("harga_dewasa_pulang");
-                    harga_balita_pulang = (String) map.get("harga_balita_pulang");
                     harga_total_pergi =(String)  map.get("harga_total_pergi");
-                    harga_total_pulang = (String) map.get("harga_total_pulang");
                     grand_total = (String) map.get("grand_total");
 
                     //Pergi
@@ -340,28 +368,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     kotaTujuan = (String) map.get("kotaTujuan");
 
 
-                    //Pergi
-                    tanggalBerangkat_ArrayList_pulang = (ArrayList<String>) map.get("tanggalBerangkat_ArrayList_pulang");
-                    waktuBerangkat_ArrayList_pulang = (ArrayList<String>) map.get("waktuBerangkat_ArrayList_pulang");
-                    bandaraAsal_ArrayList_pulang = (ArrayList<String>) map.get("bandaraAsal_ArrayList_pulang");
-                    logoMaskapai_ArrayList_pulang =  (ArrayList<Integer>) map.get("logoMaskapai_ArrayList_pulang");
-                    namaMaskapai_ArrayList_pulang = (ArrayList<String>) map.get("namaMaskapai_ArrayList_pulang");
-                    kodePenerbangan_ArrayList_pulang =  (ArrayList<String>) map.get("kodePenerbangan_ArrayList_pulang");
-                    kelasPesawat_ArrayList_pulang =  (ArrayList<String>) map.get("kelasPesawat_ArrayList_pulang");
-                    tanggalDatang_ArrayList_pulang = (ArrayList<String>) map.get("tanggalDatang_ArrayList_pulang");
-                    waktuDatang_ArrayList_pulang =  (ArrayList<String>) map.get("waktuDatang_ArrayList_pulang");
-                    bandaraTujuan_ArrayList_pulang =  (ArrayList<String>) map.get("bandaraTujuan_ArrayList_pulang");
-                    kabin_ArrayList_pulang = (ArrayList<String>) map.get("kabin_ArrayList_pulang");
-                    bagasi_ArrayList_pulang = (ArrayList<String>) map.get("bagasi_ArrayList_pulang");
-                    booleanMakan_ArrayList_pulang =  (ArrayList<Integer>) map.get("booleanMakan_ArrayList_pulang");
-                    keteranganMakan_ArrayList_pulang =  (ArrayList<String>) map.get("keteranganMakan_ArrayList_pulang");
-                    modelPesawat_ArrayList_pulang =  (ArrayList<String>) map.get("modelPesawat_ArrayList_pulang");
-                    durasi_ArrayList_pulang =  (ArrayList<String>) map.get("durasi_ArrayList_pulang");
-                    terminalBerangkat_pulang = (ArrayList<String>) map.get("terminalBerangkat_pulang");
-                    terminalDatang_pulang = (ArrayList<String>) map.get("terminalDatang_pulang");
-                    tanggalPulang_pulang = (String) map.get("tanggalPulang_pulang");
-                    kotaAsal_pulang = (String) map.get("kotaAsal_pulang");
-                    kotaTujuan_pulang = (String) map.get("kotaTujuan_pulang");
+
 
 
                 }
@@ -642,10 +649,10 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 @Override
                 public void onSuccess(DocumentReference documentReference) {
                     fs.collection("user").document(userID).update("kredit", FieldValue.increment(hargaPesawat_int));
-//                    fs.collection("bookingHistory").document(documentID).update("status", "Issued");
 
 
                     if (pulangPergi == false){
+                        fs.collection("bookingHistory").document(documentID).update("status", "Issued");
                         Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
                         startActivity(intent);
                         overridePendingTransition(0, 0);
@@ -708,62 +715,81 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 kotaTujuan
         );
 
-        CreateSingleBookingData createSingleBookingData_pulang = new CreateSingleBookingData(
+        if (pulangPergi) {
+            CreateSingleBookingData createSingleBookingData_pulang = new CreateSingleBookingData(
 
-                //Informasi Sintaksis
-                false,  //sudah tidak pulang pergi
-                expTime, waktuArsip_pulang, ongoing,
-                "Issued",
-                userID, tipePesanan, timestamp,
+                    //Informasi Sintaksis
+                    false,  //sudah tidak pulang pergi
+                    expTime, waktuArsip_pulang, ongoing,
+                    "Issued",
+                    userID, tipePesanan, timestamp,
 
-                //Primary Keys
-                bookingCode_pulang,
+                    //Primary Keys
+                    bookingCode_pulang,
 
-                //Penumpang
-                penumpang, rincianPenumpang, jmlDewasa, jmlAnak, jmlBalita,
+                    //Penumpang
+                    penumpang, rincianPenumpang, jmlDewasa, jmlAnak, jmlBalita,
 
-                //harga
-                harga_dewasa_pulang, harga_balita_pulang, harga_total_pulang,
+                    //harga
+                    harga_dewasa_pulang, harga_balita_pulang, harga_total_pulang,
 
-                //Arraylistss
-                tanggalBerangkat_ArrayList_pulang,
-                waktuBerangkat_ArrayList_pulang,
-                bandaraAsal_ArrayList_pulang,
-                logoMaskapai_ArrayList_pulang,
-                namaMaskapai_ArrayList_pulang,
-                kodePenerbangan_ArrayList_pulang,
-                kelasPesawat_ArrayList_pulang,
-                tanggalDatang_ArrayList_pulang,
-                waktuDatang_ArrayList_pulang,
-                bandaraTujuan_ArrayList_pulang,
-                kabin_ArrayList_pulang,
-                bagasi_ArrayList_pulang,
-                booleanMakan_ArrayList_pulang,
-                keteranganMakan_ArrayList_pulang,
-                modelPesawat_ArrayList_pulang,
-                durasi_ArrayList_pulang,
-                terminalBerangkat_pulang,
-                terminalDatang_pulang,
-                kotaAsal_pulang,
-                kotaTujuan_pulang
+                    //Arraylistss
+                    tanggalBerangkat_ArrayList_pulang,
+                    waktuBerangkat_ArrayList_pulang,
+                    bandaraAsal_ArrayList_pulang,
+                    logoMaskapai_ArrayList_pulang,
+                    namaMaskapai_ArrayList_pulang,
+                    kodePenerbangan_ArrayList_pulang,
+                    kelasPesawat_ArrayList_pulang,
+                    tanggalDatang_ArrayList_pulang,
+                    waktuDatang_ArrayList_pulang,
+                    bandaraTujuan_ArrayList_pulang,
+                    kabin_ArrayList_pulang,
+                    bagasi_ArrayList_pulang,
+                    booleanMakan_ArrayList_pulang,
+                    keteranganMakan_ArrayList_pulang,
+                    modelPesawat_ArrayList_pulang,
+                    durasi_ArrayList_pulang,
+                    terminalBerangkat_pulang,
+                    terminalDatang_pulang,
+                    kotaAsal_pulang,
+                    kotaTujuan_pulang
 
-        );
+            );
+
+            fs.collection("bookingHistory").add(createSingleBookingData_pergi).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    fs.collection("bookingHistory").add(createSingleBookingData_pulang).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            fs.collection("bookingHistory").document(documentID).delete();
+                            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
+                        }
+                    });
+                }
+            });
+        }
+
+        if (!pulangPergi) {
+            fs.collection("bookingHistory").add(createSingleBookingData_pergi).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                @Override
+                public void onSuccess(DocumentReference documentReference) {
+                    fs.collection("bookingHistory").document(documentID).delete();
+                    Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
 
 
-        fs.collection("bookingHistory").add(createSingleBookingData_pergi).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                fs.collection("bookingHistory").add(createSingleBookingData_pulang).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        fs.collection("bookingHistory").document(documentID).delete();
-                        Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(0, 0);
-                    }
-                });
-            }
-        });
+                }
+            });
+        }
+
+
+
+
 
     }
 

@@ -1,7 +1,6 @@
 package com.example.projectpacto;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,21 +15,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityBookingBinding;
-import com.example.projectpacto.roundtrip.PlaneIssuingActivity;
+import com.example.projectpacto.roundtrip.PlaneIssuingActivity_PulangPergi;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -130,15 +123,29 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Log.i("Document ID clicked", ""+ documentID.get(position));
-                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Belum bayar")) {
-                    Intent intent = new Intent(getApplicationContext(), PlaneIssuingActivity.class);
+
+                //Belum bayar Pulang Pergi
+                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Belum bayar") && pulangPergi_boolean.get(position)) {
+                    Intent intent = new Intent(getApplicationContext(), PlaneIssuingActivity_PulangPergi.class);
                     intent.putExtra("documentID", documentID.get(position));
                     intent.putExtra("tipePesanan", tipePesanan.get(position));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 }
 
-                if (tipePesanan.get(position).matches("Pesawat") && !statusPesanan.get(position).matches("Belum bayar")) {
+
+                //Belum bayar Pergi
+                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Belum bayar") && !pulangPergi_boolean.get(position)) {
+                    Intent intent = new Intent(getApplicationContext(), PlaneIssuingActivityPergi.class);
+                    intent.putExtra("documentID", documentID.get(position));
+                    intent.putExtra("tipePesanan", tipePesanan.get(position));
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+
+
+                //Issued.
+                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Issued")) {
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderedActivity.class);
                     intent.putExtra("documentID", documentID.get(position));
                     intent.putExtra("tipePesanan", tipePesanan.get(position));
@@ -308,6 +315,7 @@ public class BookingActivity extends AppCompatActivity {
                                     break;
                             }
                             fs.collection("bookingHistory").document(id).update("ongoing", false);
+                            Log.i("status", ""+statusPesanan);
                         }
                     }
                 }

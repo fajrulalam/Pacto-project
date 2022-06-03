@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.projectpacto.databinding.ActivityPlaneIssuingBinding;
 import com.example.projectpacto.databinding.ActivityPlaneOrderedBinding;
-import com.example.projectpacto.roundtrip.DetailHarga_BottemSheet_PulangPergi;
-import com.example.projectpacto.roundtrip.PlaneIssuingActivity;
+import com.example.projectpacto.roundtrip.PlaneIssuingActivity_PulangPergi;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -181,7 +178,7 @@ public class PlaneOrderedActivity extends AppCompatActivity {
                     Log.i("NamaPenumpang", namaPenumpang.toString());
                     String kodeBandaraBerangkat = bandaraAsal_ArrayList.get(0).split("\\(")[1].replace(")", "");
                     String kodeBandaraDatang = bandaraTujuan_ArrayList.get(bandaraTujuan_ArrayList.size() -1).split("\\(")[1].replace(")", "");
-                    PlaneIssuingActivity.DetailPenumpangRecyclerAdapter detailPenumpangRecyclerAdapter = new PlaneIssuingActivity.DetailPenumpangRecyclerAdapter(status, false, kodeBandaraBerangkat, kodeBandaraDatang, bagasi_ArrayList.get(0), bagasiDefault_pulang.get(0), titel, namaPenumpang, tambahan_kg, tambahan_kg_pulang);
+                    PlaneIssuingActivity_PulangPergi.DetailPenumpangRecyclerAdapter detailPenumpangRecyclerAdapter = new PlaneIssuingActivity_PulangPergi.DetailPenumpangRecyclerAdapter(status, false, kodeBandaraBerangkat, kodeBandaraDatang, bagasi_ArrayList.get(0), bagasiDefault_pulang.get(0), titel, namaPenumpang, tambahan_kg, tambahan_kg_pulang);
                     binding.DetailPenumpangRecyclerView.setAdapter(detailPenumpangRecyclerAdapter);
 
 
