@@ -51,6 +51,8 @@ dependencies {
 
     implementation 'com.scottyab:aescrypt:0.0.1'
 
+//    implementation 'com.google.android.gms:play-services-map:16.0.0'
+
 
 
     implementation 'com.squareup.picasso:picasso:2.71828'

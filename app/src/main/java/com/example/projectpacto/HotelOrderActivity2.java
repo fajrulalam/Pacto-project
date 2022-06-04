@@ -128,10 +128,13 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                 bundle.putString("jumlahKamar", jumlahKamar);
                 bundle.putString("jumlahMalam", jumlahMalam);
                 bundle.putString("kotaAtauHotel", hotelAtauKota_srch);
-
-                HotelSelected_BottomSheet hotelSelected_bottomSheet = new HotelSelected_BottomSheet();
-                hotelSelected_bottomSheet.setArguments(bundle);
-                hotelSelected_bottomSheet.show(getSupportFragmentManager(), hotelSelected_bottomSheet.getTag());
+                Intent intent = new Intent(getApplicationContext(), HotelSelected_Activity.class);
+                intent.putExtra("bundle", bundle);
+                startActivity(intent);
+//
+//                HotelSelected_BottomSheet hotelSelected_bottomSheet = new HotelSelected_BottomSheet();
+//                hotelSelected_bottomSheet.setArguments(bundle);
+//                hotelSelected_bottomSheet.show(getSupportFragmentManager(), hotelSelected_bottomSheet.getTag());
 
 
             }
