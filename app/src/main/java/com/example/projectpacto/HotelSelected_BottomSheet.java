@@ -12,11 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.ArrayList;
 
 
 public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
@@ -34,6 +37,8 @@ public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
 
     TextView namaHotel_txt;
     TextView alamatTambahan_txt;
+    RelativeLayout fotoGaleri;
+
 
 
     public HotelSelected_BottomSheet() {
@@ -72,6 +77,24 @@ public class HotelSelected_BottomSheet extends BottomSheetDialogFragment {
         namaHotel_txt.setText(namaHotel);
         alamatTambahan_txt = view.findViewById(R.id.alamatTambahan);
         alamatTambahan_txt.setText(tambahanAlamat);
+
+        fotoGaleri = view.findViewById(R.id.fotogallery);
+        ArrayList<Integer> gambar = new ArrayList<>();
+        gambar.add(R.drawable.hotel_fasilitas1);
+        gambar.add(R.drawable.hotel_fasilitas2);
+        gambar.add(R.drawable.hotel_fasilitas3);
+        gambar.add(R.drawable.hotel_fasilitas4);
+
+        fotoGaleri.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putIntegerArrayList("gambar", gambar);
+                GaleriFotoHotelFragment galeriFotoHotelFragment = new GaleriFotoHotelFragment();
+                galeriFotoHotelFragment.setArguments(bundle);
+                galeriFotoHotelFragment.show(getActivity().getSupportFragmentManager(), galeriFotoHotelFragment.getTag());
+            }
+        });
 
 
 
