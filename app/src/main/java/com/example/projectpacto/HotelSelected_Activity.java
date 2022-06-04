@@ -67,6 +67,11 @@ public class HotelSelected_Activity extends AppCompatActivity {
         gambar.add(R.drawable.hotel_fasilitas2);
         gambar.add(R.drawable.hotel_fasilitas3);
         gambar.add(R.drawable.hotel_fasilitas4);
+        gambar.add(R.drawable.hotel_fasilitas1);
+        gambar.add(R.drawable.hotel_fasilitas2);
+        gambar.add(R.drawable.hotel_fasilitas3);
+        gambar.add(R.drawable.hotel_fasilitas4);
+
 
 
         fotoGaleri.setOnClickListener(new View.OnClickListener() {

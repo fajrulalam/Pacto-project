@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="700dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
     tools:context=".FotoHotelGallery_BottomSheet">
 
     <LinearLayout
@@ -19,8 +20,6 @@
             android:layout_height="wrap_content"
             android:padding="6dp"
             android:orientation="horizontal">
-
-
 
 
             <LinearLayout
@@ -91,7 +90,14 @@
             android:paddingBottom="10dp"
             android:layout_marginLeft="7dp"
             android:layout_marginRight="7dp"
-            android:layout_marginBottom="30dp"/>
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:background="@color/dark_grey"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

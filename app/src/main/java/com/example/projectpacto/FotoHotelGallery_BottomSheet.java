@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -35,6 +36,10 @@ public class FotoHotelGallery_BottomSheet extends BottomSheetDialogFragment {
         final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
         final View view = View.inflate(getContext(), R.layout.fragment_foto_hotel_gallery__bottom_sheet, null);
         dialog.setContentView(view);
+
+        BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) view.getParent());
+        bottomSheetBehavior.setPeekHeight(3000);
+        bottomSheetBehavior.setMaxHeight(2100);
 
         Bundle bundle = getArguments();
         ArrayList<Integer> gambar = new ArrayList<>();
