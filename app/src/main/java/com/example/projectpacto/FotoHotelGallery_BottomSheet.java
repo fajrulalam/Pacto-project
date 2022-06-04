@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -59,6 +60,18 @@ public class FotoHotelGallery_BottomSheet extends BottomSheetDialogFragment {
 
         RecyclerAdapterFotoLainnya recyclerAdapterFotoLainnya = new RecyclerAdapterFotoLainnya(gambar);
         fotoRecyclerView.setAdapter(recyclerAdapterFotoLainnya);
+
+
+        ItemClickSupport.addTo(fotoRecyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                int pcc = position;
+                bundle.putInt("pcc", pcc);
+                GaleriFotoHotelFragment galeriFotoHotelFragment = new GaleriFotoHotelFragment();
+                galeriFotoHotelFragment.setArguments(bundle);
+                galeriFotoHotelFragment.show(getActivity().getSupportFragmentManager(), galeriFotoHotelFragment.getTag());
+            }
+        });
 
 
 

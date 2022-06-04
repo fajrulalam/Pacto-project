@@ -39,9 +39,10 @@ public class GaleriFotoHotelFragment extends AppCompatDialogFragment {
         gambar = view.findViewById(R.id.image);
 
         ArrayList<Integer> gambarIntegerArrayList = getArguments().getIntegerArrayList("gambar");
+        int pcc = getArguments().getInt("pcc");
 
-        gambar.setImageResource(gambarIntegerArrayList.get(0));
-        final int[] current = {0};
+        gambar.setImageResource(gambarIntegerArrayList.get(pcc));
+        final int[] current = {pcc};
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

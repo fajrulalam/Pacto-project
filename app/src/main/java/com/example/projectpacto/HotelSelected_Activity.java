@@ -27,6 +27,7 @@ public class HotelSelected_Activity extends AppCompatActivity {
     TextView namaHotel_txt;
     TextView alamatTambahan_txt;
     RelativeLayout fotoGaleri;
+    TextView jumlahFotoLain;
 
 
     @Override
@@ -52,6 +53,7 @@ public class HotelSelected_Activity extends AppCompatActivity {
         namaHotel_txt.setText(namaHotel);
         alamatTambahan_txt = findViewById(R.id.alamatTambahan);
         alamatTambahan_txt.setText(tambahanAlamat);
+        jumlahFotoLain = findViewById(R.id.jumlahfotolain);
 
         fotoGaleri = findViewById(R.id.fotogallery);
         ArrayList<Integer> gambar = new ArrayList<>();
@@ -71,6 +73,8 @@ public class HotelSelected_Activity extends AppCompatActivity {
         gambar.add(R.drawable.hotel_fasilitas2);
         gambar.add(R.drawable.hotel_fasilitas3);
         gambar.add(R.drawable.hotel_fasilitas4);
+
+        jumlahFotoLain.setText("+ " + gambar.size() + " Lainnya");
 
 
 
