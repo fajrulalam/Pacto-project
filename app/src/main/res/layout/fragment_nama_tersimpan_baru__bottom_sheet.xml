@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:context=".DataPenumpang">
+    tools:context=".NamaTersimpanBaru_BottomSheet">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -69,14 +69,12 @@
                 android:textSize="12dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/namaTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="12dp"
-                app:endIconTint="@color/white"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/testNamaAutocompletee"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -84,7 +82,6 @@
                     android:textSize="18sp"
                     android:padding="5dp"/>
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/titelTextInput"
                 android:layout_width="match_parent"

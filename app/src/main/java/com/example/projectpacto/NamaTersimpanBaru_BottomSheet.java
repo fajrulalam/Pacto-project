@@ -39,11 +39,11 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 
-public class DataPenumpang extends BottomSheetDialogFragment {
+public class NamaTersimpanBaru_BottomSheet extends BottomSheetDialogFragment {
 
     TextView headingFragment;
     TextView penumpangNumber;
-    AutoCompleteTextView namaAutoComplete;
+    TextInputEditText namaAutoComplete;
     AutoCompleteTextView titelDropdown;
     TextInputLayout tglLahir;
     TextInputLayout kewarganegaraan;
@@ -72,7 +72,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
 
 
 
-    public DataPenumpang() {
+    public NamaTersimpanBaru_BottomSheet() {
         // Required empty public constructor
     }
 
@@ -80,7 +80,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        final View view = View.inflate(getContext(), R.layout.fragment_data_penumpang, null);
+        final View view = View.inflate(getContext(), R.layout.fragment_nama_tersimpan_baru__bottom_sheet, null);
         dialog.setContentView(view);
         Bundle bundle = this.getArguments();
 
@@ -103,11 +103,11 @@ public class DataPenumpang extends BottomSheetDialogFragment {
 
 
 
-        nama_namaTersimpan = bundle.getStringArrayList("nama_namaTersimpan");
-        tglLahir_namaTersimpan = bundle.getStringArrayList("tglLahir_namaTersimpan");
-        titel_namaTersimpan = bundle.getStringArrayList("titel_namaTersimpan");
-        kewarganegaraan_namaTersimpan = bundle.getStringArrayList("kewarganegaraan_namaTersimpan");
-        NIKatauPaspor_namaTersimpan = bundle.getStringArrayList("NIKatauPaspor_namaTersimpan");
+//        nama_namaTersimpan = bundle.getStringArrayList("nama_namaTersimpan");
+//        tglLahir_namaTersimpan = bundle.getStringArrayList("tglLahir_namaTersimpan");
+//        titel_namaTersimpan = bundle.getStringArrayList("titel_namaTersimpan");
+//        kewarganegaraan_namaTersimpan = bundle.getStringArrayList("kewarganegaraan_namaTersimpan");
+//        NIKatauPaspor_namaTersimpan = bundle.getStringArrayList("NIKatauPaspor_namaTersimpan");
         tglLahir_str = bundle.getString("tglLahir_str");
         nama_str = bundle.getString("nama_str");
         kewarganegaraan_str = bundle.getString("kewarganegaraan_str");
@@ -127,7 +127,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         NIKatauPaspor.setText(NIKatauPaspor_str);
         Log.i("NIK/PASSOPRT RECEIVE", NIKatauPaspor.getText().toString());
 
-        Locale locale = new Locale("id", "ID");
+        Locale lokale = new Locale("id", "ID");
 
         MaterialDatePicker datePicker_start = MaterialDatePicker.Builder.datePicker()
                 .setTitleText("Pilih Tanggal Keberangkatan").build();
@@ -142,7 +142,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                         public void onPositiveButtonClick(Object selection) {
                             long epoch_long = Long.parseLong(selection.toString());
                             ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
-                            String tglLahir_str = dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", locale));
+                            String tglLahir_str = dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", lokale));
                             tglLahir.getEditText().setText(tglLahir_str);
                         }
                     });
@@ -159,7 +159,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                     public void onPositiveButtonClick(Object selection) {
                         long epoch_long = Long.parseLong(selection.toString());
                         ZonedDateTime dateTime= Instant.ofEpochMilli(epoch_long).atZone(ZoneId.of("Asia/Jakarta"));
-                        String tglLahir_str = dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", locale));
+                        String tglLahir_str = dateTime.format(DateTimeFormatter.ofPattern("dd MMMM yyyy", lokale));
                         tglLahir.getEditText().setText(tglLahir_str);
                     }
                 });
@@ -174,11 +174,6 @@ public class DataPenumpang extends BottomSheetDialogFragment {
         } else {
             penumpangNumber.setText(bundle.getString("penumpangKe_n"));
         }
-
-
-
-        ArrayAdapter arrayAdapter1 = new ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, nama_namaTersimpan);
-        namaAutoComplete.setAdapter(arrayAdapter1);
 
 
         titel = new ArrayList<>();
@@ -197,21 +192,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
             }
         });
 
-        namaAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-
-                    int index = nama_namaTersimpan.indexOf(String.valueOf(adapterView.getItemAtPosition(position)));
-                    tglLahir.getEditText().setText(tglLahir_namaTersimpan.get(index));
-                    titelDropdown.setText(titel_namaTersimpan.get(index));
-                    kewarganegaraan.getEditText().setText(kewarganegaraan_namaTersimpan.get(index));
-                    NIKatauPaspor.setText(NIKatauPaspor_namaTersimpan.get(index));
-                    Log.i("NIK/PASSOPRT INPUT", NIKatauPaspor.getText().toString());
-
-
-            }
-        });
 
         view.findViewById(R.id.actionButton_cari).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,23 +216,10 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                 try {
                     long NIKataupaspor = Long.parseLong(NIKatauPasport_str);
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Pastikan NIK atau Paspor sudah benar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Pastikan 'NIK atau No. Paspor' sudah benar", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-
-
-                if (NIKatauPaspor_namaTersimpan.indexOf(NIKatauPasport_str)==-1) {
-                    simpanPenumpangBaru simpanNamaBaru = new simpanPenumpangBaru(
-                            NIKatauPasport_str, kewarganegaraan_str, nama, tglLahir_str,titel,  userID);
-
-                    fs.collection("namaTersimpan").add(simpanNamaBaru).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(getContext(), "Data penumpang berhasil disimpan", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
 
 
                 try {
@@ -277,75 +245,10 @@ public class DataPenumpang extends BottomSheetDialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        datapasser = (DataPenumpang.OnDataPassenger) context;
+        datapasser = (NamaTersimpanBaru_BottomSheet.OnDataPassenger) context;
     }
 
-    public class  simpanPenumpangBaru {
 
-        String NIKatauPaspor;
-        String kewarganegaraan;
-        String nama;
-        String tglLahir;
-        String titel;
-        String userID;
-
-        public simpanPenumpangBaru(String NIKatauPaspor, String kewarganegaraan, String nama, String tglLahir, String titel, String userID) {
-            this.NIKatauPaspor = NIKatauPaspor;
-            this.kewarganegaraan = kewarganegaraan;
-            this.nama = nama;
-            this.tglLahir = tglLahir;
-            this.titel = titel;
-            this.userID = userID;
-        }
-
-        public String getNIKatauPaspor() {
-            return NIKatauPaspor;
-        }
-
-        public void setNIKatauPaspor(String NIKatauPaspor) {
-            this.NIKatauPaspor = NIKatauPaspor;
-        }
-
-        public String getKewarganegaraan() {
-            return kewarganegaraan;
-        }
-
-        public void setKewarganegaraan(String kewarganegaraan) {
-            this.kewarganegaraan = kewarganegaraan;
-        }
-
-        public String getNama() {
-            return nama;
-        }
-
-        public void setNama(String nama) {
-            this.nama = nama;
-        }
-
-        public String getTglLahir() {
-            return tglLahir;
-        }
-
-        public void setTglLahir(String tglLahir) {
-            this.tglLahir = tglLahir;
-        }
-
-        public String getTitel() {
-            return titel;
-        }
-
-        public void setTitel(String titel) {
-            this.titel = titel;
-        }
-
-        public String getUserID() {
-            return userID;
-        }
-
-        public void setUserID(String userID) {
-            this.userID = userID;
-        }
-    }
 
 
 }

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class NamaTersimpanActivity extends AppCompatActivity implements RecyclerAdapterNamaTersimpan.AddPassengerDetail, DataPenumpang.OnDataPassenger {
+public class NamaTersimpanActivity extends AppCompatActivity implements RecyclerAdapterNamaTersimpan.AddPassengerDetail, NamaTersimpanBaru_BottomSheet.OnDataPassenger {
 
     ActivityNamaTersimpanBinding binding;
 
@@ -72,7 +72,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         binding.tambahButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DataPenumpang dataPenumpang = new DataPenumpang();
+                NamaTersimpanBaru_BottomSheet dataPenumpang = new NamaTersimpanBaru_BottomSheet();
                 Bundle bundle = new Bundle();
                 bundle.putString("penumpangKe_n", "");
                 bundle.putString("documentID", "");
@@ -156,7 +156,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         Log.i("index battle", "tgl Lahir: " + tglLahir.size() + " || index: " + index);
 
         if (query.matches("edit")) {
-            DataPenumpang dataPenumpang = new DataPenumpang();
+            NamaTersimpanBaru_BottomSheet dataPenumpang = new NamaTersimpanBaru_BottomSheet();
             Bundle bundle = new Bundle();
             bundle.putString("penumpangKe_n", "");
             bundle.putString("documentID", documentID.get(index));
