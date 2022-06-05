@@ -133,8 +133,19 @@ public class PlaneOrderActivity1 extends AppCompatActivity implements PenumpangB
 //                tanggalBerangkat = binding.tanggalKeberangkatTextInput.getEditText().getText().toString();
                 penumpang = binding.penumpangTextInput.getEditText().getText().toString();
 
+                if (keberangkatan.matches("") || kedatangan.matches("") || tanggalBerangkat.matches("")||
+                     penumpang.matches("")){
+                    Toast.makeText(getApplicationContext(), "Pastikan semua detail sudah terisi", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if(binding.ppSwitch.isChecked()){
                     Intent intent=  new Intent(getApplicationContext(), PlaneOrderActivity2_Pergi.class);
+
+                    if (tanggalPulang.matches("")) {
+                        Toast.makeText(getApplicationContext(), "Pastikan tanggal pulang sudah terisi", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     //for testing purpose
 //                    keberangkatan = "Min, 16 Mei 2022";

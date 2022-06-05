@@ -10,6 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +27,7 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.Instant;
@@ -34,16 +39,11 @@ import java.util.Locale;
 
 public class FilterFragment extends BottomSheetDialogFragment {
 
-
-
-
-
-
-
+    TextInputLayout hargaMinimum;
+    TextInputLayout hargaMaximum;
 
     public FilterFragment() {
         // Required empty public constructor
-
 
     }
 
@@ -57,8 +57,17 @@ public class FilterFragment extends BottomSheetDialogFragment {
         final View view = View.inflate(getContext(), R.layout.fragment_filter, null);
         dialog.setContentView(view);
 
+        hargaMaximum = view.findViewById(R.id.hargaMaksimum);
+        hargaMinimum= view.findViewById(R.id.hargaMinimum);
+
+        hargaMinimum.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        hargaMinimum.getEditText().setTransformationMethod(new NumericKeyBoardTransformationMethod());
+        hargaMaximum.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        hargaMaximum.getEditText().setTransformationMethod(new NumericKeyBoardTransformationMethod());
 
 
+        hargaMinimum.getEditText().addTextChangedListener(new NumberTextWatcherForThousand( hargaMinimum.getEditText()));
+        hargaMaximum.getEditText().addTextChangedListener(new NumberTextWatcherForThousand( hargaMaximum.getEditText()));
 
 
 
@@ -133,5 +142,12 @@ public class FilterFragment extends BottomSheetDialogFragment {
         });
 
         return (int) typedArray.getDimension(0, 0);
+    }
+
+    private class NumericKeyBoardTransformationMethod extends PasswordTransformationMethod {
+        @Override
+        public CharSequence getTransformation(CharSequence source, View view) {
+            return source;
+        }
     }
 }

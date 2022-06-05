@@ -325,11 +325,6 @@ public class PlaneOrderActivity2 extends AppCompatActivity {
 
         //Displaying the Tickets.
         if (kodeBandara_berangkat.matches("SUB") && kodeBandara_datang.matches("HLP")){
-            Toast.makeText(getApplicationContext(), "MATCH ANJENG", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(), "MATCH ANJENG", Toast.LENGTH_SHORT).show();
-            Log.i("kedatangan", bandara_kedatangan);
-            Log.i("MATCH CUK", "match");
-            Log.i("keberangkatan", bandara_keberangkatan);
         }
         populateArrayLists(kodeBandara_berangkat, kodeBandara_datang);
         for (int i = 0; i <= namaMaskapai_outer.size(); i++) {
