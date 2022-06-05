@@ -20,6 +20,7 @@ public class UbahPinActivity2 extends AppCompatActivity {
 
     ActivityUbahPin2Binding binding;
     String userID;
+    String pinLama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class UbahPinActivity2 extends AppCompatActivity {
         setContentView(view);
 
         userID = this.getIntent().getStringExtra("userID");
+        pinLama = this.getIntent().getStringExtra("pin_lama");
 
         binding.pin1.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -169,7 +171,17 @@ public class UbahPinActivity2 extends AppCompatActivity {
                     mgr.hideSoftInputFromWindow(binding.pin4.getWindowToken(), 0);
 
                     String pin = binding.pin1.getText().toString() + binding.pin2.getText().toString() + binding.pin3.getText().toString() + binding.pin4.getText().toString();
-                    CheckPin(pin);
+
+                    if (!pin.matches(pinLama)) {
+                        CheckPin(pin);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Pastikan PIN berbeda dengan sebelumnya", Toast.LENGTH_SHORT).show();
+                        binding.pin1.setText("");
+                        binding.pin2.setText("");
+                        binding.pin3.setText("");
+                        binding.pin4.setText("");
+                        binding.pin1.requestFocus();
+                    }
 
 
                 }else if(editable.length() == 0)  {

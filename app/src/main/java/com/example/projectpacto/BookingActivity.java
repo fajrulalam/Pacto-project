@@ -144,14 +144,26 @@ public class BookingActivity extends AppCompatActivity {
                 }
 
 
-                //Issued.
-                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Issued")) {
+                //Plane Issued.
+                if (tipePesanan.get(position).matches("Pesawat") && ( statusPesanan.get(position).matches("Issued") || statusPesanan.get(position).matches("Selesai") || statusPesanan.get(position).matches("Dibatalkan"))) {
                     Intent intent = new Intent(getApplicationContext(), PlaneOrderedActivity.class);
                     intent.putExtra("documentID", documentID.get(position));
                     intent.putExtra("tipePesanan", tipePesanan.get(position));
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 }
+
+//                //Plane Selesai.
+//                if (tipePesanan.get(position).matches("Pesawat") && statusPesanan.get(position).matches("Selesai")) {
+//                    Intent intent = new Intent(getApplicationContext(), PlaneOrderedActivity.class);
+//                    intent.putExtra("documentID", documentID.get(position));
+//                    intent.putExtra("tipePesanan", tipePesanan.get(position));
+//                    startActivity(intent);
+//                    overridePendingTransition(0, 0);
+//                }
+
+
+
 
 
                 if (tipePesanan.get(position).matches("Hotel")) {

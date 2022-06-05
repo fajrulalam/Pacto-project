@@ -33,6 +33,8 @@ public class UbahPinActivity1 extends AppCompatActivity {
 
     String decrypt;
 
+    String pin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -194,7 +196,7 @@ public class UbahPinActivity1 extends AppCompatActivity {
                     InputMethodManager mgr = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     mgr.hideSoftInputFromWindow(binding.pin4.getWindowToken(), 0);
 
-                    String pin = binding.pin1.getText().toString() + binding.pin2.getText().toString() + binding.pin3.getText().toString() + binding.pin4.getText().toString();
+                    pin = binding.pin1.getText().toString() + binding.pin2.getText().toString() + binding.pin3.getText().toString() + binding.pin4.getText().toString();
                     decrypt(pin);
 
 
@@ -211,6 +213,8 @@ public class UbahPinActivity1 extends AppCompatActivity {
     public void CheckPin(String pin){
             Intent intent = new Intent(getApplicationContext(), UbahPinActivity2.class);
             intent.putExtra("userID", userID);
+            intent.putExtra("pin_lama", pin);
+
             startActivity(intent);
 
     }

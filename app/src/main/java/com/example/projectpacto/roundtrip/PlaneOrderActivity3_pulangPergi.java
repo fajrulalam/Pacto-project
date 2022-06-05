@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -188,6 +189,26 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
 
         fs = FirebaseFirestore.getInstance();
         String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
+
+        final int[] kredit = {0};
+        final int[] limit = {0};
+
+        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                kredit[0] = Integer.parseInt(map.get("kredit").toString());
+                limit[0] = Integer.parseInt(map.get("limit").toString());
+
+                if (kredit[0] < limit[0]) {
+                    binding.kreditWarning.setVisibility(View.VISIBLE);
+                    binding.pesanButton.setBackgroundTintList(getColorStateList(R.color.dark_grey));
+                }
+
+            }
+        });
 
 
         //FETCH Bundle -- essential for this page
@@ -594,6 +615,13 @@ public class PlaneOrderActivity3_pulangPergi extends AppCompatActivity implement
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+
+                if (kredit[0] < limit[0]) {
+                    Toast.makeText(getApplicationContext(), "Silakan hubungi admin Pacto untuk top-up kredit", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
                 Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
                 bundle.putString("status", "Belum Bayar");
                 bundle.putString("tipePesanan", "Pesawat");

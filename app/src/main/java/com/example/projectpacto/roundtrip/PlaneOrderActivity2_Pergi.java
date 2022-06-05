@@ -319,6 +319,8 @@ public class PlaneOrderActivity2_Pergi extends AppCompatActivity {
                 intent.putExtra("tanggal", tanggal);
                 intent.putExtra("tanggal_pulang", tanggalPulang);
                 intent.putExtra("penumpang", penumpang);
+                intent.putExtra("bandara_kedatangan", bandara_kedatangan);
+                intent.putExtra("bandara_keberangkatan", bandara_keberangkatan);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
