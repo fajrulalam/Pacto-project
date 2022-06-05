@@ -128,6 +128,8 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
                     }
                     RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
                     binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
+                    Log.i("TIPE Transaksi",  tipeTransaksi + " tipe transaksi");
+
                 }
             }
         });
@@ -178,11 +180,15 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
     }
 
     @Override
-    public void onDataFilterPass(String tglMulai, String tglBerakhir, String jenisTranskasi) {
+    public void onDataFilterPass(String tglMulai_str, String tglBerakhir_str, String jenisTranskasi) {
         keterangan.clear();
         tanggal.clear();
         tipeTransaksi.clear();
         nominalTransaksi.clear();
+
+        tglMulai = tglMulai_str;
+        tglBerakhir = tglBerakhir_str;
+        pemasukanAtauPengeluaran = jenisTranskasi;
 //        RecyclerAdapterTransaksi recyclerAdapterTransaksi = new RecyclerAdapterTransaksi(keterangan, tanggal, tipeTransaksi, nominalTransaksi);
 //        binding.transaksiRecyclerView.setAdapter(recyclerAdapterTransaksi);
         Long epochMulai;
@@ -368,6 +374,9 @@ public class TrankasiActivity extends AppCompatActivity implements TransaksiFilt
             if (tipeTransaksi.get(position).matches("minus")){
                 holder.simbolPlusOrMinus.setImageResource(R.drawable.transaction_minus);
                 holder.nominalTransaction.setTextColor(getResources().getColor(R.color.fail));
+            } else {
+                holder.simbolPlusOrMinus.setImageResource(R.drawable.transaction_plus);
+                holder.nominalTransaction.setTextColor(getResources().getColor(R.color.green_success2));
             }
             holder.keteranganTransaksi.setText(keterangan.get(position));
             holder.tanggal.setText(tanggal.get(position));

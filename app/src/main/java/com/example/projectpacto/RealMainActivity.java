@@ -56,8 +56,13 @@ public class RealMainActivity extends AppCompatActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
                 int kredit_int = Integer.parseInt(map.get("kredit").toString());
+                int limit = Integer.parseInt(map.get("limit").toString());
                 String kredit_str  = String.format("%,d", kredit_int).replace(',', '.');
                 binding.kredit.setText("IDR " + kredit_str);
+
+                if (limit > kredit_int) {
+                    binding.warning.setVisibility(View.VISIBLE);
+                }
 
             }
         });

@@ -112,6 +112,7 @@
             </LinearLayout>
 
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Kelas"
@@ -121,6 +122,7 @@
                 android:layout_marginBottom="10dp"/>
 
             <RadioGroup
+                android:visibility="gone"
                 android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
