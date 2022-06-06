@@ -185,7 +185,8 @@ public class PlaneIssuingActivityPergi extends AppCompatActivity {
                     jmlAnak = (String) map.get("jmlAnak");
                     jmlBalita = (String) map.get("jmlBalita");
                     harga_total_pergi = (String) map.get("harga_total_pergi");
-                    grand_total = (String) map.get("grand_total");
+                    int grand_total_int =  (Integer.parseInt(map.get("grand_total").toString()) );
+                    grand_total = "IDR " + String.format("%,d", grand_total_int).replace(",", ".");
 
 
                     //Getting the variables  -- Pulang
@@ -269,7 +270,7 @@ public class PlaneIssuingActivityPergi extends AppCompatActivity {
                 bundle.putStringArrayList("tambahan_kg", tambahan_kg);
                 bundle.putString("hargaDewasa", harga_dewasa);
                 bundle.putString("hargaBalita", harga_balita);
-                bundle.putString("harga", harga_total_pergi );
+                bundle.putString("harga", grand_total );
                 DetailHargaBottomSheet_Pergi detailHarga_bottemSheet_pulangPergi = new DetailHargaBottomSheet_Pergi();
                 detailHarga_bottemSheet_pulangPergi.setArguments(bundle);
                 detailHarga_bottemSheet_pulangPergi.show(getSupportFragmentManager(), detailHarga_bottemSheet_pulangPergi.getTag());

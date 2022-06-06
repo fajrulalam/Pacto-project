@@ -157,7 +157,8 @@ public class FormIssuingActivity extends AppCompatActivity {
                         dataTamu = (List<Map<String, String>>) map.get("dataTamu");
                         jumlahKamar = map.get("jumlahKamar").toString();
                         namaKamar = map.get("namaKamar").toString();
-                        hargaTotal = map.get("hargaTotal").toString();
+                        int hargaTotal_int = Integer.parseInt(map.get("hargaTotal").toString());
+                        hargaTotal= "IDR " + String.format("%,d", hargaTotal_int).replace(",", ".");
                         String permintaanKhusus = map.get("permintaanKhusus").toString();
 
                         String tglCekout_jmlMalam = tglCek_out + " ("+jumlahMalam +" Malam)";

@@ -1,16 +1,21 @@
 package com.example.projectpacto;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.projectpacto.databinding.ActivityHotelOrder4Binding;
 import com.example.projectpacto.databinding.ActivityPlaneOrder3Binding;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.client.utils.URIBuilder;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
@@ -107,20 +112,32 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         tipeRanjang_req = "";
         catatanLainnya_req = "";
 
-        String MSISDN =  "08180700672";
-        String iccid = "8962115937878589405";
-        URIBuilder uriBuilder = new URIBuilder()
-                .setScheme("[INSERT_SCHEME")
-                .setHost("[INSER_HOST")
-                .setPath("subscriber/v1/params?iscancel=true&msisdn=")
-                .setParameter("mssisdn", MSISDN)
-                .setParameter("ICCID", iccid);
-        String URL = uriBuilder.toString();
-
 
         Locale lokal = new Locale("id", "ID");
 
         fs = FirebaseFirestore.getInstance();
+
+
+        final int[] kredit = {0};
+        final int[] limit = {0};
+
+        String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
+
+        fs.collection("user").document(userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                kredit[0] = Integer.parseInt(map.get("kredit").toString());
+                limit[0] = Integer.parseInt(map.get("limit").toString());
+
+                if (kredit[0] < limit[0]) {
+                    binding.kreditWarning.setVisibility(View.VISIBLE);
+                    binding.pesanButton.setBackgroundTintList(getColorStateList(R.color.dark_grey));
+                }
+
+            }
+        });
 
 //        SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy", lokal);
 //        try {
@@ -204,6 +221,13 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         binding.pesanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (kredit[0] < limit[0]) {
+                    Toast.makeText(getApplicationContext(), "Silakan hubungi admin Pacto untuk top-up kredit", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
                 extras.putStringArrayList("namaTamu", namaPassenger);
                 extras.putStringArrayList("titel", titel);
                 extras.putString("permintaanKhusus", permintaanKhusus);

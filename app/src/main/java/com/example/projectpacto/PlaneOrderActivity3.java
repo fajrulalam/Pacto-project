@@ -654,7 +654,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements BagasiRede
                     bookingCode_pulang.add("BookingCode_Pulang" + i);
                 }
 
-
+                int grand_total = Integer.parseInt(binding.harga.getText().toString().split("IDR ")[1].replace(".", ""));
                 PenumpangData penumpangData = new PenumpangData(
                         //Informasi sintaksis Firebase
                         false, //boolean pulang pergi
@@ -679,7 +679,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements BagasiRede
                         //Harga
                         harga_dewasa,
                         harga_balita,
-                        binding.harga.getText().toString(), //grand total
+                        grand_total, //grand total
 
 
                         //Data Pergi
@@ -895,7 +895,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements BagasiRede
         //harga
         String harga_dewasa;
         String harga_balita;
-        String grand_total;
+        int grand_total;
 
         //Pergi
         ArrayList<String> tanggalBerangkat_ArrayList;
@@ -925,8 +925,7 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements BagasiRede
 
         }
 
-        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, boolean ongoing, String status, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, List<Map<String, String>> penumpang, String rincianPenumpang, String jmlDewasa, String jmlAnak, String jmlBalita, String harga_dewasa, String harga_balita, String grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String tanggalPulang, String kotaAsal, String kotaTujuan) {
-
+        public PenumpangData(boolean pulangPergi, Long expTime, Long waktuArsip, boolean ongoing, String status, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, List<Map<String, String>> penumpang, String rincianPenumpang, String jmlDewasa, String jmlAnak, String jmlBalita, String harga_dewasa, String harga_balita, int grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String tanggalPulang, String kotaAsal, String kotaTujuan) {
             this.pulangPergi = pulangPergi;
             this.expTime = expTime;
             this.waktuArsip = waktuArsip;
@@ -1095,11 +1094,11 @@ public class PlaneOrderActivity3 extends AppCompatActivity implements BagasiRede
             this.harga_balita = harga_balita;
         }
 
-        public String getGrand_total() {
+        public int getGrand_total() {
             return grand_total;
         }
 
-        public void setGrand_total(String grand_total) {
+        public void setGrand_total(int grand_total) {
             this.grand_total = grand_total;
         }
 

@@ -203,59 +203,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/kreditWarning"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/curved__even_less_bg"
-                    android:backgroundTint="@color/primary_light2"
-                    android:orientation="horizontal"
-                    android:padding="15dp"
-                    android:visibility="visible">
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.15"
-                        android:src="@drawable/ic_kredit_limit_warning" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.85"
-                        android:orientation="vertical"
-                        android:paddingLeft="20dp">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="Kredit limit Anda kurang dari 30%"
-                            android:textColor="@color/black" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Segera hubungi admin dan lakukan penambahan kredit untuk pengalaman pemesanan yang lebih menyenangkan"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="5dp"
-                            android:text="Hubungi admin"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -454,7 +402,7 @@
                     android:id="@+id/lastReminder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="59dp"
+                    android:layout_marginBottom="24dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/curved__dashed_even_less_colorized_bg"
                     android:foreground="#1A6CAF82"
@@ -500,9 +448,63 @@
 
 
                 </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/kreditWarning"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/curved__even_less_bg"
+                    android:backgroundTint="@color/primary_light2"
+                    android:orientation="horizontal"
+                    android:padding="15dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.15"
+                        android:src="@drawable/ic_kredit_limit_warning" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.85"
+                        android:orientation="vertical"
+                        android:paddingLeft="20dp">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Kredit limit Anda kurang dari 30%"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Segera hubungi admin dan lakukan penambahan kredit untuk pengalaman pemesanan yang lebih menyenangkan"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:padding="5dp"
+                            android:text="Hubungi admin"
+                            android:textColor="@color/primary_dark"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:paddingHorizontal="14dp"
+                    android:layout_marginTop="20dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
                     android:orientation="horizontal">

@@ -342,7 +342,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     harga_dewasa = (String) map.get("harga_dewasa");
                     harga_balita = (String) map.get("harga_balita");
                     harga_total_pergi =(String)  map.get("harga_total_pergi");
-                    grand_total = (String) map.get("grand_total");
+                    int grand_total_int =  (Integer.parseInt(map.get("grand_total").toString()) );
+                    grand_total = "IDR " + String.format("%,d", grand_total_int).replace(",", ".");
 
                     //Pergi
                     tanggalBerangkat_ArrayList = (ArrayList<String>) map.get("tanggalBerangkat_ArrayList");
@@ -563,17 +564,15 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String tipePesanan = "Hotel";
             String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
             String JumlahKamar = jumlahKamar.split(", ")[1];
-            String hargaTotal = "IDR 670.000";
+            int hargaTotal = 670000;
 
-            String hargaPesawat_cleanstr = hargaTotal.split(" ")[1].replace(".", "");
-            int hargaPesawat_int = Integer.parseInt(hargaPesawat_cleanstr) *-1;
+            int hargaPesawat_int = hargaTotal *-1;
             Log.i("harga hotel", ""+hargaPesawat_int);
 
             FieldValue timeStamp = FieldValue.serverTimestamp();
             BookingPesawat bookingPesawat = new BookingPesawat(
                     ongoing,
                     waktuArsip,
-                    timeStamp,
                     tglCek_in,
                     tglCek_out,
                     jumlahMalam,
@@ -588,13 +587,14 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     namaKamar,
                     permintaanKhusus,
                     tambahanAlamat,
-                    hargaTotal
+                    hargaTotal,
+                    timeStamp
             );
             String keterangan = "Pemesanan hotel " + namaHotel;
             Date date = new Date();
             String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
             String tipeTransaksi = "minus";
-            String nominalTransaksi = "- " + hargaTotal;
+            String nominalTransaksi = "- IDR" + String.format("%,d", hargaTotal).replace(",", ".");
             Date dateNow = new Date();
             Long epochNow = dateNow.getTime();
 
@@ -634,10 +634,10 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             Date date = new Date();
             String date_str = new SimpleDateFormat("dd/MM/yyyy").format(date);
             String tipeTransaksi = "minus";
-            String nominalTransaksi = "- " + hargaPesawat;
+            String nominalTransaksi = "- IDR " + String.format("%,d", Integer.parseInt(hargaPesawat)).replace(",", ".");
 
-            String hargaPesawat_cleanstr = hargaPesawat.split(" ")[1].replace(".", "");
-            int hargaPesawat_int = Integer.parseInt(hargaPesawat_cleanstr) *-1;
+//            String hargaPesawat_cleanstr = hargaPesawat.split(" ")[1].replace(".", "");
+            int hargaPesawat_int = Integer.parseInt(hargaPesawat) *-1;
             Log.i("harga hotel", ""+hargaPesawat_int);
 
 
@@ -690,7 +690,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                 penumpang, rincianPenumpang, jmlDewasa, jmlAnak, jmlBalita,
 
                 //harga
-                harga_dewasa, harga_balita, harga_total_pergi,
+                harga_dewasa, harga_balita, Integer.parseInt(harga_total_pergi.split("IDR ")[1].replace(".", "")) ,
 
                 //Arraylistss
                 tanggalBerangkat_ArrayList,
@@ -731,7 +731,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
                     penumpang, rincianPenumpang, jmlDewasa, jmlAnak, jmlBalita,
 
                     //harga
-                    harga_dewasa_pulang, harga_balita_pulang, harga_total_pulang,
+                    harga_dewasa_pulang, harga_balita_pulang, Integer.parseInt(harga_total_pulang.split("IDR ")[1].replace(".", "")),
 
                     //Arraylistss
                     tanggalBerangkat_ArrayList_pulang,
@@ -821,7 +821,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         //harga
         String harga_dewasa;
         String harga_balita;
-        String grand_total;
+        int grand_total;
 
         //Pergi
         ArrayList<String> tanggalBerangkat_ArrayList;
@@ -845,7 +845,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         String kotaAsal;
         String kotaTujuan;
 
-        public CreateSingleBookingData(boolean pulangPergi, Long expTime, Long waktuArsip, boolean ongoing, String status, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, List<Map<String, String>> penumpang, String rincianPenumpang, String jmlDewasa, String jmlAnak, String jmlBalita, String harga_dewasa, String harga_balita, String grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String kotaAsal, String kotaTujuan) {
+        public CreateSingleBookingData(boolean pulangPergi, Long expTime, Long waktuArsip, boolean ongoing, String status, String userID, String tipePesanan, FieldValue timeStampPesanan, ArrayList<String> bookingCode_pergi, List<Map<String, String>> penumpang, String rincianPenumpang, String jmlDewasa, String jmlAnak, String jmlBalita, String harga_dewasa, String harga_balita, int grand_total, ArrayList<String> tanggalBerangkat_ArrayList, ArrayList<String> waktuBerangkat_ArrayList, ArrayList<String> bandaraAsal_ArrayList, ArrayList<Integer> logoMaskapai_ArrayList, ArrayList<String> namaMaskapai_ArrayList, ArrayList<String> kodePenerbangan_ArrayList, ArrayList<String> kelasPesawat_ArrayList, ArrayList<String> tanggalDatang_ArrayList, ArrayList<String> waktuDatang_ArrayList, ArrayList<String> bandaraTujuan_ArrayList, ArrayList<String> kabin_ArrayList, ArrayList<String> bagasi_ArrayList, ArrayList<Integer> booleanMakan_ArrayList, ArrayList<String> keteranganMakan_ArrayList, ArrayList<String> modelPesawat_ArrayList, ArrayList<String> durasi_ArrayList, ArrayList<String> terminalBerangkat, ArrayList<String> terminalDatang, String kotaAsal, String kotaTujuan) {
             this.pulangPergi = pulangPergi;
             this.expTime = expTime;
             this.waktuArsip = waktuArsip;
@@ -1013,11 +1013,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             this.harga_balita = harga_balita;
         }
 
-        public String getGrand_total() {
+        public int getGrand_total() {
             return grand_total;
         }
 
-        public void setGrand_total(String grand_total) {
+        public void setGrand_total(int grand_total) {
             this.grand_total = grand_total;
         }
 
@@ -1200,13 +1200,15 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         private String namaKamar;
         private String permintaanKhusus;
         private String tambahanAlamat;
-        private String hargaTotal;
+        private int hargaTotal;
         FieldValue pesananTimeStamp;
 
         public BookingPesawat() {
         }
 
-        public BookingPesawat(boolean ongoing, long waktuArsip, FieldValue pesananTimeStamp, String tglCek_in, String tglCek_out, String jumlahMalam, List<Map<String, String>> dataTamu, String namaPemesan, String bookingCode, String namaHotel, String status, String tipePesanan, String userID, String jumlahKamar, String namaKamar, String permintaanKhusus, String tambahanAlamat, String hargaTotal) {
+        public BookingPesawat(boolean ongoing, long waktuArsip, String tglCek_in, String tglCek_out, String jumlahMalam, List<Map<String, String>> dataTamu, String namaPemesan, String bookingCode, String namaHotel, String status, String tipePesanan, String userID, String jumlahKamar, String namaKamar, String permintaanKhusus, String tambahanAlamat, int hargaTotal, FieldValue pesananTimeStamp) {
+            this.ongoing = ongoing;
+            this.waktuArsip = waktuArsip;
             this.tglCek_in = tglCek_in;
             this.tglCek_out = tglCek_out;
             this.jumlahMalam = jumlahMalam;
@@ -1223,8 +1225,6 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             this.tambahanAlamat = tambahanAlamat;
             this.hargaTotal = hargaTotal;
             this.pesananTimeStamp = pesananTimeStamp;
-            this.ongoing = ongoing;
-            this.waktuArsip = waktuArsip;
         }
 
         public boolean isOngoing() {
@@ -1363,11 +1363,11 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             this.tambahanAlamat = tambahanAlamat;
         }
 
-        public String getHargaTotal() {
+        public int getHargaTotal() {
             return hargaTotal;
         }
 
-        public void setHargaTotal(String hargaTotal) {
+        public void setHargaTotal(int hargaTotal) {
             this.hargaTotal = hargaTotal;
         }
     }

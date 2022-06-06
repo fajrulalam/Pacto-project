@@ -208,7 +208,8 @@ public class PlaneIssuingActivity_PulangPergi extends AppCompatActivity {
                     jmlAnak = (String) map.get("jmlAnak");
                     jmlBalita = (String) map.get("jmlBalita");
                     harga_total_pergi = (String) map.get("harga_total_pergi");
-                    grand_total = (String) map.get("grand_total");
+                    int grand_total_int =  (Integer.parseInt(map.get("grand_total").toString()) );
+                    grand_total = "IDR " + String.format("%,d", grand_total_int).replace(",", ".");
 
 
                     //Getting the variables  -- Pulang
@@ -321,8 +322,8 @@ public class PlaneIssuingActivity_PulangPergi extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("kotaAsal", kotaAsal);
                 bundle.putString("kotaTujuan", kotaTujuan);
-                bundle.putString("kotaAsal_pulang", kotaAsal_pulang);
-                bundle.putString("kotaTujuan_pulang", kotaTujuan_pulang);
+                bundle.putString("kotaAsal_pulang", kotaTujuan);
+                bundle.putString("kotaTujuan_pulang", kotaAsal);
                 bundle.putString("jmlDewasa", jmlDewasa);
                 bundle.putString("jmlAnak", jmlAnak);
                 bundle.putString("jmlBalita", jmlBalita);
@@ -335,7 +336,8 @@ public class PlaneIssuingActivity_PulangPergi extends AppCompatActivity {
                 bundle.putString("hargaDewasa_pulang", harga_dewasa_pulang);
                 bundle.putString("hargaBalita_pulang", harga_balita_pulang);
                 bundle.putString("harga", harga_total_pergi );
-                bundle.putString("harga_pulang", harga_balita_pulang);
+                bundle.putString("harga_pulang", harga_total_pulang);
+                bundle.putString("grand_total", binding.harga.getText().toString());
                 DetailHarga_BottemSheet_PulangPergi detailHarga_bottemSheet_pulangPergi = new DetailHarga_BottemSheet_PulangPergi();
                 detailHarga_bottemSheet_pulangPergi.setArguments(bundle);
                 detailHarga_bottemSheet_pulangPergi.show(getSupportFragmentManager(), detailHarga_bottemSheet_pulangPergi.getTag());

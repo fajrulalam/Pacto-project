@@ -165,7 +165,7 @@ public class BookingActivity extends AppCompatActivity {
 
 
 
-
+                //Hotel
                 if (tipePesanan.get(position).matches("Hotel")) {
 
                     Intent intent = new Intent(getApplicationContext(), FormIssuingActivity.class);

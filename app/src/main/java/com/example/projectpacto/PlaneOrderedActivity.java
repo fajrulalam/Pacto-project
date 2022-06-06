@@ -132,7 +132,8 @@ public class PlaneOrderedActivity extends AppCompatActivity {
                     harga_balita_pulang = (String) map.get("harga_balita_pulang");
                     harga_total_pergi = (String) map.get("harga_total_pergi");
                     harga_total_pulang = (String) map.get("harga_total_pulang");
-                    grand_total = (String) map.get("grand_total");
+                    int grand_total_int =  (Integer.parseInt(map.get("grand_total").toString()) );
+                    grand_total = "IDR " + String.format("%,d", grand_total_int).replace(",", ".");
 
                     //Pergi
                     tanggalBerangkat_ArrayList = (ArrayList<String>) map.get("tanggalBerangkat_ArrayList");

@@ -119,6 +119,7 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         harga_balita_pulang = bundle.getString("hargaBalita_pulang");
         harga = bundle.getString("harga");
         harga_pulang = bundle.getString("harga_pulang");
+        String grand_total = bundle.getString("grand_total");
 
 
         kotaAsal_pulang.setText(kotaAsal_str_pulang);
@@ -179,12 +180,12 @@ public class DetailHarga_BottemSheet_PulangPergi extends BottomSheetDialogFragme
         }
         Log.i("total bagasi pergi", "IDR " + totalBagasi );
         int harga_int = Integer.parseInt(harga.split("IDR ")[1].replace(".", ""));
-//        int harga_int_pulang = Integer.parseInt(harga_pulang.split("IDR ")[1].replace(".", ""));
-        int grandTotal_int = harga_int  + totalBagasi;
+        int harga_int_pulang = Integer.parseInt(harga_pulang.split("IDR ")[1].replace(".", ""));
+        int grandTotal_int = harga_int  + harga_int_pulang + totalBagasi;
 
         String grandTotal_str = "IDR " + String.format("%,d", grandTotal_int).replace(',', '.');
 
-        grandtotal.setText(grandTotal_str);
+        grandtotal.setText(grand_total);
 
         view.findViewById(R.id.closeSheet).setOnClickListener(new View.OnClickListener() {
             @Override
