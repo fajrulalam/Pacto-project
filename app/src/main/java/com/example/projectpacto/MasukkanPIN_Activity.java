@@ -1201,12 +1201,12 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         private String permintaanKhusus;
         private String tambahanAlamat;
         private int hargaTotal;
-        FieldValue pesananTimeStamp;
+        FieldValue timeStampPesanan;
 
         public BookingPesawat() {
         }
 
-        public BookingPesawat(boolean ongoing, long waktuArsip, String tglCek_in, String tglCek_out, String jumlahMalam, List<Map<String, String>> dataTamu, String namaPemesan, String bookingCode, String namaHotel, String status, String tipePesanan, String userID, String jumlahKamar, String namaKamar, String permintaanKhusus, String tambahanAlamat, int hargaTotal, FieldValue pesananTimeStamp) {
+        public BookingPesawat(boolean ongoing, long waktuArsip, String tglCek_in, String tglCek_out, String jumlahMalam, List<Map<String, String>> dataTamu, String namaPemesan, String bookingCode, String namaHotel, String status, String tipePesanan, String userID, String jumlahKamar, String namaKamar, String permintaanKhusus, String tambahanAlamat, int hargaTotal, FieldValue timeStampPesanan) {
             this.ongoing = ongoing;
             this.waktuArsip = waktuArsip;
             this.tglCek_in = tglCek_in;
@@ -1224,7 +1224,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             this.permintaanKhusus = permintaanKhusus;
             this.tambahanAlamat = tambahanAlamat;
             this.hargaTotal = hargaTotal;
-            this.pesananTimeStamp = pesananTimeStamp;
+            this.timeStampPesanan = timeStampPesanan;
         }
 
         public boolean isOngoing() {
@@ -1243,12 +1243,12 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             this.waktuArsip = waktuArsip;
         }
 
-        public FieldValue getPesananTimeStamp() {
-            return pesananTimeStamp;
+        public FieldValue getTimeStampPesanan() {
+            return timeStampPesanan;
         }
 
-        public void setPesananTimeStamp(FieldValue pesananTimeStamp) {
-            this.pesananTimeStamp = pesananTimeStamp;
+        public void setTimeStampPesanan(FieldValue timeStampPesanan) {
+            this.timeStampPesanan = timeStampPesanan;
         }
 
         public String getTglCek_in() {

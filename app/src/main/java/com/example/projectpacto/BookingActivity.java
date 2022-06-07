@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -235,7 +236,7 @@ public class BookingActivity extends AppCompatActivity {
 
     public void queryPesananOngoing(){
         clearArrayList();
-        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("ongoing", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("ongoing", true).orderBy("timeStampPesanan", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots != null) {
@@ -338,7 +339,7 @@ public class BookingActivity extends AppCompatActivity {
 
     public void queryPesananNotOngoing(){
         clearArrayList();
-        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("ongoing", false).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        fs.collection("bookingHistory").whereEqualTo("userID", "5E8dHyQfzYeu1wBvwjxNr8EUl7J3").whereEqualTo("ongoing", false).orderBy("timeStampPesanan", Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots != null) {

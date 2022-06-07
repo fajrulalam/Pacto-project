@@ -111,7 +111,7 @@ public class NamaTersimpanActivity extends AppCompatActivity implements Recycler
         kewarganegaraan.clear();
         documentID.clear();
 
-        fs.collection("namaTersimpan").whereEqualTo("userID", userID).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        fs.collection("namaTersimpan").whereEqualTo("userID", userID).orderBy("nama", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (queryDocumentSnapshots != null) {
