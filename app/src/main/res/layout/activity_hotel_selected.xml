@@ -317,6 +317,8 @@
                     android:id="@+id/lihatlainnya_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:foreground="@drawable/selectable_view"
+                    android:clickable="true"
                     android:layout_marginTop="18dp"
                     android:layout_marginBottom="24dp"
                     android:background="@drawable/curved__even_less_colorized_bg"

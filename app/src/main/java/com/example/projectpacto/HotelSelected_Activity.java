@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class HotelSelected_Activity extends AppCompatActivity {
     TextView alamatTambahan_txt;
     RelativeLayout fotoGaleri;
     TextView jumlahFotoLain;
+    LinearLayout fasilitasLainnyaButton;
 
 
     @Override
@@ -54,6 +56,7 @@ public class HotelSelected_Activity extends AppCompatActivity {
         alamatTambahan_txt = findViewById(R.id.alamatTambahan);
         alamatTambahan_txt.setText(tambahanAlamat);
         jumlahFotoLain = findViewById(R.id.jumlahfotolain);
+        fasilitasLainnyaButton = findViewById(R.id.lihatlainnya_btn);
 
         fotoGaleri = findViewById(R.id.fotogallery);
         ArrayList<Integer> gambar = new ArrayList<>();
@@ -65,14 +68,7 @@ public class HotelSelected_Activity extends AppCompatActivity {
         gambar.add(R.drawable.hotel_fasilitas2);
         gambar.add(R.drawable.hotel_fasilitas3);
         gambar.add(R.drawable.hotel_fasilitas4);
-        gambar.add(R.drawable.hotel_fasilitas1);
-        gambar.add(R.drawable.hotel_fasilitas2);
-        gambar.add(R.drawable.hotel_fasilitas3);
-        gambar.add(R.drawable.hotel_fasilitas4);
-        gambar.add(R.drawable.hotel_fasilitas1);
-        gambar.add(R.drawable.hotel_fasilitas2);
-        gambar.add(R.drawable.hotel_fasilitas3);
-        gambar.add(R.drawable.hotel_fasilitas4);
+
 
         jumlahFotoLain.setText("+ " + gambar.size() + " Lainnya");
 
@@ -86,6 +82,32 @@ public class HotelSelected_Activity extends AppCompatActivity {
                 FotoHotelGallery_BottomSheet galeriFotoHotelFragment = new FotoHotelGallery_BottomSheet();
                 galeriFotoHotelFragment.setArguments(bundle);
                 galeriFotoHotelFragment.show(getSupportFragmentManager(), galeriFotoHotelFragment.getTag());
+            }
+        });
+
+
+        ArrayList<String> fasilitas = new ArrayList<>();
+        fasilitas.add("Restoran");
+        fasilitas.add("Wi-Fi");
+        fasilitas.add("Air Hangat");
+        fasilitas.add("Laundry");
+        fasilitas.add("Elevator");
+        fasilitas.add("Transportasi Umum");
+        fasilitas.add("Pusat Kebugaran");
+        fasilitas.add("Kolam Renang");
+        fasilitas.add("Hewan Peliharaan diperbolehkan");
+        fasilitas.add("Call Center 24 jam");
+        fasilitas.add("Bathtub");
+        fasilitas.add("Spa");
+        fasilitas.add("Hiburan");
+
+        fasilitasLainnyaButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("fasilitas", fasilitas);
+
+
             }
         });
 
