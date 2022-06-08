@@ -112,6 +112,13 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
         tipeRanjang_req = "";
         catatanLainnya_req = "";
 
+        int jmlKamar_int = Integer.parseInt(jumlahKamar.split(", ")[1].split( " Kamar")[0]);
+        int jmlMalam_int = Integer.parseInt(jumlahMalam);
+        int hargaKamar_int = Integer.parseInt(hargaKamar.split("IDR ")[1].replace(".", ""));
+        int grand_total = jmlKamar_int * jmlMalam_int * hargaKamar_int;
+        String grandTotal_str = "IDR " + String.format("%,d", grand_total).replace(",", ".");
+        binding.harga.setText(grandTotal_str);
+
 
         Locale lokal = new Locale("id", "ID");
 
@@ -231,6 +238,7 @@ public class HotelOrderActivity4 extends AppCompatActivity implements RecyclerAd
                 extras.putStringArrayList("namaTamu", namaPassenger);
                 extras.putStringArrayList("titel", titel);
                 extras.putString("permintaanKhusus", permintaanKhusus);
+                extras.putInt("grand_total", grand_total);
 
                 Intent intent = new Intent(getApplicationContext(), MasukkanPIN_Activity.class);
                intent.putExtra("bundle", extras);

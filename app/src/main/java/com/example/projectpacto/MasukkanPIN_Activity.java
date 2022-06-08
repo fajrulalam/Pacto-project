@@ -54,6 +54,7 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
     String tipeKasur;
     String sarapan;
     String hargaKamar;
+    int hargaTotal;
 
     int gambarHotel;
     String namaHotel;
@@ -222,6 +223,8 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             tipeKasur = extras.getString("tipeKasur");
             sarapan = extras.getString("sarapan");
             hargaKamar = extras.getString("hargaKamar");
+            hargaTotal = extras.getInt("grand_total");
+            Log.i("Harga total", hargaTotal +"");
 
             gambarHotel = extras.getInt("gambarHotel");
             namaHotel = extras.getString("namaHotel");
@@ -379,6 +382,14 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
         }
 
 
+
+        //Back button
+        binding.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
         binding.pin1.setOnKeyListener(new View.OnKeyListener() {
@@ -564,7 +575,6 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
             String tipePesanan = "Hotel";
             String userID = "5E8dHyQfzYeu1wBvwjxNr8EUl7J3";
             String JumlahKamar = jumlahKamar.split(", ")[1];
-            int hargaTotal = 670000;
 
             int hargaPesawat_int = hargaTotal *-1;
             Log.i("harga hotel", ""+hargaPesawat_int);

@@ -248,7 +248,7 @@ public class DataPenumpang extends BottomSheetDialogFragment {
                     fs.collection("namaTersimpan").add(simpanNamaBaru).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(getContext(), "Data penumpang berhasil disimpan", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "Data penumpang berhasil disimpan", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
