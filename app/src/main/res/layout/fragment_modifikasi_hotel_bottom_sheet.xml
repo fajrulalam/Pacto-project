@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".ModifikasiHotelBottomSheet">
+
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:id="@+id/closeSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="17dp"
+        android:paddingVertical="6dp"
+        android:src="@drawable/ic_baseline_close_24"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ubah preferensi"
+        android:layout_marginHorizontal="20dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:fontFamily="@font/roboto_medium"/>
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/editTextContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/curved_bg"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="17dp"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tglCek_in"
+                    android:layout_width="match_parent"
+                    app:hintEnabled="false"
+                    app:hintAnimationEnabled="false"
+                    android:layout_height="40dp"
+                    app:boxStrokeWidth="0dp"
+                    app:startIconDrawable="@drawable/ic_calendar"
+                    android:focusable="false"
+                    app:boxStrokeWidthFocused="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Tanggal Check-in"
+                        android:textSize="14sp"
+                        android:paddingVertical="1dp"
+                        android:background="@drawable/curved__even_less_bg"
+                        android:backgroundTint="#1AA31E71"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tglCek_out"
+                app:hintEnabled="false"
+                android:focusable="false"
+                app:hintAnimationEnabled="false"
+                android:layout_width="0dp"
+                android:layout_weight="0.75"
+                android:layout_marginTop="8dp"
+                android:layout_height="40dp"
+                app:boxStrokeWidth="0dp"
+                android:padding="-10dp"
+                app:startIconDrawable="@drawable/ic_calendar"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Tanggal Check-out"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:paddingVertical="2dp"
+                    android:textSize="14sp"
+                    android:background="@drawable/curved__even_less_bg"
+                    android:backgroundTint="#1AA31E71"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/jumlahMalam"
+                app:hintEnabled="false"
+                android:layout_marginLeft="8dp"
+                android:focusable="false"
+                app:hintAnimationEnabled="false"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_marginTop="8dp"
+                android:layout_height="40dp"
+                app:boxStrokeWidth="0dp"
+                android:padding="-10dp"
+                app:boxStrokeWidthFocused="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableStart="@drawable/ic_moon"
+                    android:hint="99"
+                    android:drawablePadding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:paddingVertical="2dp"
+                    android:textSize="14sp"
+                    android:background="@drawable/curved__even_less_bg"
+                    android:backgroundTint="#1AA31E71"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jumlahKamar"
+            android:layout_width="match_parent"
+            app:hintEnabled="false"
+            android:focusable="false"
+            app:hintAnimationEnabled="false"
+            android:layout_marginTop="8dp"
+            android:layout_height="40dp"
+            app:boxStrokeWidth="0dp"
+            app:startIconDrawable="@drawable/ic_room"
+            app:boxStrokeWidthFocused="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Jumlah kamar"
+                android:paddingVertical="2dp"
+                android:textSize="14sp"
+                android:background="@drawable/curved__even_less_bg"
+                android:backgroundTint="#1AA31E71"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cariButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:text="Cari"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:fontFamily="@font/roboto_medium"
+            android:background="@color/primary"
+            android:layout_marginBottom="8dp"
+            android:textAllCaps="false"
+            android:letterSpacing="0.00001"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

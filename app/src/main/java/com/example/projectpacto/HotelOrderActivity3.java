@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-public class HotelOrderActivity3 extends AppCompatActivity {
+public class HotelOrderActivity3 extends AppCompatActivity implements ModifikasiHotelBottomSheet.KirimModifikasiPesanan, JumlahKamarBottomSheet.OnDataKamar{
 
     ActivityHotelOrder3Binding binding;
     int gambarHotel;
@@ -44,6 +44,9 @@ public class HotelOrderActivity3 extends AppCompatActivity {
     String jumlahMalam;
     String tglCek_out;
     String tglCek_in;
+    String tglCek_in_withDay;
+    int jumlahKamar_int;
+    int jumlahTamu_int;
     Date tglCek_in_date;
 
 
@@ -83,6 +86,7 @@ public class HotelOrderActivity3 extends AppCompatActivity {
         jumlahMalam= extras.getString("jumlahMalam");
         tglCek_out= extras.getString("tglCek_out");
         tglCek_in= extras.getString("tglCek_in");
+        tglCek_in_withDay= extras.getString("tglCek_in");
 
         Locale lokal = new Locale("id", "ID");
 
@@ -122,8 +126,19 @@ public class HotelOrderActivity3 extends AppCompatActivity {
 
         populateArrayList();
 
-
-
+        binding.ubahButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle =  new Bundle();
+                bundle.putString("tglCek_in", tglCek_in_withDay);
+                bundle.putString("tglCek_out", tglCek_out);
+                bundle.putString("jumlahMalam", jumlahMalam);
+                bundle.putString("jumlahKamar", jumlahKamar);
+                ModifikasiHotelBottomSheet modifikasiHotelBottomSheet = new ModifikasiHotelBottomSheet();
+                modifikasiHotelBottomSheet.setArguments(bundle);
+                modifikasiHotelBottomSheet.show(getSupportFragmentManager(), modifikasiHotelBottomSheet.getTag());
+            }
+        });
 
 
 
@@ -191,6 +206,71 @@ public class HotelOrderActivity3 extends AppCompatActivity {
 
         binding.RecycleViewKamarOptions.setAdapter(recycleAdapterKamarOptions);
     }
+
+    @Override
+    public void KirimModifikasiPesanan(String tglCekIn, String tglCekOut_str, String jumlahMalam_str, String KamardanTamu, String request) {
+        //if request == Save, then it just saves the modification and close the fragment.
+        //if request == Change, then it will save the modification, close the fragment, then opens the jumlahkamar dan jumlah tamu.
+
+        tglCek_in_withDay = tglCekIn;
+        tglCek_out = tglCekOut_str;
+        jumlahKamar = KamardanTamu;
+        jumlahKamar = jumlahMalam_str;
+
+
+
+
+        Locale lokal = new Locale("id", "ID");
+        SimpleDateFormat formatter = new SimpleDateFormat("E, dd MMM yyyy", lokal);
+        Log.i("Modifikasi Pesanan", tglCekIn);
+        try {
+            tglCek_in_date = formatter.parse(tglCekIn);
+            formatter =  new SimpleDateFormat("dd MMM yyyy");
+            tglCek_in = formatter.format(tglCek_in_date);
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+        binding.detailTamudanKamar.setText(jumlahKamar);
+        binding.tanggalCekIn.setText(tglCek_in);
+        binding.jmlMalam.setText(jumlahMalam_str + " Malam");
+        binding.jumlahKamar.setText(jumlahKamar.split(", ")[0]);
+        binding.jmlTamu.setText(jumlahKamar.split(", ")[1]);
+
+        Log.i("jumlah kamar", jumlahKamar);
+//        jumlahKamar_int =  Integer.parseInt(jumlahKamar.split(",")[1].split(" ")[0]);
+//        jumlahTamu_int = Integer.parseInt(jumlahKamar.split(",")[0].split(" ")[0]);
+
+        if (request.matches("Change")){
+            Bundle bundle = new Bundle();
+            bundle.putInt("jmlKamar", jumlahKamar_int);
+            bundle.putInt("jmlTamu", jumlahTamu_int);
+            JumlahKamarBottomSheet jumlahKamarBottomSheet = new JumlahKamarBottomSheet();
+            jumlahKamarBottomSheet.setArguments(bundle);
+            jumlahKamarBottomSheet.show(getSupportFragmentManager(), jumlahKamarBottomSheet.getTag());
+        }
+    }
+
+    @Override
+    public void onDataPassTamu(String jumlahTamu, String jumlahKamar_str) {
+        jumlahTamu_int = Integer.parseInt(jumlahTamu);
+        jumlahKamar_int = Integer.parseInt(jumlahKamar_str);
+        binding.jumlahKamar.setText(jumlahKamar_str + "");
+        binding.jmlTamu.setText(jumlahTamu + " Tamu");
+        jumlahKamar = jumlahTamu + " Tamu, " + jumlahKamar_str +" Kamar";
+        Bundle bundle =  new Bundle();
+        bundle.putString("tglCek_in", tglCek_in);
+        bundle.putString("tglCek_out", tglCek_out);
+        bundle.putString("jumlahMalam", jumlahMalam);
+        bundle.putString("jumlahKamar", jumlahKamar);
+        ModifikasiHotelBottomSheet modifikasiHotelBottomSheet = new ModifikasiHotelBottomSheet();
+        modifikasiHotelBottomSheet.setArguments(bundle);
+        modifikasiHotelBottomSheet.show(getSupportFragmentManager(), modifikasiHotelBottomSheet.getTag());
+
+
+
+
+    }
+
 
     public class RecycleAdapterKamarOptions extends RecyclerView.Adapter<RecycleAdapterKamarOptions.ViewHolder>{
         ArrayList<Integer> gambarKamar;
