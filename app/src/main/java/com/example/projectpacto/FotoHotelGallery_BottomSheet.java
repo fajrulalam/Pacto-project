@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,6 +67,7 @@ public class FotoHotelGallery_BottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 int pcc = position;
+                Log.i("Cliked", "its clicked");
                 bundle.putInt("pcc", pcc);
                 GaleriFotoHotelFragment galeriFotoHotelFragment = new GaleriFotoHotelFragment();
                 galeriFotoHotelFragment.setArguments(bundle);

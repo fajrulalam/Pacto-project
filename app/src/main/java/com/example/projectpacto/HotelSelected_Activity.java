@@ -89,14 +89,14 @@ public class HotelSelected_Activity extends AppCompatActivity {
         ArrayList<String> fasilitas = new ArrayList<>();
         fasilitas.add("Restoran");
         fasilitas.add("Wi-Fi");
-        fasilitas.add("Air Hangat");
+        fasilitas.add("Air hangat");
         fasilitas.add("Laundry");
         fasilitas.add("Elevator");
-        fasilitas.add("Transportasi Umum");
-        fasilitas.add("Pusat Kebugaran");
-        fasilitas.add("Kolam Renang");
-        fasilitas.add("Hewan Peliharaan diperbolehkan");
-        fasilitas.add("Call Center 24 jam");
+        fasilitas.add("Transportasi umum");
+        fasilitas.add("Pusat kebugaran");
+        fasilitas.add("Kolam renang");
+        fasilitas.add("Hewan peliharaan diperbolehkan");
+        fasilitas.add("Call center 24 jam");
         fasilitas.add("Bathtub");
         fasilitas.add("Spa");
         fasilitas.add("Hiburan");
@@ -106,6 +106,9 @@ public class HotelSelected_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
                 bundle.putStringArrayList("fasilitas", fasilitas);
+                FasilitasLainnyaBottomSheet fasilitasLainnyaBottomSheet = new FasilitasLainnyaBottomSheet();
+                fasilitasLainnyaBottomSheet.setArguments(bundle);
+                fasilitasLainnyaBottomSheet.show(getSupportFragmentManager(), fasilitasLainnyaBottomSheet.getTag());
 
 
             }
