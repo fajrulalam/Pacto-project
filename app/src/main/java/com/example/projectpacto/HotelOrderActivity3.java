@@ -111,8 +111,8 @@ public class HotelOrderActivity3 extends AppCompatActivity implements Modifikasi
 
         binding.tanggalCekIn.setText(tglCek_in);
         binding.jmlMalam.setText(jumlahMalam + " Malam");
-        binding.jumlahKamar.setText(jumlahKamar.split(", ")[0]);
-        binding.jmlTamu.setText(jumlahKamar.split(", ")[1]);
+        binding.jumlahKamar.setText(jumlahKamar.split(", ")[1]);
+        binding.jmlTamu.setText(jumlahKamar.split(", ")[0]);
 
         gambarKamar= new ArrayList<>();
         namaKamar= new ArrayList<>();
@@ -215,7 +215,7 @@ public class HotelOrderActivity3 extends AppCompatActivity implements Modifikasi
         tglCek_in_withDay = tglCekIn;
         tglCek_out = tglCekOut_str;
         jumlahKamar = KamardanTamu;
-        jumlahKamar = jumlahMalam_str;
+        jumlahMalam = jumlahMalam_str;
 
 
 
@@ -233,14 +233,16 @@ public class HotelOrderActivity3 extends AppCompatActivity implements Modifikasi
         binding.detailTamudanKamar.setText(jumlahKamar);
         binding.tanggalCekIn.setText(tglCek_in);
         binding.jmlMalam.setText(jumlahMalam_str + " Malam");
-        binding.jumlahKamar.setText(jumlahKamar.split(", ")[0]);
-        binding.jmlTamu.setText(jumlahKamar.split(", ")[1]);
+        binding.jumlahKamar.setText(jumlahKamar.split(", ")[1]);
+        binding.jmlTamu.setText(jumlahKamar.split(", ")[0]);
 
         Log.i("jumlah kamar", jumlahKamar);
 //        jumlahKamar_int =  Integer.parseInt(jumlahKamar.split(",")[1].split(" ")[0]);
 //        jumlahTamu_int = Integer.parseInt(jumlahKamar.split(",")[0].split(" ")[0]);
 
         if (request.matches("Change")){
+
+//            binding.jumlahKamar.setText(jumlahKamar.split(", ")[1]);
             Bundle bundle = new Bundle();
             bundle.putInt("jmlKamar", jumlahKamar_int);
             bundle.putInt("jmlTamu", jumlahTamu_int);
@@ -254,7 +256,7 @@ public class HotelOrderActivity3 extends AppCompatActivity implements Modifikasi
     public void onDataPassTamu(String jumlahTamu, String jumlahKamar_str) {
         jumlahTamu_int = Integer.parseInt(jumlahTamu);
         jumlahKamar_int = Integer.parseInt(jumlahKamar_str);
-        binding.jumlahKamar.setText(jumlahKamar_str + "");
+        binding.jumlahKamar.setText(jumlahKamar_str + " Kamar");
         binding.jmlTamu.setText(jumlahTamu + " Tamu");
         jumlahKamar = jumlahTamu + " Tamu, " + jumlahKamar_str +" Kamar";
         Bundle bundle =  new Bundle();
