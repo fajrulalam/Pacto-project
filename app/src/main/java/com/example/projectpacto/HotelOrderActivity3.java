@@ -160,10 +160,6 @@ public class HotelOrderActivity3 extends AppCompatActivity implements Modifikasi
 
 
 
-
-
-
-
     }
 
     private void populateArrayList() {

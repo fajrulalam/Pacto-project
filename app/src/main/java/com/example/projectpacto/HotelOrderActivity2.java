@@ -162,7 +162,7 @@ public class HotelOrderActivity2 extends AppCompatActivity {
 
                 nama_hotel.add("Pop! Hotel Gubeng Surabaya");
                 tambahanAlamat.add("Wonokromo, Surabaya");
-                harga.add("IDR 350.000");
+                harga.add("IDR 550.000");
                 jmlBintang.add(3);
                 gambarHotel.add(R.drawable.pop_hotel);
 
@@ -199,19 +199,19 @@ public class HotelOrderActivity2 extends AppCompatActivity {
                 nama_hotel.add("ASTON Denpasar Hotel");
                 tambahanAlamat.add("Denpasar, Bali");
                 jmlBintang.add(3);
-                harga.add("IDR 350.000");
+                harga.add("IDR 550.000");
                 gambarHotel.add(R.drawable.pop_hotel);
 
                 nama_hotel.add("Padma Resort Ubud");
                 tambahanAlamat.add("Ubud, Bali");
                 jmlBintang.add(4);
-                harga.add("IDR 350.000");
+                harga.add("IDR 450.000");
                 gambarHotel.add(R.drawable.pop_hotel);
 
                 nama_hotel.add("Shangri-La");
                 tambahanAlamat.add("Karangasem, Bali");
                 jmlBintang.add(5);
-                harga.add("IDR 350.000");
+                harga.add("IDR 650.000");
                 gambarHotel.add(R.drawable.pop_hotel);
                 break;
 
