@@ -49,13 +49,14 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_masukkan_pin.xml" value="0.25854700854700857" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_nama_tersimpan.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_notification.xml" value="0.328125" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_notifications.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_issuing.xml" value="0.32171581769436997" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_issuing_pergi.xml" value="0.264" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_issuing_pergi2.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order1.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order2.xml" value="0.39378238341968913" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order3.xml" value="0.264" />
-        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order3_pp.xml" value="0.536" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order3_pp.xml" value="0.264" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order_activity2_pergi.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order_activity2_pulang.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/activity_plane_order_activity3_pulang_pergi.xml" value="0.33994334277620397" />
@@ -105,6 +106,7 @@
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/hotel_options_single_view.xml" value="0.4" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/hotel_single_view.xml" value="0.2670940170940171" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/nama_tersimpan_single_view.xml" value="0.6" />
+        <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/notification_single_view.xml" value="0.15789473684210525" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/opsi_bagas_single_view.xml" value="0.6" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/passenger_list_single_view.xml" value="0.38796296296296295" />
         <entry key="..\:/Users/Fajrul Alam/ProjectPacto/app/src/main/res/layout/pesanan_tiket_hotel_single_view.xml" value="0.536" />
