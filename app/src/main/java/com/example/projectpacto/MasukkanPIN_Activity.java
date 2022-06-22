@@ -70,8 +70,6 @@ public class MasukkanPIN_Activity extends AppCompatActivity  {
 
     String pinFirebase;
 
-
-
     String permintaanKhusus;
 
     ArrayList<String> namaPassenger;
