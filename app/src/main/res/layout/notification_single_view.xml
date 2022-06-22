@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/logoNotifikasi"
+        android:id="@+id/logoNotif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_notif_information"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:id="@+id/judulNotifikasi"
+                android:id="@+id/judulNotif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
@@ -39,7 +39,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
             <TextView
-                android:id="@+id/waktuNotifikasi"
+                android:id="@+id/waktuNotif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="15:00"
@@ -51,7 +51,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/keteranganNotifikasi"
+            android:id="@+id/keteranganNotif"
             android:textColor="@color/text_grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
